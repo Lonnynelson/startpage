@@ -1,0 +1,157 @@
+/* Selects the root element of the document:
+   <html> in the case of HTML */
+:root {
+  --behind-modal-grad-color-start: #ab6e80cc;
+  --behind-modal-grad-color-end: #9f6af5cc;
+  --behind-modal-grad-angle: 45deg;
+  --modal-border-size: .25em;
+  --modal-border-color: #003CFF;
+  --modal-border-radius: 20px;
+  --modal_background: #E9EFFF;
+  --close-x: #003CFF;
+  --logo-size: 40%;
+  --font-color: #005278;
+  --button-text: #003CFF;
+  --button-border: #003CFF;
+  --button-border-radius: 7px;
+  --button-background: #E9EFFF;
+}
+.img-replace {
+  /* replace 'close' text with an 'X' image */
+  display: inline-block;
+  overflow: hidden;
+  text-indent: 100%; 
+  color: transparent;
+  white-space: nowrap;
+}
+.bts-popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--behind-modal-color-start);
+  background: linear-gradient(var(--behind-modal-grad-angle), var(--behind-modal-grad-color-start), var(--behind-modal-grad-color-end));
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+  -moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+  transition: opacity 0.3s 0s, visibility 0s 0.3s;
+}
+.bts-popup.is-visible {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: opacity 0.3s 0s, visibility 0s 0s;
+  -moz-transition: opacity 0.3s 0s, visibility 0s 0s;
+  transition: opacity 0.3s 0s, visibility 0s 0s;
+}
+
+.bts-popup-container {
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+  margin: 4em auto;
+  background: var(--modal_background); 
+  text-align: left;
+  box-shadow: 0 .25em 2em -2em black, 
+        inset 0 0 0 var(--modal-border-size) var(--modal-border-color);
+  padding: 10px;
+  -webkit-transform: translateY(-40px);
+  -moz-transform: translateY(-40px);
+  -ms-transform: translateY(-40px);
+  -o-transform: translateY(-40px);
+  transform: translateY(-40px);
+  -webkit-backface-visibility: hidden;
+  -webkit-transition-property: -webkit-transform;
+  -moz-transition-property: -moz-transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-border-radius: var(--modal-border-radius);
+  -moz-border-radius: var(--modal-border-radius);
+  border-radius: var(--modal-border-radius);
+}
+.bts-popup-container img {
+  padding: 20px 0 0 0;
+  width: var(--logo-size);
+  height: var(--logo-size);
+}
+.bts-popup-container h2 {
+    text-align: center;
+}
+.bts-popup-container h1, .bts-popup-container h2, .bts-popup-container h3 {
+    color: var(--font-color);
+    padding: 10px 40px;
+}
+.bts-popup-container p {
+    color: var(--font-color);
+    padding: 10px 120px;
+}
+.bts-popup-container .bts-popup-button {
+  padding: 5px 25px;
+  border: 2px solid var(--button-border);
+  background-color: var(--button-background);
+	display: inline-block;
+  margin-bottom: 10px;
+  -webkit-border-radius: var(--button-border-radius);
+  -moz-border-radius: var(--button-border-radius);
+  border-radius: var(--button-border-radius);
+}
+
+.bts-popup-container a {
+  color: var(--button-text);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.bts-popup-container .bts-popup-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 30px;
+  height: 30px;
+}
+
+.bts-popup-container .bts-popup-close::before, .bts-popup-container .bts-popup-close::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  width: 16px;
+  height: 3px;
+  background-color: var(--close-x);
+}
+.bts-popup-container .bts-popup-close::before {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  left: 8px;
+}
+.bts-popup-container .bts-popup-close::after {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  right: 6px;
+  top: 13px;
+}
+.is-visible .bts-popup-container {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
+iframe.rounded {
+    -webkit-border-radius: var(--modal-border-radius);
+    -moz-border-radius: var(--modal-border-radius);
+    border-radius: var(--modal-border-radius);
+}
+@media only screen and (min-width: 1170px) {
+  .bts-popup-container {
+    margin: 8em auto;
+  }
+}

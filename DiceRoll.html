@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset='UTF-8'>
+  <title>Textarea Tricks</title>
+  <style>
+    body {
+      font: 22px Arial, sans-serif;
+      padding: 20px;
+      background-color: #99daff;
+      color: #000000;
+      margin: auto;
+      /* width: 50%; */
+    }
+
+    h1 {
+      font: 30px Arial, sans-serif;
+      margin: 0 0 10px 0;
+    }
+
+    h2 {
+      font: 26px Arial, sans-serif;
+      margin: 0 0 10px 0;
+    }
+
+    #textarea {
+      background: #ffffff;
+      border: 2px solid #888;
+      height: 15em;
+      width: 31em;
+      resize: none;
+      border-radius: 15px;
+      padding: 10px;
+      font-size: 22px;
+    }
+
+    button {
+      margin-bottom: 1em;
+    }
+
+    #Dice4,
+    .Dice4 {
+      font: 22px Arial, sans-serif;
+      border: 1px solid #858585;
+      padding: .125em 5px;
+      border-radius: 3px 3px 3px 3px;
+      -webkit-border-radius: 3px 3px 3px 3px;
+      -moz-border-radius: 3px 3px 3px 3px;
+      background: #8AB17D;
+      color: #000000;
+    }
+
+    #Dice6,
+    .Dice6 {
+      font: 22px Arial, sans-serif;
+      border: 1px solid #858585;
+      padding: .125em 5px;
+      border-radius: 3px 3px 3px 3px;
+      -webkit-border-radius: 3px 3px 3px 3px;
+      -moz-border-radius: 3px 3px 3px 3px;
+      background: #E76F51;
+      color: #000000;
+    }
+
+    #Dice8,
+    .Dice8 {
+      font: 22px Arial, sans-serif;
+      border: 1px solid #858585;
+      padding: .125em 5px;
+      border-radius: 3px 3px 3px 3px;
+      -webkit-border-radius: 3px 3px 3px 3px;
+      -moz-border-radius: 3px 3px 3px 3px;
+      background: #2A9D8F;
+      color: #000000;
+    }
+
+    #Dice10,
+    .Dice10 {
+      font: 22px Arial, sans-serif;
+      border: 1px solid #858585;
+      padding: .125em 5px;
+      border-radius: 3px 3px 3px 3px;
+      -webkit-border-radius: 3px 3px 3px 3px;
+      -moz-border-radius: 3px 3px 3px 3px;
+      background: #F4A261;
+      color: #000000;
+    }
+
+    #Dice12,
+    .Dice12 {
+      font: 22px Arial, sans-serif;
+      border: 1px solid #858585;
+      padding: .125em 5px;
+      border-radius: 3px 3px 3px 3px;
+      -webkit-border-radius: 3px 3px 3px 3px;
+      -moz-border-radius: 3px 3px 3px 3px;
+      background: #287271;
+      color: #FFFFFF;
+    }
+
+    #Dice20,
+    .Dice20 {
+      font: 22px Arial, sans-serif;
+      border: 1px solid #858585;
+      padding: .125em 5px;
+      border-radius: 3px 3px 3px 3px;
+      -webkit-border-radius: 3px 3px 3px 3px;
+      -moz-border-radius: 3px 3px 3px 3px;
+      background: #E9C46A;
+      color: #000000;
+    }
+
+    #Dice100,
+    .Dice100 {
+      font: 22px Arial, sans-serif;
+      border: 1px solid #858585;
+      padding: .125em 5px;
+      border-radius: 3px 3px 3px 3px;
+      -webkit-border-radius: 3px 3px 3px 3px;
+      -moz-border-radius: 3px 3px 3px 3px;
+      background: #264653;
+      color: #FFFFFF;
+    }
+
+    [class*="col-"] {
+      float: left;
+      padding: 15px;
+      border: 0px solid red;
+      min-width: 5em;
+    }
+
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    @media (min-width:320px) {
+      button {
+        font: 22px Arial, sans-serif;
+      }
+    }
+
+    @media (min-width:480px) {
+      button {
+        font: 42px Arial, sans-serif;
+      }
+      .col-1 {width: 16.66%;}
+      .col-2 {width: 33.336%;}
+      .col-3 {width: 49.99%;}
+      .col-4 {width: 66.65%;}
+      .col-5 {width: 83.31%;}
+      .col-6 {width: 99.97%;}
+      .col-7 {width: 116.63%;}
+      .col-8 {width: 133.29%;}
+      .col-9 {width: 149.95%;}
+      .col-10 {width: 166.61%;}
+      .col-11 {width: 183.27%;}
+      .col-12 {width: 200%;}
+    }
+
+    @media (min-width:600px) {
+      button {
+        font: 32px Arial, sans-serif;
+      }
+    }
+
+    @media (min-width:801px) {
+      button {
+        font: 22px Arial, sans-serif;
+      }
+      .col-1 {width: 8.33%;}
+      .col-2 {width: 16.66%;}
+      .col-3 {width: 25%;}
+      .col-4 {width: 33.33%;}
+      .col-5 {width: 41.66%;}
+      .col-6 {width: 50%;}
+      .col-7 {width: 58.33%;}
+      .col-8 {width: 66.66%;}
+      .col-9 {width: 75%;}
+      .col-10 {width: 83.33%;}
+      .col-11 {width: 91.66%;}
+      .col-12 {width: 100%;}
+    }
+
+    @media (min-width:1025px) {
+      button {
+        font: 22px Arial, sans-serif;
+      }
+    }
+
+    @media (min-width:1281px) {
+      button {
+        font: 42px Arial, sans-serif;
+      }
+    }
+  </style>
+  <script src='js/autoresize.jquery.min.js'></script>
+  <script>
+    $(function() {
+      $('#textarea')
+        .focus(function() {
+          $(this).css("background", "none")
+        })
+        .blur(function() {
+          if (this.value == '') {
+            $(this).css("background", "url(https://i.imgur.com/f9oW88I.png) center center no-repeat")
+          }
+        });
+
+      function elementSupportsAttribute(element, attribute) {
+        var test = document.createElement(element);
+        if (attribute in test) {
+          return true;
+        } else {
+          return false;
+        }
+      };
+    });
+
+    function D100() {
+      document.getElementById("Dice100").innerHTML = (Math.floor(Math.random() * 10 + 1) * 10);
+    }
+
+    function D20() {
+      document.getElementById("Dice20").innerHTML = (Math.floor(Math.random() * 20 + 1));
+    }
+
+    function D12() {
+      document.getElementById("Dice12").innerHTML = (Math.floor(Math.random() * 12 + 1));
+    }
+
+    function D10() {
+      document.getElementById("Dice10").innerHTML = (Math.floor(Math.random() * 10 + 1));
+    }
+
+    function D8() {
+      document.getElementById("Dice8").innerHTML = (Math.floor(Math.random() * 8 + 1));
+    }
+
+    function D6() {
+      document.getElementById("Dice6").innerHTML = (Math.floor(Math.random() * 6 + 1));
+    }
+
+    function D4() {
+      document.getElementById("Dice4").innerHTML = (Math.floor(Math.random() * 4 + 1));
+    }
+
+    function myFunction() {
+      var x = document.getElementById("myTextarea").value;
+      document.getElementById("demo").innerHTML = x;
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Roll Dice:</h1>
+  <h2>Click a Number</h2>
+  <div class="row">
+    <div class="col-1">
+      <button class="Dice100" onclick="D100()"> D100 </button>&nbsp;<span id="Dice100"></span>
+    </div>
+    <div class="col-1">
+      <button class="Dice20" onclick="D20()"> D20 </button>&nbsp;<span id="Dice20"></span>
+    </div>
+    <div class="col-1">
+      <button class="Dice12" onclick="D12()"> D12 </button>&nbsp;<span id="Dice12"></span>
+    </div>
+    <div class="col-1">
+      <button class="Dice10" onclick="D10()"> D10 </button>&nbsp;<span id="Dice10"></span>
+    </div>
+    <div class="col-1">
+      <button class="Dice8" onclick="D8()"> D8 </button>&nbsp;<span id="Dice8"></span>
+    </div>
+    <div class="col-1">
+      <button class="Dice6" onclick="D6()"> D6 </button>&nbsp;<span id="Dice6"></span>
+    </div>
+    <div class="col-1">
+      <button class="Dice4" onclick="D4()"> D4 </button>&nbsp;<span id="Dice4"></span>
+    </div>
+  </div>
+  <hr>
+  <h2>Notes:</h2>
+  <div>
+    <textarea id="textarea"></textarea>
+  </div>
+    <div>
+    <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://fuchsia-agnesse-47.tiiny.site/AbilityScore.html' style='border:0'></iframe></div>    
+    </div>
+</body>
+
+</html>

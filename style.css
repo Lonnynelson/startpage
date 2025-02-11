@@ -1,0 +1,258 @@
+/**
+	Lonny's Startpage
+	==================
+*/
+
+html, body{
+	/* width:100%; */
+	height:100%; 
+	/* padding:0px; */ 
+	margin:0px;
+	overflow: hidden;
+	background: #191d1e; /* Old browsers */
+	background: -moz-linear-gradient(0deg,  #191d1e 50%, #283139 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#191d1e), color-stop(100%,#283139)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(0deg,  #191d1e 50%,#283139 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(0deg,  #191d1e 50%,#283139 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(0deg,  #191d1e 50%,#283139 100%); /* IE10+ */
+	background: linear-gradient(0deg,  #191d1e 50%,#283139 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#191d1e', endColorstr='#283139',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	background-attachment: fixed
+}
+
+#projector {
+  position: absolute; 
+  top: 0px;
+  left: 0px;
+  width:100%;
+  height:100%;
+} 
+
+.center-div {
+	width:580px;
+    height:374px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left: -290px;
+    margin-top:  -187px;
+}
+
+#preloaderDiv
+{
+	position:absolute;
+	left:50%;
+    top:50%;
+    margin-left: -27px;
+    margin-top:  -27px;
+}
+
+#logo{
+	opacity:0;
+    filter: alpha(opacity=0);
+}
+
+#date2014
+{
+	position:absolute;
+	padding-left: 210px;
+	padding-top:15px;
+	opacity:0;
+	top:303px;
+	left:0;
+    filter: alpha(opacity=0);
+}
+
+body {
+	background: #151515;
+    background-position: center center;
+	background-repeat: no-repeat;
+    color: #999; /* Font color */
+	padding-top: 20px; /* Padding between link blocks and top edge */
+    padding-right: 200px;
+	padding-left: 200px;
+	font-family: "Museo", "Helvetica Neue", sans-serif; /* Font */
+	text-shadow: rgba(0,0,0,0.9) 3px 3px 5px; /* Text Shadow */
+}
+body.dnd {
+	/* background: #000000; */
+    /* background-size: 50%; */
+    /* background-position: center center; */
+}
+.dnd {
+    background: #000000;
+    background-image: url(https://i.imgur.com/L4eXr1r.gif);
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+.morning { 
+	background: url("https://i.imgur.com/i2BXNkt.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.mid{ 
+	background: url("https://i.imgur.com/i2BXNkt.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.noon{ 
+	background: url("https://i.imgur.com/i2BXNkt.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.after{ 
+	background: url("https://i.imgur.com/i2BXNkt.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.night{ 
+	background: url("https://i.imgur.com/i2BXNkt.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+a {
+	color: #FFF; /* Link Color - Was CCC */
+	font-size: .8em; /* Link Size */
+	text-decoration: none; /* Remove underlines */
+	font-weight: bold;
+}
+
+a:hover {
+	color: #CCCCCC; /* Was FFF */	/* Link hover color */
+}
+
+.block {
+    /* border-left: 1px solid #999; /* Left border of link block */
+	float: left;
+	padding: .5em; /* Padding around link block */
+	width: 220px; /* Link block width */
+    background: rgba(0, 43, 235, 0.6) none repeat scroll 0 0;
+    bottom: 10px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.9);
+    color: #fff;
+    left: auto;
+    margin-right: 1em;
+    margin-bottom: 1em;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px; /* future proofing */
+	-khtml-border-radius: 10px; /* for old Konqueror browsers */
+    position: relative;
+    z-index: 20;
+}
+
+h1 {
+	margin: 0;
+	font-size: 1em;	/* Title size */
+	color: #FFFFFF; #98a7ce;
+	/* background: rgb(85, 70, 54); /* The Fallback */
+	/* background: rgba(114, 60, 0, 0.7); */
+	/* padding: 10px 20px 10px 20px;
+	/* -moz-border-radius: 10px;
+	/* -webkit-border-radius: 10px;
+	/* border-radius: 10px; /* future proofing */
+	/* -khtml-border-radius: 10px; /* for old Konqueror browsers */
+	/* text-shadow: rgba(0,0,0,0.9) 3px 3px 5px; /* Text Shadow */
+    /* box-shadow: rgba(0,0,0,0.9) 3px 3px 5px; /* Rounded Box Shadow */
+}
+
+ul {
+	padding: 0.25em;
+}
+
+ul li {
+	list-style: none;
+	/* padding: 5px; */
+	margin-bottom: 0px;
+	/* border-bottom: thin solid;
+	/* background: rgb(0, 60, 114); /* The Fallback */
+	/* background: rgba(0, 60, 114, 0.7);
+	/* border-top-left-radius: 10px;
+	/* -moz-border-radius-topleft: 10px;
+	/* border-top-right-radius: 10px;
+	/* -moz-border-radius-topright: 10px;
+    /* box-shadow: rgba(0,0,0,0.9) 3px 3px 5px; /* Rounded Box Shadow */
+}
+li img {
+	width: 24px;
+	border-width: 0;
+	margin: 4px;
+	vertical-align: middle;
+}
+
+
+#clock {
+	position: absolute;
+	bottom: 40px;
+	left: auto;                 /* was auto */
+	font-size: 6em;
+	color: #FFF; /* Clock Font color */
+	background: rgb(0, 43, 235); /* The Fallback */
+	background: rgba(0, 43, 235, 0.6);
+	padding: 10px 20px 10px 20px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px; /* future proofing */
+	-khtml-border-radius: 10px; /* for old Konqueror browsers */
+	text-shadow: rgba(0,0,0,0.10) 3px 3px 5; /* Text Shadow */
+    box-shadow: rgba(0,0,0,0.9) 3px 3px 5px; /* Rounded Box Shadow */
+}
+
+form {
+	margin-top: 1em;
+	display: block;
+	float: left;
+	margin-left: 10px;
+}
+
+form input {
+	background: #002beb;												/* Background search box */
+	background: -webkit-gradient(						/*		gradient for webkit */
+		linear,
+		left top,
+		left bottom,
+		from(#002beb),
+		to(#0026cf));
+	background: -moz-linear-gradient(				/*		gradient for gecko */
+		top,
+		#002beb,
+		#0026cf);
+	border: 1px solid #002beb;									/* Border search box */
+	-webkit-box-shadow: rgba(0,0,0,0.2) 0 1px 2px;	/* Shadow search box - webkit */
+	-moz-box-shadow: rgba(0,0,0,0.2) 0 1px 2px;			/* Shadow search box - gecko */
+	box-shadow: rgba(0,0,0,0.2) 0 1px 2px;					/* Shadow search box - generic */
+	color: #ddd;														/* Text color search box */
+	font-size: 1em;													/* Text size search box */
+    box-shadow: rgba(0,0,0,0.9) 3px 3px 5px; /* Rounded Box Shadow */
+}
+
+form input:first-child {
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-right: 0;
+	padding:6px;
+}
+
+form input:last-child {
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-left: 0;
+	padding:6px;
+}
+textarea {
+  background: #ffffff;
+  background: url(https://i.imgur.com/f9oW88I.png) center center no-repeat; /* This ruins default border */
+  border: 1px solid #888; 
+  height: 2em;
+  width: 20em;
+  resize: none;
+}

@@ -1,0 +1,294 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DND Ability Score Roller</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      background-color: #f5f2ee;
+    }
+    button {
+      font-size: 16px;
+      font-weight: bold;
+      border: 0px solid #333;
+      background-color: #8AB17D;
+      padding: 10px 10px 10px 10px;
+      color: #000000;
+      margin: 0 auto;
+      display: block;
+      width: 150px;
+      margin-bottom: 10px;
+      transition: background .3s ease;
+      border-radius: 10px;
+    }
+    button:hover {
+      background: #008114;
+      cursor: pointer;
+      color: white;
+    }
+    button:active {
+      transform: translateY(1px);
+    }
+    button:focus {
+      outline: none;
+    }
+    .container {
+      display: inline-block;
+    }
+    .abilnum {
+      display: inline-block;
+      width: 1em;
+      padding-left: 3px;
+      padding-right: 5px;
+      text-align: right;
+      font-weight: bold;
+      border-radius: 3px;
+      background-color: #FFFFFF;
+      color: 000000;
+      margin-right: 5px;
+    }
+    .abilbns {
+      display: inline-block;
+      padding-left: 3px;
+      width: 1em;
+      padding-right: 5px;
+      text-align: right;
+      border-radius: 3px;
+      /* border: 1px solid grey; */
+      background-color: #FFFFFF;
+    }
+      .str {
+          background: #E76F51;
+          color: #000000;
+          font-weight: bold;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          border-radius: 10px;
+      } 
+      .dex {
+          background: #F4A261;
+          color: #000000;
+          font-weight: bold;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          border-radius: 10px;
+      } 
+      .con {
+          background: #E9C46A;
+          color: #000000;
+          font-weight: bold;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          border-radius: 10px;
+      } 
+      .wis {
+          background: #264653;
+          color: #FFFFFF;
+          font-weight: bold;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          border-radius: 10px;
+      } 
+      .int {
+          background: #287271;
+          color: #FFFFFF;
+          font-weight: bold;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          border-radius: 10px;
+      } 
+      .chr {
+          background: #2A9D8F;
+          color: #000000;
+          font-weight: bold;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          border-radius: 10px;
+      } 
+  </style>
+  <script>
+    window.console = window.console || function(t) {};
+  </script>
+</head>
+<body translate="no" data-new-gr-c-s-check-loaded="14.1174.0" data-gr-ext-installed="">
+  <div class="container">
+    <button id="roll">-- Roll --</button>
+    <span class="str">&nbsp;&nbsp;Str: <span class="abilnum" id="str"></span><span id="strbns" class="abilbns"></span>&nbsp;&nbsp;</span>&nbsp;&nbsp;|
+    <span class="dex">&nbsp;&nbsp;Dex: <span class="abilnum" id="dex"></span><span id="dexbns" class="abilbns"></span>&nbsp;&nbsp;</span>&nbsp;&nbsp;|
+    <span class="con">&nbsp;&nbsp;Con: <span class="abilnum" id="con"></span><span id="conbns" class="abilbns"></span>&nbsp;&nbsp;</span>&nbsp;&nbsp;|
+    <span class="wis">&nbsp;&nbsp;Wis: <span class="abilnum" id="wis"></span><span id="wisbns" class="abilbns"></span>&nbsp;&nbsp;</span>&nbsp;&nbsp;|
+    <span class="int">&nbsp;&nbsp;Int: <span class="abilnum" id="int"></span><span id="intbns" class="abilbns"></span>&nbsp;&nbsp;</span>&nbsp;&nbsp;|
+    <span class="chr">&nbsp;&nbsp;Chr: <span class="abilnum" id="chr"></span><span id="chrbns" class="abilbns"></span>&nbsp;&nbsp;</span>
+  </div>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script id="rendered-js">
+    $(document).ready(function() {
+      var str1;
+      var str2;
+      var str3;
+      var str4;
+      var strlow;
+      var str;
+      var strbns;
+      var dex1;
+      var dex2;
+      var dex3;
+      var dex4;
+      var dexlow;
+      var dex;
+      var dexbns;
+      var con1;
+      var con2;
+      var con3;
+      var con4;
+      var conlow;
+      var con;
+      var conbns;
+      var wis1;
+      var wis2;
+      var wis3;
+      var wis4;
+      var wislow;
+      var wis;
+      var wisbns;
+      var int1;
+      var int2;
+      var int3;
+      var int4;
+      var intlow;
+      var int;
+      var intbns;
+      var chr1;
+      var chr2;
+      var chr3;
+      var chr4;
+      var chrlow;
+      var chr;
+      var chrbns;
+      $('#roll').click(function() {
+        //str /////////////////////
+        ///////////////////////////
+        str1 = Math.floor(Math.random() * 6 + 1);
+        str2 = Math.floor(Math.random() * 6 + 1);
+        str3 = Math.floor(Math.random() * 6 + 1);
+        str4 = Math.floor(Math.random() * 6 + 1);
+        var _array = [str1, str2, str3, str4];
+        strlow = Math.min.apply(Math, _array);
+        str = str1 + str2 + str3 + str4 - strlow;
+        strbns = Math.round((str - 10.5) / 2);
+        $('#str').html(str);
+        $('#strbns').html(strbns);
+        if (strbns > 0) {
+          $('#strbns').prepend("+");
+          $('#strbns').css("color", "MediumSeaGreen");
+        } else if (strbns < 0) {
+          $('#strbns').css("color", "Tomato");
+        } else {
+          $('#strbns').css("color", "grey");
+        }
+        //dex //////////////////// 
+        //////////////////////////    
+        dex1 = Math.floor(Math.random() * 6 + 1);
+        dex2 = Math.floor(Math.random() * 6 + 1);
+        dex3 = Math.floor(Math.random() * 6 + 1);
+        dex4 = Math.floor(Math.random() * 6 + 1);
+        var _darray = [dex1, dex2, dex3, dex4];
+        dexlow = Math.min.apply(Math, _darray);
+        dex = dex1 + dex2 + dex3 + dex4 - dexlow;
+        dexbns = Math.round((dex - 10.5) / 2);
+        $('#dex').html(dex);
+        $('#dexbns').html(dexbns);
+        if (dexbns > 0) {
+          $('#dexbns').prepend("+");
+          $('#dexbns').css("color", "MediumSeaGreen");
+        } else if (dexbns < 0) {
+          $('#dexbns').css("color", "Tomato");
+        } else {
+          $('#dexbns').css("color", "grey");
+        }
+        //con //////////////////// 
+        //////////////////////////    
+        con1 = Math.floor(Math.random() * 6 + 1);
+        con2 = Math.floor(Math.random() * 6 + 1);
+        con3 = Math.floor(Math.random() * 6 + 1);
+        con4 = Math.floor(Math.random() * 6 + 1);
+        var _carray = [con1, con2, con3, con4];
+        conlow = Math.min.apply(Math, _carray);
+        con = con1 + con2 + con3 + con4 - conlow;
+        conbns = Math.round((con - 10.5) / 2);
+        $('#con').html(con);
+        $('#conbns').html(conbns);
+        if (conbns > 0) {
+          $('#conbns').prepend("+");
+          $('#conbns').css("color", "MediumSeaGreen");
+        } else if (conbns < 0) {
+          $('#conbns').css("color", "Tomato");
+        } else {
+          $('#conbns').css("color", "grey");
+        }
+        //wis //////////////////// 
+        //////////////////////////    
+        wis1 = Math.floor(Math.random() * 6 + 1);
+        wis2 = Math.floor(Math.random() * 6 + 1);
+        wis3 = Math.floor(Math.random() * 6 + 1);
+        wis4 = Math.floor(Math.random() * 6 + 1);
+        var _warray = [wis1, wis2, wis3, wis4];
+        wislow = Math.min.apply(Math, _warray);
+        wis = wis1 + wis2 + wis3 + wis4 - wislow;
+        wisbns = Math.round((wis - 10.5) / 2);
+        $('#wis').html(wis);
+        $('#wisbns').html(wisbns);
+        if (wisbns > 0) {
+          $('#wisbns').prepend("+");
+          $('#wisbns').css("color", "MediumSeaGreen");
+        } else if (wisbns < 0) {
+          $('#wisbns').css("color", "Tomato");
+        } else {
+          $('#wisbns').css("color", "grey");
+        }
+        //int //////////////////// 
+        //////////////////////////    
+        int1 = Math.floor(Math.random() * 6 + 1);
+        int2 = Math.floor(Math.random() * 6 + 1);
+        int3 = Math.floor(Math.random() * 6 + 1);
+        int4 = Math.floor(Math.random() * 6 + 1);
+        var _iarray = [int1, int2, int3, int4];
+        intlow = Math.min.apply(Math, _iarray);
+        int = int1 + int2 + int3 + int4 - intlow;
+        intbns = Math.round((int - 10.5) / 2);
+        $('#int').html(int);
+        $('#intbns').html(intbns);
+        if (intbns > 0) {
+          $('#intbns').prepend("+");
+          $('#intbns').css("color", "MediumSeaGreen");
+        } else if (intbns < 0) {
+          $('#intbns').css("color", "Tomato");
+        } else {
+          $('#intbns').css("color", "grey");
+        }
+        //chr //////////////////// 
+        //////////////////////////    
+        chr1 = Math.floor(Math.random() * 6 + 1);
+        chr2 = Math.floor(Math.random() * 6 + 1);
+        chr3 = Math.floor(Math.random() * 6 + 1);
+        chr4 = Math.floor(Math.random() * 6 + 1);
+        var _crarray = [chr1, chr2, chr3, chr4];
+        chrlow = Math.min.apply(Math, _crarray);
+        chr = chr1 + chr2 + chr3 + chr4 - chrlow;
+        chrbns = Math.round((chr - 10.5) / 2);
+        $('#chr').html(chr);
+        $('#chrbns').html(chrbns);
+        if (chrbns > 0) {
+          $('#chrbns').prepend("+");
+          $('#chrbns').css("color", "MediumSeaGreen");
+        } else if (chrbns < 0) {
+          $('#chrbns').css("color", "Tomato");
+        } else {
+          $('#chrbns').css("color", "grey");
+        }
+      }); //end roll click
+    });
+  </script>
+</body>
+</html>
