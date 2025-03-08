@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" /> -->
+  <link rel="stylesheet" href="https://lonnystartpage.pages.dev/colorPallette2.css" />
+</head>
+<body>
+    <div class="container">
+    <h1>Colour Palette Generator</h1>
+    <h2>Use the colour picker to create harmonious colour schemes</h2>
+
+    <div class="controls">
+      <div class="control-group">
+        <label>
+          <input type="color" id="colourPicker" value="#2563eb">
+          <span>Select Base Colour</span>
+        </label>
+      </div>
+
+      <div class="control-group" style="width: 100%;">
+        <label for="harmonySelect">Harmony Type</label>
+        <div class="harmony-options">
+          <button data-harmony="analogous" class="active">Analogous</button>
+          <button data-harmony="monochromatic">Monochromatic</button>
+          <button data-harmony="triadic">Triadic</button>
+          <button data-harmony="complementary">Complementary</button>
+          <button data-harmony="split-complementary">Split-Complementary</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="palette" id="colourPalette">
+      <!-- Colour cards will be generated here -->
+    </div>
+  </div>
+
+  <div class="alert" id="alert">Copied to clipboard!</div>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.1/chroma.min.js" integrity="sha512-RWI59o+PDXjPl3bakOf3k2ZbDtfvn/OU/ZKe6QmkE0V/ve7vYKEJe0RdkDueS+VkghBazP+1o4LKGON+pHUa5g==" crossorigin="anonymous"></script> -->
+  <script src="https://lonnystartpage.pages.dev/colorPallette2.js"></script>
+</body>
+</html>
