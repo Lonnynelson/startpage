@@ -1,0 +1,129 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NAD Events - Color pallets</title>
+  <head>
+    <meta charset="UTF-8">
+    <title>North American Division Events Color palletes</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      h1 {
+        color: #444545;
+        font-weight: 600;
+        line-height: 1.1em;
+        margin: 0 0 0.125em;
+        text-transform: uppercase;
+        font-size: 2em;
+        margin-bottom: 1em;
+      }
+      h1.text-center {
+        text-align: center;
+        margin-top: 75px;
+      }
+      .circle-container {
+        text-align: center;
+      }
+      .circle-container .circle {
+        display: inline-block;
+        padding: 50px 25px;
+        color: #fff;
+        border-radius: 100%;
+        border: 3px solid #fff;
+        min-width: 90px;
+        margin-left: -25px;
+      }
+      .circle button {
+        background-color: transparent;
+        border: none;
+        color: white;
+        cursor: pointer;
+      }
+      circle-container .container {
+        display: inline-block;
+        padding: 50px 25px;
+        color: #fff;
+        border-radius: 100%;
+        border: 3px solid #fff;
+        min-width: 90px;
+      }
+      .color1 {
+        background-color: #003B5C;
+      }
+      .color2 {
+        background-color: #007681;
+      }
+      .color3 {
+        background-color: #582C83;
+      }
+      .color4 {
+        background-color: #D86018;
+      }
+      .color5 {
+        background-color: #7D2248;
+      }
+      .color6 {
+        background-color: #4E3629;
+      }
+      .color7 {
+        background-color: #4A7729;
+      }
+      .color8 {
+        background-color: #F0B323;
+      }
+    </style>
+  </head>
+<body>
+  <div class="title">
+    <h1 class="text-center">NAD Events - Color Palletes</h1>
+  </div>
+  <div class="circle-container">
+    <div class="circle color1">
+      NAD Denim<br>
+      <button contenteditable="true">#003B5C</button>
+    </div>
+    <div class="circle color2">
+      Nile<br>
+      <button contenteditable="true">#007681</button>
+    </div>
+    <div class="circle color3">
+      Amethyst<br>
+      <button contenteditable="true">#582C83</button>
+    </div>
+    <div class="circle color4">
+      Spark<br>
+      <button contenteditable="true">#D86018</button>
+    </div>
+    <div class="circle color5">
+      Miracle<br>
+      <button contenteditable="true">#7D2248</button>
+    </div>
+    <div class="circle color6">
+      Branch<br>
+      <button contenteditable="true">#4E3629</button>
+    </div>
+    <div class="circle color7">
+      Vine<br>
+      <button contenteditable="true">#4A7729</button>
+    </div>
+    <div class="circle color8">
+      Cherubim<br>
+      <button contenteditable="true">#F0B323</button>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll('.circle button').forEach(button => {
+      button.addEventListener('click', () => {
+        navigator.clipboard.writeText(button.textContent);
+        alert('Color code copied to clipboard: ' + button.textContent);
+      });
+    });
+  </script>
+</body>
+</html>
