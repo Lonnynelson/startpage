@@ -24,7 +24,10 @@
         margin: 0 0 0.125em;
         text-transform: uppercase;
         font-size: 2em;
-        margin-bottom: 1em;
+      }
+      h1 a {
+        color: #444545;
+        text-decoration: none;
       }
       h1.text-center {
         text-align: center;
@@ -33,7 +36,7 @@
       h1.text-left {
         text-align: left;
         margin-top: 75px;
-        margin-left: 35px;
+        /* margin-left: 35px; */
       }
       .circle-container {
         text-align: center;
@@ -98,6 +101,43 @@
         position: relative;
         text-align: Left;
       }
+      .pdf-icon {
+        font-size: 100%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        display: block;
+        position: relative;
+        width: 60px;
+        height: 85px;
+        background-color: #eee;
+        background-image: url("https://i.imgur.com/lZ5SgDE.png");
+        background-repeat: no-repeat;
+        -webkit-background-size: 85% auto;
+        -moz-background-size: 85% auto;
+        background-size: 85% auto;
+        background-position: center 15px;
+        border-radius: 1px 36px 1px 1px;
+        border: 1px solid #ddd;
+        margin-top: 75px;
+      }
+      .pdf-icon:after {
+        content: 'PDF';
+        font-family: Arial;
+        font-weight: bold;
+        font-size: 12px;
+        text-align: center;
+        padding: .2px 0 .2px;
+        color: #fff;
+        display: block;
+        position: absolute;
+        top: 7px;
+        left: -15px;
+        width: 34px;
+        height: auto;
+        background: #da2525;
+        border-radius: 2px;
+      }
     </style>
   </head>
 <body>
@@ -138,74 +178,84 @@
       <button contenteditable="true">#F0B323</button>
     </div>
   </div>
-  <div class="title">
-    <h1 class="text-left">Conference List</h1>
+  <div class="float-left">
+    <div class="title">
+      <h1 class="text-left">Conference List</h1>
+    </div>
+    <div class="conf-list">
+      <ul>
+        <li>Alaska Conference</li>
+        <li>Alberta Conference</l>
+        <li>Allegheny East Conference</li>
+        <li>Allegheny West Conference</li>
+        <li>Arizona Conference</li>
+        <li>Arkanasas-Louisiana Conference</li>
+        <li>Bermuda Conference</li>
+        <li>British Columbia Conference</li>
+        <li>Carolina Conference</li>
+        <li>Central California Conference</li>
+        <li>Central States Conference</li>
+        <li>Chesapeake Conference</li>
+        <li>Dakota Conference</li>
+        <li>Florida Conference</li>
+        <li>Georgia-Cumberland Conference</li>
+        <li>Greater New York Conference</li>
+        <li>Guam-Micronesia Conference</li>
+        <li>Gulf States Conference</li>
+        <li>Hawaii Conference</li>
+        <li>Idaho Conference</li>
+        <li>Illinois Conference</li>
+        <li>Indiana Conference</li>
+        <li>Iowa-Missouri Conference</li>
+        <li>Kansas-Nebraska Conference</li>
+        <li>Kentucky-Tennessee Conference</li>
+        <li>Lake Region Conference</li>
+        <li>Manitoba-Saskatchewan Conference</li>
+        <li>Maritime Conference</li>
+        <li>Michigan Conference</li>
+        <li>Minnesota Conference</li>
+        <li>Montana Conference</li>
+        <li>Mountain View Conference</li>
+        <li>Nevada-Utah Conference</li>
+        <li>New Jersey Conference</li>
+        <li>New York Conference</li>
+        <li>Northeastern Conference</li>
+        <li>Northern California Conference</li>
+        <li>Northern New England Conference</li>
+        <li>Ohio Conference</li>
+        <li>Oklahoma Conference</li>
+        <li>Ontario Conference</li>
+        <li>Oregon Conferencev</li>
+        <li>Pennsylvania Conference</li>
+        <li>Potomac Conference</li>
+        <li>Quebec Conference</li>
+        <li>Rocky Mountain Conference</li>
+        <li>SDA Church in Newfoundland and Labrador</li>
+        <li>South Atlantic Conference</li>
+        <li>South Central Conference</li>
+        <li>Southeastern California Conference</li>
+        <li>Southeastern Conference (Florida)</li>
+        <li>Southern California Conference</li>
+        <li>Southern New England Conference</li>
+        <li>Southwest Region Conference</li>
+        <li>Texas Conference</li>
+        <li>Texico Conference</li>
+        <li>Upper Columbia Conference</li>
+        <li>Washington Conference</li>
+        <li>Wisconsin Conference</li>
+        <li>North American Division</li>
+        <li>Other</li>
+      </ul>
+    </div>
   </div>
-  <div class="conf-list">
-    <ul>
-      <li>Alaska Conference</li>
-      <li>Alberta Conference</li>
-      <li>Allegheny East Conference</li>
-      <li>Allegheny West Conference</li>
-      <li>Arizona Conference</li>
-      <li>Arkanasas-Louisiana Conference</li>
-      <li>Bermuda Conference</li>
-      <li>British Columbia Conference</li>
-      <li>Carolina Conference</li>
-      <li>Central California Conference</li>
-      <li>Central States Conference</li>
-      <li>Chesapeake Conference</li>
-      <li>Dakota Conference</li>
-      <li>Florida Conference</li>
-      <li>Georgia-Cumberland Conference</li>
-      <li>Greater New York Conference</li>
-      <li>Guam-Micronesia Conference</li>
-      <li>Gulf States Conference</li>
-      <li>Hawaii Conference</li>
-      <li>Idaho Conference</li>
-      <li>Illinois Conference</li>
-      <li>Indiana Conference</li>
-      <li>Iowa-Missouri Conference</li>
-      <li>Kansas-Nebraska Conference</li>
-      <li>Kentucky-Tennessee Conference</li>
-      <li>Lake Region Conference</li>
-      <li>Manitoba-Saskatchewan Conference</li>
-      <li>Maritime Conference</li>
-      <li>Michigan Conference</li>
-      <li>Minnesota Conference</li>
-      <li>Montana Conference</li>
-      <li>Mountain View Conference</li>
-      <li>Nevada-Utah Conference</li>
-      <li>New Jersey Conference</li>
-      <li>New York Conference</li>
-      <li>Northeastern Conference</li>
-      <li>Northern California Conference</li>
-      <li>Northern New England Conference</li>
-      <li>Ohio Conference</li>
-      <li>Oklahoma Conference</li>
-      <li>Ontario Conference</li>
-      <li>Oregon Conferencev</li>
-      <li>Pennsylvania Conference</li>
-      <li>Potomac Conference</li>
-      <li>Quebec Conference</li>
-      <li>Rocky Mountain Conference</li>
-      <li>SDA Church in Newfoundland and Labrador</li>
-      <li>South Atlantic Conference</li>
-      <li>South Central Conference</li>
-      <li>Southeastern California Conference</li>
-      <li>Southeastern Conference (Florida)</li>
-      <li>Southern California Conference</li>
-      <li>Southern New England Conference</li>
-      <li>Southwest Region Conference</li>
-      <li>Texas Conference</li>
-      <li>Texico Conference</li>
-      <li>Upper Columbia Conference</li>
-      <li>Washington Conference</li>
-      <li>Wisconsin Conference</li>
-      <li>North American Division</li>
-      <li>Other</li>
-    </ul>
-    <div>
+  <div class="float-left">
+    <span class="pdf-icon"></span>
+  </div>
+  <div class="title float-left">
+    <h1 class="text-left">
+      <a href="https://lonnystartpage.pages.dev/Best%20Practices%20for%20an%20Event%20Registration%20Coordinator.pdf" target="_blank">Best Practices for an Event Registration Coordinator</a>
+    </h1>
+  </div>
   <script>
     document.querySelectorAll('.circle button').forEach(button => {
       button.addEventListener('click', () => {
