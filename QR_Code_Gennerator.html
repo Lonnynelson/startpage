@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>QR URL Builder</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 40px;
+  }
+  input {
+    width: 400px;
+    padding: 8px;
+  }
+  button {
+    padding: 8px 16px;
+    margin-left: 10px;
+  }
+</style>
+</head>
+<body>
+
+<h2>QR URL Generator</h2>
+
+<input type="text" id="urlInput" placeholder="Enter URL here">
+<button onclick="buildURL()">Go</button>
+
+<script>
+function buildURL() {
+    const base = "https://qr.zat.is/png5.005992~";
+    const userURL = document.getElementById("urlInput").value.trim();
+
+    if (!userURL) {
+        alert("Please enter a URL.");
+        return;
+    }
+
+    const finalURL = base + userURL;
+
+    window.location.href = finalURL;
+}
+</script>
+
+</body>
+</html>
