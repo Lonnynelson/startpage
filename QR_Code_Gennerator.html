@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>QR URL Generator</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    padding:40px;
+}
+
+/* Layout */
+
+.container{
+    display:flex;
+    gap:40px;
+    flex-wrap:wrap;
+}
+
+.leftColumn{
+    flex:1;
+    min-width:320px;
+}
+
+.rightColumn{
+    flex:1;
+    min-width:320px;
+}
+
+/* Inputs */
+
+input, select{
+    padding:8px;
+    margin:5px 0;
+}
+
+button{
+    padding:10px 18px;
+    cursor:pointer;
+}
+
+.colorRow{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+/* Preview */
+
+#qrPreview img{
+    border:1px solid #ccc;
+    padding:10px;
+    background:white;
+}
+
+#actionButtons{
+    margin-top:12px;
+}
+
+/* Mobile layout */
+
+@media (max-width: 700px){
+
+.container{
+    flex-direction:column;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LEFT COLUMN -->
+<div class="leftColumn">
+
+<h2>QR URL Generator</h2>
+
+<label>Destination URL</label><br>
+<input type="text" id="urlInput" size="40" placeholder="https://example.com">
+
+<br><br>
+
+<h3>QR Color</h3>
+
+<div class="colorRow">
+<label>Color Picker</label>
+<input type="color" id="colorPicker" value="#005992">
+</div>
+
+<input type="hidden" id="hexInput" value="#005992">
+<input type="hidden" id="r">
+<input type="hidden" id="g">
+<input type="hidden" id="b">
+
+<br>
+
+<label>Image Format</label><br>
+<select id="formatSelect">
+<option value="png" selected>PNG</option>
+<option value="gif">GIF</option>
+</select>
+
+<br><br>
+
+<label>QR Size</label><br>
+<select id="sizeSelect">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5" selected>5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+</select>
+
+<br><br>
+
+<button onclick="buildQR()">Generate QR</button>
+
+</div>
+
+
+<!-- RIGHT COLUMN -->
+<div class="rightColumn">
+
+<div id="qrPreview"></div>
+
+<br>
+
+<h3><strong>Built From:</strong> 
+<a href="https://a.zat.is" target="_blank">a.zat.is</a>
+</h3>
+
+<p>
+<strong>Zat URL Shortner:</strong><br>
+https://l.zat.is/[webaddress]
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+let generatedQRUrl = "";
+
+/* Press Enter to generate QR */
+document.getElementById("urlInput").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        buildQR();
+    }
+});
+
+/* Robust HEX â†’ RGB conversion */
+function hexToRgb(hex) {
+
+  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+
+  hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+    return r + r + g + g + b + b;
+  });
+
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
+  if(result){
+    document.getElementById("r").value = parseInt(result[1], 16);
+    document.getElementById("g").value = parseInt(result[2], 16);
+    document.getElementById("b").value = parseInt(result[3], 16);
+  }
+
+}
+
+/* RGB â†’ HEX */
+function componentToHex(c){
+    const hex = Number(c).toString(16);
+    return hex.length === 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r,g,b){
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+/* Color picker updates HEX and RGB */
+document.getElementById("colorPicker").addEventListener("input",function(){
+
+    const hex = this.value;
+    document.getElementById("hexInput").value = hex;
+    hexToRgb(hex);
+
+});
+
+/* HEX input updates RGB + picker */
+document.getElementById("hexInput").addEventListener("input",function(){
+
+    const hex = this.value;
+    document.getElementById("colorPicker").value = hex;
+    hexToRgb(hex);
+
+});
+
+/* Copy QR URL */
+function copyQRUrl(){
+
+    if(!generatedQRUrl){
+        alert("Generate a QR code first.");
+        return;
+    }
+
+    navigator.clipboard.writeText(generatedQRUrl);
+    alert("QR URL copied to clipboard!");
+}
+
+/* Generate QR */
+function buildQR(){
+
+    const url = document.getElementById("urlInput").value.trim();
+
+    if(!url){
+        alert("Please enter a URL");
+        return;
+    }
+
+    const hex = document.getElementById("hexInput").value.replace("#","");
+    const format = document.getElementById("formatSelect").value;
+    const size = document.getElementById("sizeSelect").value;
+
+    generatedQRUrl = "https://qr.zat.is/" + format + size + "." + hex + "~" + url;
+
+    const preview = document.getElementById("qrPreview");
+
+    preview.innerHTML = `
+        <h3>QR Preview</h3>
+        <div style="margin-top:10px;">
+            <small>Click the QR code to open in a new window.</small>
+        </div>
+        <div id="actionButtons">
+            <button onclick="copyQRUrl()">Copy QR URL</button>
+
+            <a href="${generatedQRUrl}" download="zat-qr.${format}">
+                <button>Download QR Image</button>
+            </a>
+        </div>
+
+        <a href="${generatedQRUrl}" target="_blank">
+            <img src="${generatedQRUrl}" alt="QR Code">
+        </a>
+    `;
+}
+
+/* Initialize RGB fields */
+hexToRgb("#005992");
+
+</script>
+
+</body>
+</html>
