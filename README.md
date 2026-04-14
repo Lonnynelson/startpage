@@ -1,63 +1,332 @@
-# startpage.rwrt
+<div align="center">
+  <h1 align="center">🚀 YourDynamicDashboard (v2.2.0)</h1>
+  <p align="center">
+    <strong>The Performance & Scaling Update.</strong><br>
+    Transform your new tab into a powerful, customizable,<br> minimalist & privacy-first command center.<br>
+    <br />
+    <a href="#-features-of-v2"><strong>Features</strong></a> ·
+    <a href="#%EF%B8%8F-installation-guide"><strong>Installation</strong></a> ·
+    <a href="#-future-plans"><strong>Future Plans</strong></a> ·
+    <a href="#-the-showcase"><strong>Extension Preview</strong></a>
+  </p>
+</div>
 
-## Configuration
+<div align="center">
+  <img src="https://img.shields.io/github/license/xtditom/YourDynamicDashboard" alt="License">
+  <a href="https://github.com/xtditom/YourDynamicDashboard/releases/latest" target="_blank">
+    <img src="https://img.shields.io/github/v/release/xtditom/YourDynamicDashboard?color=white" alt="Version">
+  </a>
+  <img src="https://img.shields.io/github/last-commit/xtditom/YourDynamicDashboard" alt="Last Commit">
+  <img src="https://img.shields.io/github/stars/xtditom/YourDynamicDashboard?logo=github&color=white" alt="Stars">
+</div>
 
-### index.html
-This is where you add your links. But don't worry, there's no HTML skills needed.
+<div align="center">
+  <a href="https://chromewebstore.google.com/detail/fckmlnagohleefboaleepppikpdkckjn" target="_blank">
+    <img src="https://img.shields.io/chrome-web-store/v/fckmlnagohleefboaleepppikpdkckjn" alt="Chrome Web Store Version">
+  </a>
+  <a href="https://chromewebstore.google.com/detail/fckmlnagohleefboaleepppikpdkckjn" target="_blank">
+    <img src="https://img.shields.io/chrome-web-store/users/fckmlnagohleefboaleepppikpdkckjn" alt="Chrome Web Store Users">
+  </a>
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/yourdynamicdashboard/" target="_blank">
+    <img src="https://img.shields.io/amo/v/yourdynamicdashboard?color=orange" alt="Mozilla Addons Version">
+  </a>
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/yourdynamicdashboard/" target="_blank">
+    <img src="https://img.shields.io/amo/users/yourdynamicdashboard?color=orange" alt="Mozilla Addons Users">
+  </a>
+</div>
 
-There's really only two places you should take a look at: Line 44, where you set the page title, and everything below line 49, where the links go. There's some instructions in the comments, but since I'm busy writing anyways, I'll just repeat myself here.
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/promo/ydd-bg.png" alt="YDD in Custom Bg" width="100%">
+      <br><b>Transform Your</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/promo/ydd-bg-2.png" alt="YDD in Custom Bg 2" width="100%">
+      <br><b>New Tab Page</b>
+    </td>
+  </tr>
+</table>
 
-```
-The Section Heading. This will start a new block.
-  I
-  V
-Title
-http://www.example.com || Title || Keybinding || Icon URL
-  ^                         ^           ^             ^
-  |                         |           `---------,   `-------------------------------------,
-Where you want to go ][ What you want to see ][ Keybinding to go there fast (optional) ][ URL of image to display with link (optional) ]
-```
+---
 
-The keybindings support multi-stroke bindings, so you can use ```gm``` to go to Gmail, ```gp``` to go to Google+, and so on. But beware! Shorter keybindings will get triggered first, so if you already use ```g``` to go to Google, you'll never be able to input ```gm``` or ```gp```.
+<br>
+<div align="center">
+  <h3>🔴 For a Live Test:</h3>
+  <a href="https://ditom.me/YourDynamicDashboard/" target="_blank" rel="noopener noreferrer">
+    <img src="assets/badges/live-test-badge.svg" alt="Live Demo - Try it now in your browser" height="40">
+  </a>
+</div>
+<br>
 
-### settings
-Due to some issues with Chrome's XMLHttpRequest, the settings have been moved to ```js/script.js```. They can be found right at the top of the file.
+---
 
-#### navigation
-This only has one setting: ```"newWindow"```. Set to true to have links open in a new tab/window, false to use the same window.
+## ⚡ Why Choose YourDynamicDashboard?
 
-#### clock
-Again, this has one setting: ```"showClock"```. True or false.
+Most New Tab Page/ Dashboards are either too simple (just a clock) or too cluttered (ads and news feeds). **YDD** strikes the perfect balance:
 
-#### animation
-This only has one setting: ```"hideLinks"```. Set to true to have links being shown/hidden automatically on
-mouse events, false to see them always.
+* **🔒 Privacy First:** No tracking. Your data (Search History, To-Do lists, links, settings) lives on your computer, not our servers.
+* **🏎️ Speed:** Built with vanilla JavaScript. No heavy frameworks. Loads instantly.
+* **🎨 Aesthetics:** Glassmorphism UI, animated gradients, and full color control.
 
-#### icons
-This only has one setting: ```"showIcons"```. Set to true to see configured icons next to links, false to hide them.
+---
 
-#### search
-This is where it gets interesting. There's two keys:
+## ✨ Features of V2
 
-##### focusSearch
-```true``` or ```false```. This is supposed to focus the first search box when the page is opened, but that's highly dependent on the browser. It works in Firefox, but last time I checked it won't work in Chrome. There's not really anything I can do about that.
+YourDynamicDashboard has been heavily upgraded with the "Performance & Scaling" patch.
 
-##### engines
-This is the fun part. Instead of giving you predefined search engines, I thought I'd let you add some on the fly.
+| Category | Premium Features |
+| :--- | :--- |
+| **🤖 Interaction** | <li>**Local Search History:** Native-feeling, privacy-first search history with real-time filtering and auto-delete.</li><li>**Drag & Drop Engine:** Reorder To-Do tasks, AI Tools, and Google Apps seamlessly.</li><li>**Voice Search ("Jarvis Mode"):** Hands-free control with privacy-browser fallback support.</li><li>**Zen Mode:** Press `Z` to banish all clutter. Only the clock and wallpaper remain.</li> |
+| **🎨 Personalization** | <li>**Custom Icons:** Upload and set your own image icons for individual web shortcuts.</li><li>**BG Blur Control:** Adjust the blur intensity of custom backgrounds for perfect UI readability.</li><li>**Random Backgrounds:** Fetch fresh wallpapers automatically, and **Freeze** the ones you love.</li><li>**Toxic Palettes:** New  'Radioactive' and 'Phosphor' theme presets.</li> |
+| **☁️ Utilities** | <li>**Advanced Weather:** Live local weather including daily Min/Max temperatures. No API keys required.</li><li>**Smart Search:** Switch engines (Google, Bing, DuckDuckGo) or platforms (YouTube, Reddit) instantly.</li><li>**Widget Expansion:** More granular visibility combinations (e.g., Search & Quote, Weather & Quote).</li> |
+| **⚡ Quick Access** | <li>**UI Toggles:** Hide greetings and editable text instantly via settings or custom shortcut keys.</li><li>**Link Direction:** Control exactly how and where your shortcut links open.</li><li>**Layout Flexibility:** Dock your Shortcuts bar to either the Top or Bottom of the screen.</li> |
 
-So, ```engines``` is an array full of arrays. Each inner array needs to have three objects - The URL of your search engine, the ```GET``` argument, and a placeholder for the searchbox.
+### 🎨 The Showcase
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <b>Glassmorphism</b><br>
+      <img src="assets/the-showcase/custom-bg-2.png" alt="Glassmorphism">
+    </td>
+    <td align="center" width="33%">
+      <b>Wild West</b><br>
+      <img src="assets/the-showcase/wild-west-bg.png" alt="Wild West">
+    </td>
+    <td align="center" width="33%">
+      <b>Blue Abstract</b><br>
+      <img src="assets/the-showcase/abstract-bg.png" alt="Blue Abstract">
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="33%">
+      <b>Bio Lime</b><br>
+      <img src="assets/the-showcase/bio-lime.png" alt="Bio Lime">
+    </td>
+    <td align="center" width="33%">
+      <b>The Dawn</b><br>
+      <img src="assets/the-showcase/custom-bg.png" alt="The Dawn">
+    </td>
+    <td align="center" width="33%">
+      <b>PopUp Features</b><br>
+      <img src="assets/the-showcase/pop-up-features.png" alt="PopUp Features">
+    </td>
+  </tr>
+</table>
 
-How do you get that stuff? Let's take a look at Google. When you search something, you'll get redirected to this URL:
+---
 
-```
-https://www.google.com/search?q=something
-```
+## 🛠️ Installation Guide
 
-There's some more stuff there, but this is the part we're interested about. Everything up to ```?``` is the URL, so it goes in the first position in the array.
+### 🧩 Web Store (Stable)
+*Stores may have older versions if a new update has arrived recently.*
+<p>
+  <a href="https://chromewebstore.google.com/detail/fckmlnagohleefboaleepppikpdkckjn" target="_blank">
+    <img src="https://img.shields.io/badge/Get%20it%20on-Chrome%20Web%20Store-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white" height="40">
+  </a>
+  <a href="https://microsoftedge.microsoft.com/addons/detail/yourdynamicdashboard/phhofebhbmicnfhmmdgikiddaboljnec" target="_blank">
+  <img src="https://img.shields.io/badge/Get%20it%20on-Microsoft%20Edge%20Store-648F31.svg?style=for-the-badge&logo=microsoft-edge&logoColor=white" alt="Microsoft Edge Store">
+  </a>
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/yourdynamicdashboard/" target="_blank">
+  <img src="https://img.shields.io/badge/Get%20it%20on-Firefox%20Add--ons-E66000.svg?style=for-the-badge&logo=firefox-browser&logoColor=white" alt="Firefox Add-ons">
+  </a>
+</p>
 
-The part between ```?``` and ```=``` is the name of the ```GET``` argument, this goes in the second position.
+> [!NOTE]
+> ‼️Follow these [steps](https://github.com/xtditom/YourDynamicDashboard?tab=readme-ov-file#-additional-steps-for-gecko-engine-based-browser-firefox-zen-etc) below to set it as the Homepage for Firefox, Zen, etc.
+>
+> ‼️Follow these [steps](https://github.com/xtditom/YourDynamicDashboard?tab=readme-ov-file#-additional-steps-for-opera--opera-gx) below to configure it for Opera/ Opera GX.
 
-The third position can be any string really. I suggest you choose something descriptive here, like "Google".
+### 🦊 Additional steps for Gecko engine-based browser (Firefox, Zen, etc.)
+*Firefox, Zen, Librewolf, etc. treat New Tabs and Homepages separately. To see your dashboard on startup:*
 
-### style/style.css
-If you know CSS, edit to your heart's contempt.
+1.  **Install:** Get the extension from [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/yourdynamicdashboard/).
+2.  **Bookmark:** Open a **New Tab** (so the dashboard loads), then press `Ctrl+D` to bookmark it.
+3.  **Configure:** Go to **Browser's Settings** > **Home**.
+4.  **Select:** Under **"Homepage and new windows"**, choose **Custom URLs** → **Use Bookmark...** and pick the bookmark you just created.
+5.  **Done:** Now your dashboard will load instantly when you start your browser.
+
+<details>
+<summary><strong>⚠️ Important Step for Zen Browser Users</strong></summary>
+
+By default, Zen Browser does not open extensions on New Tabs. You must enable this:
+1.  Open a new tab & Type `about:config` in your address bar and press Enter.
+2.  Click **"Accept the Risk and Continue"**.
+3.  Search for: `zen.urlbar.replace-newtab`
+4.  Double-click it or manually set its value to **false**.
+5.  Now open a new tab, and the dashboard will appear.
+
+</details>
+
+<details>
+<summary><strong>⚠️ Settings Not Saving? (LibreWolf / Zen)</strong></summary>
+
+If your Theme, Location, or To-Do list resets every time you close the browser:
+* This happens because **"Delete cookies and site data when closed"** is enabled in your browser settings.
+* **Fix:** Add an **Exception** for this extension in your Privacy & Security settings, or disable the auto-delete feature to allow `localStorage` to save your preferences.
+
+</details>
+
+### ⭕ Additional steps for Opera / Opera GX
+
+<details>
+<summary><strong>➡️ Set as Startup Page AND New Tab Page</strong></summary>
+
+*Opera blocks extensions from changing the New Tab page by default. You need a simple "Helper" extension to fix this.*
+
+1.  **Install:** Download the **[New Tab & Toolbox](https://chromewebstore.google.com/detail/new-tab-start-page/mjfahldkpjhcnfbbmdhpjolcjpcfhcpj)** extension from the Chrome Web Store.
+2.  **Configure:** Open "New Tab & Toolbox" extension and select **Configuration**.
+3.  **Set URL:** In the "Custom URL" box, paste this exact ID:
+    `chrome-extension://fckmlnagohleefboaleepppikpdkckjn/index.html`
+4.  **Activate:** Change **"Override default Start Page when browser launches"** to **YES**.
+5.  **Save:** Click the **Save** button at the bottom.
+    * *Result:* You will now see your dashboard when opening a New Tab AND when starting Opera.
+
+</details>
+
+<details>
+<summary><strong>➡️ Set as Startup Page only</strong></summary>
+
+*If you only want the dashboard to appear when you first launch Opera (but keep the default Speed Dial for new tabs):*
+
+1.  **Settings:** Go to **Browser Settings** (`Alt+P`) > **On Startup**.
+2.  **Select:** Choose **"Open a specific page or set of pages"** → **Add a new page**.
+3.  **Paste:** Enter this URL and click **Add**:
+    `chrome-extension://fckmlnagohleefboaleepppikpdkckjn/index.html`
+4.  **Done:** The dashboard will now load automatically whenever you launch Opera.
+
+</details>
+
+---
+
+### ⚡ Manual Installation
+
+#### 🟢 Chromium Browsers (Chrome, Edge, Brave, etc.)
+
+<a href="https://github.com/xtditom/YourDynamicDashboard/releases/latest">
+    <img src="https://img.shields.io/badge/Download%20Latest%20Version-v2.2.0-2ea44f?style=for-the-badge&logo=github" alt="Download" height="40">
+</a>
+
+**1. Download & Prepare**
+1.  Click the button above to download the latest `.zip` release. Or, direct download [![Download ZIP](https://img.shields.io/badge/Download-ZIP-blue.svg)](https://github.com/xtditom/YourDynamicDashboard/releases/download/v2.2.0/YourDynamicDashboard-V2.2.zip)
+2.  **Unzip** the folder to a **permanent location** (e.g., `Downloads/YDD`).
+    > ⚠️ **Important:** Do not delete or move this folder after installing, or the extension will stop working.
+
+**2. Load into Browser**
+1.  Open your browser's extension manager by typing `chrome://extensions` in the URL bar. (*Doesn't matter if you are using Edge, Brave, etc.*)
+2.  Toggle **Developer Mode** on (usually a switch in the top-right corner 🛠️).
+3.  Click the **Load Unpacked** button.
+4.  Select the folder you extracted in Step 1.
+5.  **Done!** Open a new tab to see your new dashboard.
+
+#### 🦊 Gecko Browsers (Firefox, Zen, Waterfox, etc.)
+
+**1. Download & Prepare**
+1.  Download the latest `.xpi` release from above. Or, Direct download: [![Download XPI](https://img.shields.io/badge/Download-XPI-orange.svg)](https://github.com/xtditom/YourDynamicDashboard/releases/download/v2.2.0/YourDynamicDashboard-V2.2.xpi)
+2.  Keep the `.xpi` file in a **safe location** (e.g., `Downloads/YDD`).
+    > ⚠️ **Important:** Do not delete or move this file after installing, or the extension will stop working.
+
+**2. Load into Browser**
+1.  Open your browser's extension manager by typing `about:addons` in the URL bar.
+2.  Click the ⚙️ **(Settings Icon)** next to "Manage Your Extensions".
+3.  Select **Install Add-on From File...**
+4.  Browse and select the `.xpi` file you downloaded.
+5.  **Done!** Open a new tab to see your new dashboard.
+
+---
+
+## ⚙️ Configuration
+
+**Good news!** As of v2.2.0, **configuration is essentially zero.**
+
+* **Weather:** Auto-detects your approximate location securely.
+    * *Prefer manual?* Go to **Settings > Functions > Custom Location** and type your city.
+* **Search:** Click the Engine/Platform icon in the search bar to switch between Google, Bing, YouTube, etc.
+* **Shortcuts:** Use the Settings panel to add/edit/delete shortcuts and upload custom icons.
+
+---
+
+## ⌨️ Keyboard Shortcuts
+
+Navigate like a pro without touching your mouse.
+
+| Key | Action |
+| :--- | :--- |
+| **`V`** | **Voice Search:** Activate microphone instantly. |
+| **`Z`** | **Zen Mode:** Toggle distractions On/Off. |
+| **`/`** | **Focus Search:** Jump to the search bar. |
+| **`T`** | Toggle **To-Do List**. |
+| **`A`** | Toggle **AI / Social Tools**. |
+| **`G`** | Toggle **Google Apps Grid**. |
+| **`S`** | Open **Settings**. |
+| **`1-9`** | Launch **Shortcut Link** (1 through 9). |
+
+*You can also re-bind the keys in Settings.*
+
+---
+
+## 📄 License
+
+This project is legally protected and licensed under the **GNU General Public License v3.0**. 
+
+**What this means:**
+* **✅ Permissions:** You are completely free to use, modify, and distribute this software for private or commercial purposes.
+* **🛑 Conditions (Copyleft):** If you modify and distribute this codebase, **you must** make your entire modified project open-source and free under the exact same GPLv3 license. You cannot take this code, modify it, and hide it in a closed-source project.
+* **⚠️ No Warranty:** This software is provided "as is", without warranty of any kind.
+
+See the [LICENSE](LICENSE) file for the full legal text and details.
+
+---
+
+## 🛡 Privacy Policy
+
+With **YourDynamicDashboard**, you are the product owner, not the product.
+
+* **No Analytics:** We do not track you.
+* **Local Storage:** Your history, todos, shortcuts, and themes stay on your PC.
+* **Icons:** Icons sourced from various open-source libraries.
+* **Voice Search:** Processed locally by your browser's Web Speech API; audio is never sent to us.
+* **Weather Data:** We use [Open-Meteo](https://open-meteo.com/), a privacy-focused open-source weather provider.
+
+Read the full [Privacy Policy](https://xtditom.github.io/YourDynamicDashboard/privacy-policy.html).
+
+---
+
+## 🔜 Future Plans
+
+Features planned for upcoming major releases:
+
+- [ ] **Fully Draggable Grid:** Move the clock, weather, and quote modules anywhere on the screen.
+- [ ] **Time-based Theme Change:** Theme changes based on Day & Night time.
+- [ ] **Fonts:** Adding Various fonts to enhance the experience.
+- [ ] **More Apps & Tools:** Adding new Google Apps, AI & Socials.
+- [ ] **Resolution Selection:** An option to select device resolution.
+- [ ] **Language Options:** Adding multiple languages for better UX.
+- [ ] **Fix remaining bugs:** Fixing remaining bugs & issues.
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+Feel free to check the [issues page](https://github.com/xtditom/YourDynamicDashboard/issues).
+
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
+---
+
+## ❤️ Acknowledgments
+
+* **Inspiration:** A huge thanks to **XengShi** for their project, **[MaterialYouNewTab](https://github.com/prem-k-r/MaterialYouNewTab)**, which served as a major inspiration. (Currently maintained by _Prem Kumar_ & _Itz-RJ_)
+* **AI Assistance:** Developed with help from **Google's Gemini Pro**.
+
+---
+
+<div align="center">
+  <h3>Created with ❤️ by <a href="https://github.com/xtditom">Ditom Baroi Antu</a></h3>
+  <p>© 2025-2026 All Rights Reserved.</p>
+</div>

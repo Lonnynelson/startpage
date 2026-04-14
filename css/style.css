@@ -1,0 +1,259 @@
+/**
+	Lonny's Startpage
+	==================
+*/
+
+html, body{
+	/* width:100%; */
+	height:100%; 
+	/* padding:0px; */ 
+	margin:0px;
+	overflow: hidden;
+	background-attachment: fixed;
+}
+
+#projector {
+  position: absolute; 
+  top: 0px;
+  left: 0px;
+  width:100%;
+  height:100%;
+} 
+
+.center-div {
+	width:580px;
+    height:374px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left: -290px;
+    margin-top:  -187px;
+}
+
+#preloaderDiv
+{
+	position:absolute;
+	left:50%;
+    top:50%;
+    margin-left: -27px;
+    margin-top:  -27px;
+}
+
+#logo{
+	opacity:0;
+    filter: alpha(opacity=0);
+}
+
+#date2014
+{
+	position:absolute;
+	padding-left: 210px;
+	padding-top:15px;
+	opacity:0;
+	top:303px;
+	left:0;
+    filter: alpha(opacity=0);
+}
+
+body {
+  color: #999; /* Font color */
+  padding-top: 20px; /* Padding between link blocks and top edge */
+  padding-right: 20px;
+  padding-left: 20px;
+  font-family: "Museo", "Helvetica Neue", sans-serif; /* Font */
+  text-shadow: rgba(0, 0, 0, 0.9) 3px 3px 5px; /* Text Shadow */
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.column {
+  flex: 1;
+  padding: 10px;
+  min-width: 200px;
+}
+body.dnd {
+	/* background: #000000; */
+    /* background-size: 50%; */
+    /* background-position: center center; */
+}
+
+a {
+	color: #FFF; /* Link Color - Was CCC */
+	font-size: .8em; /* Link Size */
+	text-decoration: none; /* Remove underlines */
+	font-weight: bold;
+}
+
+a:hover {
+	color: #CCCCCC; /* Was FFF */	/* Link hover color */
+}
+
+.block {
+    /* border-left: 1px solid #999; /* Left border of link block */
+	float: left;
+	padding: .5em; /* Padding around link block */
+	width: 220px; /* Link block width */
+    background: rgba(0, 43, 235, 0.6) none repeat scroll 0 0;
+    bottom: 10px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.9);
+    color: #fff;
+    left: auto;
+    margin-right: 1em;
+    margin-bottom: 1em;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px; /* future proofing */
+	-khtml-border-radius: 10px; /* for old Konqueror browsers */
+    position: relative;
+    z-index: 20;
+}
+
+h1 {
+	margin: 0;
+	font-size: 1em;	/* Title size */
+	color: #FFFFFF;
+}
+
+ul {
+	padding: 0.25em;
+}
+
+ul li {
+	list-style: none;
+	/* padding: 5px; */
+	margin-bottom: 0px;
+	/* border-bottom: thin solid;
+	/* background: rgb(0, 60, 114); /* The Fallback */
+	/* background: rgba(0, 60, 114, 0.7);
+	/* border-top-left-radius: 10px;
+	/* -moz-border-radius-topleft: 10px;
+	/* border-top-right-radius: 10px;
+	/* -moz-border-radius-topright: 10px;
+    /* box-shadow: rgba(0,0,0,0.9) 3px 3px 5px; /* Rounded Box Shadow */
+}
+li img {
+	width: 24px;
+	border-width: 0;
+	margin: 4px;
+	vertical-align: middle;
+}
+
+
+#clock {
+	position: absolute;
+	bottom: 40px;
+	left: auto;                 /* was auto */
+	font-size: 6em;
+	color: #FFF; /* Clock Font color */
+	background: rgb(0, 43, 235); /* The Fallback */
+	background: rgba(0, 43, 235, 0.6);
+	padding: 10px 20px 10px 20px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px; /* future proofing */
+	-khtml-border-radius: 10px; /* for old Konqueror browsers */
+	text-shadow: rgba(0,0,0,0.10) 3px 3px 5; /* Text Shadow */
+    box-shadow: rgba(0,0,0,0.9) 3px 3px 5px; /* Rounded Box Shadow */
+}
+
+form {
+	margin-top: 1em;
+	display: block;
+	float: left;
+	margin-left: 10px;
+}
+
+form input {
+	background: #002beb;												/* Background search box */
+	background: -webkit-gradient(						/*		gradient for webkit */
+		linear,
+		left top,
+		left bottom,
+		from(#002beb),
+		to(#0026cf));
+	background: -moz-linear-gradient(				/*		gradient for gecko */
+		top,
+		#002beb,
+		#0026cf);
+	border: 1px solid #002beb;									/* Border search box */
+	-webkit-box-shadow: rgba(0,0,0,0.2) 0 1px 2px;	/* Shadow search box - webkit */
+	-moz-box-shadow: rgba(0,0,0,0.2) 0 1px 2px;			/* Shadow search box - gecko */
+	box-shadow: rgba(0,0,0,0.2) 0 1px 2px;					/* Shadow search box - generic */
+	color: #ddd;														/* Text color search box */
+	font-size: 1em;													/* Text size search box */
+    box-shadow: rgba(0,0,0,0.9) 3px 3px 5px; /* Rounded Box Shadow */
+}
+
+form input:first-child {
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-right: 0;
+	padding:6px;
+}
+
+form input:last-child {
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-left: 0;
+	padding:6px;
+}
+textarea {
+  background: #ffffff;
+  background: url(https://i.imgur.com/f9oW88I.png) center center no-repeat; /* This ruins default border */
+  border: 1px solid #888; 
+  height: 2em;
+  width: 20em;
+  resize: none;
+}
+
+/* --- 9.5. RIGHT & LEFT CIRCULAR ARROW LINKS */
+
+/* --- Right-side --- */
+.side-nav-right {
+  position: fixed;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  text-decoration: none;
+  z-index: 2000;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.side-nav-right svg {
+  display: block;
+  color: var(--accent-color);
+}
+.side-nav-right:hover {
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.65);
+}
+
+@media (max-width: 700px) {
+  .side-nav-right {
+    right: 12px;
+    width: 44px;
+    height: 44px;
+  }
+}
