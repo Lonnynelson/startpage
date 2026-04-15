@@ -52,109 +52,7 @@
         background-color: rgb(255 255 255 / 60%) !important;
       }
     </style>
-    <script>
-      (function () {
-        function setBackgroundImage(url) {
-          const cleanUrl = url.replace(/^"|"$/g, '');
-          if (!cleanUrl || cleanUrl === 'null') return;
-          let style = document.getElementById('index2-saved-background');
-          if (!style) {
-            style = document.createElement('style');
-            style.id = 'index2-saved-background';
-            document.head.appendChild(style);
-          }
-          style.textContent =
-            'html, body { background-image: url(' + cleanUrl + ') !important; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; background-attachment: fixed !important; }';
-          document.body.style.backgroundImage = 'url(' + cleanUrl + ')';
-          document.body.style.backgroundSize = 'cover';
-          document.body.style.backgroundPosition = 'center';
-          document.body.style.backgroundRepeat = 'no-repeat';
-          document.body.style.backgroundAttachment = 'fixed';
-          document.body.classList.add('has-custom-bg');
-        }
-
-        function applySavedBackground() {
-          const bgMode = localStorage.getItem('randomBgMode');
-          const bg = localStorage.getItem('backgroundImage');
-          const savedBg = localStorage.getItem('savedBgUrl');
-          const bgTime = localStorage.getItem('randomBgTime');
-          let imgUrl = null;
-
-          if (bgMode === '"freeze"') {
-            if (
-              bgTime === 'null' ||
-              bgTime === '"-1"' ||
-              Date.now() - parseInt(bgTime, 10) <= 259200000
-            ) {
-              imgUrl =
-                savedBg && savedBg !== '"null"'
-                  ? savedBg
-                  : bg && bg !== '"null"'
-                  ? bg
-                  : null;
-            }
-          } else if (bg && bg !== '"null"' && bgMode !== '"random"') {
-            imgUrl = bg;
-          }
-
-          if (imgUrl && imgUrl !== 'null' && imgUrl !== '"null"') {
-            setBackgroundImage(imgUrl);
-          }
-
-          const bgBlur = localStorage.getItem('bgBlurIntensity');
-          if (bgBlur) {
-            const cleanBlur = bgBlur.replace(/^"|"$/g, '');
-            const blurMap = {
-              '0': 0,
-              '10': 2,
-              '20': 4,
-              '30': 6,
-              '40': 8,
-              '50': 10,
-            };
-            const blurPx = blurMap[cleanBlur] || 0;
-            document.documentElement.style.setProperty('--bg-blur', blurPx + 'px');
-            if (['10', '20', '30', '40', '50'].includes(cleanBlur)) {
-              document.documentElement.classList.add('high-bg-blur');
-            } else {
-              document.documentElement.classList.remove('high-bg-blur');
-            }
-          }
-
-          const hasIdbBg = localStorage.getItem('has_idb_bg') === 'true';
-          if (hasIdbBg || bgMode === '"random"' || bgMode === '"freeze"') {
-            const request = indexedDB.open('YDD_Storage', 2);
-            request.onupgradeneeded = function (event) {
-              const db = event.target.result;
-              if (!db.objectStoreNames.contains('images')) {
-                db.createObjectStore('images');
-              }
-            };
-            request.onsuccess = function (event) {
-              const db = event.target.result;
-              if (db.objectStoreNames.contains('images')) {
-                const transaction = db.transaction('images', 'readonly');
-                const store = transaction.objectStore('images');
-                const getRequest = store.get('current_bg');
-
-                getRequest.onsuccess = function (e) {
-                  if (e.target.result) {
-                    const objectUrl = URL.createObjectURL(e.target.result);
-                    setBackgroundImage(objectUrl);
-                  }
-                };
-              }
-            };
-          }
-        }
-
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', applySavedBackground);
-        } else {
-          applySavedBackground();
-        }
-      })();
-    </script>
+    </style>
 </head>
 <body>
     <div id="bg-blur-overlay"></div>
@@ -667,5 +565,6 @@ document.querySelectorAll('.category-button').forEach(btn => {
         <path d="M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </a>
+    <script type="module" src="src/main.js"></script>
 </body>
 </html>

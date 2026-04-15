@@ -69,7 +69,7 @@ try {
 
   if (imgUrl && imgUrl !== "null" && imgUrl !== '"null"') {
     var style = document.createElement("style");
-    style.textContent = "body { background-image: url(" + imgUrl.replace(/^"|"$/g, "") + ") !important; background-size: cover !important; background-position: center !important; }";
+    style.textContent = "body { background-image: url(" + imgUrl.replace(/^"|"$/g, "") + ") !important; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; background-attachment: fixed !important; }";
     document.head.appendChild(style);
   }
 
@@ -102,7 +102,7 @@ try {
         if (e.target.result) {
           var objectUrl = URL.createObjectURL(e.target.result);
           var style = document.createElement("style");
-          style.textContent = "body { background-image: url(" + objectUrl + ") !important; background-size: cover !important; background-position: center !important; }";
+          style.textContent = "body { background-image: url(" + objectUrl + ") !important; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; background-attachment: fixed !important; }";
           document.head.appendChild(style);
           if (document.body) {
             document.body.classList.add("has-custom-bg");
