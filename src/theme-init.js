@@ -63,7 +63,9 @@ try {
     if (bgTime === "null" || bgTime === '"-1"' || Date.now() - parseInt(bgTime) <= 259200000) {
       imgUrl = (savedBg && savedBg !== '"null"') ? savedBg : ((bg && bg !== '"null"') ? bg : null);
     }
-  } else if (bg && bg !== '"null"' && bgMode !== '"random"') {
+  } else if (savedBg && savedBg !== '"null"') {
+    imgUrl = savedBg;
+  } else if (bg && bg !== '"null"') {
     imgUrl = bg;
   }
 
