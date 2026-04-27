@@ -290,6 +290,12 @@ export const GOOGLE_APPS = [
 
 export const AI_TOOLS = [
   {
+    name: "Arena AI",
+    url: "https://arena.ai/",
+    icon: "arenaai.png",
+    id: "arena-ai",
+  },
+  {
     name: "Claude",
     url: "https://claude.ai/new/",
     icon: "claude.png",
@@ -325,12 +331,10 @@ export const AI_TOOLS = [
     icon: "qwen.png",
     id: "ai-qwen",
   },
-  { name: "Grok", url: "https://grok.com/", icon: "grok.png", id: "ai-grok" },
-  {
-    name: "Arena AI",
-    url: "https://arena.ai/",
-    icon: "arenaai.png",
-    id: "arena-ai",
+  { name: "Grok", 
+    url: "https://grok.com/", 
+    icon: "grok.png", 
+    id: "ai-grok" 
   },
   {
     name: "Perplexity",
