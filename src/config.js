@@ -327,10 +327,10 @@ export const AI_TOOLS = [
   },
   { name: "Grok", url: "https://grok.com/", icon: "grok.png", id: "ai-grok" },
   {
-    name: "Meta AI",
-    url: "https://www.meta.ai/",
-    icon: "metaai.png",
-    id: "ai-meta",
+    name: "Arena AI",
+    url: "https://arena.ai/",
+    icon: "arenaai.png",
+    id: "arena-ai",
   },
   {
     name: "Perplexity",
