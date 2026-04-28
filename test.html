@@ -1116,7 +1116,15 @@
                     <li>North American Division</li>
                     <li>Other</li>
                 </ul>
-                </div>
+            </div>
+            <script>
+                document.querySelectorAll('.circle button').forEach(button => {
+                button.addEventListener('click', () => {
+                    navigator.clipboard.writeText(button.textContent);
+                    alert('Color code copied to clipboard: ' + button.textContent);
+                });
+                });
+            </script>
         </div>
     </div>
 
