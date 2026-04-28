@@ -112,14 +112,7 @@ button{
 
 <br>
 
-<h3><strong>Built From:</strong> 
-<a href="https://a.zat.is" target="_blank">a.zat.is</a>
-</h3>
 
-<p>
-<strong>Zat URL Shortner:</strong><br>
-https://l.zat.is/[webaddress]
-</p>
 
 </div>
 
@@ -209,6 +202,8 @@ function buildQR(){
 
     generatedQRUrl = "https://qr.zat.is/" + format + size + "." + hex + "~" + url;
 
+    generateShortLinkUrl = "https://l.zat.is/" + url;
+
     const preview = document.getElementById("qrPreview");
 
     preview.innerHTML = `
@@ -227,6 +222,14 @@ function buildQR(){
         <a href="${generatedQRUrl}" target="_blank">
             <img src="${generatedQRUrl}" alt="QR Code">
         </a>
+        generateShortLinkUrl
+        <h3><strong>Built From:</strong> 
+            <a href="https://a.zat.is" target="_blank">a.zat.is</a>
+        </h3>
+        <p>
+            <strong>Click to view Shortned URL</strong><br>
+            <a href="${generateShortLinkUrl}" target="_blank">Click to view Shortned URL</a>
+        </p>
     `;
 }
 
