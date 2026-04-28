@@ -74,10 +74,11 @@ button{
 
 <body>
 
-<div class="container">
+<!--  <div class="container">
 
 <!-- LEFT COLUMN -->
 <div class="leftColumn">
+    -->
 
 <h2>QR URL Generator</h2>
 
@@ -134,25 +135,17 @@ button{
 </div>
 
 
-<!-- RIGHT COLUMN -->
+<!-- RIGHT COLUMN - ->
 <div class="rightColumn">
 
-<div id="qrPreview"></div>
+<!-- <div id="qr___Preview"></div>-->
 
-<br>
 
-<h3><strong>Built From:</strong> 
-<a href="https://a.zat.is" target="_blank">a.zat.is</a>
-</h3>
 
-<p>
-<strong>Zat URL Shortner:</strong><br>
-https://l.zat.is/[webaddress]
-</p>
 
-</div>
+</div> -->
 
-</div>
+<!-- </div> -->
 
 <script>
 
@@ -254,10 +247,20 @@ function buildQR(){
                 <button>Download QR Image</button>
             </a>
         </div>
+        
+
+        <div style="margin-top: 10px; word-break: break-all;">
+            Shortened URL: <a href="${generatedQRUrl}" target="_blank"><code>${generatedQRUrl}</code></a>
+        </div>
 
         <a href="${generatedQRUrl}" target="_blank">
             <img src="${generatedQRUrl}" alt="QR Code">
         </a>
+        <div id="qrPreview"></div>
+        <hr>
+        <h3><strong>Built From:</strong> 
+            <a href="https://a.zat.is" target="_blank">a.zat.is</a>
+        </h3>
     `;
 }
 
