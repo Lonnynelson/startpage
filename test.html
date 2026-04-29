@@ -923,185 +923,249 @@
     </div>
 
     <div class="layout-container">
-      <div class="column-left">
-        <div class="master-clock-container">
-          <div id="digital-clock-container" class="clock-container">
-            <span id="clock-hours">00</span
-            ><span class="clock-separator">:</span
-            ><span id="clock-minutes">00</span
-            ><span class="clock-separator">:</span
-            ><span id="clock-seconds">00</span>
-            <span id="clock-ampm"></span>
+      <div class="column-one">
+        <style>
+            body{
+                font-family: Arial, sans-serif;
+                padding:40px;
+            }
+
+            /* Layout */
+
+            .container{
+                /* max-width: 500px; */
+            }
+
+            /* Inputs */
+
+            input, select{
+                padding:8px;
+                margin:5px 0;
+            }
+
+            button{
+                padding:10px 18px;
+                cursor:pointer;
+            }
+
+            .colorRow{
+                display:flex;
+                align-items:center;
+                gap:10px;
+            }
+
+            /* Preview */
+
+            #qrPreview img{
+                border:1px solid #ccc;
+                padding:10px;
+                background:white;
+            }
+
+            #actionButtons{
+                margin-top:12px;
+            }
+          </style>
+          <div class="container">
+
+            <h2>QR URL Generator</h2>
+
+            <label>Destination URL</label><br>
+            <input type="text" id="urlInput" size="40" placeholder="https://example.com">
+
+            <br><br>
+
+            <h3>QR Color</h3>
+
+            <div class="colorRow">
+            <label>Color Picker</label>
+            <input type="color" id="colorPicker" value="#005992">
+            </div>
+
+            <input type="hidden" id="hexInput" value="#005992">
+            <input type="hidden" id="r">
+            <input type="hidden" id="g">
+            <input type="hidden" id="b">
+
+            <br>
+
+            <label>Image Format</label><br>
+            <select id="formatSelect">
+            <option value="png" selected>PNG</option>
+            <option value="gif">GIF</option>
+            </select>
+
+            <br><br>
+
+            <label>QR Size</label><br>
+            <select id="sizeSelect">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5" selected>5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            </select>
+
+            <br><br>
+
+            <button onclick="buildQR()">Generate QR</button>
+
+            <div id="qrPreview"></div>
+
+            <br>
+
+
+
           </div>
 
-          <div id="clock-date-row" class="clock-container">
-            <span id="clock-day">Friday</span>
-            <span id="clock-date">Nov 28</span>
-          </div>
-          <div id="analog-clock-container" class="clock-container">
-            <svg id="analog-clock-svg" viewBox="0 0 200 200">
-              <defs>
-                <path
-                  id="scalloped-edge"
-                  d=" M 100, 10 A 90,90 0 0,1 163.64,36.36 90,90 0 0,1 190,100 90,90 0 0,1 163.64,163.64 90,90 0 0,1 100,190 90,90 0 0,1 36.36,163.64 90,90 0 0,1 10,100 90,90 0 0,1 36.36,36.36 90,90 0 0,1 100,10 Z"
-                />
-              </defs>
-              <use href="#scalloped-edge" class="clock-face" />
-              <g class="clock-hands">
-                <line id="hour-hand" x1="100" y1="100" x2="100" y2="65" />
-                <line id="minute-hand" x1="100" y1="100" x2="100" y2="40" />
-                <circle id="second-dot" cx="100" cy="25" r="6" />
-              </g>
-            </svg>
-          </div>
-        </div>
-        <div class="text-container">
-          <h1 id="greeting-text"></h1>
-          <p id="welcome-text" contenteditable="true" title="Click to edit"></p>
-        </div>
+          <script>
+
+            let generatedQRUrl = "";
+
+            /* Press Enter to generate QR */
+            document.getElementById("urlInput").addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    buildQR();
+                }
+            });
+
+            /* Robust HEX â†’ RGB conversion */
+            function hexToRgb(hex) {
+
+              const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+
+              hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+                return r + r + g + g + b + b;
+              });
+
+              const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
+              if(result){
+                document.getElementById("r").value = parseInt(result[1], 16);
+                document.getElementById("g").value = parseInt(result[2], 16);
+                document.getElementById("b").value = parseInt(result[3], 16);
+              }
+
+            }
+
+            /* RGB â†’ HEX */
+            function componentToHex(c){
+                const hex = Number(c).toString(16);
+                return hex.length === 1 ? "0" + hex : hex;
+            }
+
+            function rgbToHex(r,g,b){
+                return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+            }
+
+            /* Color picker updates HEX and RGB */
+            document.getElementById("colorPicker").addEventListener("input",function(){
+
+                const hex = this.value;
+                document.getElementById("hexInput").value = hex;
+                hexToRgb(hex);
+
+            });
+
+            /* HEX input updates RGB + picker */
+            document.getElementById("hexInput").addEventListener("input",function(){
+
+                const hex = this.value;
+                document.getElementById("colorPicker").value = hex;
+                hexToRgb(hex);
+
+            });
+
+            /* Copy QR URL */
+            function copyQRUrl(){
+
+                if(!generatedQRUrl){
+                    alert("Generate a QR code first.");
+                    return;
+                }
+
+                navigator.clipboard.writeText(generatedQRUrl);
+                alert("QR URL copied to clipboard!");
+            }
+
+            /* Generate QR */
+            function buildQR(){
+
+                const url = document.getElementById("urlInput").value.trim();
+
+                if(!url){
+                    alert("Please enter a URL");
+                    return;
+                }
+
+                const hex = document.getElementById("hexInput").value.replace("#","");
+                const format = document.getElementById("formatSelect").value;
+                const size = document.getElementById("sizeSelect").value;
+
+                generatedQRUrl = "https://qr.zat.is/" + format + size + "." + hex + "~" + url;
+
+                generateShortLinkUrl = "https://l.zat.is/" + url;
+
+                const preview = document.getElementById("qrPreview");
+
+                preview.innerHTML = `
+                    <h3>QR Preview</h3>
+                    <div style="margin-top:10px;">
+                        <small>Click the QR code to open in a new window.</small>
+                    </div>
+                    <div id="actionButtons">
+                        <button onclick="copyQRUrl()">Copy QR Code URL</button>
+
+                        <a href="${generatedQRUrl}" download="zat-qr.${format}">
+                            <button>Download QR Image</button>
+                        </a>
+                    </div>
+
+                    <a href="${generatedQRUrl}" target="_blank">
+                        <img src="${generatedQRUrl}" alt="QR Code">
+                    </a>
+                    <h3><strong>Built From:</strong> 
+                        <a href="https://a.zat.is" target="_blank">a.zat.is</a>
+                    </h3>
+                    <p>
+                        <a href="${generateShortLinkUrl}" target="_blank">Click to view Shortned URL</a>
+                    </p>
+                `;
+            }
+
+            /* Initialize RGB fields */
+            hexToRgb("#005992");
+
+          </script>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+    <div class="layout-container">
+      <div class="column-left">
+        
       </div>
       <div class="column-right">
-        <div id="pinned-tasks-widget" class="widget-container hidden">
-          <h3 class="pinned-title">Your Tasks</h3>
-          <ul id="pinned-tasks-list"></ul>
-        </div>
-        <div id="weather-widget" class="widget-container">
-          <div id="weather-setup-ui" class="hidden">
-            <h3>Enter your location for Weather Forecast</h3>
-            <br />
-            <div
-              class="weather-setup-controls"
-              style="display: flex; gap: 0.5rem; width: 100%"
-            >
-              <input
-                type="text"
-                id="widget-location-input"
-                placeholder="Enter city name..."
-                style="flex: 3"
-              />
-              <button
-                id="widget-save-btn"
-                class="settings-button"
-                style="flex: 1"
-              >
-                Save
-              </button>
-              <button
-                id="widget-gps-btn"
-                class="settings-button"
-                title="Detect Location"
-                style="
-                  flex: 1;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  padding: 0.5rem;
-                "
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-                  <g fill="none" fill-rule="evenodd">
-                    <path
-                      d="M20 0v20H0V0zM10.494 19.382l-.009.001-.059.03-.017.003-.012-.003-.059-.03c-.008-.003-.016-.001-.02.004l-.003.009-.015.356.005.016.009.011.086.062.013.003.01-.003.086-.062.01-.013.003-.014-.014-.356a.019.019 0 0 0-.014-.015m.221-.094-.011.002-.154.077-.008.008-.003.01.015.358.004.01.007.006.167.078c.01.003.019 0 .024-.007l.004-.011-.029-.512a.016.016 0 0 0-.016-.019m-.596.002a.019.019 0 0 0-.022.005l-.005.011-.029.512c0 .01.006.017.014.02l.013-.002.167-.077.008-.007.003-.009.015-.358-.003-.01-.008-.008z"
-                    />
-                    <path
-                      fill="currentColor"
-                      fill-rule="nonzero"
-                      d="M5.6 13.867a.833.833 0 0 1 .467 1.6c-.417.122-.717.25-.91.367.199.119.512.253.947.377C7.067 16.485 8.444 16.667 10 16.667s2.933-.182 3.896-.457c.435-.124.748-.258.947-.377-.192-.117-.492-.245-.909-.367a.833.833 0 0 1 .466-1.6c.557.163 1.067.371 1.459.638.362.249.808.684.808 1.328 0 .653-.457 1.09-.825 1.34-.398.268-.919.477-1.488.64A15.378 15.378 0 0 1 10 18.333c-1.603 0-3.205-.192-4.353-.52a13.567 13.567 0 0 1-1.489-.641C3.79 16.92 3.333 16.483 3.333 15.833c0-.644.446-1.079.808-1.328.392-.267.902-.476 1.459-.638M10 1.667A6.25 6.25 0 0 1 16.25 7.917c0 2.14-1.166 3.88-2.375 5.116A13.668 13.668 0 0 1 12.332 14.38c-.496.372-1.627 1.068-1.627 1.068a1.425 1.425 0 0 1-1.409 0s-1.13-.697-1.626-1.068a13.575 13.575 0 0 1-1.543-1.346c-1.209-1.236-2.376-2.977-2.376-5.117a6.25 6.25 0 0 1 6.25-6.25m0 4.583a1.667 1.667 0 1 0 0 3.333 1.667 1.667 0 0 0 0-3.333"
-                    />
-                  </g>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div class="weather-details">
-            <div id="weather-condition">Loading Weather...</div>
-            <div class="weather-info-bar">
-              <span>Humidity</span>
-              <div class="progress-bar-container">
-                <div id="humidity-bar" class="progress-bar"></div>
-              </div>
-              <span id="humidity-value">--%</span>
-            </div>
-            <div class="weather-extra-info">
-              <div id="feels-like-temp" class="info-box">Feels like --°</div>
-              <div id="location" class="info-box">Unknown</div>
-            </div>
-          </div>
-          <div class="weather-current">
-            <div id="weather-icon"></div>
-            <div id="current-temp">--°</div>
-          </div>
-        </div>
-
-        <form
-          id="search-form"
-          class="widget-container"
-          action="https://www.google.com/search"
-          method="GET"
-          target="_blank"
-        >
-          <button
-            type="button"
-            id="search-provider-button"
-            title="Change Search Engine"
-          >
-            <img
-              id="current-provider-icon"
-              src="assets/search-tools/google.png"
-              alt="Google"
-            />
-            <span class="dropdown-caret">▼</span>
-          </button>
-
-          <input
-            type="text"
-            id="search-input"
-            name="q"
-            required
-            autocomplete="off"
-          />
-
-          <button type="button" id="voice-search-btn" title="Voice Search">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-mic-fill"
-              viewBox="0 0 16 16"
-            >
-              <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0z" />
-              <path
-                d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"
-              />
-            </svg>
-          </button>
-          <button type="submit" id="search-button" class="search-btn">
-            Search
-          </button>
-          <button type="button" id="open-site-button" class="search-btn hidden">
-            Open
-          </button>
-
-          <div id="search-dropdown" class="hidden">
-            <div class="dropdown-section">
-              <h4>Search Engines</h4>
-              <div id="dropdown-engines" class="dropdown-grid"></div>
-            </div>
-            <div class="dropdown-divider"></div>
-            <div class="dropdown-section">
-              <h4>Platforms</h4>
-              <div id="dropdown-platforms" class="dropdown-grid"></div>
-            </div>
-          </div>
-        </form>
-
-        <div id="quote-widget" class="widget-container hidden">
-          <div class="quote-content">
-            <p id="quote-text">"Loading quote..."</p>
-            <span id="quote-author">- Author</span>
-          </div>
-        </div>
+        
       </div>
     </div>
 
