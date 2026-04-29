@@ -1028,111 +1028,144 @@
 
     <div class="layout-container">
       <div class="column-one">
-          <style>
-            body{
-                /* font-family: Arial, sans-serif; */
-                /* padding:40px; */
-            }
+          
+      </div>
+      <div class="column-left">
+        <style>
+          body{
+              /* font-family: Arial, sans-serif; */
+              /* padding:40px; */
+          }
 
-            /* Layout */
+          /* Layout */
 
-            .container{
-                /* max-width: 500px; */
-            }
+          .container{
+              /* max-width: 500px; */
+          }
 
-            /* Inputs */
+          /* Inputs */
 
-            input, select{
-                padding:8px;
-                margin:5px 0;
-            }
+          input, select{
+              padding:8px;
+              margin:5px 0;
+          }
 
-            button{
-                padding:10px 18px;
-                cursor:pointer;
-            }
+          button{
+              padding:10px 18px;
+              cursor:pointer;
+          }
 
-            .colorRow{
-                display:flex;
-                align-items:center;
-                gap:10px;
-            }
+          .colorRow{
+              display:flex;
+              align-items:center;
+              gap:10px;
+          }
 
-            /* Preview */
+          /* Preview */
 
-            #qrPreview img{
-                border:1px solid #ccc;
-                padding:10px;
-                background:white;
-            }
+          #qrPreview img{
+              border:1px solid #ccc;
+              padding:10px;
+              background:white;
+          }
 
-            #actionButtons{
-                margin-top:12px;
-            }
-          </style>
-          <div class="container">
+          #actionButtons{
+              margin-top:12px;
+          }
+        </style>
+        <div class="container">
 
-            <h2>QR URL Generator</h2>
+          <h2>QR URL Generator</h2>
 
-            <label>Destination URL</label><br>
-            <input type="text" id="urlInput" size="40" placeholder="https://example.com">
+          <label>Destination URL</label><br>
+          <input type="text" id="urlInput" size="40" placeholder="https://example.com">
 
-            <br><br>
+          <br><br>
 
-            <h3>QR Color</h3>
+          <h3>QR Color</h3>
 
-            <div class="colorRow">
-            <label>Color Picker</label>
-            <input type="color" id="colorPicker" value="#005992">
-            </div>
-
-            <input type="hidden" id="hexInput" value="#005992">
-            <input type="hidden" id="r">
-            <input type="hidden" id="g">
-            <input type="hidden" id="b">
-
-            <br>
-
-            <label>Image Format</label><br>
-            <select id="formatSelect">
-            <option value="png" selected>PNG</option>
-            <option value="gif">GIF</option>
-            </select>
-
-            <br><br>
-
-            <label>QR Size</label><br>
-            <select id="sizeSelect">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5" selected>5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            </select>
-
-            <br><br>
-
-            <button onclick="buildQR()">Generate QR</button>
-
-            <div id="qrPreview"></div>
-
-            <br>
-
-
-
+          <div class="colorRow">
+          <label>Color Picker</label>
+          <input type="color" id="colorPicker" value="#005992">
           </div>
 
-          <script>
+          <input type="hidden" id="hexInput" value="#005992">
+          <input type="hidden" id="r">
+          <input type="hidden" id="g">
+          <input type="hidden" id="b">
+
+          <br>
+
+          <label>Image Format</label><br>
+          <select id="formatSelect">
+          <option value="png" selected>PNG</option>
+          <option value="gif">GIF</option>
+          </select>
+
+          <br><br>
+
+          <label>QR Size</label><br>
+          <select id="sizeSelect">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5" selected>5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          </select>
+          <br>
+          <br>
+          <button onclick="buildQR()">Generate QR</button>
+          <div id="qrPreview"></div>
+          <br>
+        </div>
+        <div class="master-clock-container">
+          <div id="digital-clock-container" class="clock-container">
+            <span id="clock-hours">00</span
+            ><span class="clock-separator">:</span
+            ><span id="clock-minutes">00</span
+            ><span class="clock-separator">:</span
+            ><span id="clock-seconds">00</span>
+            <span id="clock-ampm"></span>
+          </div>
+
+          <div id="clock-date-row" class="clock-container">
+            <span id="clock-day">Friday</span>
+            <span id="clock-date">Nov 28</span>
+          </div>
+          <div id="analog-clock-container" class="clock-container">
+            <svg id="analog-clock-svg" viewBox="0 0 200 200">
+              <defs>
+                <path
+                  id="scalloped-edge"
+                  d=" M 100, 10 A 90,90 0 0,1 163.64,36.36 90,90 0 0,1 190,100 90,90 0 0,1 163.64,163.64 90,90 0 0,1 100,190 90,90 0 0,1 36.36,163.64 90,90 0 0,1 10,100 90,90 0 0,1 36.36,36.36 90,90 0 0,1 100,10 Z"
+                />
+              </defs>
+              <use href="#scalloped-edge" class="clock-face" />
+              <g class="clock-hands">
+                <line id="hour-hand" x1="100" y1="100" x2="100" y2="65" />
+                <line id="minute-hand" x1="100" y1="100" x2="100" y2="40" />
+                <circle id="second-dot" cx="100" cy="25" r="6" />
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="text-container">
+          <h1 id="greeting-text"></h1>
+          <p id="welcome-text" contenteditable="true" title="Click to edit"></p>
+        </div>
+      </div>
+      <div class="column-right">
+        <script>
 
             let generatedQRUrl = "";
 
@@ -1251,45 +1284,6 @@
             hexToRgb("#005992");
 
           </script>
-      </div>
-      <div class="column-left">
-        <div class="master-clock-container">
-          <div id="digital-clock-container" class="clock-container">
-            <span id="clock-hours">00</span
-            ><span class="clock-separator">:</span
-            ><span id="clock-minutes">00</span
-            ><span class="clock-separator">:</span
-            ><span id="clock-seconds">00</span>
-            <span id="clock-ampm"></span>
-          </div>
-
-          <div id="clock-date-row" class="clock-container">
-            <span id="clock-day">Friday</span>
-            <span id="clock-date">Nov 28</span>
-          </div>
-          <div id="analog-clock-container" class="clock-container">
-            <svg id="analog-clock-svg" viewBox="0 0 200 200">
-              <defs>
-                <path
-                  id="scalloped-edge"
-                  d=" M 100, 10 A 90,90 0 0,1 163.64,36.36 90,90 0 0,1 190,100 90,90 0 0,1 163.64,163.64 90,90 0 0,1 100,190 90,90 0 0,1 36.36,163.64 90,90 0 0,1 10,100 90,90 0 0,1 36.36,36.36 90,90 0 0,1 100,10 Z"
-                />
-              </defs>
-              <use href="#scalloped-edge" class="clock-face" />
-              <g class="clock-hands">
-                <line id="hour-hand" x1="100" y1="100" x2="100" y2="65" />
-                <line id="minute-hand" x1="100" y1="100" x2="100" y2="40" />
-                <circle id="second-dot" cx="100" cy="25" r="6" />
-              </g>
-            </svg>
-          </div>
-        </div>
-        <div class="text-container">
-          <h1 id="greeting-text"></h1>
-          <p id="welcome-text" contenteditable="true" title="Click to edit"></p>
-        </div>
-      </div>
-      <div class="column-right">
         <div id="pinned-tasks-widget" class="widget-container hidden">
           <h3 class="pinned-title">Your Tasks</h3>
           <ul id="pinned-tasks-list"></ul>
