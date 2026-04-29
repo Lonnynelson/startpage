@@ -212,7 +212,7 @@ function buildQR(){
             <small>Click the QR code to open in a new window.</small>
         </div>
         <div id="actionButtons">
-            <button onclick="copyQRUrl()">Copy QR URL</button>
+            <button onclick="copyQRUrl()">Copy QR Code URL</button>
 
             <a href="${generatedQRUrl}" download="zat-qr.${format}">
                 <button>Download QR Image</button>
@@ -222,7 +222,6 @@ function buildQR(){
         <a href="${generatedQRUrl}" target="_blank">
             <img src="${generatedQRUrl}" alt="QR Code">
         </a>
-        generateShortLinkUrl
         <h3><strong>Built From:</strong> 
             <a href="https://a.zat.is" target="_blank">a.zat.is</a>
         </h3>
