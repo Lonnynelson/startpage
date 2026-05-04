@@ -103,17 +103,10 @@ button{
 <option value="14">14</option>
 <option value="15">15</option>
 </select>
-
-<br><br>
-
+<hr>
 <button onclick="buildQR()">Generate QR</button>
 
 <div id="qrPreview"></div>
-
-<br>
-
-
-
 </div>
 
 <script>
@@ -208,12 +201,11 @@ function buildQR(){
 
     preview.innerHTML = `
         <h3>QR Preview</h3>
-        <div style="margin-top:10px;">
-            <small>Click the QR code to open in a new window.</small>
-        </div>
         <div id="actionButtons">
             <button onclick="copyQRUrl()">Copy QR Code URL</button>
-
+            <a href="${generateShortLinkUrl}" target="_blank">
+                <button>Copy the QR Code Short URL</button>
+            </a>
             <a href="${generatedQRUrl}" download="zat-qr.${format}">
                 <button>Download QR Image</button>
             </a>

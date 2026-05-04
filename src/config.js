@@ -342,6 +342,12 @@ export const AI_TOOLS = [
     icon: "perplexity.png",
     id: "ai-perplexity",
   },
+  {
+    name: "Open Web UI",
+    url: "http://localhost:3000/",
+    icon: "favicon_Open_Web.png",
+    id: "ai-openwebui",
+  },
 ];
 
 export const SOCIAL_LINKS = [
