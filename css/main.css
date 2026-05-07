@@ -2844,7 +2844,7 @@ body.has-custom-bg .widget-container,
 body.has-custom-bg .popup-container,
 body.has-custom-bg .corner-button,
 body.has-custom-bg .shortcut-icon,
-body.has-custom-bg #search-dropdown {
+body.has-custom-bg #search-dropdown, .category-dropdown {
   background-color: rgba(20, 20, 20, 0.4) !important;
   -webkit-backdrop-filter: blur(16px) !important;
   backdrop-filter: blur(16px) !important;
@@ -3397,7 +3397,18 @@ html.high-bg-blur body.has-custom-bg .dropdown-item {
   backdrop-filter: blur(3px) !important;
   -webkit-backdrop-filter: blur(3px) !important;
 }
-
+.dropdown-menu a {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(20, 20, 20, 0.4) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 8px;
+}
+.dropdown-menu a:hover {
+  background-color: rgb(235 235 235 / 40%) !important;
+}
 /* --- MASTER LEVEL MOBILE & SMALL SCREEN SCALING --- */
 
 @media (max-width: 900px) {
@@ -3686,4 +3697,5 @@ html.high-bg-blur body.has-custom-bg .dropdown-item {
     height: 48px;
   }
 }
+
 /* [css/main.css] YourDynamicDashboard V2.2 (Ditom Baroi Antu - 2025-26) */

@@ -13,38 +13,31 @@
     <link rel="icon" type="image/png" href="assets/icons/icon32.png" />
     <link rel="stylesheet" href="css/main.css" />
     <style>
-      .column-left,
-      .column-right {
+      .column-left, .column-right {
         display: none;
       }
-
       .column-one {
         display: block;
         width: 65%;
         margin: 0 auto;
       }
-
       .column-one-inner {
         width: 100%;
       }
-
       @media (max-width: 768px) {
         .column-one {
           width: 95%;
         }
       }
-
       .categories-container {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         gap: 12px;
         padding: 20px 0;
       }
-
       .category-dropdown {
         position: relative;
       }
-
       .category-header {
         background: var(--bg-secondary);
         color: var(--text-primary);
@@ -56,22 +49,23 @@
         transition: all 0.3s ease;
         text-align: center;
         font-size: 0.95rem;
+        background-color: rgba(20, 20, 20, 0.4) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        backdrop-filter: blur(16px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
       }
-
       .category-header:hover {
         background: var(--accent-color);
         color: var(--bg-secondary);
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       }
-
       .dropdown-menu {
         position: absolute;
         top: 100%;
         left: 0;
         right: 0;
-        background: #000b19;
-        border: 1.5px solid var(--accent-color);
         border-top: none;
         border-radius: 0 0 8px 8px;
         opacity: 0;
@@ -79,16 +73,13 @@
         transform: translateY(-10px);
         transition: all 0.3s ease;
         z-index: 100;
-        min-width: 200px;
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
       }
-
       .category-dropdown:hover .dropdown-menu {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
       }
-
       .dropdown-menu a {
         display: block;
         padding: 10px 16px;
@@ -96,19 +87,16 @@
         text-decoration: none;
         transition: all 0.2s ease;
         font-size: 0.9rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        /* border-bottom: 1px solid rgba(255, 255, 255, 0.1); */
       }
-
       .dropdown-menu a:last-child {
         border-bottom: none;
       }
-
       .dropdown-menu a:hover {
         background: var(--accent-color);
         color: var(--bg-secondary);
         padding-left: 24px;
       }
-
       @media (max-width: 768px) {
         .categories-container {
           grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
