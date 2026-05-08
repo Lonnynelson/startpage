@@ -2844,7 +2844,7 @@ body.has-custom-bg .widget-container,
 body.has-custom-bg .popup-container,
 body.has-custom-bg .corner-button,
 body.has-custom-bg .shortcut-icon,
-body.has-custom-bg #search-dropdown, .category-dropdown {
+body.has-custom-bg #search-dropdown {
   background-color: rgba(20, 20, 20, 0.4) !important;
   -webkit-backdrop-filter: blur(16px) !important;
   backdrop-filter: blur(16px) !important;
