@@ -35,8 +35,14 @@
         gap: 12px;
         padding: 20px 0;
       }
+      #categorized-list-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+      }
       .category-dropdown {
         position: relative;
+        width: 100%;
       }
       .category-header {
         background: var(--bg-secondary);
@@ -71,7 +77,7 @@
         opacity: 0;
         visibility: hidden;
         transform: translateY(-10px);
-        transition: all 0.3s ease;
+        transition: all 1s ease;
         z-index: 100;
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
       }
@@ -86,7 +92,7 @@
         color: var(--text-primary);
         text-decoration: none;
         transition: all 0.2s ease;
-        font-size: 0.9rem;
+        font-size: 0.7rem;
         /* border-bottom: 1px solid rgba(255, 255, 255, 0.1); */
       }
       .dropdown-menu a:last-child {
@@ -477,6 +483,9 @@
         </button>
         <button id="shortcuts-tab" class="settings-tab-button">
           Shortcuts
+        </button>
+        <button id="categorized-tab" class="settings-tab-button">
+          Categorized List
         </button>
       </div>
 
@@ -997,6 +1006,41 @@
             <button type="submit" class="settings-button">Add Shortcut</button>
           </form>
         </div>
+
+        <div id="categorized-content" class="settings-pane">
+          <div id="categorized-editor-list"></div>
+          <form id="categorized-form">
+            <h3 class="settings-header">Add New Categorized Item</h3>
+            <div class="add-categorized-inputs">
+              <input
+                type="text"
+                id="categorized-category-input"
+                placeholder="Category (e.g., Video)"
+                maxlength="35"
+                required
+              />
+              <input
+                type="text"
+                id="categorized-name-input"
+                placeholder="Name (e.g., Vimeo)"
+                maxlength="35"
+                required
+              />
+              <input
+                type="text"
+                id="categorized-url-input"
+                placeholder="URL (e.g., https://vimeo.com)"
+                required
+              />
+            </div>
+            <button type="submit" class="settings-button">Add Item</button>
+          </form>
+          <div class="setting-row">
+            <button id="export-categorized-btn" class="settings-button">Export Categorized List</button>
+            <button id="import-categorized-btn" class="settings-button">Import Categorized List</button>
+            <input type="file" id="import-categorized-input" accept=".json" style="display: none;">
+          </div>
+        </div>
       </div>
 
       <div class="settings-footer">
@@ -1018,267 +1062,7 @@
       <div class="column-one">
         <div class="column-one-inner">
           <div class="categories-container">
-            <div class="category-dropdown">
-              <div class="category-header">AS</div>
-              <div class="dropdown-menu">
-                <a href="http://asiisi:8080/" target="_blank">Time Clock</a>
-                <a href="file:///c:/Users/Lonny/AppData/Local/Programs/myHUD/myHUD.exe" target="_blank">MyHUD</a>
-                <a href="https://outlook.office.com/mail/" target="_blank">AS Email</a>
-                <a href="https://trello.com/b/2z3oj94i/weekly-planner" target="_blank">Trello</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">Adv. Events</div>
-              <div class="dropdown-menu">
-                <a href="https://accounts.bizzabo.com/" target="_blank">Events Bizzabo</a>
-                <a href="https://lonnystartpage.pages.dev/NAD_colors.html" target="_blank">NAD Event Colors</a>
-                <a href="https://forms.office.com/Pages/DesignPageV2.aspx" target="_blank">Event.as Reg Forms</a>
-                <a href="https://lonnystartpage.pages.dev/QR_Code_Gennerator.html" target="_blank">QR Gen</a>
-                <a href="https://cutt.ly/" target="_blank">cut.ly</a>
-                <a href="https://www.qrcode-tiger.com/" target="_blank">QRCode-Tiger</a>
-                <a href="https://lonnystartpage.pages.dev/calculator.html" target="_blank">Calculator</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">YMMS</div>
-              <div class="dropdown-menu">
-                <a href="https://nadyouth.com" target="_blank">YMMS</a>
-                <a href="https://help.nadyouth.com" target="_blank">YMMS Support</a>
-                <a href="https://outlook.office.com/" target="_blank">Support Email</a>
-                <a href="https://web.whatsapp.com/" target="_blank">WhatsApp</a>
-                <a href="https://dashboard.tawk.to/" target="_blank">Tawk.to (c)</a>
-                <a href="https://d2fea3cd-0e9b-4ff8-ae0e-b4498012b1e3.filesusr.com/ugd/7992a6_6b598265607f4633b2356360686326d6.pdf" target="_blank">Texas YMMS Doc</a>
-                <a href="https://pdfcandy.com/" target="_blank">PDF convert</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">AdventistConnect</div>
-              <div class="dropdown-menu">
-                <a href="https://eadventist.net/search?type=a" target="_blank">eAdventist</a>
-                <a href="https://adventistconnect.org/frame" target="_blank">AdventistConnect</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">YSSI</div>
-              <div class="dropdown-menu">
-                <a href="https://app.asana.com/0/home/12289842615604" target="_blank">Asana</a>
-                <a href="https://www.youthsabbathschoolideas.org/" target="_blank">YSSI</a>
-                <a href="https://ellenwhiteaudio.org/beginning-of-the-end/" target="_blank">EGW Beginning</a>
-                <a href="https://whiteestate.org/audio/12269/love-under-fire/" target="_blank">EGW Love</a>
-                <a href="https://ellenwhiteaudio.org/royalty-in-ruin/" target="_blank">EGW Royalty</a>
-                <a href="https://ellenwhiteaudio.org/humble-hero/" target="_blank">EGW Humble</a>
-                <a href="https://ellenwhiteaudio.org/unlikely-leaders/" target="_blank">EGW Unlikely</a>
-                <a href="https://www.rotation.org/topic/88-animated-bible-story-shorts-from-saddleback-kids" target="_blank">Bible Story Video Shorts</a>
-                <a href="https://www.dailymotion.com/playlist/x6kd0s" target="_blank">Daily Motion Bible Playlist</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">Domain Tools</div>
-              <div class="dropdown-menu">
-                <a href="https://toolbox.googleapps.com/apps/dig/#ANY/" target="_blank">Google Lookup</a>
-                <a href="https://www.godaddy.com/whois" target="_blank">Whois Lookup</a>
-                <a href="https://zonemaster.fi/domain_check" target="_blank">Name Server Check</a>
-                <a href="http://network-tools.com/" target="_blank">Network-Tools</a>
-                <a href="https://lookup.icann.org/" target="_blank">ICANN Look-Up</a>
-                <a href="http://www.analogx.com/cgi-bin/cgidig.exe?DNS=ns.simpleupdates.com&Query=sunrisesda.org&Type=1&submit=Lookup" target="_blank">Analog X</a>
-                <a href="http://samdns.com/" target="_blank">SamDNS</a>
-                <a href="https://www.whois.net/" target="_blank">WhoIs.net</a>
-                <a href="https://www.easywhois.com/" target="_blank">Easy Whois</a>
-                <a href="http://mxtoolbox.com/" target="_blank">MXtoolbox</a>
-                <a href="https://accounts.google.com/ServiceLogin?service=analytics&passive=true&nui=1&hl=en&continue=https://www.google.com/analytics/settings/&followup=https://www.google.com/analytics/settings/" target="_blank">G Analytics</a>
-                <a href="http://uptimerobot.com" target="_blank">UpTimeRobot</a>
-                <a href="http://www.ipfingerprints.com/" target="_blank">IP Locator</a>
-                <a href="https://account.godaddy.com/products?go_redirect=disabled" target="_blank">GoDaddy Products</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">Graphic Tools</div>
-              <div class="dropdown-menu">
-                <a href="https://lonnystartpage.pages.dev/FreePhotos.html" target="_blank">Free Photos</a>
-                <a href="https://www.photopea.com/" target="_blank">PhotoPea</a>
-                <a href="https://lonnystartpage.pages.dev/FreePhotos.html" target="_blank">Free Photos</a>
-                <a href="https://lonnystartpage.pages.dev/Random_Image.html" target="_blank">Random Image Gennerator</a>
-                <a href="https://www.base64-image.de/" target="_blank">Base64 Encoder</a>
-                <a href="https://www.iconfinder.com/" target="_blank">IconFinder</a>
-                <a href="http://tineye.com/" target="_blank">3 TinEye.com</a>
-                <a href="https://placeit.net" target="_blank">Product Placement</a>
-                <a href="https://ezgif.com/" target="_blank">EZGif Online</a>
-                <a href="https://placeholder.com/" target="_blank">Image Placeholders</a>
-                <a href="https://pravatar.cc/" target="_blank">Person Placeholders</a>
-                <a href="https://www.transparenttextures.com/" target="_blank">Transparent Textures</a>
-                <a href="https://www.imgonline.com.ua/eng/make-seamless-texture.php" target="_blank">Seamless IMG</a>
-                <a href="http://www.slidescarnival.com/category/free-templates" target="_blank">Slides Carnival</a>
-                <a href="https://lonnystartpage.pages.dev/desktop_live.html" target="_blank">Desktop Live</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">Audio</div>
-              <div class="dropdown-menu">
-                <a href="https://app.clipchamp.com" target="_blank">ClipChamp</a>
-                <a href="http://www.pandora.com" target="_blank">Pandora</a>
-                <a href="https://play.google.com/music/listen" target="_blank">Google Music</a>
-                <a href="http://www.accuradio.com/?name=Christian%20Contemporary&b0=Christian" target="_blank">AccuRadio</a>
-                <a href="http://publicdomain4u.com" target="_blank">public domain</a>
-                <a href="https://lonnystartpage.pages.dev/GuitarTunner.html" target="_blank">Guitar Tunner</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">Video</div>
-              <div class="dropdown-menu">
-                <a href="http://vudu.com" target="_blank">Vudu</a>
-                <a href="http://vimeo.com" target="_blank">Vimeo</a>
-                <a href="http://youtube.com" target="_blank">YouTube</a>
-                <a href="https://app.clipchamp.com" target="_blank">ClipChamp</a>
-                <a href="https://bitdownloader.io/" target="_blank">BitDownloader</a>
-                <a href="https://www.media.io/" target="_blank">Online Video Converter</a>
-                <a href="https://www.kapwing.com" target="_blank">KapWing Video Editor</a>
-                <a href="https://ivipid.com" target="_blank">Ivipid</a>
-                <a href="https://www.onlinefreeconvert.com/" target="_blank">Convert to MP4</a>
-                <a href="https://www.motionworship.com/" target="_blank">Motion Worship</a>
-                <a href="https://app.offeo.com/" target="_blank">Offeo</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">3D Printing</div>
-              <div class="dropdown-menu">
-                <a href="https://theminiindex.com/Creators/Browse" target="_blank">Indexed Minis</a>
-                <a href="http://yeggi.com/" target="_blank">Yeggi</a>
-                <a href="https://www.thingiverse.com/" target="_blank">Thingiverse</a>
-                <a href="https://www.myminifactory.com/" target="_blank">MyMiniFactory</a>
-                <a href="https://www.printables.com/" target="_blank">Printables</a>
-                <a href="https://thangs.com/" target="_blank">Thangs</a>
-                <a href="https://www.tinkercad.com/" target="_blank">Tinkercad</a>
-                <a href="https://solvespace.com/" target="_blank">Solvespace</a>
-                <a href="https://imagetostl.com/" target="_blank">Image 2 STL</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">Text→Speach</div>
-              <div class="dropdown-menu">
-                <a href="https://speechma.com/" target="_blank">TTS Speechma Free</a>
-                <a href="https://murf.ai/studio" target="_blank">Murf Text2Speach</a>
-                <a href="https://app.blasteronline.com/user/login" target="_blank">Speachelo Text2Speach</a>
-                <a href="https://ttsmaker.com/" target="_blank">free Text 2 Speach</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">Pathfinders</div>
-              <div class="dropdown-menu">
-                <a href="https://www.ks-ne.club/" target="_blank">KS-NE.Club</a>
-                <a href="https://www.midamericacamporee.org/" target="_blank">Mid-America PF</a>
-                <a href="http://pathfindersonline.org" target="_blank">PF Online</a>
-                <a href="http://www.camporee.org" target="_blank">Camporee.org</a>
-                <a href="https://www.jotform.com/myforms/" target="_blank">JotForm</a>
-                <a href="http://www.investitureachievement.com" target="_blank">IA Site</a>
-                <a href="http://www.investitureachievement.org/wiki/index.php/Adventist_Youth_Honors_Answer_Book" target="_blank">Honors Wiki</a>
-                <a href="https://en.wikibooks.org/wiki/Adventist_Youth_Honors_Answer_Book" target="_blank">Original Wiki</a>
-                <a href="http://cvctrailblazers.org/" target="_blank">Trailblazers</a>
-                <a href="https://my.mobiroller.com/Home/Index" target="_blank">KS-NE APP</a>
-                <a href="https://us16.admin.mailchimp.com/" target="_blank">KS-NE Mail Chimp</a>
-                <a href="https://www.unitag.io/qrcode/" target="_blank">QR Code Gennerator</a>
-                <a href="https://cutt.ly/" target="_blank">URL Shortner</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">Personal</div>
-              <div class="dropdown-menu">
-                <a href="https://codepen.io/lonnyn" target="_blank">Codepen.io</a>
-                <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank">Gmail</a>
-                <a href="https://drive.google.com/drive/my-drive" target="_blank">Google Drive</a>
-                <a href="https://web.airdroid.com/" target="_blank">AirDroid</a>
-                <a href="https://www.amazon.com/" target="_blank">Amazon</a>
-                <a href="https://smallpdf.com/pdf-to-word#r=convert-to-word" target="_blank">PDF Converter</a>
-                <a href="https://www.mysms.com/" target="_blank">MySMS</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">Money</div>
-              <div class="dropdown-menu">
-                <a href="https://www.splitwise.com/" target="_blank">Split Wise</a>
-                <a href="https://www.les.com/" target="_blank">LES</a>
-                <a href="https://blackhillsenergy.com" target="_blank">Black Hills</a>
-                <a href="https://www.allocommunications.com/paymybill/" target="_blank">Allo</a>
-                <a href="https://www.publicsurplus.com/sms/browse/home" target="_blank">public Surplus</a>
-                <a href="https://identity.nadcloud.net/app/account/SignIn?rparams=id%3dVsYgEeDNP0GOJPBhucc7ag%3bwreply%3dhttps%3a%2f%2faccounts.nadcloud.net%2fmanager%3blang%3den-US%3brp%3dF6AFA0A0-D4E3-4E25-9B38-A07D70CE91CD%3bdt%3d2018-03-26+10%3a13%3a33Z%3b" target="_blank">Pay Stub</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">Health</div>
-              <div class="dropdown-menu">
-                <a href="https://sts.ascendtowholeness.org/adfs/ls?wa=wsignin1.0&wtrealm=https://ascendtowholeness.org/&wreply=https://ascendtowholeness.org/" target="_blank">Ascend To Wholeness</a>
-                <a href="https://app.member.virginpulse.com/" target="_blank">Virgin Pulse</a>
-                <a href="https://secure.healthx.com/v3app/a/?6713520D04184E07101C1A2003140C1C130C11166E1A0A3A00135F460D1C4C2D4B001F04105E160A5215235D515B5C50034A5E7713526E48510F5A555E402B075741440E594D5C5D0B7458025D571843011633040C34000C0A541E16472D07030A410A4C415A0D0F685A56590C48044347235F07635C520C505446402E55541152001907000853005F225E2A265641310042556E57205E512631647F55275A325C244D5A565F772B5E582C27523430/" target="_blank">WebTPA Login</a>
-                <a href="https://secure.bswift.com/login-page/ARM" target="_blank">bSwift</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">AI</div>
-              <div class="dropdown-menu">
-                <a href="https://www.perplexity.ai/" target="_blank">Perplexity Search</a>
-                <a href="https://aitoolsdirectory.com/" target="_blank">AI Tool Directory</a>
-                <a href="https://murf.ai/studio" target="_blank">Murf Text2Speach</a>
-                <a href="https://app.blasteronline.com/user/login" target="_blank">Speachelo Text2Speach</a>
-                <a href="https://fingerspelling.xyz/" target="_blank">Sign Language</a>
-                <a href="https://www.midjourney.com/home" target="_blank">Midjourney</a>
-                <a href="https://discord.com/app/invite-with-guild-onboarding/midjourney" target="_blank">Discord</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">NAD Zoom</div>
-              <div class="dropdown-menu">
-                <a href="https://www.nadadventist.org/nad-zoom-products-pricing" target="_blank">NAD Prod Pricing</a>
-                <a href="https://zoom-store.nadadventist.org/zoom/cart" target="_blank">Zoom Cart</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">Social Media Tools</div>
-              <div class="dropdown-menu">
-                <a href="https://web.whatsapp.com/" target="_blank">Whatsapp</a>
-                <a href="http://www.facebook.com/achurchconnect" target="_blank">ACC Facebook</a>
-                <a href="http://twitter.com/#!/achurchconnect" target="_blank">ACC Twitter</a>
-                <a href="https://hootsuite.com/dashboard#" target="_blank">Hoot Suite</a>
-                <a href="https://mightytext.net/web8/?exp=1" target="_blank">Mighty Text</a>
-                <a href="https://prochurchtools.com/free-tools/?tab=latest-resources" target="_blank">Pro Church Tools</a>
-                <a href="https://dashboard.tawk.to/" target="_blank">Tawk.to</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">Weather</div>
-              <div class="dropdown-menu">
-                <a href="https://weather.com/weather/map/interactive/l/68506:4:US?animation=true" target="_blank">Weather</a>
-                <a href="http://preview.weather.gov/edd" target="_blank">Weather.gov Enhanced</a>
-              </div>
-            </div>
-
-            <div class="category-dropdown">
-              <div class="category-header">Games</div>
-              <div class="dropdown-menu">
-                <a href="https://lonnystartpage.pages.dev/DND.html" target="_blank">ForgeFabel</a>
-                <a href="https://www.dexerto.com/gta" target="_blank">Dextro News</a>
-                <a href="https://www.rockstargames.com/newswire" target="_blank">Social Club Newswire</a>
-                <a href="https://twitch.amazon.com/prime/loot/gtaonline" target="_blank">Twitch Prime Info</a>
-                <a href="https://gtalens.com/map" target="_blank">GTALens Map</a>
-                <a href="https://gtaweb.eu/gtao-map" target="_blank">GTAO Maps</a>
-              </div>
-            </div>
+            <div id="categorized-list-container"></div>
           </div>
         </div>
       </div>
@@ -1546,7 +1330,10 @@
       </div>
     </div>
 
+  <!--
+
     <div id="shortcuts-container"></div>
+  -->
 
     <div
       id="gps-consent-modal-overlay"
@@ -1660,3 +1447,4 @@
   </body>
 </html>
 <!-- [index.html] YourDynamicDashboard V2.2 (Ditom Baroi Antu - 2025-26) -->
+ 

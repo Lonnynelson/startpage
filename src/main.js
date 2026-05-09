@@ -7,6 +7,7 @@ import { TodoManager } from "./modules/todo.js";
 import { AppGrid } from "./modules/apps.js";
 import { AiTools } from "./modules/aitools.js";
 import { Shortcuts } from "./modules/shortcuts.js";
+import { CategorizedList } from "./modules/catagorizedlist.js";
 import { SettingsManager } from "./modules/settings.js";
 import { KeyboardManager } from "./modules/keyboard.js";
 
@@ -46,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     new AppGrid();
     new AiTools();
     new Shortcuts();
+    new CategorizedList();
     new SettingsManager();
     new KeyboardManager();
 

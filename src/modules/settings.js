@@ -276,6 +276,14 @@ export class SettingsManager {
       tempDisplayToggle: document.getElementById("temp-display-toggle"),
       shortcutList: document.getElementById("shortcuts-editor-list"),
       shortcutForm: document.getElementById("add-shortcut-form"),
+      categorizedTab: document.getElementById("categorized-tab"),
+      categorizedContent: document.getElementById("categorized-content"),
+      categorizedList: document.getElementById("categorized-editor-list"),
+      categorizedForm: document.getElementById("categorized-form"),
+      categorizedCategoryInput: document.getElementById("categorized-category-input"),
+      exportCategorizedBtn: document.getElementById("export-categorized-btn"),
+      importCategorizedBtn: document.getElementById("import-categorized-btn"),
+      importCategorizedInput: document.getElementById("import-categorized-input"),
       uploadBg: document.getElementById("upload-bg-button"),
       bgInput: document.getElementById("bg-file-input"),
       removeBg: document.getElementById("remove-bg-button"),
@@ -319,6 +327,7 @@ export class SettingsManager {
     this.renderThemes();
     this.renderSavedThemes();
     this.renderShortcutEditor();
+    this.renderCategorizedEditor();
 
     state.subscribe((key, value) => {
       if (
@@ -573,6 +582,7 @@ export class SettingsManager {
       e.stopPropagation();
       this.els.popup.classList.toggle("visible");
       this.renderShortcutEditor();
+      this.renderCategorizedEditor();
       this.els.btn.classList.add("animating");
 
       // --- DYNAMIC VIBE: DELETE FIRST DEFAULT TASK ---
@@ -1741,6 +1751,25 @@ export class SettingsManager {
         inputs[1].value = "";
       });
     }
+    if (this.els.categorizedForm) {
+      this.els.categorizedForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const inputs = this.els.categorizedForm.querySelectorAll("input");
+        this.addCategorizedItem(inputs[0].value, inputs[1].value, inputs[2].value);
+        inputs[0].value = "";
+        inputs[1].value = "";
+        inputs[2].value = "";
+      });
+    }
+    if (this.els.exportCategorizedBtn) {
+      this.els.exportCategorizedBtn.addEventListener("click", () => this.exportCategorizedList());
+    }
+    if (this.els.importCategorizedBtn) {
+      this.els.importCategorizedBtn.addEventListener("click", () => this.els.importCategorizedInput.click());
+    }
+    if (this.els.importCategorizedInput) {
+      this.els.importCategorizedInput.addEventListener("change", (e) => this.importCategorizedList(e));
+    }
     this.els.backup.addEventListener("click", () => this.backup());
     this.els.restore.addEventListener("click", () =>
       this.els.restoreInput.click(),
@@ -1909,21 +1938,179 @@ export class SettingsManager {
     });
   }
 
-  addShortcut(name, url) {
-    url = url.trim();
-    if (!/^https?:\/\//i.test(url)) url = "https://" + url;
-    const current = [...(state.get("userShortcuts") || [])];
-    const cleanName = name.substring(0, 35);
-    current.push({ name: cleanName, url, icon: getIconUrl(url) });
-    state.set("userShortcuts", current);
-    this.renderShortcutEditor();
+  renderCategorizedEditor() {
+    if (!this.els.categorizedList) return;
+    this.els.categorizedList.innerHTML = "";
+    const items = state.get("userCategorizedList") || [];
+    items.forEach((s, index) => {
+      const div = document.createElement("div");
+      div.className = "categorized-editor-item";
+      div.draggable = true;
+      div.dataset.index = index;
+
+      const dragHandle = document.createElement("div");
+      dragHandle.className = "drag-handle";
+      dragHandle.title = "Drag to reorder";
+      dragHandle.textContent = "☰";
+
+      const iconContainer = document.createElement("div");
+      iconContainer.className = "icon-container";
+      iconContainer.style.position = "relative";
+      iconContainer.style.cursor = "pointer";
+      iconContainer.title = "Click to upload custom icon";
+
+      const img = document.createElement("img");
+      img.src = s.customIcon || s.icon || getIconUrl(s.url);
+      img.className = "icon";
+      
+      const fileInput = document.createElement("input");
+      fileInput.type = "file";
+      fileInput.accept = "image/*";
+      fileInput.style.display = "none";
+
+      iconContainer.appendChild(img);
+      iconContainer.appendChild(fileInput);
+
+      iconContainer.addEventListener("click", () => fileInput.click());
+      
+      const inputsDiv = document.createElement("div");
+      inputsDiv.className = "inputs";
+
+      const categoryInput = document.createElement("input");
+      categoryInput.type = "text";
+      categoryInput.className = "category-input";
+      categoryInput.value = s.category || "";
+      categoryInput.placeholder = "Category";
+      categoryInput.maxLength = 35;
+
+      const nameInput = document.createElement("input");
+      nameInput.type = "text";
+      nameInput.className = "name-input";
+      nameInput.value = s.name;
+      nameInput.placeholder = "Name";
+      nameInput.maxLength = 35;
+
+      const urlInput = document.createElement("input");
+      urlInput.type = "text";
+      urlInput.className = "url-input";
+      urlInput.value = s.url;
+      urlInput.placeholder = "URL";
+
+      const triggerSave = () => {
+        this.updateCategorizedItem(index, categoryInput.value, nameInput.value, urlInput.value);
+      };
+      
+      categoryInput.addEventListener("blur", triggerSave);
+      categoryInput.addEventListener("change", triggerSave);
+      nameInput.addEventListener("blur", triggerSave);
+      nameInput.addEventListener("change", triggerSave);
+      urlInput.addEventListener("blur", triggerSave);
+      urlInput.addEventListener("change", triggerSave);
+
+      inputsDiv.appendChild(categoryInput);
+      inputsDiv.appendChild(nameInput);
+      inputsDiv.appendChild(urlInput);
+
+      const actionsDiv = document.createElement("div");
+      actionsDiv.className = "actions";
+
+      const resetBtn = document.createElement("button");
+      resetBtn.className = "action-btn reset";
+      resetBtn.title = "Reset Icon";
+      const resetSvgString = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>';
+      const resetParsedSvg = new DOMParser().parseFromString(resetSvgString, 'image/svg+xml');
+      resetBtn.appendChild(resetParsedSvg.documentElement);
+      
+      if (!s.customIcon) {
+        resetBtn.style.display = "none";
+      }
+
+      resetBtn.addEventListener("click", () => {
+        this.updateCategorizedItem(index, categoryInput.value, nameInput.value, urlInput.value, null, true);
+        const autoIcon = getIconUrl(urlInput.value);
+        img.src = autoIcon;
+        resetBtn.style.display = "none";
+      });
+
+      fileInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            const tempImg = new Image();
+            tempImg.onload = () => {
+              const canvas = document.createElement("canvas");
+              canvas.width = 256;
+              canvas.height = 256;
+              const ctx = canvas.getContext("2d");
+              ctx.drawImage(tempImg, 0, 0, 256, 256);
+              const dataUrl = canvas.toDataURL("image/png");
+              
+              img.src = dataUrl;
+              this.updateCategorizedItem(index, categoryInput.value, nameInput.value, urlInput.value, dataUrl);
+              resetBtn.style.display = "";
+            };
+            tempImg.src = ev.target.result;
+          };
+          reader.readAsDataURL(file);
+          fileInput.value = "";
+        }
+      });
+
+      const delBtn = document.createElement("button");
+      delBtn.className = "action-btn delete";
+      delBtn.title = "Delete";
+      const delSvgString =
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 9L18.005 20.3463C17.8369 21.3026 17.0062 22 16.0353 22H7.96474C6.99379 22 6.1631 21.3026 5.99496 20.3463L4 9" fill="#EF4444"/><path d="M20 9L18.005 20.3463C17.8369 21.3026 17.0062 22 16.0353 22H7.96474C6.99379 22 6.1631 21.3026 5.99496 20.3463L4 9H20Z" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 6H15.375M3 6H8.625M8.625 6V4C8.625 2.89543 9.52043 2 10.625 2H13.375C14.4796 2 15.375 2.89543 15.375 4V6M8.625 6H15.375" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      const delParsedSvg = new DOMParser().parseFromString(delSvgString, 'image/svg+xml');
+      delBtn.appendChild(delParsedSvg.documentElement);
+
+      actionsDiv.appendChild(resetBtn);
+      actionsDiv.appendChild(delBtn);
+
+      div.appendChild(dragHandle);
+      div.appendChild(iconContainer);
+      div.appendChild(inputsDiv);
+      div.appendChild(actionsDiv);
+
+      delBtn.addEventListener("click", () => this.deleteCategorizedItem(index));
+      div.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("text/plain", index);
+        div.classList.add("dragging");
+      });
+      div.addEventListener("dragend", () => {
+        div.classList.remove("dragging");
+      });
+      div.addEventListener("dragover", (e) => {
+        e.preventDefault();
+      });
+      div.addEventListener("drop", (e) => {
+        e.preventDefault();
+        const fromIndex = parseInt(e.dataTransfer.getData("text/plain"));
+        const toIndex = index;
+        this.reorderCategorizedItems(fromIndex, toIndex);
+      });
+      this.els.categorizedList.appendChild(div);
+    });
   }
 
-  updateShortcut(index, name, url, customIconData = undefined, removeCustomIcon = false) {
+  addCategorizedItem(category, name, url) {
     url = url.trim();
     if (!/^https?:\/\//i.test(url)) url = "https://" + url;
-    const current = [...(state.get("userShortcuts") || [])];
+    const current = [...(state.get("userCategorizedList") || [])];
+    const cleanCategory = category.substring(0, 35);
+    const cleanName = name.substring(0, 35);
+    current.push({ category: cleanCategory, name: cleanName, url, icon: getIconUrl(url) });
+    state.set("userCategorizedList", current);
+    this.renderCategorizedEditor();
+  }
+
+  updateCategorizedItem(index, category, name, url, customIconData = undefined, removeCustomIcon = false) {
+    url = url.trim();
+    if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+    const current = [...(state.get("userCategorizedList") || [])];
     if (current[index]) {
+      current[index].category = category.substring(0, 35);
       current[index].name = name.substring(0, 35);
       const oldUrl = current[index].url;
       current[index].url = url;
@@ -1941,24 +2128,75 @@ export class SettingsManager {
         delete current[index].customIcon;
         current[index].icon = getIconUrl(url);
       }
-      state.set("userShortcuts", current);
+      state.set("userCategorizedList", current);
     }
   }
 
-  deleteShortcut(index) {
-    const current = [...(state.get("userShortcuts") || [])];
+  deleteCategorizedItem(index) {
+    const current = [...(state.get("userCategorizedList") || [])];
     current.splice(index, 1);
-    state.set("userShortcuts", current);
-    this.renderShortcutEditor();
+    state.set("userCategorizedList", current);
+    this.renderCategorizedEditor();
   }
 
-  reorderShortcuts(fromIndex, toIndex) {
+  reorderCategorizedItems(fromIndex, toIndex) {
     if (fromIndex === toIndex) return;
-    const current = [...(state.get("userShortcuts") || [])];
+    const current = [...(state.get("userCategorizedList") || [])];
     const item = current.splice(fromIndex, 1)[0];
     current.splice(toIndex, 0, item);
-    state.set("userShortcuts", current);
-    this.renderShortcutEditor();
+    state.set("userCategorizedList", current);
+    this.renderCategorizedEditor();
+  }
+
+  exportCategorizedList() {
+    const data = state.get("userCategorizedList") || [];
+    const dataStr = JSON.stringify(data, null, 2);
+    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+    const exportFileDefaultName = 'categorized-list.json';
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', exportFileDefaultName);
+    linkElement.click();
+  }
+
+  importCategorizedList(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        let data = JSON.parse(event.target.result);
+
+        if (data?.userCategorizedList) {
+          data = data.userCategorizedList;
+        } else if (data?.categorizedList) {
+          data = data.categorizedList;
+        }
+
+        if (!Array.isArray(data)) {
+          alert("Invalid file format.");
+          return;
+        }
+
+        const normalizedData = data.map((item) => ({
+          category: item.category || "Uncategorized",
+          name: item.name || "Untitled",
+          url: item.url || "",
+          icon: item.icon || getIconUrl(item.url || ""),
+          ...(item.customIcon ? { customIcon: item.customIcon } : {}),
+        }));
+
+        state.set("userCategorizedList", normalizedData);
+        this.renderCategorizedEditor();
+        if (this.els.importCategorizedInput) {
+          this.els.importCategorizedInput.value = "";
+        }
+      } catch (error) {
+        alert("Error parsing file.");
+      }
+    };
+    reader.readAsText(file);
   }
 
   backup() {
