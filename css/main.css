@@ -936,7 +936,7 @@ body:not(.loaded) #search-form {
 }
 .dropdown-item {
   display: block;
-  padding: 10px 16px !important;
+  padding: 7px 7px !important;
   color: var(--text-primary);
   text-decoration: none;
   transition: all 0.2s ease;
@@ -948,6 +948,7 @@ body:not(.loaded) #search-form {
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
   border-radius: 8px;
+  font-size: .8rem;
 }
 .dropdown-item:hover {
   background: #3A3A3A;
@@ -964,7 +965,6 @@ body:not(.loaded) #search-form {
   background-color: #2D2D2D;
   padding: 4px;
   transition: outline-color 0.2s ease;
-  margin-top: 5px;
 }
 .dropdown-item:hover img,
 .dropdown-item.active img {
