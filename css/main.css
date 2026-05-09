@@ -945,8 +945,8 @@ body:not(.loaded) #search-form {
   background-color: rgba(20, 20, 20, 0.4) !important;
   -webkit-backdrop-filter: blur(16px) !important;
   backdrop-filter: blur(16px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3) !important;
   border-radius: 8px;
   font-size: .8rem;
 }
