@@ -6,6 +6,30 @@
   padding: 0;
   box-sizing: border-box;
 }
+@view-transition {
+  navigation: auto;
+}
+::view-transition-group(root) {
+	animation-duration: 2s;
+}
+
+::view-transition-old(roote) {
+  animation-name: slide-out;
+}
+::view-transition-new(root) {
+  animation-name: slide-in;
+}
+
+@keyframes slide-in {
+	from {
+		translate: 100vw 0;
+	}
+}
+@keyframes slide-out {
+	to {
+		translate: -100vw;
+	}
+}
 
 :root {
   
