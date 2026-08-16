@@ -1752,6 +1752,14 @@ body.has-custom-bg .tool-edit-button {
   color: #ffffff !important;
   border-color: #e53e3e !important;
 }
+.settings-button.backup {
+    background-color: #0081ff;
+    color: #fff;
+}
+.settings-button.restore {
+    background-color: #28a745;
+    color: #fff;
+}
 .background-controls,
 .backup-controls {
   display: flex;
