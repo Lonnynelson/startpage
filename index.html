@@ -384,7 +384,10 @@
           Appearance
         </button>
         <button id="shortcuts-tab" class="settings-tab-button">
-          Shortcuts
+          Page 1 Shortcuts
+        </button>
+        <button id="categorized-tab" class="settings-tab-button">
+          Page 2 Categories
         </button>
       </div>
 
@@ -910,6 +913,41 @@
             </div>
             <button type="submit" class="settings-button">Add Shortcut</button>
           </form>
+        </div>
+
+        <div id="categorized-content" class="settings-pane">
+          <div id="categorized-editor-list"></div>
+          <form id="categorized-form">
+            <h3 class="settings-header">Add New Categorized Item</h3>
+            <div class="add-categorized-inputs">
+              <input
+                type="text"
+                id="categorized-category-input"
+                placeholder="Category (e.g., Video)"
+                maxlength="35"
+                required
+              />
+              <input
+                type="text"
+                id="categorized-name-input"
+                placeholder="Name (e.g., Vimeo)"
+                maxlength="35"
+                required
+              />
+              <input
+                type="text"
+                id="categorized-url-input"
+                placeholder="URL (e.g., https://vimeo.com)"
+                required
+              />
+            </div>
+            <button type="submit" class="settings-button">Add Item</button>
+          </form>
+          <div class="setting-row">
+            <button id="export-categorized-btn" class="settings-button">Export Categorized List</button>
+            <button id="import-categorized-btn" class="settings-button">Import Categorized List</button>
+            <input type="file" id="import-categorized-input" accept=".json" style="display: none;">
+          </div>
         </div>
       </div>
 
