@@ -45,6 +45,7 @@ export class Shortcuts {
     this.container.innerHTML = "";
 
     const shortcuts = state.get("userShortcuts") || [];
+    console.log("Shortcuts.render: rendering", shortcuts.length, "shortcuts");
 
     shortcuts.forEach((shortcut, index) => {
       const link = document.createElement("a");

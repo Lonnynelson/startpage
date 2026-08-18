@@ -2142,6 +2142,7 @@ export class SettingsManager {
   }
 
   deleteShortcut(index) {
+    console.log("SettingsManager.deleteShortcut called for index:", index);
     const current = [...(state.get("userShortcuts") || [])];
     current.splice(index, 1);
     state.set("userShortcuts", current);
