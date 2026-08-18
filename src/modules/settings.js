@@ -2105,6 +2105,58 @@ export class SettingsManager {
     this.renderCategorizedEditor();
   }
 
+  addShortcut(name, url) {
+    url = url.trim();
+    if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+    const current = [...(state.get("userShortcuts") || [])];
+    const cleanName = name.substring(0, 35);
+    current.push({ name: cleanName, url, icon: getIconUrl(url) });
+    state.set("userShortcuts", current);
+    this.renderShortcutEditor();
+  }
+
+  updateShortcut(index, name, url, customIconData = undefined, removeCustomIcon = false) {
+    url = url.trim();
+    if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+    const current = [...(state.get("userShortcuts") || [])];
+    if (current[index]) {
+      current[index].name = name.substring(0, 35);
+      const oldUrl = current[index].url;
+      current[index].url = url;
+
+      if (!current[index].customIcon && !customIconData) {
+        if (oldUrl !== url) {
+          current[index].icon = getIconUrl(url);
+        }
+      }
+
+      if (customIconData !== undefined && customIconData !== null) {
+        current[index].customIcon = customIconData;
+      }
+      if (removeCustomIcon) {
+        delete current[index].customIcon;
+        current[index].icon = getIconUrl(url);
+      }
+      state.set("userShortcuts", current);
+    }
+  }
+
+  deleteShortcut(index) {
+    const current = [...(state.get("userShortcuts") || [])];
+    current.splice(index, 1);
+    state.set("userShortcuts", current);
+    this.renderShortcutEditor();
+  }
+
+  reorderShortcuts(fromIndex, toIndex) {
+    if (fromIndex === toIndex) return;
+    const current = [...(state.get("userShortcuts") || [])];
+    const item = current.splice(fromIndex, 1)[0];
+    current.splice(toIndex, 0, item);
+    state.set("userShortcuts", current);
+    this.renderShortcutEditor();
+  }
+
   updateCategorizedItem(index, category, name, url, customIconData = undefined, removeCustomIcon = false) {
     url = url.trim();
     if (!/^https?:\/\//i.test(url)) url = "https://" + url;
