@@ -13,6 +13,21 @@
     <link rel="icon" type="image/png" href="assets/icons/icon32.png" />
     <link rel="stylesheet" href="css/main.css" />
     <style>
+      #shortcuts-container {
+        position: static;
+        left: auto;
+        bottom: auto;
+        transform: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+        width: 100%;
+        margin-top: 50px;
+        padding: 0 12px 12px;
+        box-sizing: border-box;
+      }
+
       .column-left,
       .column-right {
         display: none;
@@ -31,6 +46,8 @@
         flex: 0 0 20%;
         width: 20%;
         box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
       }
       .column-one-pdf {
         flex: 1 1 80%;
@@ -38,6 +55,8 @@
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
+        min-height: calc(100vh - 80px);
+        height: calc(100vh - 80px);
       }
 
       /* PDF viewer container and iframe to allow vertical scrolling */
@@ -776,8 +795,8 @@
           <div class="settings-divider"></div>
           <h3 class="settings-header">Backup & Restore</h3>
           <div class="backup-controls">
-            <button id="backup-button" class="settings-button">Backup</button>
-            <button id="restore-button" class="settings-button">Restore</button>
+            <button id="backup-button" class="settings-button backup">Backup</button>
+            <button id="restore-button" class="settings-button restore">Restore</button>
             <input
               type="file"
               id="restore-file-input"
@@ -1115,7 +1134,7 @@
     <div class="layout-container">
       <div class="column-one">
         <div class="column-one-menu">
-          <div style="padding:12px; margin-bottom:8px; border-bottom:1px solid rgba(0, 0, 0, 0.2)">
+          <div style="padding:12px; margin-bottom:8px; border-bottom:1px solid rgba(255, 255, 255, 0.2)">
             <h3 style="margin:0 0 8px 0">PDF Menu</h3>
               <div style="display:flex;gap:8px;flex-direction:column">
               <input id="menu-name-input" class="menu-input" placeholder="Button name" />
@@ -1128,14 +1147,16 @@
 
           <div id="menu-list" style="padding:12px; display:flex;flex-direction:column;gap:8px"></div>
 
-          <div style="padding:12px; margin-top:8px; border-top:1px solid rgba(0, 0, 0, 0.2)">
+          <div style="padding:12px; margin-top:8px; border-top:1px solid rgba(255, 255, 255, 0.2)">
             <div style="display:flex;gap:8px">
-              <button id="menu-export-btn" class="settings-button">Backup</button>
+              <button id="menu-export-btn" class="settings-button backup2">Backup</button>
               <input id="menu-import-input" type="file" accept="application/json" class="hidden" />
-              <button id="menu-import-btn" class="settings-button">Restore</button>
-              <button id="menu-clear-btn" class="settings-button danger">Clear</button>
+              <button id="menu-import-btn" class="settings-button restore2">Restore</button>
+              <button id="menu-clear-btn" class="settings-button danger2">Clear</button>
             </div>
           </div>
+
+          <div id="shortcuts-container" style="padding:12px; margin-top:50px; border-top:2px solid rgba(0, 0, 0, 0.2)"></div>
         </div>
         <div class="column-one-pdf">
           <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.385/build/pdf.min.js"></script>
@@ -1145,10 +1166,13 @@
               background: #eee;
               padding: 16px;
               box-sizing: border-box;
+              flex: 1 1 auto;
+              min-height: 0;
+              height: calc(100vh - 80px);
               /* Always show vertical scrollbar */
               overflow-y: scroll;
               -webkit-overflow-scrolling: touch;
-              max-height: calc(100vh - 160px);
+              max-height: none;
               /* Use auto to allow a larger scrollbar in Firefox */
               scrollbar-width: auto; /* Firefox */
               scrollbar-color: rgba(0,0,0,0.55) transparent;
@@ -1356,7 +1380,7 @@
 
             // Load default PDF if present in folder
             try{
-              renderPDF('Best_Practices_for_an_Event_Registration_Coordinator_04_30_2026.pdf', document.getElementById('holder'));
+              renderPDF('Startpage_1_ADV_ALL.pdf', document.getElementById('holder'));
             }catch(e){}
           </script>
         </div>
@@ -1624,8 +1648,6 @@
         </div>
       </div>
     </div>
-
-    <div id="shortcuts-container"></div>
 
     <div
       id="gps-consent-modal-overlay"

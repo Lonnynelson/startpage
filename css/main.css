@@ -1752,12 +1752,35 @@ body.has-custom-bg .tool-edit-button {
   color: #ffffff !important;
   border-color: #e53e3e !important;
 }
-.settings-button.backup {
+.settings-button.restore {
+    background-color: #28a745;
+    color: #fff;
+}
+.settings-button.backup{
     background-color: #0081ff;
     color: #fff;
 }
-.settings-button.restore {
+.settings-button.danger2 {
+  background-color: #e53e3e20;
+  color: #fff;
+}
+.settings-button.restore2 {
+    background-color: #28a74520;
+    color: #fff;
+}
+.settings-button.backup2 {
+    background-color: #0080ff20;
+    color: #fff;
+}
+.settings-button.danger2:hover {
+  background-color: #c53030;
+}
+.settings-button.restore2:hover {
     background-color: #28a745;
+    color: #fff;
+}
+.settings-button.backup2:hover {
+    background-color: #0081ff;
     color: #fff;
 }
 .background-controls,
