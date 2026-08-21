@@ -48,6 +48,7 @@
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
+        min-height: calc(100vh - 80px);
       }
       .column-one-pdf {
         flex: 1 1 80%;
@@ -57,6 +58,25 @@
         flex-direction: column;
         min-height: calc(100vh - 80px);
         height: calc(100vh - 80px);
+      }
+      #menu-list,
+      #add-to-menu {
+        width: 100%;
+        box-sizing: border-box;
+      }
+      #add-to-menu .menu-input,
+      #add-to-menu #menu-add-btn {
+        width: 100%;
+        box-sizing: border-box;
+      }
+      #add-to-menu #menu-add-btn {
+        display: block;
+      }
+      #backup_restore {
+        margin-top: auto;
+      }
+      #shortcuts-container {
+        margin-top: 12px;
       }
 
       /* PDF viewer container and iframe to allow vertical scrolling */
@@ -1134,20 +1154,23 @@
     <div class="layout-container">
       <div class="column-one">
         <div class="column-one-menu">
-          <div style="padding:12px; margin-bottom:8px; border-bottom:1px solid rgba(255, 255, 255, 0.2)">
+          <div>
             <h3 style="margin:0 0 8px 0">PDF Menu</h3>
-              <div style="display:flex;gap:8px;flex-direction:column">
-              <input id="menu-name-input" class="menu-input" placeholder="Button name" />
-              <input id="menu-url-input" class="menu-input" placeholder="PDF URL (or leave blank to use file input)" />
-              <div style="display:flex;gap:8px;align-items:center">
-                <button id="menu-add-btn" class="category-header" style="padding:8px 12px; font-size:0.9rem">Add</button>
-              </div>
-            </div>
           </div>
 
           <div id="menu-list" style="padding:12px; display:flex;flex-direction:column;gap:8px"></div>
 
-          <div style="padding:12px; margin-top:8px; border-top:1px solid rgba(255, 255, 255, 0.2)">
+          <div id="add-to-menu" style="display:flex;gap:8px;flex-direction:column; padding:12px; margin-top:8px; border-top:1px solid rgba(255, 255, 255, 0.5)">
+            <h3 style="margin:0 0 8px 0">Add an Online PDF</h3>
+            <input id="menu-name-input" class="menu-input" placeholder="Button name" />
+            <input id="menu-url-input" class="menu-input" placeholder="PDF URL (or leave blank to use file input)" />
+            <div style="display:flex;gap:8px;align-items:center">
+              <button id="menu-add-btn" class="category-header" style="padding:8px 12px; font-size:0.9rem">Add</button>
+            </div>
+          </div>
+
+          <div id="backup_restore" style="padding:12px; margin-top:8px; border-top:1px solid rgba(255, 255, 255, 0.5)">
+            <h3 style="margin:0 0 8px 0">Backup & Restore</h3>
             <div style="display:flex;gap:8px">
               <button id="menu-export-btn" class="settings-button backup2">Backup</button>
               <input id="menu-import-input" type="file" accept="application/json" class="hidden" />
@@ -1156,7 +1179,7 @@
             </div>
           </div>
 
-          <div id="shortcuts-container" style="padding:12px; margin-top:50px; border-top:2px solid rgba(0, 0, 0, 0.2)"></div>
+          <div id="shortcuts-container" style="padding:12px; margin-top:12px; border-top:2px solid rgba(0, 0, 0, 0.5)"></div>
         </div>
         <div class="column-one-pdf">
           <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.385/build/pdf.min.js"></script>
