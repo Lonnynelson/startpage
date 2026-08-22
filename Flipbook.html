@@ -1164,8 +1164,10 @@
             <h3 style="margin:0 0 8px 0">Add an Online PDF</h3>
             <input id="menu-name-input" class="menu-input" placeholder="PDF or Button Name" />
             <input id="menu-url-input" class="menu-input" placeholder="PDF URL" />
+            <input id="menu-local-input" type="file" accept="application/pdf" class="hidden" />
+            <button id="menu-local-btn" class="category-header" style="padding:8px 12px; font-size:0.9rem; width: 100%;">Choose Local PDF</button>
             <div style="display:flex;gap:8px;align-items:center">
-              <button id="menu-add-btn" class="category-header" style="padding:8px 12px; font-size:0.9rem">Add</button>
+              <button id="menu-add-btn" class="category-header" style="padding:8px 12px; font-size:0.9rem; width: 100%;">Add</button>
             </div>
           </div>
 
@@ -1398,6 +1400,33 @@
                 } else {
                   alert('Please provide a PDF URL.');
                 }
+            });
+
+            document.getElementById('menu-local-btn').addEventListener('click', function(){
+              document.getElementById('menu-local-input').click();
+            });
+
+            document.getElementById('menu-local-input').addEventListener('change', function(e){
+              var file = e.target.files && e.target.files[0];
+              if(!file) return;
+              if(file.type && file.type !== 'application/pdf' && !/\.pdf$/i.test(file.name)){
+                alert('Please choose a PDF file.');
+                e.target.value = '';
+                return;
+              }
+              var name = document.getElementById('menu-name-input').value.trim();
+              var blobUrl = URL.createObjectURL(file);
+              var items = loadMenu();
+              items.push({
+                name: name || file.name.replace(/\.pdf$/i, ''),
+                blobUrl: blobUrl,
+                url: ''
+              });
+              saveMenu(items); renderMenuList();
+              document.getElementById('menu-name-input').value = '';
+              document.getElementById('menu-url-input').value = '';
+              renderPDF(blobUrl, document.getElementById('holder'));
+              e.target.value = '';
             });
 
             document.getElementById('menu-export-btn').addEventListener('click', function(){
