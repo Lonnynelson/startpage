@@ -1162,8 +1162,8 @@
 
           <div id="add-to-menu" style="display:flex;gap:8px;flex-direction:column; padding:12px; margin-top:8px; border-top:1px solid rgba(255, 255, 255, 0.5)">
             <h3 style="margin:0 0 8px 0">Add an Online PDF</h3>
-            <input id="menu-name-input" class="menu-input" placeholder="Button name" />
-            <input id="menu-url-input" class="menu-input" placeholder="PDF URL (or leave blank to use file input)" />
+            <input id="menu-name-input" class="menu-input" placeholder="PDF or Button Name" />
+            <input id="menu-url-input" class="menu-input" placeholder="PDF URL" />
             <div style="display:flex;gap:8px;align-items:center">
               <button id="menu-add-btn" class="category-header" style="padding:8px 12px; font-size:0.9rem">Add</button>
             </div>
@@ -1186,12 +1186,14 @@
           <style>
             /* Holder constrained for vertical scrolling */
             #holder{
-              background: #eee;
-              padding: 16px;
+              background: #00000080;
+              border: 1px solid rgba(255, 255, 255, 0.22) !important;
+              /* padding: 16px; */
               box-sizing: border-box;
               flex: 1 1 auto;
               min-height: 0;
               height: calc(100vh - 80px);
+              position: relative;
               /* Always show vertical scrollbar */
               overflow-y: scroll;
               -webkit-overflow-scrolling: touch;
@@ -1199,6 +1201,23 @@
               /* Use auto to allow a larger scrollbar in Firefox */
               scrollbar-width: auto; /* Firefox */
               scrollbar-color: rgba(0,0,0,0.55) transparent;
+            }
+            #holder-empty-state {
+              position: absolute;
+              top: 24px;
+              left: 50%;
+              transform: translateX(-50%);
+              max-width: min(80%, 440px);
+              padding: 10px 16px;
+              border-radius: 999px;
+              background: rgba(255, 255, 255, 0.08);
+              border: 1px solid rgba(255, 255, 255, 0.22);
+              color: rgba(255, 255, 255, 0.9);
+              font-size: 0.9rem;
+              text-align: center;
+              line-height: 1.4;
+              letter-spacing: 0.02em;
+              pointer-events: none;
             }
 
             /* WebKit scrollbar styling */
@@ -1242,6 +1261,15 @@
             function clearHolder() {
               var holder = document.getElementById('holder');
               while (holder.firstChild) holder.removeChild(holder.firstChild);
+            }
+
+            function showEmptyState() {
+              var holder = document.getElementById('holder');
+              clearHolder();
+              var note = document.createElement('div');
+              note.id = 'holder-empty-state';
+              note.textContent = 'Select a PDF from the PDF Menu to the Right.';
+              holder.appendChild(note);
             }
 
             function renderPDF(url, canvasContainer, options) {
@@ -1400,11 +1428,7 @@
             document.getElementById('menu-clear-btn').addEventListener('click', function(){ if(confirm('Clear all saved menu items?')){ saveMenu([]); renderMenuList(); }});
 
             renderMenuList();
-
-            // Load default PDF if present in folder
-            try{
-              renderPDF('Startpage_1_ADV_ALL.pdf', document.getElementById('holder'));
-            }catch(e){}
+            showEmptyState();
           </script>
         </div>
       </div>
