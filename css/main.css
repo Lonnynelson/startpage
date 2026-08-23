@@ -2885,6 +2885,9 @@ body.gradient-mode-active:not(.gradient-dark)
   flex-wrap: wrap;
   gap: 8px;
 }
+.tags-container.tight-tags {
+    Margin-left: 45px;
+}
 .tag {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);

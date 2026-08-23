@@ -166,6 +166,25 @@
         box-shadow: 0 4px 12px rgba(0,0,0,0.12);
       }
 
+      /* Keep Flipbook menu buttons left-aligned and normal weight */
+      .column-one-menu .category-header,
+      .column-one-menu .settings-button,
+      #menu-list .category-header,
+      #add-to-menu .category-header {
+        text-align: left !important;
+        font-weight: 400 !important;
+      }
+      /* Ensure any button inside the Flipbook menu is left-aligned and normal weight */
+      .column-one-menu button {
+        text-align: left !important;
+        font-weight: 400 !important;
+      }
+      /* Keep the small delete button compact and aligned with the row */
+      .menu-delete-btn {
+        text-align: center !important;
+        font-weight: 400 !important;
+      }
+
       /* Inputs styled to match the category header */
       .menu-input {
         background: var(--bg-secondary);
@@ -350,12 +369,14 @@
             </div>
 
             <div class="info-group">
-              <div class="section-title"><h2>🔧 Core Fixes</h2></div>
+              <br>
+              <br>
+              <div class="section-title">🔧 Updated Aug 26, 2026:</div>
               <div class="tags-container tight-tags">
-                <h3>Mobile Scaling:</h3>
-                <h3>Master CSS fluid-scaling adapts perfectly to small screens.</h3>
-                <h4>Layout Flexibility:</h4>
-                <h3>Dock your Shortcuts bar to either the Top or Bottom of the screen.</h3>
+                <ul>
+                  <li>Merged all backup and restore functionality into a single file.</li>
+                  <li>Updated the PDF Page with new features and styling.</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -1199,12 +1220,19 @@
 
           <div id="add-to-menu" style="display:flex;gap:8px;flex-direction:column; padding:12px; margin-top:8px; border-top:1px solid rgba(255, 255, 255, 0.5)">
             <h3 style="margin:0 0 8px 0">Add an Online PDF</h3>
-            <input id="menu-name-input" class="menu-input" placeholder="PDF or Button Name" />
-            <input id="menu-url-input" class="menu-input" placeholder="PDF URL" />
-            <input id="menu-local-input" type="file" accept="application/pdf" class="hidden" />
-            <button id="menu-local-btn" class="category-header" style="padding:8px 12px; font-size:0.9rem; width: 100%;">Choose Local PDF</button>
+            <input id="menu-name-input" class="menu-input" placeholder="Button Name or PDF Name " />
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:nowrap; width:100%">
+              <div style="flex:1 1 40%; min-width:0;">
+                <input id="menu-local-input" type="file" accept="application/pdf" class="hidden" />
+                <button id="menu-local-btn" class="category-header" style="text-align: left !important; padding:8px 12px; font-size:0.9rem; width:100%">Choose file</button>
+              </div>
+              <span style="font-weight:700; color:var(--text-primary); flex:0 0 auto;">or</span>
+              <div style="flex:1 1 40%; min-width:0;">
+                <input id="menu-url-input" class="menu-input" placeholder="Paste URL" style="width:100%" />
+              </div>
+            </div>
             <div style="display:flex;gap:8px;align-items:center">
-              <button id="menu-add-btn" class="category-header" style="padding:8px 12px; font-size:0.9rem; width: 100%;">Add</button>
+              <button id="menu-add-btn" class="category-header" style="text-align: left !important; padding:8px 12px; font-size:0.9rem; width: 100%;">Add</button>
             </div>
           </div>
 
@@ -1411,7 +1439,25 @@
               options = options || { scale: 1 };
               clearHolder();
               PDFJS.disableWorker = true;
-              PDFJS.getDocument(url).then(function(pdfDoc) {
+                // Support data URLs (Base64) for persisted local PDFs saved in backup
+                var loadingTask;
+                if (typeof url === 'string' && url.indexOf('data:') === 0) {
+                  try {
+                    var base64 = (url.split(',')[1] || '');
+                    var raw = atob(base64);
+                    var len = raw.length;
+                    var u8 = new Uint8Array(len);
+                    for (var i = 0; i < len; i++) u8[i] = raw.charCodeAt(i);
+                    loadingTask = PDFJS.getDocument({ data: u8 });
+                  } catch (ex) {
+                    console.error('Invalid data URL for PDF', ex);
+                    return;
+                  }
+                } else {
+                  loadingTask = PDFJS.getDocument(url);
+                }
+                var loadPromise = loadingTask && loadingTask.promise ? loadingTask.promise : loadingTask;
+                loadPromise.then(function(pdfDoc) {
                 var renderPage = function(page) {
                   var wrapper = document.createElement("div");
                   wrapper.className = "canvas-wrapper";
@@ -1504,7 +1550,9 @@
                 btn.appendChild(icon);
                 btn.appendChild(label);
                 btn.addEventListener('click', function(){
-                  if(it.blobUrl){
+                  if(it.dataUrl){
+                    renderPDF(it.dataUrl, document.getElementById('holder'));
+                  } else if(it.blobUrl){
                     renderPDF(it.blobUrl, document.getElementById('holder'));
                   } else if(it.url){
                     renderPDF(it.url, document.getElementById('holder'));
@@ -1553,17 +1601,22 @@
                 return;
               }
               var name = document.getElementById('menu-name-input').value.trim();
-              var blobUrl = URL.createObjectURL(file);
-              var items = loadMenu();
-              items.push({
-                name: name || file.name.replace(/\.pdf$/i, ''),
-                blobUrl: blobUrl,
-                url: ''
-              });
-              saveMenu(items); renderMenuList();
-              document.getElementById('menu-name-input').value = '';
-              document.getElementById('menu-url-input').value = '';
-              renderPDF(blobUrl, document.getElementById('holder'));
+              var reader = new FileReader();
+              reader.onload = function(evt){
+                var dataUrl = evt.target.result; // data:application/pdf;base64,...
+                var items = loadMenu();
+                items.push({
+                  name: name || file.name.replace(/\.pdf$/i, ''),
+                  dataUrl: dataUrl,
+                  url: ''
+                });
+                saveMenu(items); renderMenuList();
+                document.getElementById('menu-name-input').value = '';
+                document.getElementById('menu-url-input').value = '';
+                renderPDF(dataUrl, document.getElementById('holder'));
+              };
+              // read and persist as data URL so backups include file content
+              reader.readAsDataURL(file);
               e.target.value = '';
             });
 
