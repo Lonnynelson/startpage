@@ -2782,7 +2782,7 @@ body.gradient-mode-active:not(.gradient-dark)
   font-weight: 800;
   background: linear-gradient(to right, #ffffff, #a0a0a0);
   background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* -webkit-text-fill-color: transparent; */
 }
 .modal-header p {
   color: #888;
@@ -3968,5 +3968,7 @@ html.high-bg-blur body.has-custom-bg .dropdown-item {
     height: 48px;
   }
 }
-
+.red {
+  color: #ff0000 !important;
+}
 /* [css/main.css] YourDynamicDashboard V2.2 (Ditom Baroi Antu - 2025-26) */
