@@ -2253,17 +2253,29 @@ export class SettingsManager {
   }
 
   backup() {
-    const data = {};
+    const allLocalStorageData = {};
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      data[key] = localStorage.getItem(key);
+      allLocalStorageData[key] = localStorage.getItem(key);
     }
-    const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+
+    const backupPayload = {
+      version: 1,
+      type: "ydd-full-backup",
+      exportedAt: new Date().toISOString(),
+      localStorage: allLocalStorageData,
+      userShortcuts: JSON.parse(localStorage.getItem("userShortcuts") || "[]"),
+      userCategorizedList: JSON.parse(localStorage.getItem("userCategorizedList") || "[]"),
+      flipbookMenu: JSON.parse(localStorage.getItem("flipbookMenu") || "[]"),
+    };
+
+    const blob = new Blob([JSON.stringify(backupPayload, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "ydd-backup.json";
+    a.download = "startpage-full-backup.json";
     a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
   }
   restore(e) {
     const file = e.target.files[0];
@@ -2272,6 +2284,30 @@ export class SettingsManager {
     reader.onload = (event) => {
       try {
         const data = JSON.parse(event.target.result);
+        const storageRoot = data?.localStorage && typeof data.localStorage === "object" ? data.localStorage : data;
+
+        if (data?.type === "ydd-full-backup" || data?.version === 1 || data?.flipbookMenu !== undefined || data?.userCategorizedList !== undefined || data?.userShortcuts !== undefined) {
+          Object.keys(storageRoot).forEach((key) => {
+            if (key === "userShortcuts" || key === "userCategorizedList" || key === "flipbookMenu") {
+              return;
+            }
+            localStorage.setItem(key, storageRoot[key]);
+          });
+
+          if (Array.isArray(data?.flipbookMenu)) {
+            localStorage.setItem("flipbookMenu", JSON.stringify(data.flipbookMenu));
+          }
+          if (Array.isArray(data?.userShortcuts)) {
+            localStorage.setItem("userShortcuts", JSON.stringify(data.userShortcuts));
+          }
+          if (Array.isArray(data?.userCategorizedList)) {
+            localStorage.setItem("userCategorizedList", JSON.stringify(data.userCategorizedList));
+          }
+
+          location.reload();
+          return;
+        }
+
         Object.keys(data).forEach((key) =>
           localStorage.setItem(key, data[key]),
         );

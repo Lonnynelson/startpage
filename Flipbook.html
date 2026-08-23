@@ -58,6 +58,7 @@
         flex-direction: column;
         min-height: calc(100vh - 80px);
         height: calc(100vh - 80px);
+        position: relative;
       }
       #menu-list,
       #add-to-menu {
@@ -257,9 +258,9 @@
 
         <div class="modal-header">
           <div class="badge-container">
-            <span class="version-badge">YourDynamicDashboard v2.2</span>
+            <span class="version-badge">YourDynamicDashboard</span>
           </div>
-          <h1>The Performance & Scaling Update</h1>
+          <h1>The Performance & Scaling . . . . . . . . <strong> ↗ Exit ↗</strong></h1>
           <p>
             Rebuilt mobile engine, smart storage, and a powerful local search
             history.
@@ -318,7 +319,7 @@
                 <li>
                   <span class="list-icon">↕️</span>
                   <div>
-                    <strong>Layout Flexibility:</strong>
+                    <strong>Mobile Scaling:Layout Flexibility:</strong>
                     <span
                       >Dock your Shortcuts bar to either the Top or Bottom of
                       the screen.</span
@@ -349,15 +350,12 @@
             </div>
 
             <div class="info-group">
-              <div class="section-title">🔧 Core Fixes</div>
+              <div class="section-title"><h2>🔧 Core Fixes</h2></div>
               <div class="tags-container tight-tags">
-                <span class="tag alert-tag">IndexedDB Storage</span>
-                <span class="tag alert-tag">FOUC Eradicated</span>
-                <span class="tag alert-tag-2">Gradient Clarity</span>
-                <span class="tag alert-tag-2">Animation Polish</span>
-                <span class="tag">Color Logic Fix</span>
-                <span class="tag">Mobile Responsive</span>
-                <span class="tag">Layout Bugs Fixed</span>
+                <h3>Mobile Scaling:</h3>
+                <h3>Master CSS fluid-scaling adapts perfectly to small screens.</h3>
+                <h4>Layout Flexibility:</h4>
+                <h3>Dock your Shortcuts bar to either the Top or Bottom of the screen.</h3>
               </div>
             </div>
           </div>
@@ -607,13 +605,16 @@
 
       <div class="settings-tabs">
         <button id="functions-tab" class="settings-tab-button active">
-          Functions
+          Functions Backup
         </button>
         <button id="appearance-tab" class="settings-tab-button">
-          Appearance
+          Appearance Colors
         </button>
         <button id="shortcuts-tab" class="settings-tab-button">
-          Shortcuts
+          Bottom Shortcuts
+        </button>
+        <button id="categorized-tab" class="settings-tab-button">
+          Dropdown Page
         </button>
       </div>
 
@@ -813,7 +814,8 @@
           </div>
 
           <div class="settings-divider"></div>
-          <h3 class="settings-header">Backup & Restore</h3>
+          <h3 class="settings-header">Backup & Restore<br>
+          Functions Appearence & Page 1 Shortcuts</h3>
           <div class="backup-controls">
             <button id="backup-button" class="settings-button backup">Backup</button>
             <button id="restore-button" class="settings-button restore">Restore</button>
@@ -827,8 +829,14 @@
               Reset All
             </button>
           </div>
-          <div class="settings-divider"></div>
-          <h3 class="settings-header">Others</h3>
+          <div class="settings-footer">
+            <p>See the bottom of "Page 2 Categories" for<br>
+              the Page 2 backup and restore functions.</p>
+          </div>
+          <!-- Start Comment out Check for updates and GitHub buttons -->
+          <!-- Start Comment out Check for updates and GitHub buttons -->
+          <!-- Start Comment out Check for updates and GitHub buttons 
+          <h3 class="settings-header">Copyright Information</h3>
           <div class="about-section">
             <div class="about-row">
               <button id="check-for-updates-btn" class="icon-button">
@@ -884,8 +892,10 @@
               </a>
             </div>
           </div>
+          <!-- End Comment out Check for updates and GitHub buttons -->
+          <!-- End Comment out Check for updates and GitHub buttons -->
+          <!-- End Comment out Check for updates and GitHub buttons -->
         </div>
-
         <div id="appearance-content" class="settings-pane">
           <div id="theme-color-note" class="settings-note">
             <p>
@@ -1134,20 +1144,47 @@
             <button type="submit" class="settings-button">Add Shortcut</button>
           </form>
         </div>
+
+        <div id="categorized-content" class="settings-pane">
+          <div id="categorized-editor-list"></div>
+          <form id="categorized-form">
+            <h3 class="settings-header">Add New Categorized Item</h3>
+            <div class="add-categorized-inputs">
+              <input
+                type="text"
+                id="categorized-category-input"
+                placeholder="Category (e.g., Video)"
+                maxlength="35"
+                required
+              />
+              <input
+                type="text"
+                id="categorized-name-input"
+                placeholder="Name (e.g., Vimeo)"
+                maxlength="35"
+                required
+              />
+              <input
+                type="text"
+                id="categorized-url-input"
+                placeholder="URL (e.g., https://vimeo.com)"
+                required
+              />
+            </div>
+            <button type="submit" class="settings-button">Add Item</button>
+          </form>
+          <div class="setting-row">
+            <button id="export-categorized-btn" class="settings-button backup" style="display:none">Backup Categorized List</button>&nbsp;&nbsp;
+            <button id="import-categorized-btn" class="settings-button restore" style="display:none">Restore Categorized List</button>
+            <input type="file" id="import-categorized-input" accept=".json" style="display: none;">
+          </div>
+        </div>
       </div>
 
       <div class="settings-footer">
-        <p>&copy; Ditom Baroi Antu <span id="copyright-year">2025</span></p>
-        <p><strong>YourDynamicDashboard</strong> V2.2.0</p>
-        <p>
-          Weather data provided by
-          <a
-            href="https://open-meteo.com/"
-            target="_blank"
-            style="color: inherit"
-            >Open-Meteo.com</a
-          >
-        </p>
+        <p>&copy; Lonny Nelson <span id="copyright-year">2026</span></p>
+        <p> Based on YourDynamicDashboard V2.2.0 by Ditom Baroi Antu 2025 - 2026</p>
+        <p>Weather data provided by <a href="https://open-meteo.com/" target="_blank" style="color: inherit">Open-Meteo.com</a></p>
       </div>
     </div>
 
@@ -1171,9 +1208,10 @@
             </div>
           </div>
 
-          <div id="backup_restore" style="padding:12px; margin-top:8px; border-top:1px solid rgba(255, 255, 255, 0.5)">
-            <h3 style="margin:0 0 8px 0">Backup & Restore</h3>
-            <div style="display:flex;gap:8px">
+          <div id="backup_restore">
+            <!-- <h3 style="margin:0 0 8px 0">Backup & Restore</h3> -->
+            <!-- Backup/Restore UI hidden on this page; functionality preserved -->
+            <div style="display:none;">
               <button id="menu-export-btn" class="settings-button backup2">Backup</button>
               <input id="menu-import-input" type="file" accept="application/json" class="hidden" />
               <button id="menu-import-btn" class="settings-button restore2">Restore</button>
@@ -1195,14 +1233,14 @@
               flex: 1 1 auto;
               min-height: 0;
               height: calc(100vh - 80px);
+              overflow-y: auto;
+              overflow-x: hidden;
               position: relative;
-              /* Always show vertical scrollbar */
-              overflow-y: scroll;
-              -webkit-overflow-scrolling: touch;
               max-height: none;
               /* Use auto to allow a larger scrollbar in Firefox */
-              scrollbar-width: auto; /* Firefox */
-              scrollbar-color: rgb(255 248 0) #00000000;
+              scrollbar-width: 20px; /* Firefox */
+              -webkit-scrollbar-width:20px; /* WebKit */
+              border-radius: 15px;
             }
             #holder-empty-state {
               position: absolute;
@@ -1222,26 +1260,6 @@
               pointer-events: none;
             }
 
-            /* WebKit scrollbar styling */
-            /* Make the scrollbar thumb larger for easier dragging */
-            #holder::-webkit-scrollbar{
-              width: 20px; /* user requested width */
-            }
-            #holder::-webkit-scrollbar-track{
-              background: transparent;
-              border-radius: 14px;
-              margin: 6px 0;
-            }
-            #holder::-webkit-scrollbar-thumb{
-              background: rgba(0,0,0,0.65);
-              border-radius: 14px;
-              border: 6px solid transparent;
-              background-clip: padding-box;
-              min-height: 72px; /* ensure the drag handle is large enough */
-            }
-            #holder::-webkit-scrollbar-thumb:hover{
-              background: rgba(0,0,0,0.8);
-            }
             .canvas-wrapper{
               margin-bottom: 16px;
               display: flex;
@@ -1255,10 +1273,44 @@
               width: 100% !important;
             }
             .column-one-pdf::-webkit-scrollbar {
-              width: 15px;
+              width: 30px;
+            }
+            /* Hide native scrollbar on the PDF holder so only the custom overlay shows */
+            #holder{
+              scrollbar-width: none; /* Firefox */
+              scrollbar-gutter: auto;
+            }
+            #holder::-webkit-scrollbar{
+              width: 0 !important;
+              height: 0 !important;
+              background: transparent !important;
+            }
+            #holder::-webkit-scrollbar-thumb{ display:none !important; }
+            /* Custom persistent scrollbar overlay (used when OS hides native scrollbars) */
+            #holder-scrollbar-track{
+              position: absolute;
+              top: 0;
+              right: 0;
+              width: 30px;
+              height: 100%;
+              display: flex;
+              align-items: flex-start;
+              justify-content: center;
+              pointer-events: auto;
+              z-index: 99999;
+            }
+            #holder-scrollbar-thumb{
+              width: 16px;
+              background: rgba(255,255,255,0.9);
+              border-radius: 10px;
+              margin-top: 8px;
+              cursor: pointer;
+              box-shadow: 0 2px 6px rgba(0,0,0,0.25);
             }
           </style>
           <div id="holder"></div>
+          <!-- static scrollbar track to ensure visibility even if JS fails -->
+          <div id="holder-scrollbar-track" aria-hidden="true"><div id="holder-scrollbar-thumb"></div></div>
           <script>
             function clearHolder() {
               var holder = document.getElementById('holder');
@@ -1273,6 +1325,87 @@
               note.textContent = 'Select a PDF from the PDF Menu to the Right.';
               holder.appendChild(note);
             }
+
+            // Custom scrollbar functions (ensure defined before renderPDF uses them)
+            function createCustomScrollbar(holder){
+              if(!holder) return;
+              if(holder._customScrollbar) return;
+              // reuse existing static elements if present
+              var track = document.getElementById('holder-scrollbar-track') || document.createElement('div'); track.id = 'holder-scrollbar-track';
+              var thumb = document.getElementById('holder-scrollbar-thumb') || document.createElement('div'); thumb.id = 'holder-scrollbar-thumb';
+              if(!track.contains(thumb)) track.appendChild(thumb);
+              // append track to the parent column so it overlays the holder reliably
+              var parent = holder.parentElement || document.body;
+              parent.appendChild(track);
+              // position track to the right side of the parent
+              track.style.position = 'absolute';
+              track.style.top = '0';
+              track.style.right = '4px';
+              track.style.height = '100%';
+              holder._customScrollbar = {track: track, thumb: thumb, dragging: false, parent: parent};
+
+              // sync on scroll and resize
+              holder.addEventListener('scroll', function(){ updateCustomScrollbar(holder); });
+              window.addEventListener('resize', function(){ updateCustomScrollbar(holder); });
+
+              var startY = 0, startScroll = 0;
+              thumb.addEventListener('pointerdown', function(e){
+                e.preventDefault();
+                thumb.setPointerCapture && thumb.setPointerCapture(e.pointerId);
+                holder._customScrollbar.dragging = true;
+                startY = e.clientY;
+                startScroll = holder.scrollTop;
+              });
+              thumb.addEventListener('pointermove', function(e){
+                if(!holder._customScrollbar.dragging) return;
+                var clientDelta = e.clientY - startY;
+                var thumbH = thumb.offsetHeight || 40;
+                var trackRect = track.getBoundingClientRect();
+                var trackHeight = track.clientHeight - thumbH;
+                var scrollRange = holder.scrollHeight - holder.clientHeight;
+                if(scrollRange <= 0) return;
+                var scrollDelta = (clientDelta / (trackHeight || 1)) * scrollRange;
+                holder.scrollTop = Math.max(0, Math.min(scrollRange, startScroll + scrollDelta));
+              });
+              thumb.addEventListener('pointerup', function(e){
+                holder._customScrollbar.dragging = false;
+                try{ thumb.releasePointerCapture && thumb.releasePointerCapture(e.pointerId); }catch(ex){}
+              });
+
+              track.addEventListener('click', function(e){
+                if(e.target === thumb) return;
+                var rect = track.getBoundingClientRect();
+                var y = e.clientY - rect.top;
+                var thumbH = thumb.offsetHeight;
+                var targetTop = Math.max(0, Math.min(track.clientHeight - thumbH, y - thumbH/2));
+                var ratio = targetTop / (track.clientHeight - thumbH);
+                holder.scrollTop = ratio * (holder.scrollHeight - holder.clientHeight);
+              });
+              updateCustomScrollbar(holder);
+            }
+
+            function updateCustomScrollbar(holder){
+              if(!holder) return;
+              if(!holder._customScrollbar) createCustomScrollbar(holder);
+              var cs = holder._customScrollbar; if(!cs) return;
+              var track = cs.track, thumb = cs.thumb;
+              var visible = holder.scrollHeight > holder.clientHeight + 1;
+              track.style.display = visible ? 'flex' : 'none';
+              if(!visible) return;
+              var thumbH = Math.max(40, Math.round((holder.clientHeight / holder.scrollHeight) * holder.clientHeight));
+              thumb.style.height = thumbH + 'px';
+              var maxTop = holder.clientHeight - thumbH;
+              var top = (holder.scrollTop / (holder.scrollHeight - holder.clientHeight)) * maxTop;
+              thumb.style.transform = 'translateY(' + top + 'px)';
+            }
+            // initialize custom scrollbar for the holder element
+            (function(){
+              var holderEl = document.getElementById('holder');
+              if(holderEl){
+                try{ holderEl.style.scrollbarGutter = 'stable both'; }catch(e){}
+                createCustomScrollbar(holderEl);
+              }
+            })();
 
             function renderPDF(url, canvasContainer, options) {
               options = options || { scale: 1 };
@@ -1313,6 +1446,8 @@
                   var renderContext = { canvasContext: ctx, viewport: viewport };
                   page.render(renderContext).promise.then(function(){
                     // finished rendering
+                    // update custom scrollbar after each page renders
+                    try{ updateCustomScrollbar(canvasContainer); }catch(e){}
                   });
                 };
                 var i;
@@ -1321,6 +1456,9 @@
                     pdfDoc.getPage(pageNum).then(renderPage);
                   })(i);
                 }
+                // After scheduling page renders, do a deferred update in case
+                // layout changes after canvases are appended.
+                setTimeout(function(){ try{ updateCustomScrollbar(document.getElementById('holder')); }catch(e){} }, 300);
               }).catch(function(err){
                 console.error('PDF load error', err);
                 clearHolder();
@@ -1430,10 +1568,25 @@
             });
 
             document.getElementById('menu-export-btn').addEventListener('click', function(){
-              var items = loadMenu();
-              var blob = new Blob([JSON.stringify(items, null, 2)], {type:'application/json'});
+              var appData = {};
+              for (var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                appData[key] = localStorage.getItem(key);
+              }
+
+              var payload = {
+                version: 1,
+                type: 'ydd-full-backup',
+                exportedAt: new Date().toISOString(),
+                localStorage: appData,
+                userShortcuts: JSON.parse(localStorage.getItem('userShortcuts') || '[]'),
+                userCategorizedList: JSON.parse(localStorage.getItem('userCategorizedList') || '[]'),
+                flipbookMenu: loadMenu()
+              };
+
+              var blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
               var url = URL.createObjectURL(blob);
-              var a = document.createElement('a'); a.href=url; a.download='flipbook-menu-backup.json'; document.body.appendChild(a); a.click(); a.remove();
+              var a = document.createElement('a'); a.href=url; a.download='ydd-backup.json'; document.body.appendChild(a); a.click(); a.remove();
               setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
             });
 
@@ -1445,10 +1598,36 @@
               var r = new FileReader(); r.onload = function(){
                 try{
                   var data = JSON.parse(r.result);
+                  var storageRoot = data && data.localStorage && typeof data.localStorage === 'object' ? data.localStorage : data;
+
+                  if (data && (data.type === 'ydd-full-backup' || data.version === 1 || data.flipbookMenu !== undefined || data.userCategorizedList !== undefined || data.userShortcuts !== undefined)) {
+                    Object.keys(storageRoot).forEach(function(key){
+                      if (key === 'userShortcuts' || key === 'userCategorizedList' || key === 'flipbookMenu') return;
+                      localStorage.setItem(key, storageRoot[key]);
+                    });
+
+                    if (Array.isArray(data.flipbookMenu)) {
+                      localStorage.setItem('flipbookMenu', JSON.stringify(data.flipbookMenu));
+                    }
+                    if (Array.isArray(data.userShortcuts)) {
+                      localStorage.setItem('userShortcuts', JSON.stringify(data.userShortcuts));
+                    }
+                    if (Array.isArray(data.userCategorizedList)) {
+                      localStorage.setItem('userCategorizedList', JSON.stringify(data.userCategorizedList));
+                    }
+
+                    renderMenuList();
+                    showEmptyState();
+                    alert('Backup restored.');
+                    return;
+                  }
+
                   if(Array.isArray(data)){
                     saveMenu(data); renderMenuList();
                     alert('Menu restored.');
-                  } else alert('Invalid backup file');
+                  } else {
+                    alert('Invalid backup file');
+                  }
                 }catch(err){ alert('Failed to parse file'); }
               }; r.readAsText(f);
               e.target.value='';

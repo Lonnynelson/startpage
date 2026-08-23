@@ -482,13 +482,16 @@
 
       <div class="settings-tabs">
         <button id="functions-tab" class="settings-tab-button active">
-          Functions
+          Functions Backup
         </button>
         <button id="appearance-tab" class="settings-tab-button">
-          Appearance
+          Appearance Colors
         </button>
         <button id="shortcuts-tab" class="settings-tab-button">
-          Shortcuts
+          Bottom Shortcuts
+        </button>
+        <button id="categorized-tab" class="settings-tab-button">
+          Dropdown Page
         </button>
       </div>
 
@@ -688,10 +691,11 @@
           </div>
 
           <div class="settings-divider"></div>
-          <h3 class="settings-header">Backup & Restore</h3>
+          <h3 class="settings-header">Backup & Restore<br>
+          Functions Appearence & Page 1 Shortcuts</h3>
           <div class="backup-controls">
-            <button id="backup-button" class="settings-button">Backup</button>
-            <button id="restore-button" class="settings-button">Restore</button>
+            <button id="backup-button" class="settings-button backup">Backup</button>
+            <button id="restore-button" class="settings-button restore">Restore</button>
             <input
               type="file"
               id="restore-file-input"
@@ -702,8 +706,14 @@
               Reset All
             </button>
           </div>
-          <div class="settings-divider"></div>
-          <h3 class="settings-header">Others</h3>
+          <div class="settings-footer">
+            <p>See the bottom of "Page 2 Categories" for<br>
+              the Page 2 backup and restore functions.</p>
+          </div>
+          <!-- Start Comment out Check for updates and GitHub buttons -->
+          <!-- Start Comment out Check for updates and GitHub buttons -->
+          <!-- Start Comment out Check for updates and GitHub buttons 
+          <h3 class="settings-header">Copyright Information</h3>
           <div class="about-section">
             <div class="about-row">
               <button id="check-for-updates-btn" class="icon-button">
@@ -759,8 +769,10 @@
               </a>
             </div>
           </div>
+          <!-- End Comment out Check for updates and GitHub buttons -->
+          <!-- End Comment out Check for updates and GitHub buttons -->
+          <!-- End Comment out Check for updates and GitHub buttons -->
         </div>
-
         <div id="appearance-content" class="settings-pane">
           <div id="theme-color-note" class="settings-note">
             <p>
@@ -1009,20 +1021,47 @@
             <button type="submit" class="settings-button">Add Shortcut</button>
           </form>
         </div>
+
+        <div id="categorized-content" class="settings-pane">
+          <div id="categorized-editor-list"></div>
+          <form id="categorized-form">
+            <h3 class="settings-header">Add New Categorized Item</h3>
+            <div class="add-categorized-inputs">
+              <input
+                type="text"
+                id="categorized-category-input"
+                placeholder="Category (e.g., Video)"
+                maxlength="35"
+                required
+              />
+              <input
+                type="text"
+                id="categorized-name-input"
+                placeholder="Name (e.g., Vimeo)"
+                maxlength="35"
+                required
+              />
+              <input
+                type="text"
+                id="categorized-url-input"
+                placeholder="URL (e.g., https://vimeo.com)"
+                required
+              />
+            </div>
+            <button type="submit" class="settings-button">Add Item</button>
+          </form>
+          <div class="setting-row">
+            <button id="export-categorized-btn" class="settings-button backup" style="display:none">Backup Categorized List</button>&nbsp;&nbsp;
+            <button id="import-categorized-btn" class="settings-button restore" style="display:none">Restore Categorized List</button>
+            <input type="file" id="import-categorized-input" accept=".json" style="display: none;">
+          </div>
+        </div>
       </div>
 
       <div class="settings-footer">
-        <p>&copy; Ditom Baroi Antu <span id="copyright-year">2025</span></p>
-        <p><strong>YourDynamicDashboard</strong> V2.2.0</p>
-        <p>
-          Weather data provided by
-          <a
-            href="https://open-meteo.com/"
-            target="_blank"
-            style="color: inherit"
-            >Open-Meteo.com</a
-          >
-        </p>
+        <p>&copy; Lonny Nelson <span id="copyright-year">2026</span></p>
+        <p> Based on YourDynamicDashboard V2.2.0 by Ditom Baroi Antu 2025 - 2026</p>
+        <p>Weather data provided by <a href="https://open-meteo.com/" target="_blank" style="color: inherit">Open-Meteo.com</a></p>
       </div>
     </div>
 
