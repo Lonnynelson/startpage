@@ -1,0 +1,60 @@
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		html, body, h1 {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font: inherit;
+			vertical-align: baseline;
+		}
+		body {
+			background: #ff674f;
+			color: #000;
+			text-align: center;
+			animation: pulse 2s ease-in-out infinite;
+		}
+		h1 {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			font-family: sans-serif;
+			font-size: 6rem;
+			background: transparent;
+			transition: font 0.4s ease-in-out;
+		}
+		@media screen and (max-width: 727px) {
+			h1 {
+				font-size: 4rem;
+			}
+		}
+		@media screen and (max-width: 467px) {
+			h1 {
+				font-size: 2.5rem;
+			}
+		}
+		@keyframes pulse {
+			0% {
+				background: #FF0000;
+				color: #000;
+			}
+			50% {
+				background: #0000FF;
+				color: #FFFF00;
+			}
+			100% {
+				background: #FFFF00;
+				color: #FF0000;
+			}
+		}
+		@media (prefers-reduced-motion: reduce) {
+			h1 {
+				transition: none !important;
+			}
+		}
+	</style>
+</head>
+<body>
+	<h1>INCOMING CALL</h1>
+</body>
