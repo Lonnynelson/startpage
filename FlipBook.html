@@ -10,40 +10,123 @@
     <title>New Tab</title>
 
     <script src="src/theme-init.js"></script>
-    <!-- <link rel="icon" type="image/png" href="assets/icons/icon32.png" /> -->
+    <link rel="icon" type="image/png" href="assets/icons/icon32.png" />
     <link rel="stylesheet" href="css/main.css" />
     <style>
-      .column-left, .column-right {
+      #shortcuts-container {
+        position: static;
+        left: auto;
+        bottom: auto;
+        transform: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+        width: 100%;
+        margin-top: 50px;
+        padding: 0 12px 12px;
+        box-sizing: border-box;
+      }
+      
+      .column-left,
+      .column-right {
         display: none;
       }
+
       .column-one {
-        display: block;
-        width: 65%;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        width: 95%;
         margin: 0 auto;
+        box-sizing: border-box;
       }
-      .column-one-inner {
+
+      .column-one-menu {
+        flex: 0 0 20%;
+        width: 20%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - 80px);
+      }
+      .column-one-pdf {
+        flex: 1 1 80%;
+        width: 80%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - 80px);
+        height: calc(100vh - 80px);
+        position: relative;
+      }
+      #menu-list,
+      #add-to-menu {
         width: 100%;
+        box-sizing: border-box;
       }
+      #add-to-menu .menu-input,
+      #add-to-menu #menu-add-btn {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+      }
+      #add-to-menu #menu-add-btn {
+        display: block;
+      }
+      #backup_restore {
+        margin-top: auto;
+      }
+      #shortcuts-container {
+        margin-top: 12px;
+      }
+
+      /* PDF viewer container and iframe to allow vertical scrolling */
+      .pdf-container {
+        width: 100%;
+        height: calc(100vh - 160px);
+        max-height: calc(100vh - 120px);
+        min-height: 360px;
+        overflow: hidden;
+        background: var(--bg-secondary);
+        border-radius: 6px;
+      }
+
+      .pdf-frame {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+      }
+
       @media (max-width: 768px) {
         .column-one {
           width: 95%;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .column-one-menu,
+        .column-one-pdf {
+          width: 100%;
+          flex: none;
         }
       }
+
       .categories-container {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         gap: 12px;
         padding: 20px 0;
       }
-      #categorized-list-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 12px;
-      }
+
       .category-dropdown {
         position: relative;
-        width: 100%;
       }
+
+      button.category-header {
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+      }
+
       .category-header {
         background: var(--bg-secondary);
         color: var(--text-primary);
@@ -55,54 +138,127 @@
         transition: all 0.3s ease;
         text-align: center;
         font-size: 0.95rem;
-        background-color: rgba(20, 20, 20, 0.4) !important;
-        -webkit-backdrop-filter: blur(3px) !important;
-        backdrop-filter: blur(3px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.4) !important;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3) !important;
       }
+
       .category-header:hover {
-        background: var(--bg-secondary);
-        color: var(--text-primary);
+        background: var(--accent-color);
+        color: var(--bg-secondary);
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       }
+
+      /* Small delete button that matches category-header styling */
+      .menu-delete-btn {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        border: 1px solid rgba(255,255,255,0.06);
+        padding: 6px 8px;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        font-size: 0.95rem;
+      }
+      .menu-delete-btn:hover {
+        background: var(--accent-color);
+        color: var(--bg-secondary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      }
+
+      /* Keep Flipbook menu buttons left-aligned and normal weight */
+      .column-one-menu .category-header,
+      .column-one-menu .settings-button,
+      #menu-list .category-header,
+      #add-to-menu .category-header {
+        text-align: left !important;
+        font-weight: 400 !important;
+      }
+      /* Ensure any button inside the Flipbook menu is left-aligned and normal weight */
+      .column-one-menu button {
+        text-align: left !important;
+        font-weight: 400 !important;
+      }
+      /* Keep the small delete button compact and aligned with the row */
+      .menu-delete-btn {
+        text-align: center !important;
+        font-weight: 400 !important;
+      }
+
+      /* Inputs styled to match the category header */
+      .menu-input {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        border: 1px solid rgba(255,255,255,0.06);
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: text;
+        transition: all 0.2s ease;
+        font-size: 0.95rem;
+        outline: none;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .menu-input::placeholder {
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+      .menu-input:focus {
+        background: var(--accent-color);
+        color: var(--bg-secondary);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      }
+
       .dropdown-menu {
         position: absolute;
         top: 100%;
         left: 0;
         right: 0;
+        background: #000b19;
+        border: 1.5px solid var(--accent-color);
         border-top: none;
         border-radius: 0 0 8px 8px;
         opacity: 0;
         visibility: hidden;
         transform: translateY(-10px);
-        transition: all 1s ease;
+        transition: all 0.3s ease;
         z-index: 100;
+        min-width: 200px;
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
       }
+
       .category-dropdown:hover .dropdown-menu {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
       }
+
       .dropdown-menu a {
         display: block;
         padding: 10px 16px;
         color: var(--text-primary);
         text-decoration: none;
         transition: all 0.2s ease;
-        font-size: 0.7rem;
-        /* border-bottom: 1px solid rgba(255, 255, 255, 0.1); */
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       }
+
       .dropdown-menu a:last-child {
         border-bottom: none;
       }
+
       .dropdown-menu a:hover {
         background: var(--accent-color);
         color: var(--bg-secondary);
         padding-left: 24px;
       }
+
       @media (max-width: 768px) {
         .categories-container {
           grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -120,6 +276,103 @@
   </head>
   <body>
     <div id="bg-blur-overlay"></div>
+    <div id="welcome-modal-overlay" class="hidden">
+      <div id="welcome-modal" class="v2-1-modal">
+        <button id="welcome-modal-close">&times;</button>
+
+        <div class="modal-header">
+          <div class="badge-container">
+            <span class="version-badge">Lonny's Dynamic Dashboard</span>
+          </div>
+          <h1>Welcome to My Dynamic Dashboard &nbsp; &nbsp; <span class="red">Close ↗</span></h1>
+          <p>
+            Rebuilt mobile engine, smart storage, and a powerful local search
+            history.
+          </p>
+        </div>
+
+        <div class="modal-content-v2">
+          <div class="section-title">✨ Key Features</div>
+          <div class="feature-row-3">
+            <div class="feature-card new-glow">
+              <div class="card-header">
+                <span class="icon">🔍</span>
+                <h3>Search History</h3>
+              </div>
+              <p>
+                A native-feeling, privacy-first search history with real-time
+                filtering and auto-delete.
+              </p>
+            </div>
+            <div class="feature-card new-glow">
+              <div class="card-header">
+                <span class="icon">🖼️</span>
+                <h3>Custom Icons</h3>
+              </div>
+              <p>
+                Upload and set your own custom image icons for individual web
+                shortcuts.
+              </p>
+            </div>
+            <div class="feature-card new-glow">
+              <div class="card-header">
+                <span class="icon">💧</span>
+                <h3>BG Blur Control</h3>
+              </div>
+              <p>
+                Adjust the blur intensity of your custom backgrounds for perfect
+                UI readability.
+              </p>
+            </div>
+          </div>
+          <div class="modal-split-bottom">
+            <div class="info-group">
+              <div class="section-title">🚀 More Control</div>
+                <ul class="detail-list modern-list">
+                  <li>
+                    <span class="list-icon">📱</span>
+                    <div>
+                      <strong>Mobile Scaling:</strong>
+                      <span
+                        >Master CSS fluid-scaling adapts perfectly to small
+                        screens.</span
+                      >
+                    </div>
+                  </li>
+                  <li>
+                    <span class="list-icon">↕️</span>
+                    <div>
+                      <strong>Layout Flexibility:</strong>
+                      <span>Dock your Shortcuts bar to either the Top or Bottom of the screen.</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="info-group">
+              <br>
+              <br>
+              <div class="section-title">🔧 Updated Aug 26, 2026:</div>
+              <div class="tags-container tight-tags">
+                <ul>
+                  <li>Updated For Merilyn!</li>
+                  <li>Merged all backup and restore functionality into a single file.</li>
+                  <li>Updated the PDF Page with new features and styling.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--
+        <div class="modal-footer">
+          <a id="release-notes-btn" href="https://github.com/xtditom/YourDynamicDashboard/blob/main/releasenotes.md" target="_blank">
+            Read Full Release Notes <span class="arrow">→</span>
+          </a>
+        </div>
+        -->
+      </div>
+    </div>
+
     <button id="todo-toggle-button" class="corner-button top-left">
       <span class="icon-list">
         <svg
@@ -937,10 +1190,486 @@
 
     <div class="layout-container">
       <div class="column-one">
-        <div class="column-one-inner">
-          <div class="categories-container">
-            <div id="categorized-list-container"></div>
+        <div class="column-one-menu">
+          <div>
+            <h3 style="margin:0 0 8px 0">PDF Menu</h3>
           </div>
+
+          <div id="menu-list" style="padding:12px; display:flex;flex-direction:column;gap:8px"></div>
+
+          <div id="add-to-menu" style="display:flex;gap:8px;flex-direction:column; padding:12px; margin-top:8px; border-top:1px solid rgba(255, 255, 255, 0.5)">
+            <h3 style="margin:0 0 8px 0">Add an Online PDF</h3>
+            <input id="menu-name-input" class="menu-input" placeholder="Button Name or PDF Name " />
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:nowrap; width:100%">
+              <div style="flex:1 1 40%; min-width:0;">
+                <input id="menu-local-input" type="file" accept="application/pdf" class="hidden" />
+                <button id="menu-local-btn" class="category-header" style="text-align: left !important; padding:8px 12px; font-size:0.9rem; width:100%">Choose file</button>
+              </div>
+              <span style="font-weight:700; color:var(--text-primary); flex:0 0 auto;">or</span>
+              <div style="flex:1 1 40%; min-width:0;">
+                <input id="menu-url-input" class="menu-input" placeholder="Paste URL" style="width:100%" />
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <button id="menu-add-btn" class="category-header" style="text-align: left !important; padding:8px 12px; font-size:0.9rem; width: 100%;">Add</button>
+            </div>
+          </div>
+
+          <div id="backup_restore">
+            <!-- <h3 style="margin:0 0 8px 0">Backup & Restore</h3> -->
+            <!-- Backup/Restore UI hidden on this page; functionality preserved -->
+            <div style="display:none;">
+              <button id="menu-export-btn" class="settings-button backup2">Backup</button>
+              <input id="menu-import-input" type="file" accept="application/json" class="hidden" />
+              <button id="menu-import-btn" class="settings-button restore2">Restore</button>
+              <button id="menu-clear-btn" class="settings-button danger2">Clear</button>
+            </div>
+          </div>
+
+          <div id="shortcuts-container" style="padding:12px; margin-top:12px; border-top:2px solid rgba(0, 0, 0, 0.5)"></div>
+        </div>
+        <div class="column-one-pdf">
+          <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.385/build/pdf.min.js"></script>
+          <style>
+            /* Holder constrained for vertical scrolling */
+            #holder{
+              background: #00000080;
+              border: 1px solid rgba(255, 255, 255, 0.22) !important;
+              /* padding: 16px; */
+              box-sizing: border-box;
+              flex: 1 1 auto;
+              min-height: 0;
+              height: calc(100vh - 80px);
+              overflow-y: auto;
+              overflow-x: hidden;
+              position: relative;
+              max-height: none;
+              /* Use auto to allow a larger scrollbar in Firefox */
+              scrollbar-width: 20px; /* Firefox */
+              -webkit-scrollbar-width:20px; /* WebKit */
+              border-radius: 15px;
+            }
+            #holder-empty-state {
+              position: absolute;
+              top: 24px;
+              left: 50%;
+              transform: translateX(-50%);
+              max-width: min(80%, 440px);
+              padding: 10px 16px;
+              border-radius: 999px;
+              background: rgba(255, 255, 255, 0.08);
+              border: 1px solid rgba(255, 255, 255, 0.22);
+              color: rgba(255, 255, 255, 0.9);
+              font-size: 0.9rem;
+              text-align: center;
+              line-height: 1.4;
+              letter-spacing: 0.02em;
+              pointer-events: none;
+            }
+
+            .canvas-wrapper{
+              margin-bottom: 16px;
+              display: flex;
+              justify-content: center;
+            }
+            /* Make canvases responsive so pages stack vertically and fit column width */
+            .canvas-wrapper canvas{
+              display: block;
+              max-width: 100%;
+              height: auto !important;
+              width: 100% !important;
+            }
+            .column-one-pdf::-webkit-scrollbar {
+              width: 30px;
+            }
+            /* Hide native scrollbar on the PDF holder so only the custom overlay shows */
+            #holder{
+              scrollbar-width: none; /* Firefox */
+              scrollbar-gutter: auto;
+            }
+            #holder::-webkit-scrollbar{
+              width: 0 !important;
+              height: 0 !important;
+              background: transparent !important;
+            }
+            #holder::-webkit-scrollbar-thumb{ display:none !important; }
+            /* Custom persistent scrollbar overlay (used when OS hides native scrollbars) */
+            #holder-scrollbar-track{
+              position: absolute;
+              top: 0;
+              right: 0;
+              width: 30px;
+              height: 100%;
+              display: flex;
+              align-items: flex-start;
+              justify-content: center;
+              pointer-events: auto;
+              z-index: 99999;
+            }
+            #holder-scrollbar-thumb{
+              width: 16px;
+              background: #ff6f00a1;
+              border-radius: 10px;
+              margin-top: 8px;
+              cursor: pointer;
+              box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+            }
+          </style>
+          <div id="holder"></div>
+          <!-- static scrollbar track to ensure visibility even if JS fails -->
+          <div id="holder-scrollbar-track" aria-hidden="true"><div id="holder-scrollbar-thumb"></div></div>
+          <script>
+            function clearHolder() {
+              var holder = document.getElementById('holder');
+              while (holder.firstChild) holder.removeChild(holder.firstChild);
+            }
+
+            function showEmptyState() {
+              var holder = document.getElementById('holder');
+              clearHolder();
+              var note = document.createElement('div');
+              note.id = 'holder-empty-state';
+              note.textContent = 'Select a PDF from the PDF Menu to the Right.';
+              holder.appendChild(note);
+            }
+
+            // Custom scrollbar functions (ensure defined before renderPDF uses them)
+            function createCustomScrollbar(holder){
+              if(!holder) return;
+              if(holder._customScrollbar) return;
+              // reuse existing static elements if present
+              var track = document.getElementById('holder-scrollbar-track') || document.createElement('div'); track.id = 'holder-scrollbar-track';
+              var thumb = document.getElementById('holder-scrollbar-thumb') || document.createElement('div'); thumb.id = 'holder-scrollbar-thumb';
+              if(!track.contains(thumb)) track.appendChild(thumb);
+              // append track to the parent column so it overlays the holder reliably
+              var parent = holder.parentElement || document.body;
+              parent.appendChild(track);
+              // position track to the right side of the parent
+              track.style.position = 'absolute';
+              track.style.top = '0';
+              track.style.right = '4px';
+              track.style.height = '100%';
+              holder._customScrollbar = {track: track, thumb: thumb, dragging: false, parent: parent};
+
+              // sync on scroll and resize
+              holder.addEventListener('scroll', function(){ updateCustomScrollbar(holder); });
+              window.addEventListener('resize', function(){ updateCustomScrollbar(holder); });
+
+              var startY = 0, startScroll = 0;
+              thumb.addEventListener('pointerdown', function(e){
+                e.preventDefault();
+                thumb.setPointerCapture && thumb.setPointerCapture(e.pointerId);
+                holder._customScrollbar.dragging = true;
+                startY = e.clientY;
+                startScroll = holder.scrollTop;
+              });
+              thumb.addEventListener('pointermove', function(e){
+                if(!holder._customScrollbar.dragging) return;
+                var clientDelta = e.clientY - startY;
+                var thumbH = thumb.offsetHeight || 40;
+                var trackRect = track.getBoundingClientRect();
+                var trackHeight = track.clientHeight - thumbH;
+                var scrollRange = holder.scrollHeight - holder.clientHeight;
+                if(scrollRange <= 0) return;
+                var scrollDelta = (clientDelta / (trackHeight || 1)) * scrollRange;
+                holder.scrollTop = Math.max(0, Math.min(scrollRange, startScroll + scrollDelta));
+              });
+              thumb.addEventListener('pointerup', function(e){
+                holder._customScrollbar.dragging = false;
+                try{ thumb.releasePointerCapture && thumb.releasePointerCapture(e.pointerId); }catch(ex){}
+              });
+
+              track.addEventListener('click', function(e){
+                if(e.target === thumb) return;
+                var rect = track.getBoundingClientRect();
+                var y = e.clientY - rect.top;
+                var thumbH = thumb.offsetHeight;
+                var targetTop = Math.max(0, Math.min(track.clientHeight - thumbH, y - thumbH/2));
+                var ratio = targetTop / (track.clientHeight - thumbH);
+                holder.scrollTop = ratio * (holder.scrollHeight - holder.clientHeight);
+              });
+              updateCustomScrollbar(holder);
+            }
+
+            function updateCustomScrollbar(holder){
+              if(!holder) return;
+              if(!holder._customScrollbar) createCustomScrollbar(holder);
+              var cs = holder._customScrollbar; if(!cs) return;
+              var track = cs.track, thumb = cs.thumb;
+              var visible = holder.scrollHeight > holder.clientHeight + 1;
+              track.style.display = visible ? 'flex' : 'none';
+              if(!visible) return;
+              var thumbH = Math.max(40, Math.round((holder.clientHeight / holder.scrollHeight) * holder.clientHeight));
+              thumb.style.height = thumbH + 'px';
+              var maxTop = holder.clientHeight - thumbH;
+              var top = (holder.scrollTop / (holder.scrollHeight - holder.clientHeight)) * maxTop;
+              thumb.style.transform = 'translateY(' + top + 'px)';
+            }
+            // initialize custom scrollbar for the holder element
+            (function(){
+              var holderEl = document.getElementById('holder');
+              if(holderEl){
+                try{ holderEl.style.scrollbarGutter = 'stable both'; }catch(e){}
+                createCustomScrollbar(holderEl);
+              }
+            })();
+
+            function renderPDF(url, canvasContainer, options) {
+              options = options || { scale: 1 };
+              clearHolder();
+              PDFJS.disableWorker = true;
+                // Support data URLs (Base64) for persisted local PDFs saved in backup
+                var loadingTask;
+                if (typeof url === 'string' && url.indexOf('data:') === 0) {
+                  try {
+                    var base64 = (url.split(',')[1] || '');
+                    var raw = atob(base64);
+                    var len = raw.length;
+                    var u8 = new Uint8Array(len);
+                    for (var i = 0; i < len; i++) u8[i] = raw.charCodeAt(i);
+                    loadingTask = PDFJS.getDocument({ data: u8 });
+                  } catch (ex) {
+                    console.error('Invalid data URL for PDF', ex);
+                    return;
+                  }
+                } else {
+                  loadingTask = PDFJS.getDocument(url);
+                }
+                var loadPromise = loadingTask && loadingTask.promise ? loadingTask.promise : loadingTask;
+                loadPromise.then(function(pdfDoc) {
+                var renderPage = function(page) {
+                  var wrapper = document.createElement("div");
+                  wrapper.className = "canvas-wrapper";
+                  var canvas = document.createElement('canvas');
+                  var ctx = canvas.getContext('2d');
+
+                  // measure container width and devicePixelRatio for crisp rendering
+                  var containerWidth = canvasContainer.clientWidth || (canvasContainer.getBoundingClientRect && canvasContainer.getBoundingClientRect().width) || 800;
+                  var dpr = window.devicePixelRatio || 1;
+
+                  // compute scale so the PDF page fits the container width at device pixel ratio
+                  var unscaledViewport = page.getViewport(1);
+                  var baseScale = containerWidth / unscaledViewport.width;
+                  var finalScale = (options.scale || 1) * baseScale * dpr;
+
+                  var viewport = page.getViewport(finalScale);
+
+                  // set canvas internal resolution to the scaled viewport size
+                  canvas.width = Math.floor(viewport.width);
+                  canvas.height = Math.floor(viewport.height);
+
+                  // set CSS size to the logical size (divide by DPR)
+                  canvas.style.width = (canvas.width / dpr) + 'px';
+                  canvas.style.height = (canvas.height / dpr) + 'px';
+
+                  // prepare context for high-DPI rendering
+                  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                  wrapper.appendChild(canvas);
+                  canvasContainer.appendChild(wrapper);
+
+                  var renderContext = { canvasContext: ctx, viewport: viewport };
+                  page.render(renderContext).promise.then(function(){
+                    // finished rendering
+                    // update custom scrollbar after each page renders
+                    try{ updateCustomScrollbar(canvasContainer); }catch(e){}
+                  });
+                };
+                var i;
+                for(i=1;i<=pdfDoc.numPages;i++){
+                  (function(pageNum){
+                    pdfDoc.getPage(pageNum).then(renderPage);
+                  })(i);
+                }
+                // After scheduling page renders, do a deferred update in case
+                // layout changes after canvases are appended.
+                setTimeout(function(){ try{ updateCustomScrollbar(document.getElementById('holder')); }catch(e){} }, 300);
+              }).catch(function(err){
+                console.error('PDF load error', err);
+                clearHolder();
+                var errMsg = document.createElement('div');
+                errMsg.style.padding = '12px';
+                errMsg.textContent = 'Failed to load PDF: '+err.message;
+                document.getElementById('holder').appendChild(errMsg);
+              });
+            }
+
+            // Menu management: store items in localStorage under 'flipbookMenu'
+            function loadMenu() {
+              try{
+                var raw = localStorage.getItem('flipbookMenu');
+                return raw? JSON.parse(raw): [];
+              }catch(e){return []}
+            }
+            function saveMenu(items){
+              localStorage.setItem('flipbookMenu', JSON.stringify(items||[]));
+            }
+
+            function renderMenuList(){
+              var list = document.getElementById('menu-list');
+              list.innerHTML='';
+              var items = loadMenu();
+              items.forEach(function(it, idx){
+                var btn = document.createElement('button');
+                btn.className = 'category-header';
+                btn.style.textAlign = 'left';
+                btn.style.width = '100%';
+                btn.style.padding = '10px';
+                // add PDF icon
+                var icon = document.createElement('img');
+                icon.src = 'assets/icons/PDF.png';
+                icon.alt = 'PDF';
+                icon.style.width = '20px';
+                icon.style.height = '20px';
+                icon.style.objectFit = 'contain';
+                icon.style.marginRight = '8px';
+                icon.style.verticalAlign = 'middle';
+                var label = document.createElement('span');
+                label.textContent = it.name || ('Item '+(idx+1));
+                btn.appendChild(icon);
+                btn.appendChild(label);
+                btn.addEventListener('click', function(){
+                  if(it.dataUrl){
+                    renderPDF(it.dataUrl, document.getElementById('holder'));
+                  } else if(it.blobUrl){
+                    renderPDF(it.blobUrl, document.getElementById('holder'));
+                  } else if(it.url){
+                    renderPDF(it.url, document.getElementById('holder'));
+                  }
+                });
+                var row = document.createElement('div');
+                row.style.display='flex'; row.style.gap='8px'; row.style.alignItems='center';
+                row.appendChild(btn);
+                var del = document.createElement('button');
+                del.className = 'menu-delete-btn';
+                del.textContent='✕';
+                del.title='Delete';
+                del.style.flex='0 0 34px';
+                del.addEventListener('click', function(e){
+                  e.stopPropagation();
+                  items.splice(idx,1); saveMenu(items); renderMenuList();
+                });
+                row.appendChild(del);
+                list.appendChild(row);
+              });
+            }
+
+            document.getElementById('menu-add-btn').addEventListener('click', function(){
+              var name = document.getElementById('menu-name-input').value.trim();
+                var url = document.getElementById('menu-url-input').value.trim();
+                var items = loadMenu();
+                if(url){
+                  items.push({name: name || url, url: url});
+                  saveMenu(items); renderMenuList();
+                  document.getElementById('menu-name-input').value=''; document.getElementById('menu-url-input').value='';
+                } else {
+                  alert('Please provide a PDF URL.');
+                }
+            });
+
+            document.getElementById('menu-local-btn').addEventListener('click', function(){
+              document.getElementById('menu-local-input').click();
+            });
+
+            document.getElementById('menu-local-input').addEventListener('change', function(e){
+              var file = e.target.files && e.target.files[0];
+              if(!file) return;
+              if(file.type && file.type !== 'application/pdf' && !/\.pdf$/i.test(file.name)){
+                alert('Please choose a PDF file.');
+                e.target.value = '';
+                return;
+              }
+              var name = document.getElementById('menu-name-input').value.trim();
+              var reader = new FileReader();
+              reader.onload = function(evt){
+                var dataUrl = evt.target.result; // data:application/pdf;base64,...
+                var items = loadMenu();
+                items.push({
+                  name: name || file.name.replace(/\.pdf$/i, ''),
+                  dataUrl: dataUrl,
+                  url: ''
+                });
+                saveMenu(items); renderMenuList();
+                document.getElementById('menu-name-input').value = '';
+                document.getElementById('menu-url-input').value = '';
+                renderPDF(dataUrl, document.getElementById('holder'));
+              };
+              // read and persist as data URL so backups include file content
+              reader.readAsDataURL(file);
+              e.target.value = '';
+            });
+
+            document.getElementById('menu-export-btn').addEventListener('click', function(){
+              var appData = {};
+              for (var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                appData[key] = localStorage.getItem(key);
+              }
+
+              var payload = {
+                version: 1,
+                type: 'ydd-full-backup',
+                exportedAt: new Date().toISOString(),
+                localStorage: appData,
+                userShortcuts: JSON.parse(localStorage.getItem('userShortcuts') || '[]'),
+                userCategorizedList: JSON.parse(localStorage.getItem('userCategorizedList') || '[]'),
+                flipbookMenu: loadMenu()
+              };
+
+              var blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+              var url = URL.createObjectURL(blob);
+              var a = document.createElement('a'); a.href=url; a.download='ydd-backup.json'; document.body.appendChild(a); a.click(); a.remove();
+              setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+            });
+
+            document.getElementById('menu-import-btn').addEventListener('click', function(){
+              document.getElementById('menu-import-input').click();
+            });
+            document.getElementById('menu-import-input').addEventListener('change', function(e){
+              var f = e.target.files[0]; if(!f) return;
+              var r = new FileReader(); r.onload = function(){
+                try{
+                  var data = JSON.parse(r.result);
+                  var storageRoot = data && data.localStorage && typeof data.localStorage === 'object' ? data.localStorage : data;
+
+                  if (data && (data.type === 'ydd-full-backup' || data.version === 1 || data.flipbookMenu !== undefined || data.userCategorizedList !== undefined || data.userShortcuts !== undefined)) {
+                    Object.keys(storageRoot).forEach(function(key){
+                      if (key === 'userShortcuts' || key === 'userCategorizedList' || key === 'flipbookMenu') return;
+                      localStorage.setItem(key, storageRoot[key]);
+                    });
+
+                    if (Array.isArray(data.flipbookMenu)) {
+                      localStorage.setItem('flipbookMenu', JSON.stringify(data.flipbookMenu));
+                    }
+                    if (Array.isArray(data.userShortcuts)) {
+                      localStorage.setItem('userShortcuts', JSON.stringify(data.userShortcuts));
+                    }
+                    if (Array.isArray(data.userCategorizedList)) {
+                      localStorage.setItem('userCategorizedList', JSON.stringify(data.userCategorizedList));
+                    }
+
+                    renderMenuList();
+                    showEmptyState();
+                    alert('Backup restored.');
+                    return;
+                  }
+
+                  if(Array.isArray(data)){
+                    saveMenu(data); renderMenuList();
+                    alert('Menu restored.');
+                  } else {
+                    alert('Invalid backup file');
+                  }
+                }catch(err){ alert('Failed to parse file'); }
+              }; r.readAsText(f);
+              e.target.value='';
+            });
+
+            document.getElementById('menu-clear-btn').addEventListener('click', function(){ if(confirm('Clear all saved menu items?')){ saveMenu([]); renderMenuList(); }});
+
+            renderMenuList();
+            showEmptyState();
+          </script>
         </div>
       </div>
       <div class="column-left">
@@ -1299,23 +2028,21 @@
       </div>
     </div>
 
-    <!-- Left-side circular arrow link to index.html .-->
-    <a href="index.html" class="side-nav-left" aria-label="Next page">
+    <!-- Left-side circular arrow link to index.html -->
+    <a href="index2.html" class="side-nav-left" aria-label="Next page">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M19 12H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </a>
- 
-    <!-- Right-side circular arrow link to calculator.html -->
-    <a href="pdf_reader.html" class="side-nav-right" aria-label="Next page">
+
+    <!-- Right-side circular arrow link to index2.html -->
+    <a href="calculator.html" class="side-nav-right" aria-label="Next page">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </a>
-
-    <div id="shortcuts-container"></div>
 
     <script type="module" src="src/main.js"></script>
   </body>
