@@ -1495,6 +1495,13 @@
             }
 
             // Menu management: store items in localStorage under 'flipbookMenu'
+            function isPdfFile(file) {
+              if (!file) return false;
+              var name = (file.name || '').toLowerCase();
+              var mime = (file.type || '').toLowerCase();
+              return mime === 'application/pdf' || mime === 'application/octet-stream' && /\.pdf$/i.test(name) || /\.pdf$/i.test(name);
+            }
+
             function loadMenu() {
               try{
                 var raw = localStorage.getItem('flipbookMenu');
@@ -1503,6 +1510,29 @@
             }
             function saveMenu(items){
               localStorage.setItem('flipbookMenu', JSON.stringify(items||[]));
+            }
+            function saveMenuSafe(items) {
+              try {
+                saveMenu(items);
+                return true;
+              } catch (err) {
+                console.warn('flipbookMenu quota exceeded; falling back to session-only storage.', err);
+                try {
+                  var trimmed = (items || []).map(function(item){
+                    return {
+                      name: item && item.name ? item.name : '',
+                      url: item && item.url ? item.url : '',
+                      blobUrl: item && item.blobUrl ? item.blobUrl : '',
+                      dataUrl: ''
+                    };
+                  });
+                  localStorage.setItem('flipbookMenu', JSON.stringify(trimmed));
+                  return true;
+                } catch (fallbackErr) {
+                  console.warn('Unable to persist menu to localStorage.', fallbackErr);
+                  return false;
+                }
+              }
             }
 
             function renderMenuList(){
@@ -1574,28 +1604,33 @@
             document.getElementById('menu-local-input').addEventListener('change', function(e){
               var file = e.target.files && e.target.files[0];
               if(!file) return;
-              if(file.type && file.type !== 'application/pdf' && !/\.pdf$/i.test(file.name)){
-                alert('Please choose a PDF file.');
+              if(!isPdfFile(file)){
+                alert('Please choose a valid PDF file.');
                 e.target.value = '';
                 return;
               }
+
               var name = document.getElementById('menu-name-input').value.trim();
-              var reader = new FileReader();
-              reader.onload = function(evt){
-                var dataUrl = evt.target.result; // data:application/pdf;base64,...
-                var items = loadMenu();
-                items.push({
-                  name: name || file.name.replace(/\.pdf$/i, ''),
-                  dataUrl: dataUrl,
-                  url: ''
-                });
-                saveMenu(items); renderMenuList();
-                document.getElementById('menu-name-input').value = '';
-                document.getElementById('menu-url-input').value = '';
-                renderPDF(dataUrl, document.getElementById('holder'));
+              var displayName = name || file.name.replace(/\.pdf$/i, '');
+              var items = loadMenu();
+              var blobUrl = URL.createObjectURL(file);
+              var localItem = {
+                name: displayName,
+                dataUrl: '',
+                blobUrl: blobUrl,
+                url: ''
               };
-              // read and persist as data URL so backups include file content
-              reader.readAsDataURL(file);
+
+              items.push(localItem);
+              var saved = saveMenuSafe(items);
+              renderMenuList();
+              document.getElementById('menu-name-input').value = '';
+              document.getElementById('menu-url-input').value = '';
+              renderPDF(blobUrl, document.getElementById('holder'));
+
+              if (!saved) {
+                alert('The selected PDF is too large to save in browser storage. It will stay available for this session only.');
+              }
               e.target.value = '';
             });
 
