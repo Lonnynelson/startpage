@@ -15,6 +15,17 @@
 	<script type="text/javascript" src="src/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="src/script.js"></script>
 	<title>DND Tools</title>
+    <script>
+        $(document).ready(function () {
+            var overlay = document.createElement("div");
+            overlay.id = "bg-blur-overlay";
+            document.body.appendChild(overlay);
+            document.body.classList.toggle(
+                "gradient-mode-active",
+                document.documentElement.classList.contains("gradient-mode-active")
+            );
+        });
+    </script>
         <style>
             body {
                 min-height: 100vh;
