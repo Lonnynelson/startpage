@@ -1292,12 +1292,14 @@
               -webkit-user-select: text;
             }
             .textLayer span,
+            .textLayer div,
             .textLayer br {
-              color: transparent;
+              color: transparent !important;
               position: absolute;
               white-space: pre;
               cursor: text;
               transform-origin: 0 0;
+              -webkit-text-fill-color: transparent;
             }
             .textLayer ::selection {
               background: rgba(0, 120, 215, 0.35);
