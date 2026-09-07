@@ -23,6 +23,11 @@
             var gradientMode = localStorage.getItem("gradientModeActive");
             document.body.classList.toggle("gradient-mode-active", gradientMode === "true" || gradientMode === '"true"');
             document.body.classList.add("loaded");
+			document.querySelectorAll(".block li img").forEach(function (img) {
+				if (!img.getAttribute("src").includes("/")) {
+					img.src = "assets/startpage2/" + img.getAttribute("src");
+				}
+			});
         });
     </script>
         <style>
@@ -68,16 +73,29 @@
                 display: flex;
                 align-items: center;
                 min-height: 36px;
-                margin: 0;
+                margin: 4px 0;
+                padding: 4px 8px;
                 border-radius: 6px;
+                background: rgba(20, 20, 20, 0.4);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                -webkit-backdrop-filter: blur(16px);
+                backdrop-filter: blur(16px);
+                transition: background-color 0.2s ease, transform 0.2s ease;
             }
 
             .block li:hover {
-                background: var(--bg-hover-translucent);
+                background: rgb(235 235 235 / 40%);
+                transform: translateY(-1px);
             }
 
             .block li img {
                 flex: 0 0 24px;
+                width: 24px;
+                height: 24px;
+                object-fit: contain;
+                margin: 0 8px 0 0;
+                border-radius: 4px;
             }
 
             .block a {
@@ -179,7 +197,8 @@ https://5e.tools/adventure.html#wdh || Waterdeep Tools ||  || DND_Icons_F.png
 https://autorolltables.github.io/ || NPC, Cities, Envrioments ||  || DND_Icons_M.png
 https://autorolltables.github.io/ || Auto Roll Tables ||  || DND_Icons_B.png
 https://www.aidedd.org/atlas/index.php?map=W&l=1 || Waterdeep Interactive ||  || globe.png
-https://www.patreon.com/tychmaps/collections || Waterdeep Player Maps ||  || globe.pngPersonal:
+https://www.patreon.com/tychmaps/collections || Waterdeep Player Maps ||  || globe.png
+Personal:
 https://mail.google.com/mail/u/0/#inbox || Personal Email ||  || email.png
 https://drive.google.com/drive/my-drive || Google Drive || d || cloud.png
 https://www.amazon.com/ || Amazon ||  || truck.png
