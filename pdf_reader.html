@@ -1502,11 +1502,10 @@
                   });
                   page.getTextContent().then(function(textContent){
                     if (typeof PDFJS.renderTextLayer !== 'function') return;
-                    var textViewport = page.getViewport(baseScale);
                     PDFJS.renderTextLayer({
                       textContent: textContent,
                       container: textLayer,
-                      viewport: textViewport,
+                      viewport: page.getViewport(baseScale),
                       textDivs: [],
                       enhanceTextSelection: true
                     });
