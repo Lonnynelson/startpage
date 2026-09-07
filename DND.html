@@ -20,10 +20,9 @@
             var overlay = document.createElement("div");
             overlay.id = "bg-blur-overlay";
             document.body.appendChild(overlay);
-            document.body.classList.toggle(
-                "gradient-mode-active",
-                document.documentElement.classList.contains("gradient-mode-active")
-            );
+            var gradientMode = localStorage.getItem("gradientModeActive");
+            document.body.classList.toggle("gradient-mode-active", gradientMode === "true" || gradientMode === '"true"');
+            document.body.classList.add("loaded");
         });
     </script>
         <style>
