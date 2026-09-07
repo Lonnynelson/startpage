@@ -54,6 +54,9 @@
                 color: var(--text-primary);
                 -webkit-backdrop-filter: blur(3px);
                 backdrop-filter: blur(3px);
+                position: relative;
+                align-self: start;
+                z-index: 1;
             }
 
             .block h1 {
@@ -65,8 +68,13 @@
             }
 
             .block ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
                 margin: 0;
                 padding: 0 8px 8px;
+                z-index: 10;
             }
 
             .block li {
