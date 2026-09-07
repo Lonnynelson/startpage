@@ -43,6 +43,8 @@ try {
   var bg = localStorage.getItem("backgroundImage");
   var savedBg = localStorage.getItem("savedBgUrl");
   var bgTime = localStorage.getItem("randomBgTime");
+  var cleanBgMode = (bgMode || "").replace(/^"|"$/g, "");
+  var parsedBgTime = parseInt((bgTime || "").replace(/^"|"$/g, ""), 10);
   var imgUrl = null;
 
   var bgBlur = localStorage.getItem("bgBlurIntensity");
@@ -59,8 +61,8 @@ try {
     }
   }
 
-  if (bgMode === '"freeze"') {
-    if (bgTime === "null" || bgTime === '"-1"' || Date.now() - parseInt(bgTime) <= 259200000) {
+  if (cleanBgMode === "freeze") {
+    if (bgTime === null || parsedBgTime === -1 || Date.now() - parsedBgTime <= 259200000) {
       imgUrl = (savedBg && savedBg !== '"null"') ? savedBg : ((bg && bg !== '"null"') ? bg : null);
     }
   } else if (savedBg && savedBg !== '"null"') {
@@ -71,13 +73,14 @@ try {
 
   if (imgUrl && imgUrl !== "null" && imgUrl !== '"null"') {
     var style = document.createElement("style");
-    style.textContent = "body { background-image: url(" + imgUrl.replace(/^"|"$/g, "") + ") !important; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; background-attachment: fixed !important; }";
+    var backgroundUrl = imgUrl.replace(/^"|"$/g, "");
+    style.textContent = "html, body { background-image: url(" + JSON.stringify(backgroundUrl) + ") !important; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; background-attachment: fixed !important; }";
     document.head.appendChild(style);
   }
 
   var hasIdbBg = localStorage.getItem("has_idb_bg") === "true";
   var fallback = THEME_COLORS[thId] || "#0a0a0a";
-  if (hasIdbBg || (bgMode === '"random"' || bgMode === '"freeze"')) {
+  if (hasIdbBg || cleanBgMode === "random" || cleanBgMode === "freeze") {
     var preloader = document.createElement("style");
     preloader.id = "idb-preloader";
     var pColor = fallback || "#0a0a0a";
@@ -104,7 +107,7 @@ try {
         if (e.target.result) {
           var objectUrl = URL.createObjectURL(e.target.result);
           var style = document.createElement("style");
-          style.textContent = "body { background-image: url(" + objectUrl + ") !important; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; background-attachment: fixed !important; }";
+          style.textContent = "html, body { background-image: url(" + JSON.stringify(objectUrl) + ") !important; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; background-attachment: fixed !important; }";
           document.head.appendChild(style);
           if (document.body) {
             document.body.classList.add("has-custom-bg");
