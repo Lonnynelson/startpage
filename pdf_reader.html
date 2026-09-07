@@ -1271,6 +1271,7 @@
               margin-bottom: 16px;
               display: flex;
               justify-content: center;
+              position: relative;
             }
             /* Make canvases responsive so pages stack vertically and fit column width */
             .canvas-wrapper canvas{
@@ -1278,6 +1279,28 @@
               max-width: 100%;
               height: auto !important;
               width: 100% !important;
+            }
+            .textLayer {
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              overflow: hidden;
+              line-height: 1;
+              user-select: text;
+              -webkit-user-select: text;
+            }
+            .textLayer span,
+            .textLayer br {
+              color: transparent;
+              position: absolute;
+              white-space: pre;
+              cursor: text;
+              transform-origin: 0 0;
+            }
+            .textLayer ::selection {
+              background: rgba(0, 120, 215, 0.35);
             }
             .column-one-pdf::-webkit-scrollbar {
               width: 30px;
@@ -1441,6 +1464,8 @@
                   var wrapper = document.createElement("div");
                   wrapper.className = "canvas-wrapper";
                   var canvas = document.createElement('canvas');
+                  var textLayer = document.createElement('div');
+                  textLayer.className = 'textLayer';
                   var ctx = canvas.getContext('2d');
 
                   // measure container width and devicePixelRatio for crisp rendering
@@ -1466,6 +1491,7 @@
                   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
                   wrapper.appendChild(canvas);
+                  wrapper.appendChild(textLayer);
                   canvasContainer.appendChild(wrapper);
 
                   var renderContext = { canvasContext: ctx, viewport: viewport };
@@ -1473,6 +1499,19 @@
                     // finished rendering
                     // update custom scrollbar after each page renders
                     try{ updateCustomScrollbar(canvasContainer); }catch(e){}
+                  });
+                  page.getTextContent().then(function(textContent){
+                    if (typeof PDFJS.renderTextLayer !== 'function') return;
+                    var textViewport = page.getViewport(baseScale);
+                    PDFJS.renderTextLayer({
+                      textContent: textContent,
+                      container: textLayer,
+                      viewport: textViewport,
+                      textDivs: [],
+                      enhanceTextSelection: true
+                    });
+                  }).catch(function(err){
+                    console.warn('PDF text layer error', err);
                   });
                 };
                 var i;
