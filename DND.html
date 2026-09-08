@@ -77,6 +77,11 @@
                 }
             }
 
+            function getLinkIcon(link) {
+                var savedIcon = String(link.icon || "").trim();
+                return savedIcon && savedIcon.indexOf("file://") !== 0 ? savedIcon : getPageIcon(link.url);
+            }
+
             function getLinkKey(category, url, title) {
                 return JSON.stringify([category, url, title]);
             }
@@ -132,7 +137,7 @@
                 var item = document.createElement("li");
                 var icon = document.createElement("img");
                 var anchor = document.createElement("a");
-                icon.src = link.icon || getPageIcon(link.url);
+                icon.src = getLinkIcon(link);
                 icon.alt = "";
                 icon.onerror = function () {
                     if (icon.src.indexOf("assets/icons/icon32.png") === -1) {
@@ -203,11 +208,12 @@
                     if (!heading) return;
                     block.querySelectorAll("ul > li a").forEach(function (anchor) {
                         var icon = anchor.parentElement.querySelector("img");
+                        var iconSource = icon ? icon.src : "";
                         links.push({
                             category: heading.textContent.trim(),
                             title: anchor.textContent.trim(),
                             url: anchor.href,
-                            icon: icon ? icon.src : ""
+                            icon: iconSource.indexOf("file://") === 0 ? "" : iconSource
                         });
                     });
                 });
@@ -351,7 +357,7 @@
                                 category: String(link.category).trim(),
                                 title: String(link.title).trim(),
                                 url: String(link.url).trim(),
-                                icon: String(link.icon || "").trim()
+                                icon: String(link.icon || "").trim().indexOf("file://") === 0 ? "" : String(link.icon || "").trim()
                             };
                         });
                         if (!restoredLinks.length) throw new Error("No valid links");
