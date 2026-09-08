@@ -180,6 +180,9 @@
         text-align: left !important;
         font-weight: 400 !important;
       }
+      #menu-list .category-header.pdf-menu-selected {
+        border: 2px solid #FF0000 !important;
+      }
       /* Ensure any button inside the Flipbook menu is left-aligned and normal weight */
       .column-one-menu button {
         text-align: left !important;
@@ -1600,6 +1603,10 @@
                 btn.appendChild(icon);
                 btn.appendChild(label);
                 btn.addEventListener('click', function(){
+                  list.querySelectorAll('.pdf-menu-selected').forEach(function(selectedBtn){
+                    selectedBtn.classList.remove('pdf-menu-selected');
+                  });
+                  btn.classList.add('pdf-menu-selected');
                   if(it.dataUrl){
                     renderPDF(it.dataUrl, document.getElementById('holder'));
                   } else if(it.blobUrl){
