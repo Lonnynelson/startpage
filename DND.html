@@ -47,31 +47,91 @@
                 localStorage.setItem(storageKey, JSON.stringify(links));
             }
 
-            function getCategories() {
-                return Array.prototype.map.call(document.querySelectorAll(".block h1"), function (heading) {
-                    return heading.textContent.trim();
+            function getPageIcon(url) {
+                try {
+                    return "https://www.google.com/s2/favicons?sz=64&domain_url=" + encodeURIComponent(new URL(url).href);
+                } catch (error) {
+                    return "assets/icons/icon32.png";
+                }
+            }
+
+            function getLinkKey(category, url, title) {
+                return JSON.stringify([category, url, title]);
+            }
+
+            function applySavedOrders() {
+                var savedOrders;
+                try {
+                    savedOrders = JSON.parse(localStorage.getItem("dndLinkOrders") || "{}");
+                } catch (error) {
+                    savedOrders = {};
+                }
+                document.querySelectorAll(".block").forEach(function (block) {
+                    var heading = block.querySelector("h1");
+                    var list = block.querySelector("ul");
+                    if (!heading || !list) return;
+                    var category = heading.textContent.trim();
+                    var order = savedOrders[category];
+                    if (!Array.isArray(order)) return;
+                    var positions = {};
+                    order.forEach(function (key, index) {
+                        positions[key] = index;
+                    });
+                    var items = Array.prototype.slice.call(list.children);
+                    items.forEach(function (item) {
+                        var anchor = item.querySelector("a");
+                        if (!anchor) return;
+                        var key = getLinkKey(category, anchor.href, anchor.textContent);
+                        item.dataset.dndLinkKey = key;
+                    });
+                    items.sort(function (a, b) {
+                        var aPosition = positions[a.dataset.dndLinkKey];
+                        var bPosition = positions[b.dataset.dndLinkKey];
+                        return (aPosition === undefined ? items.length : aPosition) - (bPosition === undefined ? items.length : bPosition);
+                    });
+                    items.forEach(function (item) { list.appendChild(item); });
                 });
             }
 
-            function createLinkItem(link) {
+            function saveCategoryOrder(category, linkList) {
+                var orders;
+                try {
+                    orders = JSON.parse(localStorage.getItem("dndLinkOrders") || "{}");
+                } catch (error) {
+                    orders = {};
+                }
+                orders[category] = Array.prototype.map.call(linkList.children, function (row) {
+                    return row.dataset.key;
+                });
+                localStorage.setItem("dndLinkOrders", JSON.stringify(orders));
+            }
+
+            function createLinkItem(link, customIndex) {
                 var item = document.createElement("li");
                 var icon = document.createElement("img");
                 var anchor = document.createElement("a");
-                icon.src = link.icon || "assets/icons/icon32.png";
+                icon.src = link.icon || getPageIcon(link.url);
                 icon.alt = "";
                 icon.onerror = function () {
-                    icon.src = "assets/icons/icon32.png";
+                    if (icon.src.indexOf("assets/icons/icon32.png") === -1) {
+                        icon.src = "assets/icons/icon32.png";
+                    }
                 };
                 anchor.href = link.url;
                 anchor.target = "_blank";
                 anchor.rel = "noopener noreferrer";
                 anchor.textContent = link.title;
+                if (typeof customIndex === "number") {
+                    item.dataset.dndCustom = "true";
+                    item.dataset.dndCustomIndex = customIndex;
+                }
+                item.dataset.dndLinkKey = getLinkKey(link.category, link.url, link.title);
                 item.appendChild(icon);
                 item.appendChild(anchor);
                 return item;
             }
 
-            function addLinkToCategory(link) {
+            function addLinkToCategory(link, customIndex) {
                 var block = Array.prototype.find.call(document.querySelectorAll(".block"), function (candidate) {
                     var heading = candidate.querySelector("h1");
                     return heading && heading.textContent.trim() === link.category;
@@ -93,11 +153,110 @@
                     });
                 }
 
-                block.querySelector("ul").appendChild(createLinkItem(link));
+                block.querySelector("ul").appendChild(createLinkItem(link, customIndex));
             }
 
             function renderCustomLinks() {
-                readCustomLinks().forEach(addLinkToCategory);
+                readCustomLinks().forEach(function (link, index) {
+                    addLinkToCategory(link, index);
+                });
+            }
+
+            function renderManageList(container) {
+                container.innerHTML = "";
+                var blocks = document.querySelectorAll(".block");
+                var draggedRow = null;
+                if (!blocks.length) {
+                    var empty = document.createElement("p");
+                    empty.className = "dnd-links-empty";
+                    empty.textContent = "No links available.";
+                    container.appendChild(empty);
+                    return;
+                }
+
+                Array.prototype.forEach.call(blocks, function (block) {
+                    var heading = block.querySelector("h1");
+                    var categorySection = document.createElement("div");
+                    categorySection.className = "dnd-managed-category";
+                    var categoryHeading = document.createElement("h4");
+                    categoryHeading.textContent = heading ? heading.textContent.trim() : "Uncategorized";
+                    categorySection.appendChild(categoryHeading);
+
+                    var linkList = document.createElement("div");
+                    linkList.className = "dnd-managed-category-links";
+                    Array.prototype.forEach.call(block.querySelectorAll("ul > li"), function (item) {
+                        var anchor = item.querySelector("a");
+                        if (!anchor) return;
+                        var row = document.createElement("div");
+                        var isCustom = item.dataset.dndCustom === "true";
+                        row.className = "dnd-managed-link" + (isCustom ? " is-custom" : "");
+                        row.draggable = true;
+                        row.dataset.key = item.dataset.dndLinkKey || getLinkKey(categoryHeading.textContent, anchor.href, anchor.textContent);
+                        if (isCustom) row.dataset.index = item.dataset.dndCustomIndex;
+
+                        var grip = document.createElement("span");
+                        grip.className = "dnd-managed-link-grip";
+                        grip.textContent = "⋮⋮";
+                        grip.title = "Drag to reorder";
+
+                        var icon = item.querySelector("img");
+                        var iconCopy = document.createElement("img");
+                        iconCopy.src = icon ? icon.src : "assets/icons/icon32.png";
+                        iconCopy.alt = "";
+
+                        var details = document.createElement("span");
+                        details.className = "dnd-managed-link-details";
+                        details.textContent = anchor.textContent;
+
+                        var kind = document.createElement("span");
+                        kind.className = "dnd-managed-link-kind";
+                        kind.textContent = isCustom ? "Added" : "Built-in";
+
+                        row.appendChild(grip);
+                        row.appendChild(iconCopy);
+                        row.appendChild(details);
+                        row.appendChild(kind);
+
+                        if (isCustom) {
+                            var deleteButton = document.createElement("button");
+                            deleteButton.type = "button";
+                            deleteButton.className = "dnd-managed-link-delete";
+                            deleteButton.textContent = "Delete";
+                            deleteButton.addEventListener("click", function () {
+                                var currentLinks = readCustomLinks();
+                                currentLinks.splice(parseInt(row.dataset.index, 10), 1);
+                                writeCustomLinks(currentLinks);
+                                location.reload();
+                            });
+                            row.appendChild(deleteButton);
+
+                        }
+                        row.addEventListener("dragstart", function (event) {
+                            draggedRow = row;
+                            event.dataTransfer.effectAllowed = "move";
+                            event.dataTransfer.setData("text/plain", row.dataset.key);
+                            row.classList.add("is-dragging");
+                        });
+                        row.addEventListener("dragend", function () {
+                            row.classList.remove("is-dragging");
+                            draggedRow = null;
+                        });
+                        row.addEventListener("dragover", function (event) {
+                            event.preventDefault();
+                            event.dataTransfer.dropEffect = "move";
+                        });
+                        row.addEventListener("drop", function (event) {
+                            event.preventDefault();
+                            if (!draggedRow || draggedRow === row || draggedRow.parentElement !== linkList) return;
+                            linkList.insertBefore(draggedRow, row);
+                            saveCategoryOrder(categoryHeading.textContent, linkList);
+                            location.reload();
+                        });
+                        linkList.appendChild(row);
+                    });
+                    categorySection.appendChild(linkList);
+                    container.appendChild(categorySection);
+                });
             }
 
             function downloadBackup() {
@@ -153,22 +312,16 @@
                 popup.id = "dnd-links-popup";
                 popup.setAttribute("aria-hidden", "true");
                 popup.innerHTML = "<div class=\"dnd-links-popup-header\"><h2>DND Links</h2><button type=\"button\" class=\"dnd-links-close\" aria-label=\"Close\">&times;</button></div>" +
-                    "<form id=\"dnd-link-form\"><label for=\"dnd-link-category\">Category</label><select id=\"dnd-link-category\" required></select><label for=\"dnd-link-new-category\">New category (optional)</label><input id=\"dnd-link-new-category\" type=\"text\" placeholder=\"Create a category\"><label for=\"dnd-link-title\">Title</label><input id=\"dnd-link-title\" type=\"text\" required placeholder=\"Link title\"><label for=\"dnd-link-url\">URL</label><input id=\"dnd-link-url\" type=\"url\" required placeholder=\"https://example.com\"><label for=\"dnd-link-icon\">Icon URL or path</label><input id=\"dnd-link-icon\" type=\"text\" placeholder=\"assets/startpage2/my-icon.png\"><button type=\"submit\" class=\"dnd-links-primary\">Add Link</button></form>" +
-                    "<div class=\"dnd-links-actions\"><button type=\"button\" id=\"dnd-backup\">Backup JSON</button><button type=\"button\" id=\"dnd-restore\">Restore JSON</button><button type=\"button\" id=\"dnd-reset\" class=\"dnd-links-danger\">Reset Added Links</button><input id=\"dnd-restore-input\" type=\"file\" accept=\"application/json,.json\" hidden></div>";
+                    "<form id=\"dnd-link-form\"><label for=\"dnd-link-category\">Category</label><input id=\"dnd-link-category\" type=\"text\" required placeholder=\"Enter a category\"><label for=\"dnd-link-title\">Title</label><input id=\"dnd-link-title\" type=\"text\" required placeholder=\"Link title\"><label for=\"dnd-link-url\">URL</label><input id=\"dnd-link-url\" type=\"url\" required placeholder=\"https://example.com\"><label for=\"dnd-link-icon-file\">Choose icon (optional)</label><input id=\"dnd-link-icon-file\" type=\"file\" accept=\"image/*\"><button type=\"submit\" class=\"dnd-links-primary\">Add Link</button></form>" +
+                    "<div class=\"dnd-links-actions\"><button type=\"button\" id=\"dnd-backup\" class=\"settings-button backup\">Backup</button><button type=\"button\" id=\"dnd-restore\" class=\"settings-button restore\">Restore</button><button type=\"button\" id=\"dnd-reset\" class=\"settings-button danger\">Reset</button><input id=\"dnd-restore-input\" type=\"file\" accept=\"application/json,.json\" hidden></div><div class=\"dnd-managed-links-section\"><h3>Manage Added Links</h3><p class=\"dnd-managed-links-note\">Drag links to reorder them.</p><div id=\"dnd-managed-links\"></div></div>";
 
                 document.body.appendChild(toggle);
                 document.body.appendChild(popup);
-                var categorySelect = document.getElementById("dnd-link-category");
-                function refreshCategories() {
-                    categorySelect.innerHTML = getCategories().map(function (category) {
-                        return "<option value=\"" + category.replace(/\"/g, "&quot;") + "\">" + category + "</option>";
-                    }).join("");
-                }
+                var managedLinks = document.getElementById("dnd-managed-links");
 
                 toggle.addEventListener("click", function () {
                     var open = popup.classList.toggle("visible");
                     popup.setAttribute("aria-hidden", String(!open));
-                    if (open) refreshCategories();
                 });
                 popup.querySelector(".dnd-links-close").addEventListener("click", function () {
                     popup.classList.remove("visible");
@@ -176,20 +329,32 @@
                 });
                 document.getElementById("dnd-link-form").addEventListener("submit", function (event) {
                     event.preventDefault();
-                    var newCategory = document.getElementById("dnd-link-new-category").value.trim();
                     var link = {
-                        category: newCategory || categorySelect.value,
+                        category: document.getElementById("dnd-link-category").value.trim(),
                         title: document.getElementById("dnd-link-title").value.trim(),
                         url: document.getElementById("dnd-link-url").value.trim(),
-                        icon: document.getElementById("dnd-link-icon").value.trim()
+                        icon: getPageIcon(document.getElementById("dnd-link-url").value.trim())
                     };
                     if (!link.category || !link.title || !link.url) return;
-                    var links = readCustomLinks();
-                    links.push(link);
-                    writeCustomLinks(links);
-                    addLinkToCategory(link);
-                    this.reset();
-                    refreshCategories();
+                    var iconFile = document.getElementById("dnd-link-icon-file").files[0];
+                    function saveLink() {
+                        var links = readCustomLinks();
+                        links.push(link);
+                        writeCustomLinks(links);
+                        addLinkToCategory(link, links.length - 1);
+                        document.getElementById("dnd-link-form").reset();
+                        renderManageList(managedLinks);
+                    }
+                    if (iconFile) {
+                        var reader = new FileReader();
+                        reader.onload = function () {
+                            link.icon = reader.result;
+                            saveLink();
+                        };
+                        reader.readAsDataURL(iconFile);
+                    } else {
+                        saveLink();
+                    }
                 });
                 document.getElementById("dnd-backup").addEventListener("click", downloadBackup);
                 document.getElementById("dnd-restore").addEventListener("click", function () {
@@ -206,6 +371,8 @@
                     }
                 });
                 renderCustomLinks();
+                applySavedOrders();
+                renderManageList(managedLinks);
             }
 
             $(document).ready(buildManager);
@@ -406,7 +573,6 @@
             }
 
             #dnd-link-form input,
-            #dnd-link-form select,
             .dnd-links-actions button {
                 width: 100%;
                 min-height: 36px;
@@ -420,7 +586,7 @@
             }
 
             #dnd-link-form input:focus,
-            #dnd-link-form select:focus {
+            #dnd-link-form input:focus {
                 outline: 2px solid var(--accent-color);
                 outline-offset: 1px;
             }
@@ -432,9 +598,23 @@
             }
 
             .dnd-links-primary {
-                border: 1px solid var(--accent-color) !important;
-                background: var(--accent-color) !important;
-                color: var(--bg-secondary) !important;
+                min-height: 36px;
+                border: 1px solid #28a745 !important;
+                border-radius: 8px;
+                background: #28a745 !important;
+                color: #fff !important;
+            }
+
+            #dnd-restore {
+                border-color: #ffc107 !important;
+                border-radius: 8px;
+                background-color: #ffc107 !important;
+                color: #1a1a1a !important;
+            }
+
+            #dnd-restore:hover {
+                background-color: #e0a800 !important;
+                color: #1a1a1a !important;
             }
 
             .dnd-links-actions {
@@ -448,6 +628,108 @@
                 grid-column: 1 / -1;
                 color: #ffb3b3;
                 border-color: #b33a3a;
+            }
+
+            .dnd-managed-links-section {
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            .dnd-managed-links-section h3 {
+                margin: 0;
+                font-size: 0.95rem;
+            }
+
+            .dnd-managed-links-note,
+            .dnd-links-empty {
+                margin: 0.4rem 0 0.6rem;
+                color: var(--text-secondary);
+                font-size: 0.75rem;
+            }
+
+            #dnd-managed-links {
+                display: flex;
+                flex-direction: column;
+                gap: 0.4rem;
+            }
+
+            .dnd-managed-category {
+                margin-top: 0.7rem;
+            }
+
+            .dnd-managed-category:first-child {
+                margin-top: 0;
+            }
+
+            .dnd-managed-category h4 {
+                margin: 0 0 0.35rem;
+                color: var(--text-secondary);
+                font-size: 0.78rem;
+                font-weight: 600;
+            }
+
+            .dnd-managed-category-links {
+                display: flex;
+                flex-direction: column;
+                gap: 0.35rem;
+            }
+
+            .dnd-managed-link {
+                display: flex;
+                align-items: center;
+                gap: 0.45rem;
+                min-height: 38px;
+                padding: 4px 6px;
+                border: 1px solid var(--border-color);
+                border-radius: 6px;
+                background: var(--bg-tertiary);
+                cursor: grab;
+            }
+
+            .dnd-managed-link.is-dragging {
+                opacity: 0.45;
+            }
+
+            .dnd-managed-link-grip {
+                color: var(--text-secondary);
+                font-size: 1rem;
+                letter-spacing: -0.2em;
+                cursor: grab;
+            }
+
+            .dnd-managed-link img {
+                width: 22px;
+                height: 22px;
+                object-fit: contain;
+                border-radius: 3px;
+            }
+
+            .dnd-managed-link-details {
+                min-width: 0;
+                flex: 1;
+                overflow: hidden;
+                color: var(--text-primary);
+                font-size: 0.76rem;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .dnd-managed-link-delete {
+                flex: 0 0 auto;
+                padding: 4px 7px;
+                border: 1px solid #b33a3a;
+                border-radius: 5px;
+                background: transparent;
+                color: #ffb3b3;
+                font: inherit;
+                font-size: 0.7rem;
+                cursor: pointer;
+            }
+
+            .dnd-managed-link-delete:hover {
+                background: #e53e3e;
+                color: #fff;
             }
 
             @media (max-width: 699px) {
