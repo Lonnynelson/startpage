@@ -325,8 +325,13 @@
                 var anchor = document.createElement("a");
                 anchor.href = url;
                 anchor.download = "dnd-links-backup.json";
+                anchor.style.display = "none";
+                document.body.appendChild(anchor);
                 anchor.click();
-                URL.revokeObjectURL(url);
+                setTimeout(function () {
+                    URL.revokeObjectURL(url);
+                    anchor.remove();
+                }, 1000);
             }
 
             function restoreBackup(file) {
@@ -375,6 +380,21 @@
 
                 document.body.appendChild(toggle);
                 document.body.appendChild(popup);
+                var clock = document.getElementById("clock");
+                if (clock) {
+                    var clockControls = document.createElement("div");
+                    clockControls.id = "dnd-clock-controls";
+                    clock.parentNode.insertBefore(clockControls, clock);
+                    clockControls.appendChild(clock);
+
+                    var homeLink = document.createElement("a");
+                    homeLink.id = "dnd-home-link";
+                    homeLink.href = "index.html";
+                    homeLink.title = "Go to index.html";
+                    homeLink.setAttribute("aria-label", "Go to index.html");
+                    homeLink.innerHTML = "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10Z\"/></svg>";
+                    clockControls.appendChild(homeLink);
+                }
                 var managedLinks = document.getElementById("dnd-managed-links");
 
                 toggle.addEventListener("click", function () {
@@ -538,11 +558,7 @@
             }
 
             #clock {
-                position: fixed;
-                left: 1.25rem;
-                bottom: 1.25rem;
                 display: inline-block;
-                z-index: 3000;
                 padding: 12px 16px;
                 color: var(--text-primary);
                 background: rgba(20, 20, 20, 0.4);
@@ -552,6 +568,47 @@
                 font-size: 0.95rem;
                 font-weight: 600;
                 text-shadow: none;
+            }
+
+            #dnd-clock-controls {
+                position: fixed;
+                left: 1.25rem;
+                bottom: 1.25rem;
+                z-index: 3000;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            #dnd-home-link {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 48px;
+                height: 48px;
+                padding: 12px;
+                border: 1px solid rgba(255, 255, 255, 0.4);
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.5);
+                color: var(--accent-color);
+                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+                text-decoration: none;
+                -webkit-backdrop-filter: blur(6px);
+                backdrop-filter: blur(6px);
+                transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+            }
+
+            #dnd-home-link:hover {
+                transform: scale(1.05);
+                background: rgba(255, 255, 255, 0.65);
+                box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+            }
+
+            #dnd-home-link svg {
+                display: block;
+                width: 100%;
+                height: 100%;
+                fill: currentColor;
             }
 
             #dnd-links-toggle {
@@ -916,7 +973,7 @@ https://alchemyrpg.com/ || Alchemy ||  || DND_Icons_H.png
 
 DND - Music Sound:
 https://www.ambient-mixer.com/s/DND || Ambient Mixer ||  || music2.png
-https://fantasyplus.app/login|| Fantansy + ||  || music.png
+https://fantasyplus.app/login || Fantansy + ||  || music.png
 https://mynoise.net/index.php/ || myNoise ||  || music2.png
 https://syrinscape.com/ || Ambient Sounds ||  || music.png
 https://elderbrain.com/ || Elderb Brain ||  || music2.png
