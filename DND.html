@@ -167,7 +167,8 @@
                     block.appendChild(heading);
                     block.appendChild(document.createElement("ul"));
                     var clock = document.getElementById("clock");
-                    document.body.insertBefore(block, clock || null);
+                    var clockAnchor = document.getElementById("dnd-clock-controls") || clock;
+                    document.body.insertBefore(block, clockAnchor || null);
                     $(block).on("mouseenter", function () {
                         $("ul", this).stop().slideDown();
                     }).on("mouseleave", function () {
@@ -341,10 +342,10 @@
                     try {
                         var payload = JSON.parse(reader.result);
                         var links = Array.isArray(payload) ? payload : payload.links;
-                        if (!Array.isArray(links) || links.some(function (link) {
-                            return !link || !link.category || !link.title || !link.url;
-                        })) throw new Error("Invalid backup");
-                        var restoredLinks = links.map(function (link) {
+                        if (!Array.isArray(links)) throw new Error("Invalid backup");
+                        var restoredLinks = links.filter(function (link) {
+                            return link && String(link.category || "").trim() && String(link.title || "").trim() && String(link.url || "").trim();
+                        }).map(function (link) {
                             return {
                                 category: String(link.category).trim(),
                                 title: String(link.title).trim(),
@@ -352,6 +353,7 @@
                                 icon: String(link.icon || "").trim()
                             };
                         });
+                        if (!restoredLinks.length) throw new Error("No valid links");
                         writePageState(restoredLinks);
                         localStorage.removeItem(storageKey);
                         localStorage.removeItem("dndLinkOrders");
