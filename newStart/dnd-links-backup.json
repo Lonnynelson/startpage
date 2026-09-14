@@ -1,0 +1,648 @@
+{
+  "type": "dnd-links-backup",
+  "version": 2,
+  "links": [
+    {
+      "category": "My DM Screen:",
+      "title": "References",
+      "url": "https://docs.google.com/spreadsheets/d/1tZN0h7RYH1AykNs4iojBBc-YuL2BCB82JmpqUNvvux8",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "My DM Screen:",
+      "title": "Roll20",
+      "url": "https://roll20.net/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "My DM Screen:",
+      "title": "DND_Beyond",
+      "url": "https://www.dndbeyond.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "My DM Screen:",
+      "title": "DND_Beyond/Campains",
+      "url": "https://www.dndbeyond.com/campaigns/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "My DM Screen:",
+      "title": "DND_B Encounter",
+      "url": "https://www.dndbeyond.com/my-encounters/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "My DM Screen:",
+      "title": "↓ Kobold Fight Club",
+      "url": "https://koboldplus.club/#/encounter-builder",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "My DM Screen:",
+      "title": "↑ Improved Initiative",
+      "url": "https://improvedinitiative.app/e/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "My DM Screen:",
+      "title": "Trollskull",
+      "url": "https://docs.google.com/spreadsheets/d/1QKSDZqv2a7dDWOKlzHdZGYWXljpzS_PGNnZK2M8_Sm8",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "My DM Screen:",
+      "title": "Tenday Recaps",
+      "url": "https://docs.google.com/document/d/1c74y37xRVLHsgEIWHIukVi-_k5_GQEN9L6cqSSez2vY",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "My DM Screen:",
+      "title": "BackStories",
+      "url": "https://docs.google.com/document/d/1iY-v7lG0N513hNkTyB8nWhG6yroMHPSx3ju-a0fNxII",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "My DM Screen:",
+      "title": "Waterdeep Tools",
+      "url": "https://5e.tools/adventure.html#wdh",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "My DM Screen:",
+      "title": "NPC, Cities, Envrioments",
+      "url": "https://autorolltables.github.io/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "My DM Screen:",
+      "title": "Auto Roll Tables",
+      "url": "https://autorolltables.github.io/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "My DM Screen:",
+      "title": "Waterdeep Interactive",
+      "url": "https://www.aidedd.org/atlas/index.php?map=W&l=1",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "My DM Screen:",
+      "title": "Waterdeep Player Maps",
+      "url": "https://www.patreon.com/tychmaps/collections",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Personal:",
+      "title": "Personal Email",
+      "url": "https://mail.google.com/mail/u/0/#inbox",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Personal:",
+      "title": "Google Drive",
+      "url": "https://drive.google.com/drive/my-drive",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Personal:",
+      "title": "Amazon",
+      "url": "https://www.amazon.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Personal:",
+      "title": "Key Bindings (b)",
+      "url": "https://lonnystartpage.pages.dev/Key_Bindings2.html",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Personal:",
+      "title": "Waterdeep News",
+      "url": "https://lonnystartpage.pages.dev/Waterdeep_Breaking_News_01.mp3",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Dice Online:",
+      "title": "3D Dice",
+      "url": "https://dddice.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Dice Online:",
+      "title": "Rand Abilities",
+      "url": "https://lonnystartpage.pages.dev/AbilityScore.html",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Dice Online:",
+      "title": "Dice Roller",
+      "url": "https://lonnystartpage.pages.dev/DiceRoll.html",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Dice Online:",
+      "title": "Role Dice",
+      "url": "https://www.rolldice.games/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Dice Online:",
+      "title": "Online Dice",
+      "url": "https://onlinedice.app/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - TTRPG VTT:",
+      "title": "Roll20",
+      "url": "https://roll20.net/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - TTRPG VTT:",
+      "title": "Foundry",
+      "url": "https://foundryvtt.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - TTRPG VTT:",
+      "title": "OwlBear",
+      "url": "https://www.owlbear.rodeo/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - TTRPG VTT:",
+      "title": "Shmeppy",
+      "url": "https://shmeppy.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - TTRPG VTT:",
+      "title": "MapTool",
+      "url": "https://www.rptools.net/toolbox/maptool/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - TTRPG VTT:",
+      "title": "Quest Portal",
+      "url": "https://www.questportal.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - TTRPG VTT:",
+      "title": "Cauldron",
+      "url": "https://www.cauldron-vtt.net/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - TTRPG VTT:",
+      "title": "DMHub",
+      "url": "https://dmhubapp.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - TTRPG VTT:",
+      "title": "TaleSpire",
+      "url": "https://talespire.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - TTRPG VTT:",
+      "title": "Let's Role",
+      "url": "https://lets-role.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - TTRPG VTT:",
+      "title": "Alchemy",
+      "url": "https://alchemyrpg.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Music Sound:",
+      "title": "Ambient Mixer",
+      "url": "https://www.ambient-mixer.com/s/DND",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Music Sound:",
+      "title": "Fantansy +",
+      "url": "https://fantasyplus.app/login",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Music Sound:",
+      "title": "myNoise",
+      "url": "https://mynoise.net/index.php/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Music Sound:",
+      "title": "Ambient Sounds",
+      "url": "https://syrinscape.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Music Sound:",
+      "title": "Elderb Brain",
+      "url": "https://elderbrain.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Music Producer",
+      "url": "https://music-producer.net/my-curated-spotify-playlists-for-dnd-scenes/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Bg music - Main themes",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/4ZM9i1IPn22xCSFKhyt52y?si=uwadP-0hQ-uZ5w-nyWdxkA",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Bg music - Day",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/2zTRhDcPGCujEZG7xf3JoC?si=7_P0RqWySEyPjgJd6it5VA",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Bg music - Night",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/01PtUKHD0apGQXNp5DCv7I?si=00c1nmS8Q4Gtzxo8bQV4RQ",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Bg music - Ambient",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/5vT0iaUXb0zRB9gSx8K78D?si=7Y3r-WmNTmmZL3vzN-r4dA",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Bg music - Mysterious",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/0quU6MIfdUAmr3qjLuXT0d?si=h9S1i286Tnea17AQwWmH6w",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Bg music - Tension",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/4Cx56R1SYK3bWu6whN0TY7?si=AL38lpDHQjCutSAEccu4Vg",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Bg music - Horror",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/64tSBE8j2HNFg9w7KvqAR2?si=-Rvq0d1aTCmw3CFWhhyS_w",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Bg music - Combat",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/0dGy7pZ25RElaiHpPdofJ1?si=dJUj1YBKSLyhGfYeWhiBiw",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Bg music - Chase Scenes",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/6Wd5pRGGpDIdonCRcDwqfy?si=bRFHEtgvSSi-VIVgl0gc_Q",
+      "icon": "https://www.google.com/s2/favicons?sz=64&domain_url=https%3A%2F%2Fopen.spotify.com%2Fuser%2Freclusiarch%2Fplaylist%2F6Wd5pRGGpDIdonCRcDwqfy%3Fsi%3DbRFHEtgvSSi-VIVgl0gc_Q"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Bg music - Taverns",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/1n4X1zJjsHklOVxuqT60y2?si=_9pbf5iYQkmUx-I9DwkU0g",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Bg music - Sci-Fi",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/5IMG79AwZcWjopsFjRW75z?si=gh9krXJFQ5G5m2EEmsSJlw",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Bg music - Sci-Fi Combat",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/7mgpzwLQfmaeUwJmhxjBob?si=0PkMTkRrTga_k72TYSW5dg",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Bg music - Sci-Fi Modern",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/6jDV9yVqakcP7JvJpPSKNS?si=nD8PlTAwRquhdltDqp1nHA",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Emotional music - Beautiful",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/2yCVLLyR4lt1x5mJ63HHM9?si=8RiJV3jcRymQiyeigLCm4w",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Emotional music - Romantic",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/0PPV0Jx404ktfZCyGz252D?si=dc38WRLFQwOtnR-hce0Q7Q",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Emotional music - Sad",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/7CRF10l84Ou4EYsb72r6PW?si=XThhb3-lRhKcIBsSNP38Dw",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Emotional music - hopeful",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/5AvPrMaTr3wnmAY2w8AlYc?si=HBJPfjgvRbSv513VcswvUQ",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Norse music",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/06aGLXVZ2QsDOZ7l1C5dzo?si=Bc_PIDFcST2J60PCuaHt0A",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Setpieces/Cutscenes",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/61gxn22cm6FegSdKQakU8g?si=Bn_WwCrjQtKjpBjOk1tUGg",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Endings",
+      "url": "https://open.spotify.com/user/reclusiarch/playlist/2sKv0NUWevvsNrR8Lse7ZA?si=j3ZVQi9ERRK-Xo9x03D46g",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Spotify Playlists:",
+      "title": "Curse of Strahd",
+      "url": "https://www.youtube.com/watch?v=eePl-I8heFc&list=PLHEmO3yycE8rmaxTJ3V8X_6Pu-crA_ofo",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Generate Battle Maps:",
+      "title": "DND Maps",
+      "url": "https://dnd-maps.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Generate Battle Maps:",
+      "title": "DonJohn Dungeon",
+      "url": "https://donjon.bin.sh/5e/dungeon/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Generate Battle Maps:",
+      "title": "Dungeon Generator",
+      "url": "http://dungeon-generator.fantasy-calendar.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Generate Battle Maps:",
+      "title": "DunGen",
+      "url": "https://dungen.app/dungen/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Generate Battle Maps:",
+      "title": "Dave's Mapper",
+      "url": "http://davesmapper.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Generate Battle Maps:",
+      "title": "Gozzy's",
+      "url": "http://www.gozzys.com/dungeon-maps",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Generate Battle Maps:",
+      "title": "Myth Weavers",
+      "url": "https://www.myth-weavers.com/generate_dungeon.php",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Draw Battle Maps:",
+      "title": "Inkarnate",
+      "url": "https://inkarnate.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Draw Battle Maps:",
+      "title": "DungeonScrawl",
+      "url": "https://dungeonscrawl.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Draw Battle Maps:",
+      "title": "Dungeon Map Doodler",
+      "url": "https://dungeonmapdoodler.com/draw/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Draw Battle Maps:",
+      "title": "DungeonFog",
+      "url": "https://www.dungeonfog.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Draw Battle Maps:",
+      "title": "SVG Gridmapper",
+      "url": "https://campaignwiki.org/assets/startpage2/gridmapper.svg",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Draw Battle Maps:",
+      "title": "Mipui",
+      "url": "https://www.mipui.net/app/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Draw Battle Maps:",
+      "title": "Tiamat",
+      "url": "http://www.rpgobjects.com/tiamat/index.php",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Draw Battle Maps:",
+      "title": "RPG Inferno",
+      "url": "https://rpginferno.com/rpg-map-editor",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Draw Battle Maps:",
+      "title": "ANAmap",
+      "url": "https://deepnight.net/tools/tabletop-rpg-map-editor/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Generate City Maps:",
+      "title": "Inkarnate",
+      "url": "https://inkarnate.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Generate City Maps:",
+      "title": "Medieval City Generator",
+      "url": "https://watabou.itch.io/medieval-fantasy-city-generator",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Generate City Maps:",
+      "title": "DonJohn Town",
+      "url": "https://donjon.bin.sh/fantasy/town/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Generate City Maps:",
+      "title": "Waterdeep Interactive",
+      "url": "https://www.aidedd.org/atlas/index.php?map=W&l=1",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Generate City Maps:",
+      "title": "Waterdeep Player Maps",
+      "url": "https://www.patreon.com/tychmaps/collections",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Generate World Maps:",
+      "title": "Inkarnate",
+      "url": "https://inkarnate.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Generate World Maps:",
+      "title": "Azgaar's",
+      "url": "https://azgaar.github.io/Fantasy-Map-Generator/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "Generate World Maps:",
+      "title": "MapGen4",
+      "url": "https://www.redblobgames.com/maps/mapgen4/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DM Screens:",
+      "title": "MasterScreen",
+      "url": "https://masterscreen.app/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DM Screens:",
+      "title": "DMScreen Charts",
+      "url": "https://ceryliae.github.io/5edmscreen/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DM Screens:",
+      "title": "DM Screen",
+      "url": "https://critit.co.uk/collections/dungeon-master-screens",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "DND Beyond",
+      "url": "https://www.dndbeyond.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "DND Letter",
+      "url": "https://lonnystartpage.pages.dev/DNDDocument.html",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "My Ability Score Roller",
+      "url": "https://lonnystartpage.pages.dev/AbilityScore.html",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "Donjon",
+      "url": "https://donjon.bin.sh/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "Character Sheets",
+      "url": "https://elderdragonstavern.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "NPC, Cities, Envrioments",
+      "url": "https://autorolltables.github.io/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "Auto Roll Tables",
+      "url": "https://autorolltables.github.io/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "Char. Generators",
+      "url": "https://www.fantasynamegenerators.com/dungeons-and-dragons.php",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "Name Generators",
+      "url": "https://thestoryshack.com/tools/dnd-name-generators/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "Magic Shop Gen.",
+      "url": "https://5emagic.shop/generate",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "Magic Shop Gen.",
+      "url": "https://www.kassoon.com/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "↓ Kobold Fight Club",
+      "url": "https://koboldplus.club/#/encounter-builder",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "↑ Improved Initiative",
+      "url": "https://improvedinitiative.app/e/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "5e.tools",
+      "url": "https://5e.tools/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "thieves guild",
+      "url": "https://www.thievesguild.cc/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "Trello DM Screen",
+      "url": "https://trello.com/b/DioGxQSl/dm-screen-5e",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    },
+    {
+      "category": "DND - Other Tools:",
+      "title": "DNDBeyond/Campains",
+      "url": "https://www.dndbeyond.com/campaigns/",
+      "icon": "https://lonnystartpage.pages.dev/assets/icons/icon32.png"
+    }
+  ]
+}

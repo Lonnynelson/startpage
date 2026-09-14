@@ -1,0 +1,230 @@
+/* Stylesheet imports */
+@import url("variables.css");
+@import url("animations.css");
+@import url("layout.css");
+@import url("themes.css");
+@import url("clock.css");
+@import url("widgets.css");
+@import url("popups.css");
+@import url("shortcuts.css");
+@import url("news.css");
+@import url("modals.css");
+@import url("settings-modal.css");
+@import url("palette.css");
+@import url("zen-mode.css");
+@import url("responsive.css");
+@import url("interaction-policy.css");
+
+/* Light gradient dashboard surfaces */
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) .widget-container,
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) #search-dropdown,
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) #sh-quick-dropdown,
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) .sh-modal,
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) .popup-container {
+  --bg-secondary: rgba(255, 255, 255, 0.25) !important;
+  --bg-tertiary: rgba(255, 255, 255, 0.35) !important;
+  --bg-interactive: rgba(255, 255, 255, 0.5) !important;
+  --bg-interactive-hover: rgba(255, 255, 255, 0.65) !important;
+  --bg-hover-translucent: rgba(255, 255, 255, 0.25) !important;
+  --text-primary: #000000 !important;
+  --text-secondary: #000000 !important;
+  --text-placeholder: rgba(0, 0, 0, 0.62) !important;
+  --accent-color: #000000 !important;
+  --border-color: rgba(0, 0, 0, 0.05) !important;
+  --widget-bg: rgba(255, 255, 255, 0.4) !important;
+  --widget-border: rgba(0, 0, 0, 0.05) !important;
+  --text-color: #000000 !important;
+  --text-shadow: none !important;
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  background-image: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) .widget-container *,
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) #search-dropdown *,
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) #sh-quick-dropdown *,
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) .sh-modal *,
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) .popup-container * {
+  text-shadow: none !important;
+}
+
+/* Popup glass surface */
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) .popup-container {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+/* Light gradient clock surface */
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) #digital-clock-container,
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) #digital-clock-container *,
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) #clock-date-row,
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) #greeting-text,
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) #welcome-text {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7) !important;
+}
+
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) .clock-hands * {
+  stroke: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) #analog-clock-svg {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7)) !important;
+}
+
+/* Light gradient weather surface */
+body.gradient-mode-active.gradient-light:not(.has-custom-bg) #weather-widget #current-temp {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Custom-background full settings surface */
+body.has-custom-bg #full-settings-modal,
+body.has-custom-bg.gradient-mode-active.gradient-light #full-settings-modal {
+  --bg-primary: #101010 !important;
+  --bg-secondary: rgba(0, 0, 0, 0.25) !important;
+  --bg-tertiary: rgba(0, 0, 0, 0.45) !important;
+  --bg-interactive: rgba(255, 255, 255, 0.1) !important;
+  --bg-interactive-hover: rgba(255, 255, 255, 0.18) !important;
+  --bg-hover-translucent: rgba(255, 255, 255, 0.05) !important;
+  --text-primary: #f0f0f0 !important;
+  --text-secondary: #d1d5db !important;
+  --text-placeholder: #9ca3af !important;
+  --accent-color: #f0f0f0 !important;
+  --border-color: rgba(255, 255, 255, 0.5) !important;
+  --switch-bg: rgba(255, 255, 255, 0.34) !important;
+  --switch-border: rgba(255, 255, 255, 0.76) !important;
+  --switch-thumb: #f8fafc !important;
+  --switch-active-bg: #84a8ff !important;
+  --form-control-bg: rgba(0, 0, 0, 0.36) !important;
+  --form-control-text: #ffffff !important;
+  --form-control-placeholder: rgba(255, 255, 255, 0.8) !important;
+  --form-control-border: rgba(255, 255, 255, 0.62) !important;
+  --widget-bg: rgba(0, 0, 0, 0.25) !important;
+  --widget-border: rgba(255, 255, 255, 0.18) !important;
+  --text-color: #f0f0f0 !important;
+  --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7) !important;
+  color: #f0f0f0 !important;
+  color-scheme: dark;
+  background-color: rgba(16, 16, 16, 0.6) !important;
+  background-image: none !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  backdrop-filter: blur(5px) !important;
+}
+
+/* Custom-background toggle overrides */
+body.has-custom-bg.gradient-mode-active.gradient-light .toggle-switch input:checked + .slider,
+html.ydd-custom-bg-pending body.gradient-mode-active.gradient-light .toggle-switch input:checked + .slider {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+body.has-custom-bg.gradient-mode-active.gradient-light .toggle-switch input:checked + .slider::before,
+html.ydd-custom-bg-pending body.gradient-mode-active.gradient-light .toggle-switch input:checked + .slider::before {
+  background-color: #000000 !important;
+}
+
+/* Dashboard asset controls */
+.ydd-asset-image {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Light preset control surfaces */
+body[data-theme-id="default-light"][data-theme="light"]:not(.has-custom-bg) input[placeholder]:not(#search-input):not(#cp-search-input),
+body[data-theme-id="default-light"][data-theme="light"]:not(.has-custom-bg) textarea[placeholder],
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) input[placeholder]:not(#search-input):not(#cp-search-input),
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) textarea[placeholder],
+body[data-theme-id="theme-8"][data-theme="light"]:not(.has-custom-bg) input[placeholder]:not(#search-input):not(#cp-search-input),
+body[data-theme-id="theme-8"][data-theme="light"]:not(.has-custom-bg) textarea[placeholder] {
+  background: #c7c7c7 !important;
+}
+
+body[data-theme-id="default-light"][data-theme="light"]:not(.has-custom-bg) .fs-about-row .icon-button,
+body[data-theme-id="default-light"][data-theme="light"]:not(.has-custom-bg) #add-shortcut-form button,
+body[data-theme-id="default-light"][data-theme="light"]:not(.has-custom-bg) #fs-add-shortcut-form button,
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) .fs-about-row .icon-button,
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) #add-shortcut-form button,
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) #fs-add-shortcut-form button,
+body[data-theme-id="theme-8"][data-theme="light"]:not(.has-custom-bg) .fs-about-row .icon-button,
+body[data-theme-id="theme-8"][data-theme="light"]:not(.has-custom-bg) #add-shortcut-form button,
+body[data-theme-id="theme-8"][data-theme="light"]:not(.has-custom-bg) #fs-add-shortcut-form button {
+  background-color: #c7c7c7 !important;
+}
+
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) input[placeholder]:not(#search-input):not(#cp-search-input),
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) textarea[placeholder],
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) .fs-about-row .icon-button,
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) #add-shortcut-form button,
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) #fs-add-shortcut-form button {
+  background: #b7c7bb !important;
+  background: color-mix(in srgb, #c7c7c7 70%, #90c69e 30%) !important;
+}
+
+body[data-theme-id="theme-8"][data-theme="light"]:not(.has-custom-bg) input[placeholder]:not(#search-input):not(#cp-search-input),
+body[data-theme-id="theme-8"][data-theme="light"]:not(.has-custom-bg) textarea[placeholder],
+body[data-theme-id="theme-8"][data-theme="light"]:not(.has-custom-bg) .fs-about-row .icon-button,
+body[data-theme-id="theme-8"][data-theme="light"]:not(.has-custom-bg) #add-shortcut-form button,
+body[data-theme-id="theme-8"][data-theme="light"]:not(.has-custom-bg) #fs-add-shortcut-form button {
+  background: #ceccd8 !important;
+  background: color-mix(in srgb, #c7c7c7 70%, #ded6ff 30%) !important;
+}
+
+body[data-theme-id="default-light"][data-theme="light"]:not(.has-custom-bg) .fs-about-row .icon-button:hover,
+body[data-theme-id="default-light"][data-theme="light"]:not(.has-custom-bg) #add-shortcut-form button:hover,
+body[data-theme-id="default-light"][data-theme="light"]:not(.has-custom-bg) #fs-add-shortcut-form button:hover,
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) .fs-about-row .icon-button:hover,
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) #add-shortcut-form button:hover,
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) #fs-add-shortcut-form button:hover,
+body[data-theme-id="theme-8"][data-theme="light"]:not(.has-custom-bg) .fs-about-row .icon-button:hover {
+  background-color: #b8b8b8 !important;
+}
+
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) .fs-about-row .icon-button:hover,
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) #add-shortcut-form button:hover,
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) #fs-add-shortcut-form button:hover {
+  background: #9ca99f !important;
+  background: color-mix(in srgb, #b7c7bb 85%, #000000 15%) !important;
+}
+
+body[data-theme-id="theme-8"][data-theme="light"]:not(.has-custom-bg) .fs-about-row .icon-button:hover,
+body[data-theme-id="theme-8"][data-theme="light"]:not(.has-custom-bg) #add-shortcut-form button:hover,
+body[data-theme-id="theme-8"][data-theme="light"]:not(.has-custom-bg) #fs-add-shortcut-form button:hover {
+  background: #afadb8 !important;
+  background: color-mix(in srgb, #ceccd8 85%, #000000 15%) !important;
+}
+
+/* Light preset settings contrast */
+body[data-theme-id="default-light"][data-theme="light"]:not(.has-custom-bg) #full-settings-modal,
+body[data-theme-id="theme-4"][data-theme="light"]:not(.has-custom-bg) #full-settings-modal,
+body[data-theme-id="theme-8"][data-theme="light"]:not(.has-custom-bg) #full-settings-modal {
+  background-color: #d1d1d1 !important;
+}
+
+/* News selection colors */
+body[data-theme-id="default-light"] .fs-news-choice-check,
+body[data-theme-id="default-dark"] .fs-news-choice-check,
+body[data-theme-id="theme-1"] .fs-news-choice-check,
+body[data-theme-id="theme-2"] .fs-news-choice-check,
+body[data-theme-id="theme-3"] .fs-news-choice-check,
+body[data-theme-id="theme-4"] .fs-news-choice-check,
+body[data-theme-id="theme-5"] .fs-news-choice-check,
+body[data-theme-id="theme-6"] .fs-news-choice-check,
+body[data-theme-id="theme-7"] .fs-news-choice-check,
+body[data-theme-id="theme-8"] .fs-news-choice-check {
+  color: inherit !important;
+}
+
+/* Gradient news selection colors */
+body.gradient-mode-active .fs-news-choice-check {
+  color: inherit !important;
+}
+
+/* [css/main.css] YourDynamicDashboard V3.0.0 (Ditom Baroi Antu - 2025-26) */

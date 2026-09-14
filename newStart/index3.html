@@ -1,0 +1,3278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="google-site-verification"
+      content="EOdEUW58DUvLbQxnv_gyzCjydCvMbA9gOGxrVNYJqg4"
+    />
+    <title>PDF Reader</title>
+
+    <script src="src/theme-init.js"></script>
+    <link rel="icon" type="image/png" href="assets/icons/icon32.png" />
+    <link rel="stylesheet" href="css/main.css" />
+    <style>
+      #shortcuts-container {
+        position: static;
+        left: auto;
+        bottom: auto;
+        transform: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+        width: 100%;
+        margin-top: 50px;
+        padding: 0 12px 12px;
+        box-sizing: border-box;
+      }
+
+      .column-left,
+      .column-right {
+        display: none;
+      }
+
+      .column-one {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        width: 95%;
+        margin: 0 auto;
+        box-sizing: border-box;
+      }
+
+      .column-one-menu {
+        flex: 0 0 20%;
+        width: 20%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - 80px);
+      }
+      .column-one-pdf {
+        flex: 1 1 80%;
+        width: 80%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - 80px);
+        height: calc(100vh - 80px);
+        position: relative;
+      }
+      #menu-list,
+      #add-to-menu {
+        width: 100%;
+        box-sizing: border-box;
+      }
+      #add-to-menu .menu-input,
+      #add-to-menu #menu-add-btn {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+      }
+      #add-to-menu #menu-add-btn {
+        display: block;
+      }
+      #backup_restore {
+        margin-top: auto;
+      }
+      #shortcuts-container {
+        margin-top: 12px;
+      }
+
+      /* PDF viewer container and iframe to allow vertical scrolling */
+      .pdf-container {
+        width: 100%;
+        height: calc(100vh - 160px);
+        max-height: calc(100vh - 120px);
+        min-height: 360px;
+        overflow: hidden;
+        background: var(--bg-secondary);
+        border-radius: 6px;
+      }
+
+      .pdf-frame {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+      }
+
+      @media (max-width: 768px) {
+        .column-one {
+          width: 95%;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .column-one-menu,
+        .column-one-pdf {
+          width: 100%;
+          flex: none;
+        }
+      }
+
+      .categories-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        padding: 20px 0;
+      }
+
+      .category-dropdown {
+        position: relative;
+      }
+
+      button.category-header {
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+      }
+
+      .category-header {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        border: 0px solid var(--accent-color); /* was 1.5 px */
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        font-size: 0.95rem;
+      }
+
+      .category-header:hover {
+        background: var(--accent-color);
+        color: var(--bg-secondary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Small delete button that matches category-header styling */
+      .menu-delete-btn {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        border: 1px solid rgba(255,255,255,0.06);
+        padding: 6px 8px;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        font-size: 0.95rem;
+      }
+      .menu-delete-btn:hover {
+        background: var(--accent-color);
+        color: var(--bg-secondary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      }
+
+      /* Keep Flipbook menu buttons left-aligned and normal weight */
+      .column-one-menu .category-header,
+      .column-one-menu .settings-button,
+      #menu-list .category-header,
+      #add-to-menu .category-header {
+        text-align: left !important;
+        font-weight: 400 !important;
+      }
+      #menu-list .category-header.pdf-menu-selected {
+        border: 2px solid #FF0000 !important;
+      }
+      /* Ensure any button inside the Flipbook menu is left-aligned and normal weight */
+      .column-one-menu button {
+        text-align: left !important;
+        font-weight: 400 !important;
+      }
+      /* Keep the small delete button compact and aligned with the row */
+      .menu-delete-btn {
+        text-align: center !important;
+        font-weight: 400 !important;
+      }
+
+      /* Inputs styled to match the category header */
+      .menu-input {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        border: 1px solid rgba(255,255,255,0.06);
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: text;
+        transition: all 0.2s ease;
+        font-size: 0.95rem;
+        outline: none;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .menu-input::placeholder {
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+      .menu-input:focus {
+        background: var(--accent-color);
+        color: var(--bg-secondary);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      }
+
+      /* PDF Category & Action Styles */
+      .pdf-cat-group {
+        margin-bottom: 8px;
+      }
+      .pdf-cat-header {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: var(--text-primary);
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-weight: 600 !important;
+        font-size: 0.85rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background 0.2s ease;
+        box-sizing: border-box;
+      }
+      .pdf-cat-header:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+      .pdf-cat-body {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding-top: 6px;
+      }
+      .pdf-item-row {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.18);
+        padding: 4px 6px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        cursor: grab;
+      }
+      .pdf-item-row.dragging {
+        opacity: 0.5;
+        border-color: var(--accent-color);
+      }
+      .pdf-drag-handle {
+        cursor: grab;
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        padding: 0 2px;
+        user-select: none;
+      }
+      .pdf-action-btn {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 4px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+        flex: 0 0 28px;
+        box-sizing: border-box;
+      }
+      .pdf-action-btn:hover {
+        background: var(--accent-color);
+        color: var(--bg-secondary);
+        transform: translateY(-1px);
+      }
+      .pdf-action-btn.delete:hover {
+        background: #ef4444 !important;
+        color: #ffffff !important;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #000b19;
+        border: 1.5px solid var(--accent-color);
+        border-top: none;
+        border-radius: 0 0 8px 8px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 100;
+        min-width: 200px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      }
+
+      .category-dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .dropdown-menu a {
+        display: block;
+        padding: 10px 16px;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: all 0.2s ease;
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .dropdown-menu a:last-child {
+        border-bottom: none;
+      }
+
+      .dropdown-menu a:hover {
+        background: var(--accent-color);
+        color: var(--bg-secondary);
+        padding-left: 24px;
+      }
+
+      @media (max-width: 768px) {
+        .categories-container {
+          grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+          gap: 10px;
+        }
+      }
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="bg-blur-overlay"></div>
+    <div id="welcome-modal-overlay" class="hidden">
+      <div id="welcome-modal" class="v2-1-modal">
+        <button id="welcome-modal-close">&times;</button>
+
+        <div class="modal-header">
+          <div class="badge-container">
+            <span class="version-badge">Lonny's Dynamic Dashboard</span>
+          </div>
+          <h1>Welcome to My Dynamic Dashboard &nbsp; &nbsp; <span class="red">Close ↗</span></h1>
+          <p>
+            Rebuilt mobile engine, smart storage, and a powerful local search
+            history.
+          </p>
+        </div>
+
+        <div class="modal-content-v2">
+          <div class="section-title">✨ Key Features</div>
+          <div class="feature-row-3">
+            <div class="feature-card new-glow">
+              <div class="card-header">
+                <span class="icon">🔍</span>
+                <h3>Search History</h3>
+              </div>
+              <p>
+                A native-feeling, privacy-first search history with real-time
+                filtering and auto-delete.
+              </p>
+            </div>
+            <div class="feature-card new-glow">
+              <div class="card-header">
+                <span class="icon">🖼️</span>
+                <h3>Custom Icons</h3>
+              </div>
+              <p>
+                Upload and set your own custom image icons for individual web
+                shortcuts.
+              </p>
+            </div>
+            <div class="feature-card new-glow">
+              <div class="card-header">
+                <span class="icon">💧</span>
+                <h3>BG Blur Control</h3>
+              </div>
+              <p>
+                Adjust the blur intensity of your custom backgrounds for perfect
+                UI readability.
+              </p>
+            </div>
+          </div>
+          <div class="modal-split-bottom">
+            <div class="info-group">
+              <div class="section-title">🚀 More Control</div>
+                <ul class="detail-list modern-list">
+                  <li>
+                    <span class="list-icon">📱</span>
+                    <div>
+                      <strong>Mobile Scaling:</strong>
+                      <span
+                        >Master CSS fluid-scaling adapts perfectly to small
+                        screens.</span
+                      >
+                    </div>
+                  </li>
+                  <li>
+                    <span class="list-icon">↕️</span>
+                    <div>
+                      <strong>Layout Flexibility:</strong>
+                      <span>Dock your Shortcuts bar to either the Top or Bottom of the screen.</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="info-group">
+              <br>
+              <br>
+              <div class="section-title">🔧 Updated Aug 26, 2026:</div>
+              <div class="tags-container tight-tags">
+                <ul>
+                  <li>Updated For Merilyn!</li>
+                  <li>Merged all backup and restore functionality into a single file.</li>
+                  <li>Updated the PDF Page with new features and styling.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--
+        <div class="modal-footer">
+          <a id="release-notes-btn" href="https://github.com/xtditom/YourDynamicDashboard/blob/main/releasenotes.md" target="_blank">
+            Read Full Release Notes <span class="arrow">→</span>
+          </a>
+        </div>
+        -->
+      </div>
+    </div>
+
+    <button id="todo-toggle-button" class="corner-button top-left">
+      <span class="icon-list">
+        <svg
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M2 2h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Zm4.655 8.595a.75.75 0 0 1 0 1.06L4.03 14.28a.75.75 0 0 1-1.06 0l-1.5-1.5a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215l.97.97 2.095-2.095a.75.75 0 0 1 1.06 0ZM9.75 2.5h5.5a.75.75 0 0 1 0 1.5h-5.5a.75.75 0 0 1 0-1.5Zm0 5h5.5a.75.75 0 0 1 0 1.5h-5.5a.75.75 0 0 1 0-1.5Zm0 5h5.5a.75.75 0 0 1 0 1.5h-5.5a.75.75 0 0 1 0-1.5Zm-7.25-9v3h3v-3Z"
+          />
+        </svg>
+      </span>
+      <span class="icon-close">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </span>
+    </button>
+
+    <button id="ai-tools-toggle-button" class="corner-button bottom-left">
+      <svg
+        class="tool-icon ai-icon"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10 7L9.48415 8.39405C8.80774 10.222 8.46953 11.136 7.80278 11.8028C7.13603 12.4695 6.22204 12.8077 4.39405 13.4842L3 14L4.39405 14.5158C6.22204 15.1923 7.13603 15.5305 7.80278 16.1972C8.46953 16.864 8.80774 17.778 9.48415 19.6059L10 21L10.5158 19.6059C11.1923 17.778 11.5305 16.864 12.1972 16.1972C12.864 15.5305 13.778 15.1923 15.6059 14.5158L17 14L15.6059 13.4842C13.778 12.8077 12.864 12.4695 12.1972 11.8028C11.5305 11.136 11.1923 10.222 10.5158 8.39405L10 7Z"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M18 3L17.7789 3.59745C17.489 4.38087 17.3441 4.77259 17.0583 5.05833C16.7726 5.34408 16.3809 5.48903 15.5975 5.77892L15 6L15.5975 6.22108C16.3809 6.51097 16.7726 6.65592 17.0583 6.94167C17.3441 7.22741 17.489 7.61913 17.7789 8.40255L18 9L18.2211 8.40255C18.511 7.61913 18.6559 7.22741 18.9417 6.94166C19.2274 6.65592 19.6191 6.51097 20.4025 6.22108L21 6L20.4025 5.77892C19.6191 5.48903 19.2274 5.34408 18.9417 5.05833C18.6559 4.77259 18.511 4.38087 18.2211 3.59745L18 3Z"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <svg
+        class="tool-icon social-icon hidden"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.508 5.508 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4 4 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.493 3.493 0 0 1 2 5.5ZM11 4a3.001 3.001 0 0 1 2.22 5.018 5.01 5.01 0 0 1 2.56 3.012.749.749 0 0 1-.885.954.752.752 0 0 1-.549-.514 3.507 3.507 0 0 0-2.522-2.372.75.75 0 0 1-.574-.73v-.352a.75.75 0 0 1 .416-.672A1.5 1.5 0 0 0 11 5.5.75.75 0 0 1 11 4Zm-5.5-.5a2 2 0 1 0-.001 3.999A2 2 0 0 0 5.5 3.5Z"
+        />
+      </svg>
+    </button>
+
+    <button id="apps-toggle-button" class="corner-button top-right">
+      <span class="icon-grid">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <rect x="3" y="3" width="4" height="4" rx="1" />
+          <rect x="10" y="3" width="4" height="4" rx="1" />
+          <rect x="17" y="3" width="4" height="4" rx="1" />
+          <rect x="3" y="10" width="4" height="4" rx="1" />
+          <rect x="10" y="10" width="4" height="4" rx="1" />
+          <rect x="17" y="10" width="4" height="4" rx="1" />
+          <rect x="3" y="17" width="4" height="4" rx="1" />
+          <rect x="10" y="17" width="4" height="4" rx="1" />
+          <rect x="17" y="17" width="4" height="4" rx="1" />
+        </svg>
+      </span>
+      <span class="icon-square">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+        </svg>
+      </span>
+    </button>
+
+    <button id="settings-toggle-button" class="corner-button bottom-right"
+      aria-label="Open settings" aria-controls="settings-popup"
+      aria-expanded="false">
+      <svg
+        stroke="currentColor"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          opacity="0.34"
+          d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-miterlimit="10"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M2 12.8799V11.1199C2 10.0799 2.85 9.21994 3.9 9.21994C5.71 9.21994 6.45 7.93994 5.54 6.36994C5.02 5.46994 5.33 4.29994 6.24 3.77994L7.97 2.78994C8.76 2.31994 9.78 2.59994 10.25 3.38994L10.36 3.57994C11.26 5.14994 12.74 5.14994 13.65 3.57994L13.76 3.38994C14.23 2.59994 15.25 2.31994 16.04 2.78994L17.77 3.77994C18.68 4.29994 18.99 5.46994 18.47 6.36994C17.56 7.93994 18.3 9.21994 20.11 9.21994C21.15 9.21994 22.01 10.0699 22.01 11.1199V12.8799C22.01 13.9199 21.16 14.7799 20.11 14.7799C18.3 14.7799 17.56 16.0599 18.47 17.6299C18.99 18.5399 18.68 19.6999 17.77 20.2199L16.04 21.2099C15.25 21.6799 14.23 21.3999 13.76 20.6099L13.65 20.4199C12.75 18.8499 11.27 18.8499 10.36 20.4199L10.25 20.6099C9.78 21.3999 8.76 21.6799 7.97 21.2099L6.24 20.2199C5.33 19.6999 5.02 18.5299 5.54 17.6299C6.45 16.0599 5.71 14.7799 3.9 14.7799C2.85 14.7799 2 13.9199 2 12.8799Z"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-miterlimit="10"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+
+    <div id="todo-popup" class="popup-container">
+      <h2>To-Do List</h2>
+      <div id="todo-list"></div>
+      <form id="todo-add-form">
+        <input
+          type="text"
+          id="todo-input"
+          placeholder="Add a new task..."
+          autocomplete="off"
+          maxlength="50"
+        /><button type="submit" id="todo-add-btn">+</button>
+      </form>
+    </div>
+
+    <div id="ai-tools-popup" class="popup-container">
+      <div class="tools-header">
+        <div class="tool-tabs-container">
+          <button class="tool-tab-button active" data-tab="ai">AI Tools</button>
+          <div class="tab-divider"></div>
+          <button class="tool-tab-button" data-tab="social">
+            Social Media
+          </button>
+        </div>
+        <button id="tool-edit-button" class="tool-edit-button">
+          <svg
+            class="icon-pencil"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M21.7312 2.26884C20.706 1.24372 19.044 1.24372 18.0188 2.26884L16.8617 3.42599L20.574 7.1383L21.7312 5.98116C22.7563 4.95603 22.7563 3.29397 21.7312 2.26884Z"
+              fill="currentColor"
+            />
+            <path
+              d="M19.5133 8.19896L15.801 4.48665L7.40019 12.8875C6.78341 13.5043 6.33002 14.265 6.081 15.101L5.28122 17.7859C5.2026 18.0498 5.27494 18.3356 5.46967 18.5303C5.6644 18.725 5.95019 18.7974 6.21412 18.7188L8.89901 17.919C9.73498 17.67 10.4957 17.2166 11.1125 16.5998L19.5133 8.19896Z"
+              fill="currentColor"
+            />
+            <path
+              d="M5.25 5.24999C3.59315 5.24999 2.25 6.59314 2.25 8.24999V18.75C2.25 20.4068 3.59315 21.75 5.25 21.75H15.75C17.4069 21.75 18.75 20.4068 18.75 18.75V13.5C18.75 13.0858 18.4142 12.75 18 12.75C17.5858 12.75 17.25 13.0858 17.25 13.5V18.75C17.25 19.5784 16.5784 20.25 15.75 20.25H5.25C4.42157 20.25 3.75 19.5784 3.75 18.75V8.24999C3.75 7.42156 4.42157 6.74999 5.25 6.74999H10.5C10.9142 6.74999 11.25 6.41421 11.25 5.99999C11.25 5.58578 10.9142 5.24999 10.5 5.24999H5.25Z"
+              fill="currentColor"
+            />
+          </svg>
+          <svg
+            class="icon-check hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </button>
+      </div>
+      <div id="ai-tools-list" class="tool-list active"></div>
+      <div id="social-tools-list" class="tool-list"></div>
+    </div>
+
+    <div id="apps-popup" class="popup-container">
+      <div id="apps-grid"></div>
+      <div class="apps-footer">Drag and drop to rearrange apps</div>
+    </div>
+
+    <!-- Mini settings -->
+    <div id="settings-popup" class="popup-container" role="dialog"
+      aria-labelledby="settings-popup-title" aria-hidden="true">
+      <div style="position: relative; text-align: center; margin-bottom: 1rem">
+        <button
+          id="info-btn"
+          aria-label="Open tips and tricks"
+          title="Tips &amp; Tricks"
+          style="position: absolute; left: 0; top: 0"
+        >
+          <svg
+            height="24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 256 256"
+            fill="currentColor"
+          >
+            <path
+              d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z"
+            />
+          </svg>
+        </button>
+        <h2 id="settings-popup-title"
+          style="margin: 0; display: inline-block">Mini Settings</h2>
+        <button
+          id="open-full-settings-btn"
+          aria-label="Open full settings"
+          title="Open Full Settings"
+          style="position: absolute; right: 0; top: 0"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="settings-tabs">
+        <button id="quick-tab" class="settings-tab-button active" role="tab"
+          aria-selected="true" aria-controls="quick-content">Quick</button>
+        <button id="look-tab" class="settings-tab-button" role="tab"
+          aria-selected="false" aria-controls="look-content">Look</button>
+      </div>
+
+      <div class="settings-content">
+        <!-- Quick settings -->
+        <div id="quick-content" class="settings-pane active">
+          <div class="setting-row">
+            <div class="label">
+              <span>Analog Clock</span><small>Use the analog clock.</small>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="clock-type-toggle"
+                aria-label="Use analog clock" />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="setting-row" id="clock-format-row">
+            <div class="label">
+              <span>Clock Format</span><small>Toggle for 24-hour format.</small>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="clock-format-toggle"
+                aria-label="Use 24-hour clock format" />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="setting-row">
+            <div class="label">
+              <span>Temperature Display</span><small>Switch between Min-Max and Feels like.</small>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="temp-display-toggle"
+                aria-label="Show daily minimum and maximum temperatures" />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="api-key-section">
+            <div class="label">
+              <span class="mini-weather-location-label">
+                <span>Weather Location</span>
+                <span id="weather-location-updated-sticker"
+                  class="fs-updated-sticker" aria-label="Updated">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 36"
+                    role="img" aria-label="Updated">
+                    <title>Updated</title>
+                    <path d="M10 3h88l7 7v16l-7 7H10l-7-7V10z" fill="#ffe05b"
+                      stroke="#141414" stroke-width="2.5"
+                      stroke-linejoin="round" />
+                    <path d="M13 8h12" stroke="#ffffff" stroke-width="2"
+                      stroke-linecap="round" opacity=".9" />
+                    <text x="54" y="24" fill="#141414"
+                      font-family="Arial, sans-serif" font-size="13"
+                      font-weight="800" letter-spacing="1.1"
+                      text-anchor="middle">UPDATED</text>
+                  </svg>
+                </span>
+              </span>
+            </div>
+            <div class="api-key-input-wrapper" style="display: flex; gap: 8px">
+              <input
+                type="text"
+                id="custom-location-input"
+                aria-label="Weather location"
+                placeholder="Enter city name..."
+                style="flex: 1"
+              />
+              <button id="save-location-btn" class="settings-button"
+                aria-label="Save weather location">
+                Save
+              </button>
+              <button
+                id="settings-gps-btn"
+                aria-label="Detect my location"
+                class="settings-button"
+                title="Detect My Location"
+                style="
+                  padding: 0 12px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+                  <g fill="none" fill-rule="evenodd">
+                    <path
+                      fill="currentColor"
+                      fill-rule="nonzero"
+                      d="M5.04 12.48a.75.75 0 0 1 .42 1.44c-.375.11-.645.225-.818.33.178.107.46.227.852.339C6.36 14.836 7.6 15 9 15s2.64-.164 3.506-.411c.392-.112.674-.232.852-.339-.173-.105-.443-.22-.818-.33a.75.75 0 0 1 .42-1.44c.501.146.96.334 1.313.575.326.224.727.615.727 1.195 0 .587-.411.98-.743 1.205-.358.241-.827.43-1.34.576C11.884 16.327 10.5 16.5 9 16.5s-2.885-.173-3.918-.469c-.512-.146-.981-.335-1.34-.576C3.332 15.23 2.92 14.836 2.92 14.25c0-.58.401-.971.727-1.195.353-.241.812-.428 1.313-.575M9 1.5a5.625 5.625 0 0 1 5.625 5.625c0 1.926-1.05 3.492-2.137 4.605A12.3 12.3 0 0 1 11.098 12.94c-.446.335-1.464.962-1.464.962a1.283 1.283 0 0 1-1.268 0s-1.018-.627-1.464-.962a12.217 12.217 0 0 1-1.39-1.21C4.425 10.617 3.375 9.051 3.375 7.125A5.625 5.625 0 0 1 9 1.5m0 4.125a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"
+                    />
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="setting-row">
+            <div class="label">
+              <span
+                class="mini-search-suggestion-label">Search Suggestions</span>
+              <span id="search-suggestion-new-sticker"
+                class="fs-new-sticker mini-new-sticker" aria-label="New">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 36"
+                  role="img" aria-label="New">
+                  <title>New</title>
+                  <path d="M10 3h58l7 7v16l-7 7H10l-7-7V10z" fill="#ffe05b"
+                    stroke="#141414" stroke-width="2.5"
+                    stroke-linejoin="round" />
+                  <path d="M13 8h11" stroke="#ffffff" stroke-width="2"
+                    stroke-linecap="round" opacity=".9" />
+                  <text x="39" y="24" fill="#141414"
+                    font-family="Arial, sans-serif" font-size="14"
+                    font-weight="800" letter-spacing="1"
+                    text-anchor="middle">NEW</text>
+                </svg>
+              </span>
+            </div>
+            <select id="search-suggestion-mode-select"
+              aria-label="Search suggestion mode" class="settings-dropdown"
+              style="padding: 5px; border-radius: 5px; background: var(--bg-interactive); color: var(--text-primary); border: none;">
+              <option value="history-only">History Only</option>
+              <option value="history-online">History + Online</option>
+            </select>
+          </div>
+          <div class="setting-row mini-news-row">
+            <div class="label">
+              <span class="mini-news-label">
+                <span>News Feeds</span>
+                <span id="news-feeds-new-sticker"
+                  class="fs-new-sticker mini-new-sticker" aria-label="New">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 36"
+                    role="img" aria-label="New">
+                    <title>New</title>
+                    <path d="M10 3h58l7 7v16l-7 7H10l-7-7V10z" fill="#ffe05b"
+                      stroke="#141414" stroke-width="2.5"
+                      stroke-linejoin="round" />
+                    <path d="M13 8h11" stroke="#ffffff" stroke-width="2"
+                      stroke-linecap="round" opacity=".9" />
+                    <text x="39" y="24" fill="#141414"
+                      font-family="Arial, sans-serif" font-size="14"
+                      font-weight="800" letter-spacing="1"
+                      text-anchor="middle">NEW</text>
+                  </svg>
+                </span>
+              </span>
+              <small>Enable or configure news feeds.</small>
+            </div>
+            <div class="mini-news-controls">
+              <label class="toggle-switch" title="Enable news feeds">
+                <input type="checkbox" id="news-enabled-toggle"
+                  aria-label="Enable news feeds" />
+                <span class="slider"></span>
+              </label>
+              <button id="configure-news-btn"
+                class="settings-button">Configure</button>
+            </div>
+          </div>
+          <div class="setting-row">
+            <div class="label">
+              <span>Widget Control</span>
+              <small>Control widget visibility.</small>
+            </div>
+            <select
+              id="widget-control-select"
+              aria-label="Widget visibility"
+              class="settings-dropdown"
+              style="
+                padding: 5px;
+                border-radius: 5px;
+                background: var(--bg-interactive);
+                color: var(--text-primary);
+                border: none;
+              "
+            >
+              <option value="all">All Visible</option>
+              <option value="search-only">Search Only</option>
+              <option value="weather-only">Weather Only</option>
+              <option value="quote-only">Quote Only</option>
+              <option value="search-weather">Search &amp; Weather</option>
+              <option value="search-quote">Search &amp; Quote</option>
+              <option value="weather-quote">Weather &amp; Quote</option>
+              <option value="nothing">Nothing</option>
+            </select>
+          </div>
+          <div class="setting-row">
+            <div class="label">
+              <span>Shortcuts Position</span>
+              <small>Position or hide the shortcuts bar.</small>
+            </div>
+            <select
+              id="shortcuts-position-select"
+              aria-label="Shortcuts bar position"
+              class="settings-dropdown"
+              style="
+                padding: 5px;
+                border-radius: 5px;
+                background: var(--bg-interactive);
+                color: var(--text-primary);
+                border: none;
+              "
+            >
+              <option value="bottom">Bottom</option>
+              <option value="top">Top</option>
+              <option value="left">Left</option>
+              <option value="right">Right</option>
+              <option value="hide">Hide</option>
+            </select>
+          </div>
+          <div class="settings-divider"></div>
+          <h3 class="settings-header">Backup &amp; Restore</h3>
+          <div class="backup-controls">
+            <button id="backup-button" class="settings-button backup">Backup</button>
+            <button id="restore-button" class="settings-button restore">Restore</button>
+            <input
+              type="file"
+              id="restore-file-input"
+              accept=".json"
+              class="hidden"
+            />
+            <button id="reset-button" class="settings-button danger">
+              Reset All
+            </button>
+          </div>
+
+          <div class="setting-row"
+            style="margin-top: 0.5rem; justify-content: center;">
+            <button
+              id="check-for-updates-btn"
+              class="settings-button"
+              style="
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+              "
+            >
+              <svg
+                stroke="currentColor"
+                fill="currentColor"
+                height="18"
+                width="18"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M21,10.12H14.22L16.96,7.3C14.23,4.6 9.81,4.5 7.08,7.2C4.35,9.91 4.35,14.28 7.08,17C9.81,19.7 14.23,19.7 16.96,17C18.32,15.65 19,14.08 19,12.1H21C21,14.08 20.12,16.65 18.36,18.39C14.85,21.87 9.15,21.87 5.64,18.39C2.14,14.92 2.11,9.28 5.62,5.81C9.13,2.34 14.76,2.34 18.27,5.81L21,3V10.12M12.5,8V12.25L16,14.33L15.28,15.54L11,13V8H12.5Z"
+                />
+              </svg>
+              <span>Check for Updates</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Appearance settings -->
+        <div id="look-content" class="settings-pane">
+          <div class="setting-row">
+            <div class="label">
+              <span class="mini-dark-mode-label">
+                Dark / Light
+                <span id="dark-mode-updated-sticker" class="fs-updated-sticker">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 36" role="img" aria-label="Updated">
+                    <title>Updated</title>
+                    <path d="M10 3h88l7 7v16l-7 7H10l-7-7V10z" fill="#ffe05b" stroke="#141414" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M13 8h12" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity=".9"/>
+                    <text x="54" y="24" fill="#141414" font-family="Arial, sans-serif" font-size="13" font-weight="800" letter-spacing="1.1" text-anchor="middle">UPDATED</text>
+                  </svg>
+                </span>
+              </span><small>Toggle the selected theme's appearance.</small>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="dark-mode-toggle"
+                aria-label="Toggle selected theme appearance" />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="setting-row">
+            <div class="label">
+              <span>Custom BG</span><small>Upload your custom wallpaper.</small>
+            </div>
+            <div class="mini-bg-actions mini-custom-bg-actions">
+              <button id="upload-bg-button" class="settings-button"
+                aria-label="Upload custom background">Upload</button>
+              <input type="file" id="bg-file-input" accept="image/*"
+                class="hidden" aria-label="Choose background image" />
+              <button id="remove-bg-button" class="settings-button hidden"
+                aria-label="Remove custom background">Remove</button>
+            </div>
+          </div>
+          <div class="setting-row">
+            <div class="label">
+              <span class="mini-random-bg-label">
+                <span>Random BG</span>
+                <span id="random-bg-updated-sticker" class="fs-updated-sticker"
+                  aria-label="Updated">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 36"
+                    role="img" aria-label="Updated">
+                    <title>Updated</title>
+                    <path d="M10 3h88l7 7v16l-7 7H10l-7-7V10z" fill="#ffe05b"
+                      stroke="#141414" stroke-width="2.5"
+                      stroke-linejoin="round" />
+                    <path d="M13 8h12" stroke="#ffffff" stroke-width="2"
+                      stroke-linecap="round" opacity=".9" />
+                    <text x="54" y="24" fill="#141414"
+                      font-family="Arial, sans-serif" font-size="13"
+                      font-weight="800" letter-spacing="1.1"
+                      text-anchor="middle">UPDATED</text>
+                  </svg>
+                </span>
+              </span>
+              <small>Picsum wallpaper features.</small>
+            </div>
+            <div class="mini-bg-actions mini-random-bg-actions">
+              <button id="random-bg-rnd-btn" class="settings-button"
+                title="Get new random wallpaper"
+                aria-label="Get a new random background">New BG</button>
+              <button id="random-bg-freeze-btn" class="settings-button hidden"
+                title="Freeze random background"
+                aria-label="Freeze random background">Freeze</button>
+            </div>
+          </div>
+          <div class="setting-row">
+            <div class="label">
+              <span>Glow Effect</span><small>Toggle clock glow &amp; pulsing.</small>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="glow-effect-toggle"
+                aria-label="Enable glow effect" />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="setting-row" id="transparency-effect-row">
+            <div class="label">
+              <span class="mini-appearance-label">
+                <span>Glassmorphism effect</span>
+                <span id="glassmorphism-new-sticker"
+                  class="fs-new-sticker mini-new-sticker" aria-label="New">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 36"
+                    role="img" aria-label="New">
+                    <title>New</title>
+                    <path d="M10 3h58l7 7v16l-7 7H10l-7-7V10z" fill="#ffe05b"
+                      stroke="#141414" stroke-width="2.5"
+                      stroke-linejoin="round" />
+                    <path d="M13 8h11" stroke="#ffffff" stroke-width="2"
+                      stroke-linecap="round" opacity=".9" />
+                    <text x="39" y="24" fill="#141414"
+                      font-family="Arial, sans-serif" font-size="14"
+                      font-weight="800" letter-spacing="1"
+                      text-anchor="middle">NEW</text>
+                  </svg>
+                </span>
+              </span>
+              <small>Add a transparent glass effect to dashboard surfaces.</small>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="transparency-toggle"
+                aria-label="Enable Glassmorphism effect" />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="setting-row">
+            <div class="label">
+              <span class="mini-appearance-label">
+                <span>Font Style</span>
+                <span id="font-family-new-sticker" class="fs-new-sticker mini-new-sticker" aria-label="New">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78 36" role="img" aria-label="New">
+                    <title>New</title>
+                    <path d="M10 3h58l7 7v16l-7 7H10l-7-7V10z" fill="#ffe05b" stroke="#141414" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M13 8h11" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity=".9"/>
+                    <text x="39" y="24" fill="#141414" font-family="Arial, sans-serif" font-size="14" font-weight="800" letter-spacing="1" text-anchor="middle">NEW</text>
+                  </svg>
+                </span>
+              </span><small>Choose the dashboard font.</small>
+            </div>
+            <select id="font-family-select" class="settings-dropdown"
+              aria-label="Choose dashboard font"
+              style="padding: 5px; border-radius: 5px; background: var(--bg-interactive); color: var(--text-primary); border: none;">
+              <option value="outfit">Outfit</option>
+              <option value="lexend">Lexend</option>
+              <option value="inter">Inter</option>
+              <option value="roboto">Roboto</option>
+              <option value="manrope">Manrope</option>
+              <option value="nunito">Nunito</option>
+              <option value="merriweather">Merriweather</option>
+              <option value="roboto-mono">Roboto Mono</option>
+            </select>
+          </div>
+          <div class="setting-row"
+            style="flex-direction: column; align-items: stretch; margin-top: 0.5rem;">
+            <div class="label" style="margin-bottom: 4px;">
+              <span>Themes &amp; Presets</span><small>Click to apply theme or saved preset.</small>
+            </div>
+            <div id="mini-themes-grid" class="mini-themes-grid"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-footer">
+        <p>© Ditom Baroi Antu <span id="copyright-year">2025</span></p>
+        <p><strong>YourDynamicDashboard</strong> V3.0.0</p>
+        <p>
+          Weather data provided by
+          <a
+            href="https://open-meteo.com/"
+            target="_blank"
+            style="color: inherit"
+            >Open-Meteo.com</a
+          >
+        </p>
+      </div>
+    </div>
+
+    <div class="layout-container">
+      <div class="column-one">
+        <div class="column-one-menu">
+          <!-- Sidebar Navigation Tabs -->
+          <div class="pdf-sidebar-tabs">
+            <button id="sidebar-tab-menu" class="pdf-sidebar-tab active">PDF Menu</button>
+            <button id="sidebar-tab-outline" class="pdf-sidebar-tab">Outline</button>
+            <button id="sidebar-tab-thumbs" class="pdf-sidebar-tab">Thumbnails</button>
+          </div>
+
+          <!-- PDF Menu Panel -->
+          <div id="pdf-panel-menu">
+            <div id="menu-list" style="padding:4px 0; display:flex;flex-direction:column;gap:8px"></div>
+
+            <div id="add-to-menu" style="display:flex;gap:8px;flex-direction:column; padding:12px 0 0; margin-top:8px; border-top:1px solid rgba(255, 255, 255, 0.2)">
+              <h3 style="margin:0 0 8px 0">Add a PDF</h3>
+              <input id="menu-name-input" class="menu-input" placeholder="Button Name or PDF Name" />
+              <div style="display:flex; align-items:center; gap:8px; flex-wrap:nowrap; width:100%">
+                <div style="flex:1 1 40%; min-width:0;">
+                  <input id="menu-local-input" type="file" accept="application/pdf" class="hidden" />
+                  <button id="menu-local-btn" class="category-header" style="text-align: left !important; padding:8px 12px; font-size:0.9rem; width:100%">Choose file</button>
+                </div>
+                <span style="font-weight:700; color:var(--text-primary); flex:0 0 auto;">or</span>
+                <div style="flex:1 1 40%; min-width:0;">
+                  <input id="menu-url-input" class="menu-input" placeholder="Paste URL" style="width:100%" />
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center">
+                <button id="menu-add-btn" class="category-header" style="text-align: left !important; padding:8px 12px; font-size:0.9rem; width: 100%;">Add</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Outline Panel -->
+          <div id="pdf-panel-outline" class="pdf-panel hidden">
+            <div id="outline-tree">
+              <div style="padding:12px; color:var(--text-secondary); font-size:0.85rem; text-align:center;">Select a PDF to view its outline.</div>
+            </div>
+          </div>
+
+          <!-- Thumbnails Panel -->
+          <div id="pdf-panel-thumbs" class="pdf-panel hidden">
+            <div id="thumb-grid" class="pdf-thumb-grid">
+              <div style="grid-column: 1 / -1; padding:12px; color:var(--text-secondary); font-size:0.85rem; text-align:center;">Select a PDF to view thumbnails.</div>
+            </div>
+          </div>
+
+          <div id="backup_restore">
+            <!-- <h3 style="margin:0 0 8px 0">Backup & Restore</h3> -->
+            <!-- Backup/Restore UI hidden on this page; functionality preserved -->
+            <div style="display:none;">
+              <button id="menu-export-btn" class="settings-button backup2">Backup</button>
+              <input id="menu-import-input" type="file" accept="application/json" class="hidden" />
+              <button id="menu-import-btn" class="settings-button restore2">Restore</button>
+              <button id="menu-clear-btn" class="settings-button danger2">Clear</button>
+            </div>
+          </div>
+
+          <div id="shortcuts-container" style="padding:12px; margin-top:12px; border-top:2px solid rgba(0, 0, 0, 0.5)"></div>
+        </div>
+        <div class="column-one-pdf" data-ydd-selection="allow">
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+
+          <!-- PDF Viewer Top Toolbar -->
+          <div id="pdf-toolbar" class="pdf-toolbar hidden">
+            <!-- Left: Page Navigation -->
+            <div class="pdf-tb-group">
+              <button id="pdf-tb-prev" class="pdf-tb-btn" title="Previous Page (◄)">◄</button>
+              <span class="pdf-tb-label">Page</span>
+              <input id="pdf-tb-page-num" class="pdf-tb-input" type="number" min="1" value="1" />
+              <span id="pdf-tb-page-count" class="pdf-tb-label">of --</span>
+              <button id="pdf-tb-next" class="pdf-tb-btn" title="Next Page (►)">►</button>
+            </div>
+
+            <!-- Middle: Zoom & View Controls -->
+            <div class="pdf-tb-group">
+              <button id="pdf-tb-zoom-out" class="pdf-tb-btn" title="Zoom Out (−)">−</button>
+              <span id="pdf-tb-zoom-level" class="pdf-tb-label" style="min-width: 44px; text-align: center; font-weight: 600;">100%</span>
+              <button id="pdf-tb-zoom-in" class="pdf-tb-btn" title="Zoom In (+)">+</button>
+              <button id="pdf-tb-fit-width" class="pdf-tb-btn active" title="Fit to Width">Fit Width</button>
+              <button id="pdf-tb-fit-page" class="pdf-tb-btn" title="Fit to Page">Fit Page</button>
+            </div>
+
+            <!-- Right: Search & Reading Mode -->
+            <div class="pdf-tb-group">
+              <button id="pdf-tb-search" class="pdf-tb-btn" title="Find in Document (Cmd+F)">🔍</button>
+              <button id="pdf-tb-fullscreen" class="pdf-tb-btn" title="Toggle Reading / Fullscreen Mode">⛶</button>
+            </div>
+          </div>
+
+          <!-- In-Document Search Bar -->
+          <div id="pdf-search-bar" class="pdf-search-bar hidden">
+            <input id="pdf-search-input" class="pdf-search-input" type="text" placeholder="Find in document... (Cmd+F)" />
+            <span id="pdf-search-count" class="pdf-search-count">0 matches</span>
+            <button id="pdf-search-prev" class="pdf-search-btn" title="Previous match (Shift+Enter)">▲</button>
+            <button id="pdf-search-next" class="pdf-search-btn" title="Next match (Enter)">▼</button>
+            <button id="pdf-search-close" class="pdf-search-btn" title="Close search (Esc)">✕</button>
+          </div>
+
+          <style>
+            /* Sidebar Navigation Tabs & Panels */
+            .pdf-sidebar-tabs {
+              display: flex;
+              gap: 4px;
+              background: rgba(0, 0, 0, 0.25);
+              padding: 4px;
+              border-radius: 8px;
+              margin-bottom: 8px;
+            }
+            .pdf-sidebar-tab {
+              flex: 1;
+              background: transparent;
+              color: var(--text-secondary);
+              border: none;
+              padding: 6px 4px;
+              border-radius: 6px;
+              font-size: 0.8rem;
+              font-weight: 600 !important;
+              cursor: pointer;
+              transition: all 0.2s ease;
+              text-align: center !important;
+            }
+            .pdf-sidebar-tab.active {
+              background: var(--bg-secondary);
+              color: var(--text-primary);
+              box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            .pdf-panel {
+              max-height: 400px;
+              overflow-y: auto;
+            }
+            .pdf-panel.hidden {
+              display: none !important;
+            }
+            .pdf-outline-item {
+              padding: 8px 10px;
+              border-radius: 6px;
+              font-size: 0.82rem;
+              color: var(--text-primary);
+              cursor: pointer;
+              transition: background 0.2s ease;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            .pdf-outline-item:hover {
+              background: rgba(255, 255, 255, 0.12);
+            }
+            .pdf-thumb-grid {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              gap: 8px;
+              max-height: 400px;
+              overflow-y: auto;
+              padding: 4px;
+            }
+            .pdf-thumb-item {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              background: rgba(0, 0, 0, 0.2);
+              border: 1px solid rgba(255, 255, 255, 0.1);
+              border-radius: 6px;
+              padding: 6px;
+              cursor: pointer;
+              transition: all 0.2s ease;
+            }
+            .pdf-thumb-item:hover, .pdf-thumb-item.active {
+              border-color: var(--accent-color);
+              transform: translateY(-2px);
+              box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            }
+            .pdf-thumb-item canvas {
+              width: 100% !important;
+              height: auto !important;
+              border-radius: 4px;
+              display: block;
+            }
+            .pdf-thumb-label {
+              font-size: 0.72rem;
+              color: var(--text-secondary);
+              margin-top: 4px;
+            }
+
+            /* PDF Viewer Top Toolbar */
+            .pdf-toolbar {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              gap: 8px;
+              background: rgba(20, 20, 20, 0.85);
+              backdrop-filter: blur(12px);
+              -webkit-backdrop-filter: blur(12px);
+              border: 1px solid rgba(255, 255, 255, 0.18);
+              padding: 6px 12px;
+              border-radius: 10px;
+              margin-bottom: 8px;
+              box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+              flex-wrap: wrap;
+              transition: opacity 0.25s ease;
+            }
+            .pdf-toolbar.hidden {
+              display: none !important;
+            }
+            .pdf-tb-group {
+              display: flex;
+              align-items: center;
+              gap: 6px;
+            }
+            .pdf-tb-btn {
+              background: rgba(255, 255, 255, 0.08);
+              color: var(--text-primary);
+              border: 1px solid rgba(255, 255, 255, 0.12);
+              border-radius: 6px;
+              padding: 4px 10px;
+              font-size: 0.82rem;
+              font-weight: 500 !important;
+              cursor: pointer;
+              transition: all 0.2s ease;
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              box-sizing: border-box;
+              height: 28px;
+            }
+            .pdf-tb-btn:hover {
+              background: var(--accent-color);
+              color: var(--bg-secondary);
+            }
+            .pdf-tb-btn.active {
+              background: var(--accent-color);
+              color: var(--bg-secondary);
+              border-color: var(--accent-color);
+            }
+            .pdf-tb-btn:disabled {
+              opacity: 0.35;
+              cursor: not-allowed;
+            }
+            .pdf-tb-label {
+              font-size: 0.82rem;
+              color: var(--text-secondary);
+              white-space: nowrap;
+            }
+            .pdf-tb-input {
+              background: rgba(255, 255, 255, 0.12);
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              color: var(--text-primary);
+              text-align: center;
+              border-radius: 6px;
+              width: 46px;
+              height: 28px;
+              padding: 2px 4px;
+              font-size: 0.82rem;
+              font-weight: 600;
+              outline: none;
+              box-sizing: border-box;
+              appearance: textfield;
+              -moz-appearance: textfield;
+            }
+            .pdf-tb-input::-webkit-outer-spin-button,
+            .pdf-tb-input::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+            .pdf-tb-input:focus {
+              border-color: var(--accent-color);
+              background: rgba(255, 255, 255, 0.2);
+            }
+
+            /* Reading / Fullscreen mode */
+            .column-one-pdf.reading-mode {
+              position: fixed !important;
+              top: 0 !important;
+              left: 0 !important;
+              width: 100vw !important;
+              height: 100vh !important;
+              z-index: 100000 !important;
+              background: #0f0f0f !important;
+              padding: 16px !important;
+              box-sizing: border-box !important;
+              display: flex !important;
+              flex-direction: column !important;
+            }
+            .column-one-pdf.reading-mode #holder {
+              height: calc(100vh - 80px) !important;
+              flex: 1 1 auto !important;
+            }
+
+            /* In-Document Search Bar */
+            .column-one-pdf {
+              position: relative;
+            }
+            .pdf-search-bar {
+              position: absolute;
+              top: 12px;
+              right: 40px;
+              z-index: 10000;
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              background: rgba(20, 20, 20, 0.88);
+              backdrop-filter: blur(12px);
+              -webkit-backdrop-filter: blur(12px);
+              border: 1px solid rgba(255, 255, 255, 0.22);
+              padding: 6px 10px;
+              border-radius: 8px;
+              box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+              transition: opacity 0.2s ease, transform 0.2s ease;
+            }
+            .pdf-search-bar.hidden {
+              opacity: 0;
+              pointer-events: none;
+              transform: translateY(-8px);
+            }
+            .pdf-search-input {
+              background: rgba(255, 255, 255, 0.1);
+              border: 1px solid rgba(255, 255, 255, 0.15);
+              color: var(--text-primary);
+              padding: 4px 8px;
+              border-radius: 4px;
+              font-size: 0.82rem;
+              outline: none;
+              width: 160px;
+            }
+            .pdf-search-input:focus {
+              border-color: var(--accent-color);
+            }
+            .pdf-search-count {
+              font-size: 0.75rem;
+              color: var(--text-secondary);
+              white-space: nowrap;
+              min-width: 50px;
+              text-align: center;
+            }
+            .pdf-search-btn {
+              background: rgba(255, 255, 255, 0.1);
+              color: var(--text-primary);
+              border: none;
+              border-radius: 4px;
+              width: 26px;
+              height: 26px;
+              cursor: pointer;
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 0.8rem;
+              transition: background 0.2s;
+            }
+            .pdf-search-btn:hover {
+              background: var(--accent-color);
+              color: var(--bg-secondary);
+            }
+            mark.pdf-search-mark {
+              background-color: rgba(255, 235, 59, 0.5) !important;
+              color: #000000 !important;
+              border-radius: 2px;
+              padding: 0 1px;
+            }
+            mark.pdf-search-mark.active {
+              background-color: rgba(255, 152, 0, 0.65) !important;
+              color: #ffffff !important;
+            }
+
+            /* Holder constrained for vertical scrolling */
+            #holder{
+              background: #00000080;
+              border: 1px solid rgba(255, 255, 255, 0.22) !important;
+              /* padding: 16px; */
+              box-sizing: border-box;
+              flex: 1 1 auto;
+              min-height: 0;
+              height: calc(100vh - 80px);
+              overflow-y: auto;
+              overflow-x: hidden;
+              position: relative;
+              max-height: none;
+              /* Use auto to allow a larger scrollbar in Firefox */
+              scrollbar-width: 20px; /* Firefox */
+              -webkit-scrollbar-width:20px; /* WebKit */
+              border-radius: 15px;
+            }
+            #holder-empty-state {
+              position: absolute;
+              top: 24px;
+              left: 50%;
+              transform: translateX(-50%);
+              max-width: min(80%, 440px);
+              padding: 10px 16px;
+              border-radius: 999px;
+              background: rgba(255, 255, 255, 0.08);
+              border: 1px solid rgba(255, 255, 255, 0.22);
+              color: rgba(255, 255, 255, 0.9);
+              font-size: 0.9rem;
+              text-align: center;
+              line-height: 1.4;
+              letter-spacing: 0.02em;
+              pointer-events: none;
+            }
+
+            .canvas-wrapper{
+              margin: 0 auto 16px auto;
+              display: flex;
+              justify-content: center;
+              position: relative;
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              border-radius: 6px;
+              box-sizing: border-box;
+            }
+            .page-number-indicator {
+              position: absolute;
+              top: 12px;
+              left: 12px;
+              font-size: 0.75rem;
+              color: rgba(255, 255, 255, 0.45);
+              pointer-events: none;
+              z-index: 1;
+              background: rgba(0, 0, 0, 0.4);
+              padding: 3px 8px;
+              border-radius: 4px;
+            }
+            /* Make canvases responsive so pages stack vertically and fit column width */
+            .canvas-wrapper canvas{
+              display: block;
+              width: 100%;
+              height: 100%;
+            }
+            .textLayer {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              overflow: hidden;
+              opacity: 1;
+              line-height: 1;
+              -webkit-user-select: text !important;
+              -moz-user-select: text !important;
+              -ms-user-select: text !important;
+              user-select: text !important;
+              pointer-events: auto;
+              box-sizing: border-box;
+            }
+            .textLayer span,
+            .textLayer div,
+            .textLayer br {
+              color: transparent !important;
+              position: absolute;
+              white-space: pre;
+              cursor: text;
+              transform-origin: 0 0;
+              -webkit-text-fill-color: transparent;
+              pointer-events: auto;
+              -webkit-user-select: text !important;
+              -moz-user-select: text !important;
+              -ms-user-select: text !important;
+              user-select: text !important;
+            }
+            .textLayer ::selection,
+            .textLayer *::selection {
+              background: rgba(0, 120, 215, 0.35) !important;
+              color: transparent !important;
+            }
+            .column-one-pdf::-webkit-scrollbar {
+              width: 30px;
+            }
+            /* Hide native scrollbar on the PDF holder so only the custom overlay shows */
+            #holder{
+              scrollbar-width: none; /* Firefox */
+              scrollbar-gutter: auto;
+            }
+            #holder::-webkit-scrollbar{
+              width: 0 !important;
+              height: 0 !important;
+              background: transparent !important;
+            }
+            #holder::-webkit-scrollbar-thumb{ display:none !important; }
+            /* Custom persistent scrollbar overlay (used when OS hides native scrollbars) */
+            #holder-scrollbar-track{
+              position: absolute;
+              top: 0;
+              right: 0;
+              width: 30px;
+              height: 100%;
+              display: flex;
+              align-items: flex-start;
+              justify-content: center;
+              pointer-events: auto;
+              z-index: 99999;
+            }
+            #holder-scrollbar-thumb{
+              width: 16px;
+              background: #ff6f00a1;
+              border-radius: 10px;
+              margin-top: 8px;
+              cursor: pointer;
+              box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+            }
+          </style>
+          <div id="holder" data-ydd-selection="allow"></div>
+          <!-- static scrollbar track to ensure visibility even if JS fails -->
+          <div id="holder-scrollbar-track" aria-hidden="true"><div id="holder-scrollbar-thumb"></div></div>
+          <script>
+            var currentPdfObserver = null;
+            var currentPdfLoadingTask = null;
+            var currentLoadedPdfDoc = null;
+            var pdfSearchResults = [];
+            var currentSearchIndex = -1;
+
+            // Sidebar Tab Switcher
+            function initPdfSidebarTabs() {
+              var tabMenu = document.getElementById('sidebar-tab-menu');
+              var tabOutline = document.getElementById('sidebar-tab-outline');
+              var tabThumbs = document.getElementById('sidebar-tab-thumbs');
+
+              var panelMenu = document.getElementById('pdf-panel-menu');
+              var panelOutline = document.getElementById('pdf-panel-outline');
+              var panelThumbs = document.getElementById('pdf-panel-thumbs');
+
+              if (!tabMenu || !tabOutline || !tabThumbs) return;
+
+              function selectTab(activeTab, activePanel) {
+                [tabMenu, tabOutline, tabThumbs].forEach(function(t) { t.classList.remove('active'); });
+                [panelMenu, panelOutline, panelThumbs].forEach(function(p) { p.classList.add('hidden'); });
+
+                activeTab.classList.add('active');
+                activePanel.classList.remove('hidden');
+              }
+
+              tabMenu.addEventListener('click', function() { selectTab(tabMenu, panelMenu); });
+              tabOutline.addEventListener('click', function() { selectTab(tabOutline, panelOutline); });
+              tabThumbs.addEventListener('click', function() { selectTab(tabThumbs, panelThumbs); });
+            }
+
+            function scrollToPage(pageNum) {
+              var holder = document.getElementById('holder');
+              if (!holder) return;
+              var wrapper = holder.querySelector('.canvas-wrapper[data-page-num="' + pageNum + '"]');
+              if (wrapper) {
+                wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }
+
+            // Outline Extraction (Bookmarks / Table of Contents)
+            function loadPdfOutline(pdfDoc) {
+              var outlineTree = document.getElementById('outline-tree');
+              if (!outlineTree) return;
+              outlineTree.innerHTML = '<div style="padding:12px; color:var(--text-secondary); font-size:0.85rem; text-align:center;">Loading outline...</div>';
+
+              pdfDoc.getOutline().then(function(outline) {
+                outlineTree.innerHTML = '';
+                if (!outline || outline.length === 0) {
+                  outlineTree.innerHTML = '<div style="padding:12px; color:var(--text-secondary); font-size:0.85rem; text-align:center;">No outline available for this PDF.</div>';
+                  return;
+                }
+
+                function buildOutlineNodes(items, container, depth) {
+                  items.forEach(function(item) {
+                    var itemDiv = document.createElement('div');
+                    itemDiv.className = 'pdf-outline-item';
+                    itemDiv.style.paddingLeft = (depth * 12 + 10) + 'px';
+                    itemDiv.textContent = item.title;
+
+                    itemDiv.addEventListener('click', function() {
+                      var dest = item.dest;
+                      if (typeof dest === 'string') {
+                        pdfDoc.getDestination(dest).then(function(destArray) {
+                          if (destArray && destArray[0]) {
+                            pdfDoc.getPageIndex(destArray[0]).then(function(pIdx) {
+                              scrollToPage(pIdx + 1);
+                            });
+                          }
+                        });
+                      } else if (Array.isArray(dest) && dest[0]) {
+                        pdfDoc.getPageIndex(dest[0]).then(function(pIdx) {
+                          scrollToPage(pIdx + 1);
+                        });
+                      }
+                    });
+
+                    container.appendChild(itemDiv);
+                    if (item.items && item.items.length > 0) {
+                      buildOutlineNodes(item.items, container, depth + 1);
+                    }
+                  });
+                }
+
+                buildOutlineNodes(outline, outlineTree, 0);
+              }).catch(function() {
+                outlineTree.innerHTML = '<div style="padding:12px; color:var(--text-secondary); font-size:0.85rem; text-align:center;">No outline available for this PDF.</div>';
+              });
+            }
+
+            // Thumbnail Previews
+            function loadPdfThumbnails(pdfDoc) {
+              var grid = document.getElementById('thumb-grid');
+              if (!grid) return;
+              grid.innerHTML = '';
+
+              var numPages = pdfDoc.numPages;
+              for (var i = 1; i <= numPages; i++) {
+                (function(pNum) {
+                  var item = document.createElement('div');
+                  item.className = 'pdf-thumb-item';
+                  item.dataset.pageNum = pNum;
+
+                  var canvas = document.createElement('canvas');
+                  var label = document.createElement('div');
+                  label.className = 'pdf-thumb-label';
+                  label.textContent = 'Page ' + pNum;
+
+                  item.appendChild(canvas);
+                  item.appendChild(label);
+                  grid.appendChild(item);
+
+                  item.addEventListener('click', function() {
+                    grid.querySelectorAll('.pdf-thumb-item').forEach(function(el) {
+                      el.classList.remove('active');
+                    });
+                    item.classList.add('active');
+                    scrollToPage(pNum);
+                  });
+
+                  pdfDoc.getPage(pNum).then(function(page) {
+                    var unscaledViewport = page.getViewport({ scale: 1 });
+                    var thumbScale = 110 / unscaledViewport.width;
+                    var viewport = page.getViewport({ scale: thumbScale });
+                    canvas.width = Math.floor(viewport.width);
+                    canvas.height = Math.floor(viewport.height);
+                    var ctx = canvas.getContext('2d');
+                    page.render({ canvasContext: ctx, viewport: viewport });
+                  });
+                })(i);
+              }
+            }
+
+            // In-Document Search Manager
+            function initPdfSearch() {
+              var searchBar = document.getElementById('pdf-search-bar');
+              var searchInput = document.getElementById('pdf-search-input');
+              var searchPrev = document.getElementById('pdf-search-prev');
+              var searchNext = document.getElementById('pdf-search-next');
+              var searchClose = document.getElementById('pdf-search-close');
+
+              if (!searchBar || !searchInput) return;
+
+              function toggleSearchBar(show) {
+                if (show) {
+                  searchBar.classList.remove('hidden');
+                  searchInput.focus();
+                  searchInput.select();
+                } else {
+                  searchBar.classList.add('hidden');
+                  clearSearchHighlights();
+                }
+              }
+
+              window.addEventListener('keydown', function(e) {
+                if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'f') {
+                  if (currentLoadedPdfDoc) {
+                    e.preventDefault();
+                    toggleSearchBar(true);
+                  }
+                }
+              });
+
+              searchClose.addEventListener('click', function() {
+                toggleSearchBar(false);
+              });
+
+              searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                  toggleSearchBar(false);
+                } else if (e.key === 'Enter') {
+                  e.preventDefault();
+                  if (e.shiftKey) {
+                    navigateSearchResult(-1);
+                  } else {
+                    navigateSearchResult(1);
+                  }
+                }
+              });
+
+              searchInput.addEventListener('input', function() {
+                performPdfSearch(searchInput.value);
+              });
+
+              searchPrev.addEventListener('click', function() { navigateSearchResult(-1); });
+              searchNext.addEventListener('click', function() { navigateSearchResult(1); });
+            }
+
+            function clearSearchHighlights() {
+              document.querySelectorAll('mark.pdf-search-mark').forEach(function(mark) {
+                var parent = mark.parentNode;
+                if (parent) {
+                  parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                  parent.normalize();
+                }
+              });
+            }
+
+            function performPdfSearch(query) {
+              query = (query || '').trim().toLowerCase();
+              pdfSearchResults = [];
+              currentSearchIndex = -1;
+              clearSearchHighlights();
+
+              if (!query || !currentLoadedPdfDoc) {
+                updateSearchCountUI();
+                return;
+              }
+
+              var numPages = currentLoadedPdfDoc.numPages;
+              var pagePromises = [];
+
+              for (var i = 1; i <= numPages; i++) {
+                (function(pNum) {
+                  pagePromises.push(
+                    currentLoadedPdfDoc.getPage(pNum).then(function(page) {
+                      return page.getTextContent().then(function(textContent) {
+                        var fullText = textContent.items.map(function(item) { return item.str; }).join(' ');
+                        var lowerText = fullText.toLowerCase();
+                        var pos = lowerText.indexOf(query);
+                        while (pos !== -1) {
+                          pdfSearchResults.push({ pageNum: pNum, query: query });
+                          pos = lowerText.indexOf(query, pos + query.length);
+                        }
+                      });
+                    })
+                  );
+                })(i);
+              }
+
+              Promise.all(pagePromises).then(function() {
+                if (pdfSearchResults.length > 0) {
+                  currentSearchIndex = 0;
+                  jumpToSearchResult(currentSearchIndex);
+                }
+                updateSearchCountUI();
+              });
+            }
+
+            function navigateSearchResult(direction) {
+              if (pdfSearchResults.length === 0) return;
+              currentSearchIndex += direction;
+              if (currentSearchIndex < 0) currentSearchIndex = pdfSearchResults.length - 1;
+              if (currentSearchIndex >= pdfSearchResults.length) currentSearchIndex = 0;
+
+              jumpToSearchResult(currentSearchIndex);
+            }
+
+            function jumpToSearchResult(idx) {
+              if (idx < 0 || idx >= pdfSearchResults.length) return;
+              var result = pdfSearchResults[idx];
+              scrollToPage(result.pageNum);
+              highlightPageText(result.pageNum, result.query);
+              updateSearchCountUI();
+            }
+
+            function highlightPageText(pageNum, query) {
+              clearSearchHighlights();
+              var wrapper = document.querySelector('.canvas-wrapper[data-page-num="' + pageNum + '"]');
+              if (!wrapper) return;
+
+              var textLayer = wrapper.querySelector('.textLayer');
+              if (!textLayer) return;
+
+              var textNodes = [];
+              var walker = document.createTreeWalker(textLayer, NodeFilter.SHOW_TEXT, null, false);
+              var node;
+              while ((node = walker.nextNode())) {
+                if (node.nodeValue && node.nodeValue.toLowerCase().includes(query)) {
+                  textNodes.push(node);
+                }
+              }
+
+              textNodes.forEach(function(tNode) {
+                var val = tNode.nodeValue;
+                var lower = val.toLowerCase();
+                var matchPos = lower.indexOf(query);
+                if (matchPos !== -1) {
+                  var parent = tNode.parentNode;
+                  var before = val.substring(0, matchPos);
+                  var matchText = val.substring(matchPos, matchPos + query.length);
+                  var after = val.substring(matchPos + query.length);
+
+                  var mark = document.createElement('mark');
+                  mark.className = 'pdf-search-mark active';
+                  mark.textContent = matchText;
+
+                  var frag = document.createDocumentFragment();
+                  if (before) frag.appendChild(document.createTextNode(before));
+                  frag.appendChild(mark);
+                  if (after) frag.appendChild(document.createTextNode(after));
+
+                  parent.replaceChild(frag, tNode);
+                }
+              });
+            }
+
+            function updateSearchCountUI() {
+              var countEl = document.getElementById('pdf-search-count');
+              if (!countEl) return;
+              if (pdfSearchResults.length === 0) {
+                countEl.textContent = '0 matches';
+              } else {
+                countEl.textContent = (currentSearchIndex + 1) + ' of ' + pdfSearchResults.length;
+              }
+            }
+
+            var currentPdfSource = null;
+            var currentPdfScale = 1.0;
+            var currentPdfPageNum = 1;
+            var currentPdfTotalPages = 1;
+
+            function initPdfToolbar() {
+              var prevBtn = document.getElementById('pdf-tb-prev');
+              var nextBtn = document.getElementById('pdf-tb-next');
+              var pageInput = document.getElementById('pdf-tb-page-num');
+              var zoomOutBtn = document.getElementById('pdf-tb-zoom-out');
+              var zoomInBtn = document.getElementById('pdf-tb-zoom-in');
+              var fitWidthBtn = document.getElementById('pdf-tb-fit-width');
+              var fitPageBtn = document.getElementById('pdf-tb-fit-page');
+              var searchBtn = document.getElementById('pdf-tb-search');
+              var fullscreenBtn = document.getElementById('pdf-tb-fullscreen');
+
+              if (!prevBtn || !nextBtn || !pageInput) return;
+
+              prevBtn.addEventListener('click', function() {
+                if (currentPdfPageNum > 1) {
+                  scrollToPage(currentPdfPageNum - 1);
+                }
+              });
+
+              nextBtn.addEventListener('click', function() {
+                if (currentPdfPageNum < currentPdfTotalPages) {
+                  scrollToPage(currentPdfPageNum + 1);
+                }
+              });
+
+              function handlePageJump() {
+                var p = parseInt(pageInput.value, 10);
+                if (isNaN(p)) return;
+                p = Math.max(1, Math.min(currentPdfTotalPages, p));
+                pageInput.value = p;
+                scrollToPage(p);
+              }
+
+              pageInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') handlePageJump();
+              });
+              pageInput.addEventListener('blur', handlePageJump);
+
+              zoomInBtn.addEventListener('click', function() {
+                var nextScale = Math.min(2.0, Math.round((currentPdfScale + 0.15) * 100) / 100);
+                setPdfZoom(nextScale);
+              });
+
+              zoomOutBtn.addEventListener('click', function() {
+                var nextScale = Math.max(0.5, Math.round((currentPdfScale - 0.15) * 100) / 100);
+                setPdfZoom(nextScale);
+              });
+
+              fitWidthBtn.addEventListener('click', function() {
+                setPdfZoom(1.0, 'width');
+              });
+
+              fitPageBtn.addEventListener('click', function() {
+                var holder = document.getElementById('holder');
+                if (currentLoadedPdfDoc && holder) {
+                  currentLoadedPdfDoc.getPage(1).then(function(page1) {
+                    var vp1 = page1.getViewport({ scale: 1 });
+                    var holderHeight = holder.clientHeight - 32;
+                    var fitPageScale = holderHeight / vp1.height;
+                    var containerWidth = holder.clientWidth || 800;
+                    var widthScale = containerWidth / vp1.width;
+                    var relScale = Math.max(0.5, Math.min(2.0, fitPageScale / widthScale));
+                    setPdfZoom(Math.round(relScale * 100) / 100, 'page');
+                  });
+                }
+              });
+
+              searchBtn.addEventListener('click', function() {
+                var searchBar = document.getElementById('pdf-search-bar');
+                if (searchBar) {
+                  var isHidden = searchBar.classList.contains('hidden');
+                  if (isHidden) {
+                    searchBar.classList.remove('hidden');
+                    document.getElementById('pdf-search-input')?.focus();
+                  } else {
+                    searchBar.classList.add('hidden');
+                  }
+                }
+              });
+
+              fullscreenBtn.addEventListener('click', function() {
+                var col = document.querySelector('.column-one-pdf');
+                if (!col) return;
+                col.classList.toggle('reading-mode');
+                var isReading = col.classList.contains('reading-mode');
+                fullscreenBtn.classList.toggle('active', isReading);
+
+                if (isReading) {
+                  if (col.requestFullscreen) col.requestFullscreen().catch(function(){});
+                  else if (col.webkitRequestFullscreen) col.webkitRequestFullscreen();
+                } else {
+                  if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                  else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                }
+
+                setTimeout(function() {
+                  try { updateCustomScrollbar(document.getElementById('holder')); } catch (e) {}
+                }, 200);
+              });
+
+              document.addEventListener('fullscreenchange', function() {
+                if (!document.fullscreenElement) {
+                  var col = document.querySelector('.column-one-pdf');
+                  if (col) col.classList.remove('reading-mode');
+                  if (fullscreenBtn) fullscreenBtn.classList.remove('active');
+                }
+              });
+            }
+
+            function setPdfZoom(scale, mode) {
+              if (!currentPdfSource) return;
+              currentPdfScale = scale;
+              var zoomLabel = document.getElementById('pdf-tb-zoom-level');
+              if (zoomLabel) zoomLabel.textContent = Math.round(scale * 100) + '%';
+
+              var fitWidthBtn = document.getElementById('pdf-tb-fit-width');
+              var fitPageBtn = document.getElementById('pdf-tb-fit-page');
+              if (fitWidthBtn) fitWidthBtn.classList.toggle('active', mode === 'width' || scale === 1.0);
+              if (fitPageBtn) fitPageBtn.classList.toggle('active', mode === 'page');
+
+              var savedPage = currentPdfPageNum;
+              renderPDF(currentPdfSource, document.getElementById('holder'), { scale: scale, preservePage: savedPage });
+            }
+
+            function updateActivePageCounter() {
+              var holder = document.getElementById('holder');
+              if (!holder || !currentLoadedPdfDoc || currentPdfTotalPages <= 0) return;
+              var wrappers = holder.querySelectorAll('.canvas-wrapper');
+              if (!wrappers || wrappers.length === 0) return;
+
+              var holderRect = holder.getBoundingClientRect();
+              var holderCenter = holderRect.top + holderRect.height / 3;
+              var activePage = 1;
+
+              for (var i = 0; i < wrappers.length; i++) {
+                var rect = wrappers[i].getBoundingClientRect();
+                if (rect.top <= holderCenter) {
+                  activePage = parseInt(wrappers[i].dataset.pageNum, 10) || (i + 1);
+                }
+              }
+
+              currentPdfPageNum = activePage;
+              var inputEl = document.getElementById('pdf-tb-page-num');
+              if (inputEl && document.activeElement !== inputEl) {
+                inputEl.value = activePage;
+              }
+
+              var prevBtn = document.getElementById('pdf-tb-prev');
+              var nextBtn = document.getElementById('pdf-tb-next');
+              if (prevBtn) prevBtn.disabled = (activePage <= 1);
+              if (nextBtn) nextBtn.disabled = (activePage >= currentPdfTotalPages);
+            }
+
+            function clearHolder() {
+              if (currentPdfObserver) {
+                currentPdfObserver.disconnect();
+                currentPdfObserver = null;
+              }
+              if (currentPdfLoadingTask && currentPdfLoadingTask.destroy) {
+                try { currentPdfLoadingTask.destroy(); } catch (e) {}
+                currentPdfLoadingTask = null;
+              }
+              currentLoadedPdfDoc = null;
+              pdfSearchResults = [];
+              currentSearchIndex = -1;
+              updateSearchCountUI();
+
+              var holder = document.getElementById('holder');
+              if (holder) {
+                while (holder.firstChild) holder.removeChild(holder.firstChild);
+              }
+              var outlineTree = document.getElementById('outline-tree');
+              if (outlineTree) {
+                outlineTree.innerHTML = '<div style="padding:12px; color:var(--text-secondary); font-size:0.85rem; text-align:center;">Select a PDF to view its outline.</div>';
+              }
+              var thumbGrid = document.getElementById('thumb-grid');
+              if (thumbGrid) {
+                thumbGrid.innerHTML = '<div style="grid-column: 1 / -1; padding:12px; color:var(--text-secondary); font-size:0.85rem; text-align:center;">Select a PDF to view thumbnails.</div>';
+              }
+            }
+
+            function showEmptyState() {
+              currentPdfSource = null;
+              currentPdfTotalPages = 1;
+              currentPdfPageNum = 1;
+              var tb = document.getElementById('pdf-toolbar');
+              if (tb) tb.classList.add('hidden');
+
+              clearHolder();
+              var holder = document.getElementById('holder');
+              if (!holder) return;
+              var note = document.createElement('div');
+              note.id = 'holder-empty-state';
+              note.textContent = 'Select a PDF from the PDF Menu to the Right.';
+              holder.appendChild(note);
+            }
+
+            // Custom scrollbar functions (ensure defined before renderPDF uses them)
+            function createCustomScrollbar(holder){
+              if(!holder) return;
+              if(holder._customScrollbar) return;
+              // reuse existing static elements if present
+              var track = document.getElementById('holder-scrollbar-track') || document.createElement('div'); track.id = 'holder-scrollbar-track';
+              var thumb = document.getElementById('holder-scrollbar-thumb') || document.createElement('div'); thumb.id = 'holder-scrollbar-thumb';
+              if(!track.contains(thumb)) track.appendChild(thumb);
+              // append track to the parent column so it overlays the holder reliably
+              var parent = holder.parentElement || document.body;
+              parent.appendChild(track);
+              // position track to the right side of the parent
+              track.style.position = 'absolute';
+              track.style.top = '0';
+              track.style.right = '4px';
+              track.style.height = '100%';
+              holder._customScrollbar = {track: track, thumb: thumb, dragging: false, parent: parent};
+
+              // sync on scroll and resize
+              holder.addEventListener('scroll', function(){ updateCustomScrollbar(holder); });
+              window.addEventListener('resize', function(){ updateCustomScrollbar(holder); });
+
+              var startY = 0, startScroll = 0;
+              thumb.addEventListener('pointerdown', function(e){
+                e.preventDefault();
+                thumb.setPointerCapture && thumb.setPointerCapture(e.pointerId);
+                holder._customScrollbar.dragging = true;
+                startY = e.clientY;
+                startScroll = holder.scrollTop;
+              });
+              thumb.addEventListener('pointermove', function(e){
+                if(!holder._customScrollbar.dragging) return;
+                var clientDelta = e.clientY - startY;
+                var thumbH = thumb.offsetHeight || 40;
+                var trackRect = track.getBoundingClientRect();
+                var trackHeight = track.clientHeight - thumbH;
+                var scrollRange = holder.scrollHeight - holder.clientHeight;
+                if(scrollRange <= 0) return;
+                var scrollDelta = (clientDelta / (trackHeight || 1)) * scrollRange;
+                holder.scrollTop = Math.max(0, Math.min(scrollRange, startScroll + scrollDelta));
+              });
+              thumb.addEventListener('pointerup', function(e){
+                holder._customScrollbar.dragging = false;
+                try{ thumb.releasePointerCapture && thumb.releasePointerCapture(e.pointerId); }catch(ex){}
+              });
+
+              track.addEventListener('click', function(e){
+                if(e.target === thumb) return;
+                var rect = track.getBoundingClientRect();
+                var y = e.clientY - rect.top;
+                var thumbH = thumb.offsetHeight;
+                var targetTop = Math.max(0, Math.min(track.clientHeight - thumbH, y - thumbH/2));
+                var ratio = targetTop / (track.clientHeight - thumbH);
+                holder.scrollTop = ratio * (holder.scrollHeight - holder.clientHeight);
+              });
+              updateCustomScrollbar(holder);
+            }
+
+            function updateCustomScrollbar(holder){
+              if(!holder) return;
+              if(!holder._customScrollbar) createCustomScrollbar(holder);
+              var cs = holder._customScrollbar; if(!cs) return;
+              var track = cs.track, thumb = cs.thumb;
+              var visible = holder.scrollHeight > holder.clientHeight + 1;
+              track.style.display = visible ? 'flex' : 'none';
+              if(!visible) return;
+              var thumbH = Math.max(40, Math.round((holder.clientHeight / holder.scrollHeight) * holder.clientHeight));
+              thumb.style.height = thumbH + 'px';
+              var maxTop = holder.clientHeight - thumbH;
+              var top = (holder.scrollTop / (holder.scrollHeight - holder.clientHeight)) * maxTop;
+              thumb.style.transform = 'translateY(' + top + 'px)';
+            }
+            // initialize custom scrollbar and PDF features for the holder element
+            (function(){
+              var holderEl = document.getElementById('holder');
+              if(holderEl){
+                try{ holderEl.style.scrollbarGutter = 'stable both'; }catch(e){}
+                createCustomScrollbar(holderEl);
+                holderEl.addEventListener('scroll', updateActivePageCounter);
+              }
+              initPdfSidebarTabs();
+              initPdfSearch();
+              initPdfToolbar();
+              try { migrateLegacyDataUrls(); } catch (e) {}
+            })();
+
+            function renderPDF(url, canvasContainer, options) {
+              options = options || {};
+              if (options.scale) currentPdfScale = options.scale;
+              currentPdfSource = url;
+
+              var tb = document.getElementById('pdf-toolbar');
+              if (tb) tb.classList.remove('hidden');
+
+              clearHolder();
+              currentPdfSource = url;
+              if (tb) tb.classList.remove('hidden');
+
+              if (!canvasContainer) canvasContainer = document.getElementById('holder');
+              if (!canvasContainer) return;
+
+              var pdfLib = window.pdfjsLib || window.PDFJS;
+              if (!pdfLib) {
+                console.error('PDF.js library is not loaded.');
+                return;
+              }
+              if (pdfLib.GlobalWorkerOptions && !pdfLib.GlobalWorkerOptions.workerSrc) {
+                pdfLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+              }
+
+              // Support data URLs (Base64) for persisted local PDFs saved in backup
+              var loadingTask;
+              if (typeof url === 'string' && url.indexOf('data:') === 0) {
+                try {
+                  var base64 = (url.split(',')[1] || '');
+                  var raw = atob(base64);
+                  var len = raw.length;
+                  var u8 = new Uint8Array(len);
+                  for (var i = 0; i < len; i++) u8[i] = raw.charCodeAt(i);
+                  loadingTask = pdfLib.getDocument({ data: u8 });
+                } catch (ex) {
+                  console.error('Invalid data URL for PDF', ex);
+                  return;
+                }
+              } else {
+                loadingTask = pdfLib.getDocument(url);
+              }
+              currentPdfLoadingTask = loadingTask;
+
+              var loadPromise = loadingTask && loadingTask.promise ? loadingTask.promise : loadingTask;
+              loadPromise.then(function(pdfDoc) {
+                currentLoadedPdfDoc = pdfDoc;
+                currentPdfTotalPages = pdfDoc.numPages;
+
+                var pageCountEl = document.getElementById('pdf-tb-page-count');
+                if (pageCountEl) pageCountEl.textContent = 'of ' + pdfDoc.numPages;
+                var pageInputEl = document.getElementById('pdf-tb-page-num');
+                if (pageInputEl) pageInputEl.max = pdfDoc.numPages;
+                var zoomLabel = document.getElementById('pdf-tb-zoom-level');
+                if (zoomLabel) zoomLabel.textContent = Math.round(currentPdfScale * 100) + '%';
+
+                loadPdfOutline(pdfDoc);
+                loadPdfThumbnails(pdfDoc);
+
+                var numPages = pdfDoc.numPages;
+                var containerWidth = canvasContainer.clientWidth || (canvasContainer.getBoundingClientRect && canvasContainer.getBoundingClientRect().width) || 800;
+                var dpr = window.devicePixelRatio || 1;
+
+                // Fetch Page 1 first to determine aspect ratio for smooth layout skeleton
+                pdfDoc.getPage(1).then(function(page1) {
+                  var unscaledViewport1 = page1.getViewport({ scale: 1 });
+                  var aspectRatio = unscaledViewport1.height / unscaledViewport1.width;
+                  var estimatedHeight = Math.round(containerWidth * aspectRatio);
+
+                  var wrappers = [];
+                  for (var pageNum = 1; pageNum <= numPages; pageNum++) {
+                    var wrapper = document.createElement('div');
+                    wrapper.className = 'canvas-wrapper';
+                    wrapper.dataset.pageNum = pageNum;
+                    wrapper.style.minHeight = estimatedHeight + 'px';
+
+                    var indicator = document.createElement('div');
+                    indicator.className = 'page-number-indicator';
+                    indicator.textContent = 'Page ' + pageNum + ' of ' + numPages;
+                    wrapper.appendChild(indicator);
+
+                    canvasContainer.appendChild(wrapper);
+                    wrappers.push(wrapper);
+                  }
+
+                  var renderPageContent = function(page, wrapper) {
+                    if (wrapper._isRendered || wrapper._isRendering) return;
+                    wrapper._isRendering = true;
+
+                    var canvas = document.createElement('canvas');
+                    var textLayer = document.createElement('div');
+                    textLayer.className = 'textLayer';
+                    textLayer.setAttribute('data-ydd-selection', 'allow');
+                    var ctx = canvas.getContext('2d');
+
+                    var curWidth = canvasContainer.clientWidth || containerWidth;
+                    var unscaledViewport = page.getViewport({ scale: 1 });
+                    var baseScale = (curWidth / unscaledViewport.width) * (options.scale || 1);
+                    var cssViewport = page.getViewport({ scale: baseScale });
+                    var canvasViewport = page.getViewport({ scale: baseScale * dpr });
+
+                    canvas.width = Math.floor(canvasViewport.width);
+                    canvas.height = Math.floor(canvasViewport.height);
+
+                    var cssWidth = Math.floor(cssViewport.width) + 'px';
+                    var cssHeight = Math.floor(cssViewport.height) + 'px';
+
+                    canvas.style.width = cssWidth;
+                    canvas.style.height = cssHeight;
+
+                    wrapper.style.width = cssWidth;
+                    wrapper.style.height = cssHeight;
+                    wrapper.style.minHeight = cssHeight;
+
+                    textLayer.style.width = cssWidth;
+                    textLayer.style.height = cssHeight;
+                    textLayer.style.setProperty('--scale-factor', String(cssViewport.scale));
+
+                    wrapper.appendChild(canvas);
+                    wrapper.appendChild(textLayer);
+
+                    var renderContext = { canvasContext: ctx, viewport: canvasViewport };
+                    page.render(renderContext).promise.then(function() {
+                      wrapper._isRendered = true;
+                      wrapper._isRendering = false;
+                      var indicatorEl = wrapper.querySelector('.page-number-indicator');
+                      if (indicatorEl) indicatorEl.remove();
+                      try { updateCustomScrollbar(canvasContainer); } catch (e) {}
+                    }).catch(function(err) {
+                      wrapper._isRendering = false;
+                      console.warn('PDF page render error page ' + page.pageNumber, err);
+                    });
+
+                    page.getTextContent().then(function(textContent) {
+                      var renderTL = (pdfLib && pdfLib.renderTextLayer) || (window.PDFJS && window.PDFJS.renderTextLayer);
+                      if (typeof renderTL === 'function') {
+                        textLayer.innerHTML = '';
+                        renderTL({
+                          textContent: textContent,
+                          container: textLayer,
+                          viewport: cssViewport,
+                          textDivs: [],
+                          enhanceTextSelection: true
+                        });
+                      }
+                    }).catch(function(err) {
+                      console.warn('PDF text layer error', err);
+                    });
+                  };
+
+                  if ('IntersectionObserver' in window) {
+                    currentPdfObserver = new IntersectionObserver(function(entries) {
+                      entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                          var wrp = entry.target;
+                          var pNum = parseInt(wrp.dataset.pageNum, 10);
+                          if (pNum && !wrp._isRendered && !wrp._isRendering) {
+                            pdfDoc.getPage(pNum).then(function(page) {
+                              renderPageContent(page, wrp);
+                            });
+                          }
+                        }
+                      });
+                    }, { root: canvasContainer, rootMargin: '300px 0px 300px 0px' });
+
+                    wrappers.forEach(function(wrp) {
+                      currentPdfObserver.observe(wrp);
+                    });
+                  } else {
+                    for (var p = 1; p <= numPages; p++) {
+                      (function(pNum, wrp) {
+                        pdfDoc.getPage(pNum).then(function(page) {
+                          renderPageContent(page, wrp);
+                        });
+                      })(p, wrappers[p - 1]);
+                    }
+                  }
+
+                  setTimeout(function() { try { updateCustomScrollbar(canvasContainer); } catch (e) {} }, 300);
+                  if (options.preservePage) {
+                    setTimeout(function() {
+                      scrollToPage(options.preservePage);
+                    }, 150);
+                  }
+                }).catch(function(err) {
+                  console.error('Failed to get page 1', err);
+                });
+              }).catch(function(err) {
+                console.error('PDF load error', err);
+                clearHolder();
+                var errMsg = document.createElement('div');
+                errMsg.style.padding = '20px';
+                errMsg.style.textAlign = 'center';
+                errMsg.style.color = '#ff6b6b';
+                var isBlobErr = typeof url === 'string' && url.indexOf('blob:') === 0;
+                if (isBlobErr) {
+                  errMsg.innerHTML = '<strong>Local PDF Expired:</strong><br><br>This local PDF was available for the previous session only.<br>Please click <em>"Choose file"</em> in the PDF Menu on the left to re-select the PDF file.';
+                } else {
+                  errMsg.textContent = 'Failed to load PDF: ' + err.message;
+                }
+                canvasContainer.appendChild(errMsg);
+              });
+            }
+
+            // Menu management: store items in localStorage & IndexedDB
+            function getPdfStorage() {
+              if (window.secondStorage) return window.secondStorage;
+              return {
+                savePdfBlob: function(id, blob) {
+                  return new Promise(function(resolve, reject) {
+                    var req = indexedDB.open("YDD_Storage", 2);
+                    req.onupgradeneeded = function(e) {
+                      var db = e.target.result;
+                      if (!db.objectStoreNames.contains("images")) db.createObjectStore("images");
+                    };
+                    req.onsuccess = function(e) {
+                      var db = e.target.result;
+                      var tx = db.transaction("images", "readwrite");
+                      tx.objectStore("images").put(blob, "pdf_" + id);
+                      tx.oncomplete = function() { db.close(); resolve(); };
+                      tx.onerror = function() { db.close(); reject(tx.error); };
+                    };
+                    req.onerror = function() { reject(req.error); };
+                  });
+                },
+                getPdfBlob: function(id) {
+                  return new Promise(function(resolve, reject) {
+                    var req = indexedDB.open("YDD_Storage", 2);
+                    req.onupgradeneeded = function(e) {
+                      var db = e.target.result;
+                      if (!db.objectStoreNames.contains("images")) db.createObjectStore("images");
+                    };
+                    req.onsuccess = function(e) {
+                      var db = e.target.result;
+                      var tx = db.transaction("images", "readonly");
+                      var getReq = tx.objectStore("images").get("pdf_" + id);
+                      getReq.onsuccess = function() { db.close(); resolve(getReq.result); };
+                      getReq.onerror = function() { db.close(); reject(getReq.error); };
+                    };
+                    req.onerror = function() { reject(req.error); };
+                  });
+                },
+                deletePdfBlob: function(id) {
+                  return new Promise(function(resolve, reject) {
+                    var req = indexedDB.open("YDD_Storage", 2);
+                    req.onsuccess = function(e) {
+                      var db = e.target.result;
+                      var tx = db.transaction("images", "readwrite");
+                      tx.objectStore("images").delete("pdf_" + id);
+                      tx.oncomplete = function() { db.close(); resolve(); };
+                      tx.onerror = function() { db.close(); resolve(); };
+                    };
+                    req.onerror = function() { resolve(); };
+                  });
+                }
+              };
+            }
+
+            function isPdfFile(file) {
+              if (!file) return false;
+              var name = (file.name || '').toLowerCase();
+              var mime = (file.type || '').toLowerCase();
+              return mime === 'application/pdf' || mime === 'application/octet-stream' && /\.pdf$/i.test(name) || /\.pdf$/i.test(name);
+            }
+
+            function loadMenu() {
+              try{
+                var raw = localStorage.getItem('flipbookMenu');
+                return raw? JSON.parse(raw): [];
+              }catch(e){return []}
+            }
+            function saveMenu(items){
+              localStorage.setItem('flipbookMenu', JSON.stringify(items||[]));
+            }
+            function saveMenuSafe(items) {
+              try {
+                saveMenu(items);
+                return true;
+              } catch (err) {
+                console.warn('flipbookMenu quota exceeded in localStorage.', err);
+                return false;
+              }
+            }
+
+            function openPdfInNewTab(it) {
+              if (it.url) {
+                window.open(it.url, '_blank');
+              } else if (it.id) {
+                getPdfStorage().getPdfBlob(it.id).then(function(blob) {
+                  if (blob) {
+                    var url = URL.createObjectURL(blob);
+                    window.open(url, '_blank');
+                  } else if (it.dataUrl) {
+                    openDataUrlInNewTab(it.dataUrl);
+                  }
+                }).catch(function() {
+                  if (it.dataUrl) openDataUrlInNewTab(it.dataUrl);
+                });
+              } else if (it.dataUrl) {
+                openDataUrlInNewTab(it.dataUrl);
+              } else if (it.blobUrl) {
+                window.open(it.blobUrl, '_blank');
+              }
+            }
+
+            function openDataUrlInNewTab(dataUrl) {
+              try {
+                var base64 = (dataUrl.split(',')[1] || '');
+                var raw = atob(base64);
+                var len = raw.length;
+                var u8 = new Uint8Array(len);
+                for (var i = 0; i < len; i++) u8[i] = raw.charCodeAt(i);
+                var blob = new Blob([u8], { type: 'application/pdf' });
+                var url = URL.createObjectURL(blob);
+                window.open(url, '_blank');
+              } catch (e) {
+                console.error('Error opening dataUrl PDF in new tab', e);
+              }
+            }
+
+            function downloadPdfItem(it) {
+              var filename = (it.name || 'document').replace(/[\/\\?%*:|"<>]/g, '_') + '.pdf';
+              var downloadUrl = it.url || it.blobUrl;
+              var createdUrl = null;
+
+              if (!downloadUrl && it.dataUrl) {
+                try {
+                  var base64 = (it.dataUrl.split(',')[1] || '');
+                  var raw = atob(base64);
+                  var len = raw.length;
+                  var u8 = new Uint8Array(len);
+                  for (var i = 0; i < len; i++) u8[i] = raw.charCodeAt(i);
+                  var blob = new Blob([u8], { type: 'application/pdf' });
+                  createdUrl = URL.createObjectURL(blob);
+                  downloadUrl = createdUrl;
+                } catch (e) {
+                  console.error('Error preparing PDF download', e);
+                  return;
+                }
+              }
+              if (!downloadUrl) return;
+
+              var a = document.createElement('a');
+              a.href = downloadUrl;
+              a.download = filename;
+              a.target = '_blank';
+              document.body.appendChild(a);
+              a.click();
+              a.remove();
+              if (createdUrl) {
+                setTimeout(function() { URL.revokeObjectURL(createdUrl); }, 10000);
+              }
+            }
+
+            function renderMenuList(){
+              var list = document.getElementById('menu-list');
+              if (!list) return;
+              list.innerHTML = '';
+              var items = loadMenu();
+
+              if (items.length === 0) {
+                var emptyMsg = document.createElement('div');
+                emptyMsg.style.cssText = 'padding: 12px; text-align: center; color: var(--text-secondary); font-size: 0.85rem;';
+                emptyMsg.textContent = 'No PDF items added yet. Add a PDF below.';
+                list.appendChild(emptyMsg);
+                return;
+              }
+
+              items.forEach(function(it, idx) {
+                var row = document.createElement('div');
+                row.className = 'pdf-item-row';
+                row.draggable = true;
+
+                // Drag handle
+                var dragHandle = document.createElement('span');
+                dragHandle.className = 'pdf-drag-handle';
+                dragHandle.textContent = '☰';
+                dragHandle.title = 'Drag to reorder';
+
+                // Select / Render PDF Button
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'category-header';
+                btn.style.cssText = 'text-align: left !important; width: 100%; padding: 6px 8px; font-size: 0.85rem; flex: 1; min-width: 0; display: flex; align-items: center; background: transparent !important; border: none !important; box-shadow: none !important;';
+
+                var icon = document.createElement('img');
+                icon.src = 'assets/icons/PDF.png';
+                icon.alt = 'PDF';
+                icon.style.cssText = 'width: 18px; height: 18px; object-fit: contain; margin-right: 6px; flex-shrink: 0;';
+
+                var label = document.createElement('span');
+                label.style.cssText = 'overflow: hidden; text-overflow: ellipsis; white-space: nowrap;';
+                label.textContent = it.name || ('Item ' + (idx + 1));
+
+                btn.appendChild(icon);
+                btn.appendChild(label);
+
+                btn.addEventListener('click', function() {
+                  list.querySelectorAll('.pdf-menu-selected').forEach(function(selectedBtn) {
+                    selectedBtn.classList.remove('pdf-menu-selected');
+                  });
+                  btn.classList.add('pdf-menu-selected');
+                  if (it.id) {
+                    getPdfStorage().getPdfBlob(it.id).then(function(blob) {
+                      if (blob) {
+                        var blobUrl = URL.createObjectURL(blob);
+                        renderPDF(blobUrl, document.getElementById('holder'));
+                      } else if (it.dataUrl) {
+                        renderPDF(it.dataUrl, document.getElementById('holder'));
+                      } else if (it.url) {
+                        renderPDF(it.url, document.getElementById('holder'));
+                      } else {
+                        alert('PDF file not found in storage. Please re-add the file.');
+                      }
+                    }).catch(function() {
+                      if (it.dataUrl) renderPDF(it.dataUrl, document.getElementById('holder'));
+                      else if (it.url) renderPDF(it.url, document.getElementById('holder'));
+                    });
+                  } else if (it.dataUrl) {
+                    renderPDF(it.dataUrl, document.getElementById('holder'));
+                  } else if (it.url) {
+                    renderPDF(it.url, document.getElementById('holder'));
+                  }
+                });
+
+                // Open in New Tab Button
+                var newTabBtn = document.createElement('button');
+                newTabBtn.type = 'button';
+                newTabBtn.className = 'pdf-action-btn';
+                newTabBtn.title = 'Open Raw PDF in New Tab';
+                newTabBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>';
+                newTabBtn.addEventListener('click', function(e) {
+                  e.stopPropagation();
+                  openPdfInNewTab(it);
+                });
+
+                // Delete Button
+                var delBtn = document.createElement('button');
+                delBtn.type = 'button';
+                delBtn.className = 'pdf-action-btn delete';
+                delBtn.title = 'Delete Item';
+                delBtn.innerHTML = '✕';
+                delBtn.addEventListener('click', function(e) {
+                  e.stopPropagation();
+                  if (it.id) {
+                    getPdfStorage().deletePdfBlob(it.id);
+                  }
+                  items.splice(idx, 1);
+                  saveMenu(items);
+                  renderMenuList();
+                });
+
+                // Drag and Drop
+                row.addEventListener('dragstart', function(e) {
+                  e.dataTransfer.setData('text/plain', idx);
+                  row.classList.add('dragging');
+                });
+                row.addEventListener('dragend', function() {
+                  row.classList.remove('dragging');
+                });
+                row.addEventListener('dragover', function(e) {
+                  e.preventDefault();
+                });
+                row.addEventListener('drop', function(e) {
+                  e.preventDefault();
+                  var fromIdx = parseInt(e.dataTransfer.getData('text/plain'), 10);
+                  if (!isNaN(fromIdx) && fromIdx !== idx) {
+                    var moved = items.splice(fromIdx, 1)[0];
+                    items.splice(idx, 0, moved);
+                    saveMenu(items);
+                    renderMenuList();
+                  }
+                });
+
+                row.appendChild(dragHandle);
+                row.appendChild(btn);
+                row.appendChild(newTabBtn);
+                row.appendChild(delBtn);
+
+                list.appendChild(row);
+              });
+            }
+
+            function migrateLegacyDataUrls() {
+              var items = loadMenu();
+              var changed = false;
+              var promises = [];
+              items.forEach(function(it) {
+                if (!it.id && it.dataUrl && typeof it.dataUrl === 'string' && it.dataUrl.indexOf('data:') === 0) {
+                  var pdfId = 'pdf_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+                  try {
+                    var base64 = (it.dataUrl.split(',')[1] || '');
+                    var raw = atob(base64);
+                    var len = raw.length;
+                    var u8 = new Uint8Array(len);
+                    for (var i = 0; i < len; i++) u8[i] = raw.charCodeAt(i);
+                    var blob = new Blob([u8], { type: 'application/pdf' });
+                    it.id = pdfId;
+                    delete it.dataUrl;
+                    changed = true;
+                    promises.push(getPdfStorage().savePdfBlob(pdfId, blob));
+                  } catch (ex) {
+                    console.warn('Could not migrate legacy Data URL to IndexedDB:', ex);
+                  }
+                }
+              });
+              if (changed) {
+                Promise.all(promises).then(function() {
+                  saveMenu(items);
+                });
+              }
+            }
+
+            document.getElementById('menu-add-btn').addEventListener('click', function(){
+              var name = document.getElementById('menu-name-input').value.trim();
+              var url = document.getElementById('menu-url-input').value.trim();
+              var items = loadMenu();
+              if(url){
+                items.push({name: name || url, url: url});
+                saveMenu(items); renderMenuList();
+                document.getElementById('menu-name-input').value=''; document.getElementById('menu-url-input').value='';
+              } else {
+                alert('Please provide a PDF URL.');
+              }
+            });
+
+            document.getElementById('menu-local-btn').addEventListener('click', function(){
+              document.getElementById('menu-local-input').click();
+            });
+
+            document.getElementById('menu-local-input').addEventListener('change', function(e){
+              var file = e.target.files && e.target.files[0];
+              if(!file) return;
+              if(!isPdfFile(file)){
+                alert('Please choose a valid PDF file.');
+                e.target.value = '';
+                return;
+              }
+
+              var name = document.getElementById('menu-name-input').value.trim();
+              var displayName = name || file.name.replace(/\.pdf$/i, '');
+              var pdfId = 'pdf_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+
+              getPdfStorage().savePdfBlob(pdfId, file).then(function() {
+                var items = loadMenu();
+                var localItem = {
+                  id: pdfId,
+                  name: displayName,
+                  url: ''
+                };
+
+                items.push(localItem);
+                saveMenu(items);
+                renderMenuList();
+                document.getElementById('menu-name-input').value = '';
+                document.getElementById('menu-url-input').value = '';
+                var blobUrl = URL.createObjectURL(file);
+                renderPDF(blobUrl, document.getElementById('holder'));
+              }).catch(function(err) {
+                console.error('Error saving local PDF to IndexedDB:', err);
+                alert('Could not save PDF file to browser storage.');
+              });
+              e.target.value = '';
+            });
+
+            document.getElementById('menu-export-btn').addEventListener('click', function(){
+              var items = loadMenu();
+              var exportPromises = items.map(function(it) {
+                var itemCopy = Object.assign({}, it);
+                if (itemCopy.id) {
+                  return getPdfStorage().getPdfBlob(itemCopy.id).then(function(blob) {
+                    if (blob) {
+                      return new Promise(function(res) {
+                        var r = new FileReader();
+                        r.onload = function() { itemCopy.dataUrl = r.result; res(itemCopy); };
+                        r.onerror = function() { res(itemCopy); };
+                        r.readAsDataURL(blob);
+                      });
+                    }
+                    return itemCopy;
+                  }).catch(function() { return itemCopy; });
+                }
+                return Promise.resolve(itemCopy);
+              });
+
+              Promise.all(exportPromises).then(function(exportedItems) {
+                var appData = {};
+                for (var i = 0; i < localStorage.length; i++) {
+                  var key = localStorage.key(i);
+                  appData[key] = localStorage.getItem(key);
+                }
+
+                var payload = {
+                  version: 1,
+                  type: 'ydd-full-backup',
+                  exportedAt: new Date().toISOString(),
+                  localStorage: appData,
+                  userShortcuts: JSON.parse(localStorage.getItem('userShortcuts') || '[]'),
+                  userCategorizedList: JSON.parse(localStorage.getItem('userCategorizedList') || '[]'),
+                  flipbookMenu: exportedItems
+                };
+
+                var blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a'); a.href=url; a.download='startpage-full-backup.json'; document.body.appendChild(a); a.click(); a.remove();
+                setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+              });
+            });
+
+            document.getElementById('menu-import-btn').addEventListener('click', function(){
+              document.getElementById('menu-import-input').click();
+            });
+            document.getElementById('menu-import-input').addEventListener('change', function(e){
+              var f = e.target.files[0]; if(!f) return;
+              var r = new FileReader(); r.onload = function(){
+                try{
+                  var data = JSON.parse(r.result);
+                  var rawItems = Array.isArray(data.flipbookMenu) ? data.flipbookMenu : [];
+                  var importPromises = rawItems.map(function(it) {
+                    var itemCopy = Object.assign({}, it);
+                    if (itemCopy.dataUrl && typeof itemCopy.dataUrl === 'string' && itemCopy.dataUrl.indexOf('data:') === 0) {
+                      var pdfId = itemCopy.id || ('pdf_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7));
+                      itemCopy.id = pdfId;
+                      try {
+                        var base64 = (itemCopy.dataUrl.split(',')[1] || '');
+                        var raw = atob(base64);
+                        var len = raw.length;
+                        var u8 = new Uint8Array(len);
+                        for (var i = 0; i < len; i++) u8[i] = raw.charCodeAt(i);
+                        var pdfBlob = new Blob([u8], { type: 'application/pdf' });
+                        delete itemCopy.dataUrl;
+                        return getPdfStorage().savePdfBlob(pdfId, pdfBlob).then(function() { return itemCopy; });
+                      } catch (ex) {
+                        return Promise.resolve(itemCopy);
+                      }
+                    }
+                    return Promise.resolve(itemCopy);
+                  });
+
+                  Promise.all(importPromises).then(function(restoredItems) {
+                    var storageRoot = data && data.localStorage && typeof data.localStorage === 'object' ? data.localStorage : data;
+                    if (data && (data.type === 'ydd-full-backup' || data.version === 1 || data.flipbookMenu !== undefined || data.userCategorizedList !== undefined || data.userShortcuts !== undefined || data.localStorage !== undefined)) {
+                      Object.keys(storageRoot).forEach(function(key){
+                        if (key === 'userShortcuts' || key === 'userCategorizedList' || key === 'flipbookMenu') return;
+                        var val = storageRoot[key];
+                        localStorage.setItem(key, typeof val === 'object' && val !== null ? JSON.stringify(val) : String(val));
+                      });
+
+                      saveMenu(restoredItems);
+                      if (Array.isArray(data.userShortcuts)) {
+                        localStorage.setItem('userShortcuts', JSON.stringify(data.userShortcuts));
+                      }
+                      if (Array.isArray(data.userCategorizedList)) {
+                        localStorage.setItem('userCategorizedList', JSON.stringify(data.userCategorizedList));
+                      }
+
+                      renderMenuList();
+                      showEmptyState();
+                      alert('Backup restored.');
+                      return;
+                    }
+
+                    if (Array.isArray(data)) {
+                      saveMenu(data);
+                      renderMenuList();
+                      alert('Menu restored.');
+                    } else {
+                      alert('Invalid backup file');
+                    }
+                  });
+                } catch(err) {
+                  alert('Failed to parse file');
+                }
+              };
+              r.readAsText(f);
+              e.target.value = '';
+            });
+
+            document.getElementById('menu-clear-btn').addEventListener('click', function(){ if(confirm('Clear all saved menu items?')){ saveMenu([]); renderMenuList(); }});
+
+            renderMenuList();
+            showEmptyState();
+          </script>
+        </div>
+      </div>
+      <div class="column-left">
+        <div class="master-clock-container">
+          <div id="digital-clock-container" class="clock-container">
+            <span id="clock-hours">00</span
+            ><span class="clock-separator">:</span
+            ><span id="clock-minutes">00</span
+            ><span class="clock-separator">:</span
+            ><span id="clock-seconds">00</span>
+            <span id="clock-ampm"></span>
+          </div>
+
+          <div id="clock-date-row" class="clock-container">
+            <span id="clock-day">Friday</span>
+            <span id="clock-date">Nov 28</span>
+          </div>
+          <div id="analog-clock-container" class="clock-container">
+            <svg id="analog-clock-svg" viewBox="0 0 200 200">
+              <defs>
+                <path
+                  id="scalloped-edge"
+                  d=" M 100, 10 A 90,90 0 0,1 163.64,36.36 90,90 0 0,1 190,100 90,90 0 0,1 163.64,163.64 90,90 0 0,1 100,190 90,90 0 0,1 36.36,163.64 90,90 0 0,1 10,100 90,90 0 0,1 36.36,36.36 90,90 0 0,1 100,10 Z"
+                />
+              </defs>
+              <use href="#scalloped-edge" class="clock-face" />
+              <g class="clock-hands">
+                <line id="hour-hand" x1="100" y1="100" x2="100" y2="65" />
+                <line id="minute-hand" x1="100" y1="100" x2="100" y2="40" />
+                <circle id="second-dot" cx="100" cy="25" r="6" />
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="text-container">
+          <h1 id="greeting-text"></h1>
+          <p id="welcome-text" contenteditable="true" title="Click to edit"></p>
+        </div>
+      </div>
+      <div class="column-right">
+        <div id="pinned-tasks-widget" class="widget-container hidden">
+          <h3 class="pinned-title">Your Tasks</h3>
+          <ul id="pinned-tasks-list"></ul>
+        </div>
+        <div id="weather-widget" class="widget-container">
+          <div id="weather-setup-ui" class="hidden">
+            <h3>Enter your location for Weather Forecast</h3>
+            <br />
+            <div
+              class="weather-setup-controls"
+              style="display: flex; gap: 0.5rem; width: 100%"
+            >
+              <input
+                type="text"
+                id="widget-location-input"
+                placeholder="Enter city name..."
+                style="flex: 3"
+              />
+              <button
+                id="widget-save-btn"
+                class="settings-button"
+                style="flex: 1"
+              >
+                Save
+              </button>
+              <button
+                id="widget-gps-btn"
+                class="settings-button"
+                title="Detect Location"
+                style="
+                  flex: 1;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  padding: 0.5rem;
+                "
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                  <g fill="none" fill-rule="evenodd">
+                    <path
+                      d="M20 0v20H0V0zM10.494 19.382l-.009.001-.059.03-.017.003-.012-.003-.059-.03c-.008-.003-.016-.001-.02.004l-.003.009-.015.356.005.016.009.011.086.062.013.003.01-.003.086-.062.01-.013.003-.014-.014-.356a.019.019 0 0 0-.014-.015m.221-.094-.011.002-.154.077-.008.008-.003.01.015.358.004.01.007.006.167.078c.01.003.019 0 .024-.007l.004-.011-.029-.512a.016.016 0 0 0-.016-.019m-.596.002a.019.019 0 0 0-.022.005l-.005.011-.029.512c0 .01.006.017.014.02l.013-.002.167-.077.008-.007.003-.009.015-.358-.003-.01-.008-.008z"
+                    />
+                    <path
+                      fill="currentColor"
+                      fill-rule="nonzero"
+                      d="M5.6 13.867a.833.833 0 0 1 .467 1.6c-.417.122-.717.25-.91.367.199.119.512.253.947.377C7.067 16.485 8.444 16.667 10 16.667s2.933-.182 3.896-.457c.435-.124.748-.258.947-.377-.192-.117-.492-.245-.909-.367a.833.833 0 0 1 .466-1.6c.557.163 1.067.371 1.459.638.362.249.808.684.808 1.328 0 .653-.457 1.09-.825 1.34-.398.268-.919.477-1.488.64A15.378 15.378 0 0 1 10 18.333c-1.603 0-3.205-.192-4.353-.52a13.567 13.567 0 0 1-1.489-.641C3.79 16.92 3.333 16.483 3.333 15.833c0-.644.446-1.079.808-1.328.392-.267.902-.476 1.459-.638M10 1.667A6.25 6.25 0 0 1 16.25 7.917c0 2.14-1.166 3.88-2.375 5.116A13.668 13.668 0 0 1 12.332 14.38c-.496.372-1.627 1.068-1.627 1.068a1.425 1.425 0 0 1-1.409 0s-1.13-.697-1.626-1.068a13.575 13.575 0 0 1-1.543-1.346c-1.209-1.236-2.376-2.977-2.376-5.117a6.25 6.25 0 0 1 6.25-6.25m0 4.583a1.667 1.667 0 1 0 0 3.333 1.667 1.667 0 0 0 0-3.333"
+                    />
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="weather-details">
+            <div id="weather-condition">Loading Weather...</div>
+            <div class="weather-info-bar">
+              <span>Humidity</span>
+              <div class="progress-bar-container">
+                <div id="humidity-bar" class="progress-bar"></div>
+              </div>
+              <span id="humidity-value">--%</span>
+            </div>
+            <div class="weather-extra-info">
+              <div id="feels-like-temp" class="info-box">Feels like --°</div>
+              <div id="location" class="info-box">Unknown</div>
+            </div>
+          </div>
+          <div class="weather-current">
+            <div id="weather-icon"></div>
+            <div id="current-temp">--°</div>
+          </div>
+        </div>
+
+        <form
+          id="search-form"
+          class="widget-container"
+          action="https://www.google.com/search"
+          method="GET"
+          target="_blank"
+        >
+          <button
+            type="button"
+            id="search-provider-button"
+            title="Change Search Engine"
+          >
+            <img
+              id="current-provider-icon"
+              src="assets/search-tools/google.png"
+              alt="Google"
+            />
+            <span class="dropdown-caret">▼</span>
+          </button>
+
+          <input
+            type="text"
+            id="search-input"
+            name="q"
+            required
+            autocomplete="off"
+          />
+
+          <button type="button" id="voice-search-btn" title="Voice Search">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-mic-fill"
+              viewBox="0 0 16 16"
+            >
+              <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0z" />
+              <path
+                d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"
+              />
+            </svg>
+          </button>
+          <button type="submit" id="search-button" class="search-btn">
+            Search
+          </button>
+          <button type="button" id="open-site-button" class="search-btn hidden">
+            Open
+          </button>
+
+          <div id="search-dropdown" class="hidden">
+            <div class="dropdown-section">
+              <h4>Search Engines</h4>
+              <div id="dropdown-engines" class="dropdown-grid"></div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-section">
+              <h4>Platforms</h4>
+              <div id="dropdown-platforms" class="dropdown-grid"></div>
+            </div>
+          </div>
+        </form>
+
+        <div id="quote-widget" class="widget-container hidden">
+          <div class="quote-content">
+            <p id="quote-text">"Loading quote..."</p>
+            <span id="quote-author">- Author</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="info-modal-overlay" class="hidden">
+      <div class="modal-box">
+        <button class="modal-close" id="info-modal-close">&times;</button>
+        <h2>Did You Know? (Read this)</h2>
+        <div class="info-content">
+          <div class="info-item">
+            <strong>👋 Personalized Greeting</strong>
+            <p>
+              <b>Double-click</b> the Greeting text (e.g. Good Morning) text to
+              enter your Name.
+            </p>
+          </div>
+          <div class="info-item">
+            <strong>⌨️ Key Shortcuts</strong>
+            <p>
+              Use <b>keyboard shortcuts</b> to navigate faster. Press
+              <code>/</code> to search, <code>V</code> to voice search,
+              <code>Z</code> for Zen Mode, <code>T</code> for To-Do, or
+              <code>1-9</code> for your Shortcuts.
+            </p>
+          </div>
+          <div class="info-item">
+            <strong> 🔗 Link Direction</strong>
+            <p>
+              Open <b>Link Direction</b> in Settings to change the direction
+              <b>(New Tab / Current Tab)</b> of Google Apps, AI Tools,
+              Shortcuts, etc.
+            </p>
+          </div>
+          <div class="info-item">
+            <strong>🎙️ Voice Search Issue</strong>
+            <p>
+              If you are using Gecko based browser (like Firefox), you can't use
+              Voice Search. It's a
+              <b>privacy feature</b> of Gecko based browsers.
+            </p>
+          </div>
+          <div class="info-item">
+            <strong>🔍 Switch Engine</strong>
+            <p>
+              Click the current <b>"Search Engine"</b> (e.g. Google) to change
+              <b>Search Engine</b>. Also click <b>Open</b> to open the
+              <b>Search Engine</b> or the selected <b>Platform</b>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="key-modal-overlay" class="hidden">
+      <div class="modal-box">
+        <button class="modal-close" id="key-modal-close">&times;</button>
+        <h2>Keyboard Shortcuts</h2>
+        <p class="modal-subtitle">
+          Click a button, then press a key to rebind.
+        </p>
+        <div id="key-list" class="key-grid"></div>
+        <div id="key-note-container"></div>
+        <div class="modal-footer">
+          <button id="reset-keys-btn" class="settings-button danger">
+            Reset to Defaults
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="link-direction-modal-overlay" class="hidden">
+      <div class="modal-box">
+        <button class="modal-close" id="link-direction-modal-close">
+          &times;
+        </button>
+        <h2>Link Direction</h2>
+        <p class="modal-subtitle">Choose where your links open.</p>
+        <div id="link-direction-list" class="key-grid"></div>
+        <div class="modal-footer">
+          <button id="reset-link-direction-btn" class="settings-button danger">
+            Reset to Defaults
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="gps-consent-modal-overlay"
+      class="hidden"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 3000;
+        opacity: 1;
+        transition: opacity 0.3s;
+      "
+    >
+      <div class="modal-box" style="max-width: 400px; text-align: center">
+        <h2 style="color: var(--accent-color); margin-bottom: 1rem">
+          Location Access
+        </h2>
+        <p
+          style="
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            text-align: left;
+          "
+        >
+          Your coordinates are used strictly to fetch local weather data. When
+          you proceed, your browser will securely ping Open-Meteo (for weather)
+          and BigDataCloud (for the city name).
+        </p>
+        <p
+          style="
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+          "
+        >
+          This data is saved locally on your device. We do not track you in the
+          background, and we have no server to store your location data.
+        </p>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+          "
+        >
+          <input
+            type="checkbox"
+            id="gps-consent-checkbox"
+            class="custom-rounded-checkbox"
+          />
+          <label
+            for="gps-consent-checkbox"
+            style="
+              color: var(--text-primary);
+              font-size: 0.9rem;
+              cursor: pointer;
+            "
+            >Don't show this warning again</label
+          >
+        </div>
+        <div style="display: flex; gap: 10px; justify-content: center">
+          <button
+            id="gps-consent-agree"
+            class="settings-button"
+            style="width: 120px"
+          >
+            I Agree
+          </button>
+          <button
+            id="gps-consent-cancel"
+            class="settings-button"
+            style="
+              width: 120px;
+              background-color: var(--bg-interactive);
+              color: var(--text-primary);
+            "
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left-side circular arrow link to index2.html -->
+    <a href="index2.html" class="side-nav-left" aria-label="Previous page (index2.html)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M19 12H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+    <!-- Right-side circular arrow link to index.html -->
+    <a href="index.html" class="side-nav-right" aria-label="Next page (index.html)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
+<!-- [index.html] YourDynamicDashboard V2.2 (Ditom Baroi Antu - 2025-26) -->
