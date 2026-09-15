@@ -1130,8 +1130,8 @@ body.transparency-active #welcome-modal-overlay {
   border-radius: 999px;
   background: linear-gradient(
     135deg,
-    rgba(247, 247, 247, 0.12),
-    rgba(175, 175, 175, 0.05)
+    rgba(75, 75, 255, 0.25),
+    rgba(255, 75, 75, 0.25)
   );
   font-size: 0.7rem;
   font-weight: 700;
