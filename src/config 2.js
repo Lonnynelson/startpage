@@ -336,83 +336,112 @@ export const QUOTES = [
     text: "The only way to do great work is to love what you do.",
     author: "Steve Jobs",
   },
-   {
-    text: "There are many . . . offices connected with the cause of God which our sisters are better qualified to fill than our brethren, and in which they might do efficient service.",
-    author: "Ellen White",
+  {
+    text: "Code is like humor. When you have to explain it, it’s bad.",
+    author: "Cory House",
+  },
+  { text: "Simplicity is the soul of efficiency.", author: "Austin Freeman" },
+  { text: "Talk is cheap. Show me the code.", author: "Linus Torvalds" },
+  {
+    text: "First, solve the problem. Then, write the code.",
+    author: "John Johnson",
   },
   {
-    text: "Women are needed who are not self-important, but gentle in manners and lowly of heart, who will work with the meekness of Christ.",
-    author: "Ellen White",
+    text: "We suffer more often in imagination than in reality.",
+    author: "Seneca",
+  },
+  { text: "Discipline equals freedom.", author: "Jocko Willink" },
+  { text: "The obstacle is the way.", author: "Ryan Holiday" },
+  {
+    text: "You have the right to work, but never to the fruit of work.",
+    author: "Shree Krishna",
+  },
+  { text: "Change is the law of the universe.", author: "Shree Krishna" },
+  {
+    text: "Man is made by his belief. As he believes, so he is.",
+    author: "Shree Krishna",
   },
   {
-    text: "Therefore, my dear brothers and sisters, stand firm. Let nothing move you. Always give yourselves fully to the work of the Lord, because you know that your labour in the Lord is not in vain.",
-    author: "1 Corinthians 15:58",
+    text: "Nature does not hurry, yet everything is accomplished.",
+    author: "Lao Tzu",
   },
   {
-    text: "Be on your guard; stand firm in the faith; be courageous; be strong.",
-    author: "1 Corinthians 16:13",
+    text: "Arise, awake, and stop not till the goal is reached.",
+    author: "Swami Vivekananda",
   },
+  { text: "Your ego is your soul's worst enemy.", author: "Rusty Eric" },
   {
-    text: "With man this is impossible, but with God all things are possible.",
-    author: "Matthew 19:26",
-  },
-  {
-    text: "So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.",
-    author: "Isaiah 41:10",
-  },
-  {
-    text: "For I know the plans I have for you,” declares the Lord, “plans to prosper you and not to harm you, plans to give you hope and a future.",
-    author: "Jeremiah 29:11",
-  },
-  {
-    text: "The Lord Himself goes before you and will be with you; He will never leave you nor forsake you. Do not be afraid; do not be discouraged.",
-    author: "Deuteronomy 31:8",
-  },
-  {
-    text: "The righteous cry out, and the Lord hears them; He delivers them from all their troubles.",
-    author: "Psalm 34:17",
-  },
-  {
-    text: "Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.",
-    author: "Joshua 1:9",
-  },
-  {
-    text: "Cast all your anxiety on Him because He cares for you.",
-    author: "1 Peter 5:7",
-  },
-  {
-    text: "I know what it is to be in need, and I know what it is to have plenty. … I can do all this through Him who gives me strength.",
-    author: "Philippians 4:12,13",
-  },
-  {
-    text: "We have nothing to fear for the future, except as we shall forget the way the Lord has led us, and His teaching in our past history.",
-    author: "Ellen G. White",
-  },
- {
     text: "If you are going through hell, keep going.",
     author: "Winston Churchill",
   },
-  { text: "Whatever you are, be a good one.", author: "Abraham Lincoln",
+  { text: "Happiness depends upon ourselves.", author: "Aristotle" },
+  { text: "Knowledge is power.", author: "Francis Bacon" },
+  { text: "The unexamined life is not worth living.", author: "Socrates" },
+  { text: "I think, therefore I am.", author: "René Descartes" },
+  { text: "Knowledge is power.", author: "Sir Francis Bacon" },
+  {
+    text: "To be, or not to be, that is the question.",
+    author: "William Shakespeare",
   },
-  { text: "Do or do not. There is no try.", author: "Yoda",
+  { text: "I came, I saw, I conquered.", author: "Julius Caesar" },
+  { text: "Whatever you are, be a good one.", author: "Abraham Lincoln" },
+  { text: "Be loyal to what matters.", author: "Arthur Morgan" },
+  {
+    text: "We can't change what's done, we can only move on.",
+    author: "Arthur Morgan",
   },
-  { text: "Stay hungry, stay foolish.", author: "Steve Jobs",
+  { text: "Do or do not. There is no try.", author: "Yoda" },
+  {
+    text: "Simplicity is the ultimate sophistication.",
+    author: "Leonardo da Vinci",
   },
-  { text: "Turn your wounds into wisdom.", author: "Oprah Winfrey",
+  { text: "Stay hungry, stay foolish.", author: "Steve Jobs" },
+  {
+    text: "He who has a why to live can bear almost any how.",
+    author: "Friedrich Nietzsche",
   },
-  { text: "Leave no stone unturned.", author: "Euripides",
-  },
+  { text: "Turn your wounds into wisdom.", author: "Oprah Winfrey" },
+  { text: "No pressure, no diamonds.", author: "Thomas Carlyle" },
+  { text: "Leave no stone unturned.", author: "Euripides" },
   {
     text: "Have no fear of perfection, you'll never reach it.",
     author: "Marie Curie",
   },
+  { text: "Make each day your masterpiece.", author: "John Wooden" },
+  { text: "Be water, my friend.", author: "Bruce Lee" },
   {
     text: "The only real mistake is the one we learn nothing from.",
     author: "Henry Ford",
   },
   {
+    text: "Action is the foundational key to all success.",
+    author: "Pablo Picasso",
+  },
+  { text: "Dream big and dare to fail.", author: "Norman Vaughan" },
+  {
+    text: "Tough times never last, but tough people do.",
+    author: "Robert H. Schuller",
+  },
+  {
+    text: "It always seems impossible until it's done.",
+    author: "Nelson Mandela",
+  },
+  { text: "Well begun is half done.", author: "Aristotle" },
+  {
+    text: "The future depends on what you do today.",
+    author: "Mahatma Gandhi",
+  },
+  {
+    text: "What you do speaks so loudly that I cannot hear what you say.",
+    author: "Ralph Waldo Emerson",
+  },
+  {
     text: "Great things are done by a series of small things brought together.",
     author: "Vincent van Gogh",
+  },
+  {
+    text: "Success is the sum of small efforts, repeated day in and day out.",
+    author: "Robert Collier",
   },
   {
     text: "The secret of getting ahead is getting started.",
@@ -423,21 +452,43 @@ export const QUOTES = [
     author: "Albert Einstein",
   },
   {
+    text: "The journey of a thousand miles begins with one step.",
+    author: "Lao Tzu",
+  },
+  {
+    text: "It does not matter how slowly you go as long as you do not stop.",
+    author: "Confucius",
+  },
+  {
     text: "A person who never made a mistake never tried anything new.",
     author: "Albert Einstein",
   },
+  { text: "The best way out is always through.", author: "Robert Frost" },
   {
     text: "Believe you can and you're halfway there.",
     author: "Theodore Roosevelt",
   },
+  { text: "Everything you can imagine is real.", author: "Pablo Picasso" },
   {
     text:
       "The future belongs to those who believe in the beauty of their dreams.",
     author: "Eleanor Roosevelt",
   },
   {
+    text: "Start where you are. Use what you have. Do what you can.",
+    author: "Arthur Ashe",
+  },
+  {
+    text: "If opportunity doesn't knock, build a door.",
+    author: "Milton Berle",
+  },
+  {
     text: "Don't count the days, make the days count.",
     author: "Muhammad Ali",
+  },
+  {
+    text: "You miss 100% of the shots you don't take.",
+    author: "Wayne Gretzky",
   },
   {
     text:
