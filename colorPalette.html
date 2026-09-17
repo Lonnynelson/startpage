@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#10131a">
   <title>Palette Studio</title>
+  <script src="src/theme-init.js"></script>
+  <link rel="stylesheet" href="css/main.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;600;700;800&display=swap');
 
@@ -25,10 +27,9 @@
       margin: 0;
       color: var(--ink);
       font-family: Manrope, sans-serif;
-      background:
-        radial-gradient(circle at 12% 8%, rgba(157, 231, 193, 0.12), transparent 30%),
-        radial-gradient(circle at 88% 90%, rgba(255, 180, 110, 0.10), transparent 28%),
-        #0d1016;
+      background: transparent;
+      height: auto;
+      overflow: auto;
     }
     button, input { font: inherit; }
     button { cursor: pointer; }
@@ -96,6 +97,15 @@
     .modal input { width: 100%; height: 44px; margin: 18px 0; padding: 0 12px; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); background: rgba(255,255,255,.06); }
     .modal-actions { display: flex; justify-content: end; gap: 8px; }
 
+    .ydd-palette-shell {
+      position: relative;
+      z-index: 1;
+    }
+    .ydd-palette-shell .panel {
+      background: var(--widget-bg, var(--panel));
+      border-color: var(--widget-border, var(--line));
+    }
+
     @media (max-width: 900px) {
       .workspace { grid-template-columns: 1fr; }
       .side-panel { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
@@ -117,6 +127,49 @@
   </style>
 </head>
 <body>
+  <div id="bg-blur-overlay"></div>
+  <div id="sample-dark-background" aria-hidden="true">
+    <canvas id="sample-dark-signal-canvas"></canvas>
+  </div>
+
+  <div class="ydd-palette-shell">
+    <button id="todo-toggle-button" class="corner-button top-left" aria-label="Open To-Do list" aria-controls="todo-popup" aria-expanded="false">&#9776;</button>
+    <button id="ai-tools-toggle-button" class="corner-button bottom-left" aria-label="Open AI tools and social links" aria-controls="ai-tools-popup" aria-expanded="false">&#10024;</button>
+    <button id="apps-toggle-button" class="corner-button top-right" aria-label="Open Google Apps" aria-controls="apps-popup" aria-expanded="false">&#9638;</button>
+    <button id="settings-toggle-button" class="corner-button bottom-right" aria-label="Open settings" aria-controls="settings-popup" aria-expanded="false">&#9881;</button>
+
+    <div id="todo-popup" class="popup-container" aria-hidden="true">
+      <h2>To-Do List</h2>
+      <div id="todo-list"></div>
+      <form id="todo-add-form">
+        <input id="todo-input" type="text" placeholder="Add a new task..." maxlength="50" autocomplete="off">
+        <button id="todo-add-btn" type="submit">+</button>
+      </form>
+    </div>
+    <div id="ai-tools-popup" class="popup-container" aria-hidden="true">
+      <div class="tools-header">
+        <div class="tool-tabs-container">
+          <button class="tool-tab-button active" data-tab="ai">AI Tools</button>
+          <button class="tool-tab-button" data-tab="social">Social Media</button>
+        </div>
+        <button id="tool-edit-button" class="tool-edit-button" aria-label="Edit AI tools">Edit</button>
+      </div>
+      <div id="ai-tools-list" class="tool-list active"></div>
+      <div id="social-tools-list" class="tool-list"></div>
+    </div>
+    <div id="apps-popup" class="popup-container" aria-hidden="true">
+      <div id="apps-grid"></div>
+    </div>
+    <div id="settings-popup" class="popup-container" role="dialog" aria-hidden="true">
+      <div class="settings-tabs">
+        <button class="settings-tab-button active" type="button">Quick</button>
+        <button class="settings-tab-button" type="button">Look</button>
+      </div>
+      <button id="open-full-settings-btn" class="settings-button" type="button">Open Full Settings</button>
+      <input id="glow-effect-toggle" type="checkbox" hidden>
+    </div>
+    <span id="copyright-year" hidden></span>
+
   <main class="app-shell">
     <header class="topbar">
       <div>
@@ -336,5 +389,6 @@
       render(); loadLibrary();
     })();
   </script>
+  <script type="module" src="src/main.js"></script>
 </body>
 </html>
