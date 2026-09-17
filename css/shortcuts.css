@@ -214,7 +214,8 @@ body.gradient-light .shortcut-editor-item .icon-container:hover .icon {
   gap: 6px;
   flex-grow: 1;
 }
-.shortcut-editor-item input {
+.shortcut-editor-item input,
+#fs-add-categorized-form .add-shortcut-inputs input {
   width: 100%;
   background-color: var(--form-control-bg);
   border: 1px solid var(--form-control-border);
@@ -225,7 +226,8 @@ body.gradient-light .shortcut-editor-item .icon-container:hover .icon {
   outline: none;
   transition: border-color 0.2s;
 }
-.shortcut-editor-item input:focus {
+.shortcut-editor-item input:focus,
+#fs-add-categorized-form .add-shortcut-inputs input:focus {
   border-color: var(--accent-color);
   background-color: var(--bg-secondary);
 }
