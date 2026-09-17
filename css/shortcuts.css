@@ -217,6 +217,8 @@ body.gradient-light .shortcut-editor-item .icon-container:hover .icon {
 .shortcut-editor-item input,
 #fs-add-categorized-form .add-shortcut-inputs input {
   width: 100%;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
   background-color: var(--form-control-bg);
   border: 1px solid var(--form-control-border);
   color: var(--form-control-text);
