@@ -257,6 +257,10 @@
         border: 1px solid rgba(255, 255, 255, 0.06);
         cursor: grab;
       }
+      .pdf-item-row.pdf-menu-selected {
+        border: 2px solid #FF0000;
+        box-shadow: 0 0 0 1px rgba(255, 0, 0, 0.35), 0 6px 18px rgba(0, 0, 0, 0.2);
+      }
       .pdf-item-row.dragging {
         opacity: 0.5;
         border-color: var(--accent-color);
@@ -2255,7 +2259,7 @@
                   return;
                 }
               } else {
-                loadingTask = pdfLib.getDocument(url);
+                loadingTask = pdfLib.getDocument(normalizePdfMenuUrl(url));
               }
               currentPdfLoadingTask = loadingTask;
 
@@ -2403,6 +2407,12 @@
                   console.error('Failed to get page 1', err);
                 });
               }).catch(function(err) {
+                var fallbackUrl = getPdfFallbackUrl(url);
+                if (!options._fallbackTried && fallbackUrl) {
+                  var fallbackOptions = Object.assign({}, options, { _fallbackTried: true });
+                  renderPDF(fallbackUrl, canvasContainer, fallbackOptions);
+                  return;
+                }
                 console.error('PDF load error', err);
                 clearHolder();
                 var errMsg = document.createElement('div');
@@ -2478,6 +2488,40 @@
               var name = (file.name || '').toLowerCase();
               var mime = (file.type || '').toLowerCase();
               return mime === 'application/pdf' || mime === 'application/octet-stream' && /\.pdf$/i.test(name) || /\.pdf$/i.test(name);
+            }
+
+            function isPdfUrl(url) {
+              return typeof url === 'string' && /\.pdf(?:[?#].*)?$/i.test(url.trim());
+            }
+
+            function isAbsoluteOrSpecialPdfUrl(url) {
+              return /^(?:[a-z][a-z0-9+.-]*:|\/\/|\/)/i.test(url);
+            }
+
+            function normalizePdfMenuUrl(url) {
+              if (typeof url !== 'string') return url;
+              var trimmed = url.trim();
+              if (!trimmed || !isPdfUrl(trimmed) || isAbsoluteOrSpecialPdfUrl(trimmed)) return trimmed;
+              var pathOnly = trimmed.split(/[?#]/)[0];
+              if (/[\\/]/.test(pathOnly)) return trimmed;
+              return "PDF's/" + trimmed;
+            }
+
+            function getPdfFallbackUrl(url) {
+              if (typeof url !== 'string' || !isPdfUrl(url)) return '';
+              var trimmed = url.trim();
+              if (/^data:|^blob:/i.test(trimmed)) return '';
+              var pathOnly = trimmed.split(/[?#]/)[0];
+              if (/\/PDF's\//i.test(pathOnly) || /^PDF's\//i.test(pathOnly)) return '';
+              var filename = pathOnly.split('/').pop();
+              if (!filename || !/\.pdf$/i.test(filename)) return '';
+              return "PDF's/" + filename;
+            }
+
+            function preparePdfItemForStorage(item) {
+              var itemCopy = Object.assign({}, item);
+              if (itemCopy.url) itemCopy.url = normalizePdfMenuUrl(itemCopy.url);
+              return itemCopy;
             }
 
             function loadMenu() {
@@ -2613,10 +2657,12 @@
                 btn.appendChild(label);
 
                 btn.addEventListener('click', function() {
-                  list.querySelectorAll('.pdf-menu-selected').forEach(function(selectedBtn) {
-                    selectedBtn.classList.remove('pdf-menu-selected');
+                  list.querySelectorAll('.pdf-item-row.pdf-menu-selected').forEach(function(selectedRow) {
+                    selectedRow.classList.remove('pdf-menu-selected');
+                    selectedRow.removeAttribute('aria-current');
                   });
-                  btn.classList.add('pdf-menu-selected');
+                  row.classList.add('pdf-menu-selected');
+                  row.setAttribute('aria-current', 'true');
                   if (it.id) {
                     getPdfStorage().getPdfBlob(it.id).then(function(blob) {
                       if (blob) {
@@ -2733,7 +2779,8 @@
               var url = document.getElementById('menu-url-input').value.trim();
               var items = loadMenu();
               if(url){
-                items.push({name: name || url, url: url});
+                var normalizedUrl = normalizePdfMenuUrl(url);
+                items.push({name: name || url, url: normalizedUrl});
                 saveMenu(items); renderMenuList();
                 document.getElementById('menu-name-input').value=''; document.getElementById('menu-url-input').value='';
               } else {
@@ -2832,9 +2879,23 @@
               var r = new FileReader(); r.onload = function(){
                 try{
                   var data = JSON.parse(r.result);
-                  var rawItems = Array.isArray(data.flipbookMenu) ? data.flipbookMenu : [];
+                  var storageRoot = data && data.localStorage && typeof data.localStorage === 'object' ? data.localStorage : data;
+                  var rawItems = [];
+                  if (Array.isArray(data.flipbookMenu)) {
+                    rawItems = data.flipbookMenu;
+                  } else if (Array.isArray(data)) {
+                    rawItems = data;
+                  } else if (storageRoot && Array.isArray(storageRoot.flipbookMenu)) {
+                    rawItems = storageRoot.flipbookMenu;
+                  } else if (storageRoot && typeof storageRoot.flipbookMenu === 'string') {
+                    try {
+                      rawItems = JSON.parse(storageRoot.flipbookMenu);
+                    } catch (ex) {
+                      rawItems = [];
+                    }
+                  }
                   var importPromises = rawItems.map(function(it) {
-                    var itemCopy = Object.assign({}, it);
+                    var itemCopy = preparePdfItemForStorage(it);
                     if (itemCopy.dataUrl && typeof itemCopy.dataUrl === 'string' && itemCopy.dataUrl.indexOf('data:') === 0) {
                       var pdfId = itemCopy.id || ('pdf_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7));
                       itemCopy.id = pdfId;
@@ -2855,7 +2916,6 @@
                   });
 
                   Promise.all(importPromises).then(function(restoredItems) {
-                    var storageRoot = data && data.localStorage && typeof data.localStorage === 'object' ? data.localStorage : data;
                     if (data && (data.type === 'ydd-full-backup' || data.version === 1 || data.flipbookMenu !== undefined || data.userCategorizedList !== undefined || data.userShortcuts !== undefined || data.localStorage !== undefined)) {
                       Object.keys(storageRoot).forEach(function(key){
                         if (key === 'userShortcuts' || key === 'userCategorizedList' || key === 'flipbookMenu') return;
@@ -2878,7 +2938,7 @@
                     }
 
                     if (Array.isArray(data)) {
-                      saveMenu(data);
+                      saveMenu(restoredItems);
                       renderMenuList();
                       alert('Menu restored.');
                     } else {
