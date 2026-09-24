@@ -54,6 +54,34 @@ body.loaded .corner-button {
   transform: translateX(0) scale(1);
 }
 
+.side-nav-left,
+.side-nav-right {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--bg-tertiary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--accent-color);
+  cursor: pointer;
+  z-index: 100;
+  transition: background-color 0.2s ease;
+}
+.side-nav-left:hover,
+.side-nav-right:hover {
+  background-color: var(--bg-interactive);
+}
+.side-nav-left {
+  left: 2rem;
+}
+.side-nav-right {
+  right: 2rem;
+}
+
 .corner-button span {
   position: absolute;
   transition:
