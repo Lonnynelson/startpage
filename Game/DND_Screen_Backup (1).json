@@ -1,0 +1,43 @@
+{
+    "format":"YourDynamicDashboard",
+    "version":2,
+    "createdAt": "2026-09-24T02:47:28.544Z",
+    "localStorage": {
+        "custom---bg-secondary": "\"#3a3a3a\"",
+        "glowDefaultOffMigrated": "true",
+        "aiToolsOrder": "[\"ai-claude\",\"ai-gemini\",\"ai-chatgpt\",\"ai-copilot\",\"ai-deepseek\",\"ai-qwen\",\"ai-grok\",\"ai-meta\",\"ai-perplexity\",\"ai-mistral\"]",
+        "custom---text-placeholder": "\"#9ca3af\"",
+        "fullSettingsEverOpened": "true",
+        "hiddenToolsDefaultsMigrated": "true",
+        "custom---glow-color": "\"#c8c8c8\"",
+        "custom---text-secondary": "\"#d1d5db\"",
+        "userShortcuts": "
+        [{\"name\":\"YouTube\",\"url\":\"https://www.youtube.com/\",\"icon\":\"https://www.google.com/s2/favicons?sz=64&domain=www.youtube.com\"},
+        {\"name\":\"LinkedIn\",\"url\":\"https://www.linkedin.com/\",\"icon\":\"https://www.google.com/s2/favicons?sz=64&domain=www.linkedin.com\"},
+        {\"name\":\"Facebook\",\"url\":\"https://www.facebook.com/\",\"icon\":\"https://www.google.com/s2/favicons?sz=64&domain=www.facebook.com\"},
+        {\"name\":\"Reddit\",\"url\":\"https://www.reddit.com/\",\"icon\":\"https://www.google.com/s2/favicons?sz=64&domain=www.reddit.com\"},
+        {\"name\":\"Amazon\",\"url\":\"https://www.amazon.com/\",\"icon\":\"https://www.google.com/s2/favicons?sz=64&domain=www.amazon.com\"}]",
+        "todos": "
+        [{\"id\":\"dt-1\",\"text\":\"Checkout the Setting for Functions & Customization\",\"completed\":true,\"pinned\":true},
+        {\"id\":\"dt-2\",\"text\":\"Click INFO button in the corner of Settings\",\"completed\":false,\"pinned\":true},
+        {\"id\":\"dt-3\",\"text\":\"Double-Click the Greeting text to set your Name\",\"completed\":false,\"pinned\":true},
+        {\"id\":\"dt-4\",\"text\":\"Click the Google icon in Search Box to change it\",\"completed\":false,\"pinned\":false},
+        {\"id\":\"dt-5\",\"text\":\"Go to Settings > Appearance & select a Theme\",\"completed\":false,\"pinned\":false}]",
+        "lastSettingsView": "\"mini\"",
+        "custom---accent-color": "\"#ffffff\"",
+        "newsPermissionModelVersion": "1",
+        "defaultTasksPinned": "true",
+        "activeToolTab": "ai",
+        "custom---bg-tertiary": "\"#2d2d2d\"",
+        "completedDefaultTaskIds": "[\"dt-1\"]",
+        "welcomeShown_v3.0.0": "true",
+        "custom---text-primary": "\"#f9fafb\"",
+        "socialToolsOrder": "[\"social-facebook\",\"social-instagram\",\"social-x\",\"social-whatsapp\",\"social-discord\",\"social-linkedin\",\"social-telegram\",\"social-messenger\",\"social-snapchat\",\"social-tiktok\"]",
+        "googleAppsOrder": "[\"app-default-account\",\"app-default-google\",\"app-default-youtube\",\"app-default-gmail\",\"app-default-yt-music\",\"app-default-maps\",\"app-default-play\",\"app-default-drive\",\"app-default-photos\",\"app-default-translate\",\"app-default-calendar\",\"app-default-meet\",\"app-default-docs\",\"app-default-sheets\",\"app-default-slides\",\"app-divider\",\"app-default-chat\",\"app-default-books\",\"app-default-news\",\"app-default-forms\",\"app-default-contacts\",\"app-default-travel\",\"app-default-ads\",\"app-default-business-profile\",\"app-default-shopping\",\"app-default-ad-center\",\"app-default-tasks\",\"app-default-vids\",\"app-default-google-one\",\"app-default-keep\",\"app-default-passwords\",\"app-default-classroom\",\"app-default-blogger\",\"app-default-earth\",\"app-default-webstore\",\"app-default-notebooklm\",\"app-default-wallet\"]",
+        "miniSettingsOpenCount": "1",
+        "custom---bg-primary": "\"#0a0a0a\"",
+        "miniSettingsHintShown": "true",
+        "gradientModeActive": "false"
+    },
+    "backgroundImage": null
+}

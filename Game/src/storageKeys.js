@@ -24,6 +24,7 @@ const EXTRA_STORAGE_KEYS = [
   "bgSavedDate",
   "completedDefaultTaskIds",
   "defaultTasksPinned",
+  "dmScreenMenuList",
   "glowEffect",
   "googleAppsOrder",
   "gradientModeActive",
@@ -90,6 +91,10 @@ const IMPORT_VALUE_NORMALIZERS = new Map([
   [
     "userShortcuts",
     (value) => requireArray(value, "shortcuts") && sanitizeShortcuts(value),
+  ],
+  [
+    "dmScreenMenuList",
+    (value) => requireArray(value, "DM menu items") && value,
   ],
   [
     "customAiTools",
