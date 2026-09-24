@@ -42,13 +42,13 @@
       .board-toolbar {
         display: flex;
         justify-content: flex-end;
-        padding: 20px 0 10px;
+        padding: 10px 0 20px;
       }
       .board-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
         gap: 12px;
-        padding-bottom: 40px;
+        padding-top: 20px;
       }
       .board-box {
         position: relative;
@@ -897,12 +897,12 @@
     <div class="layout-container">
       <div class="column-one">
         <div class="column-one-inner">
+          <div id="board-grid" class="board-grid"></div>
           <div class="board-toolbar">
             <button id="board-add-box-btn" class="settings-button" type="button">
               + Add Box
             </button>
           </div>
-          <div id="board-grid" class="board-grid"></div>
         </div>
       </div>
       <div class="column-left">
