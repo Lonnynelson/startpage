@@ -26,6 +26,7 @@ const EXTRA_STORAGE_KEYS = [
   "defaultTasksPinned",
   "dmBoardItems",
   "dmBoardColumnWidths",
+  "dmBoardPageTitle",
   "dmScreenMenuList",
   "glowEffect",
   "googleAppsOrder",
@@ -76,6 +77,7 @@ const RAW_STORAGE_KEYS = new Set([
   "dmHasIdbBg",
   "hideGpsConsent",
   "dmLowResBg",
+  "dmBoardPageTitle",
 ]);
 
 const INTERNAL_STORAGE_KEYS = new Set(["ydd_daily_greeting"]);

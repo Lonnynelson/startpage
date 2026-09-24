@@ -39,6 +39,26 @@
         gap: 5px;
         padding: 20px 0;
       }
+      .board-page-title {
+        margin: 0;
+        padding: 4px 12px;
+        text-align: center;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        cursor: text;
+        border-radius: 8px;
+        outline: none;
+        transition: background-color 0.2s ease;
+      }
+      .board-page-title:hover,
+      .board-page-title:focus {
+        background: var(--bg-interactive);
+      }
+      .board-page-title:empty::before {
+        content: "Click to name this board";
+        color: var(--text-secondary);
+      }
       .board-toolbar {
         position: fixed;
         left: 50%;
@@ -960,6 +980,12 @@
     <div class="layout-container">
       <div class="column-one">
         <div class="column-one-inner">
+          <h1
+            id="board-page-title"
+            class="board-page-title"
+            contenteditable="true"
+            title="Click to edit"
+          ></h1>
           <div id="board-grid" class="board-grid"></div>
         </div>
       </div>

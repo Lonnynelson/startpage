@@ -2,6 +2,8 @@ import { escapeHtml } from "../utils.js";
 
 const STORAGE_KEY = "dmBoardItems";
 const COLUMN_WIDTH_KEY = "dmBoardColumnWidths";
+const PAGE_TITLE_KEY = "dmBoardPageTitle";
+const MAX_PAGE_TITLE_LENGTH = 80;
 const MAX_TITLE_LENGTH = 60;
 const MAX_CONTENT_LENGTH = 20000;
 const COLUMN_COUNT = 4;
@@ -65,6 +67,7 @@ export class BoardManager {
     window.__boardManagerInstance = this;
 
     this.addButton?.addEventListener("click", () => this.addBox());
+    this._wirePageTitle();
 
     window.addEventListener("storage", (e) => {
       if (e.key === STORAGE_KEY || e.key === null) this.render();
@@ -117,6 +120,30 @@ export class BoardManager {
         Number(column.dataset.column),
         `${column.offsetWidth}px`,
       );
+    });
+  }
+
+  _wirePageTitle() {
+    const titleEl = document.getElementById("board-page-title");
+    if (!titleEl) return;
+    titleEl.textContent = localStorage.getItem(PAGE_TITLE_KEY) || "";
+
+    const save = () => {
+      const value = titleEl.textContent.trim().slice(0, MAX_PAGE_TITLE_LENGTH);
+      titleEl.textContent = value;
+      if (value) {
+        localStorage.setItem(PAGE_TITLE_KEY, value);
+      } else {
+        localStorage.removeItem(PAGE_TITLE_KEY);
+      }
+    };
+
+    titleEl.addEventListener("blur", save);
+    titleEl.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        titleEl.blur();
+      }
     });
   }
 
