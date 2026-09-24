@@ -468,9 +468,9 @@ export class CommandPalette {
     state.subscribe((key) => {
       if (
         key === "hideVoiceSearch" ||
-        key === "backgroundImage" ||
-        key === "randomBgMode" ||
-        key === "savedBgUrl" ||
+        key === "dmBackgroundImage" ||
+        key === "dmRandomBgMode" ||
+        key === "dmSavedBgUrl" ||
         key === "disableAnimations" ||
         key === "customApps" ||
         key === "googleAppOverrides" ||
@@ -502,9 +502,9 @@ export class CommandPalette {
   hasActiveBackground() {
     return Boolean(
       document.body.classList.contains("has-custom-bg") ||
-        state.get("backgroundImage") ||
-        state.get("randomBgMode") ||
-        localStorage.getItem("has_idb_bg") === "true",
+        state.get("dmBackgroundImage") ||
+        state.get("dmRandomBgMode") ||
+        localStorage.getItem("dmHasIdbBg") === "true",
     );
   }
 
@@ -519,7 +519,7 @@ export class CommandPalette {
 
     if (!BACKGROUND_COMMAND_IDS.has(command?.id)) return true;
     if (command.id === "bg-random-freeze") {
-      return ["random", "freeze"].includes(state.get("randomBgMode"));
+      return ["random", "freeze"].includes(state.get("dmRandomBgMode"));
     }
     return this.hasActiveBackground();
   }

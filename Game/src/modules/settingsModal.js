@@ -1031,7 +1031,7 @@ export class FullSettingsModal {
       className: "fs-random-bg-label",
     }, [this._el("span", { textContent: "Random BG" })]);
     this.els.fsRandomBgUpdatedSticker = null;
-    if (state.get("randomBgScheduleBadgeDismissed") !== true) {
+    if (state.get("dmRandomBgScheduleBadgeDismissed") !== true) {
       const updatedSticker = this._el(
         "span",
         { className: "fs-updated-sticker" },
@@ -1670,7 +1670,7 @@ export class FullSettingsModal {
     });
 
     this.els.fsBlurSelect.addEventListener("change", (e) => {
-      state.set("bgBlurIntensity", e.target.value);
+      state.set("dmBgBlurIntensity", e.target.value);
       const blurMap = { 0: 0, 10: 2, 20: 4, 30: 6, 40: 8, 50: 10 };
       document.documentElement.style.setProperty(
         "--bg-blur",
@@ -1950,7 +1950,7 @@ export class FullSettingsModal {
   updateRandomBackgroundBadge(hidden = null) {
     if (!this.els.fsRandomBgUpdatedSticker) return;
     this.els.fsRandomBgUpdatedSticker.hidden = hidden === null
-      ? state.get("randomBgScheduleBadgeDismissed") === true
+      ? state.get("dmRandomBgScheduleBadgeDismissed") === true
       : hidden;
   }
 
@@ -2023,11 +2023,11 @@ export class FullSettingsModal {
       }
       if (
         key === "gradientModeActive" ||
-        key === "backgroundImage" ||
-        key === "randomBgMode" ||
+        key === "dmBackgroundImage" ||
+        key === "dmRandomBgMode" ||
         key === "disableAnimations" ||
-        key === "randomBgScheduleBadgeDismissed" ||
-        key === "randomBgSchedule" ||
+        key === "dmRandomBgScheduleBadgeDismissed" ||
+        key === "dmRandomBgSchedule" ||
         key === "normalThemeId" ||
         key === "gradientThemeId" ||
         key === "gradientColor1" ||
@@ -2135,8 +2135,8 @@ export class FullSettingsModal {
     this._updateSearchSuggestionRelayAvailability();
     this.els.fsScPosition.value = state.get("shortcutsPosition") || "bottom";
     this.els.fsLocInput.value = state.get("yd_city") || "";
-    this.els.fsBlurSelect.value = state.get("bgBlurIntensity") || "0";
-    this.els.fsRandomBgSchedule.value = state.get("randomBgSchedule") || "1m";
+    this.els.fsBlurSelect.value = state.get("dmBgBlurIntensity") || "0";
+    this.els.fsRandomBgSchedule.value = state.get("dmRandomBgSchedule") || "1m";
 
     const isAnalog = state.get("clockType") === "analog";
     this.els.fsClockFormatRow.classList.toggle("disabled", isAnalog);
@@ -2757,9 +2757,9 @@ export class FullSettingsModal {
   hasCustomBackground() {
     return Boolean(
       document.body.classList.contains("has-custom-bg") ||
-        state.get("backgroundImage") ||
-        state.get("randomBgMode") ||
-        localStorage.getItem("has_idb_bg") === "true",
+        state.get("dmBackgroundImage") ||
+        state.get("dmRandomBgMode") ||
+        localStorage.getItem("dmHasIdbBg") === "true",
     );
   }
 
@@ -3172,8 +3172,8 @@ export class FullSettingsModal {
   // Background controls
   _updateBgState() {
     const hasBg = this.hasCustomBackground();
-    const mode = state.get("randomBgMode");
-    const schedule = state.get("randomBgSchedule") || "1m";
+    const mode = state.get("dmRandomBgMode");
+    const schedule = state.get("dmRandomBgSchedule") || "1m";
 
     if (this.els.fsRandomBgSchedule) {
       this.els.fsRandomBgSchedule.value = schedule;

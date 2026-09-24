@@ -206,10 +206,10 @@ class StateManager {
       }
       return url.toString();
     }
-    if (["backgroundImage", "savedBgUrl", "randomBgNextUrl"].includes(key)) {
+    if (["dmBackgroundImage", "dmSavedBgUrl", "dmRandomBgNextUrl"].includes(key)) {
       return normalizeStoredBackgroundUrl(value);
     }
-    if (["randomBgCurrentPreview", "randomBgNextPreview"].includes(key)) {
+    if (["dmRandomBgCurrentPreview", "dmRandomBgNextPreview"].includes(key)) {
       return normalizeStoredImageDataUrl(value);
     }
     if (key === "userSavedThemes") return sanitizeSavedThemes(value);

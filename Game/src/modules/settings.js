@@ -1146,7 +1146,7 @@ export class SettingsManager {
       removeBg: document.getElementById("remove-bg-button"),
       randomBgFreeze: document.getElementById("random-bg-freeze-btn"),
       randomBgRnd: document.getElementById("random-bg-rnd-btn"),
-      randomBgSchedule: document.getElementById("random-bg-schedule-select"),
+      dmRandomBgSchedule: document.getElementById("random-bg-schedule-select"),
       randomBgUpdatedSticker: document.getElementById(
         "random-bg-updated-sticker",
       ),
@@ -1243,10 +1243,10 @@ export class SettingsManager {
       }
       if (
         key === "gradientModeActive" ||
-        key === "backgroundImage" ||
-        key === "randomBgMode" ||
+        key === "dmBackgroundImage" ||
+        key === "dmRandomBgMode" ||
         key === "disableAnimations" ||
-        key === "randomBgScheduleBadgeDismissed" ||
+        key === "dmRandomBgScheduleBadgeDismissed" ||
         key === "normalThemeId" ||
         key === "gradientThemeId"
       ) {
@@ -1271,7 +1271,7 @@ export class SettingsManager {
           }
         }
       }
-      if (key === "randomBgScheduleBadgeDismissed") {
+      if (key === "dmRandomBgScheduleBadgeDismissed") {
         this.updateRandomBgButtons();
         window.__fullSettingsModalInstance?.updateRandomBackgroundBadge?.();
       }
@@ -1382,7 +1382,7 @@ export class SettingsManager {
     if (this.els.locInput) this.els.locInput.value = state.get("yd_city") || "";
 
     if (this.els.bgBlurSelect) {
-      const savedBlur = state.get("bgBlurIntensity") || "0";
+      const savedBlur = state.get("dmBgBlurIntensity") || "0";
       this.els.bgBlurSelect.value = savedBlur;
 
       const blurMap = {
@@ -1409,29 +1409,29 @@ export class SettingsManager {
       }
     }
 
-    const bg = state.get("backgroundImage");
-    const randomBgMode = state.get("randomBgMode");
-    const randomBgTime = state.get("randomBgTime");
+    const bg = state.get("dmBackgroundImage");
+    const dmRandomBgMode = state.get("dmRandomBgMode");
+    const dmRandomBgTime = state.get("dmRandomBgTime");
     let backgroundReady = Promise.resolve();
 
-    if (randomBgMode === "random") {
+    if (dmRandomBgMode === "random") {
       document.body.classList.add("has-custom-bg");
       backgroundReady = this.initializeRandomBackground();
-    } else if (randomBgMode === "freeze") {
+    } else if (dmRandomBgMode === "freeze") {
       document.body.classList.add("has-custom-bg");
-      if (randomBgTime === -1) {
-        if (state.get("savedBgUrl")) {
+      if (dmRandomBgTime === -1) {
+        if (state.get("dmSavedBgUrl")) {
           document.body.style.backgroundImage = `url(${
-            state.get("savedBgUrl")
+            state.get("dmSavedBgUrl")
           })`;
         } else if (bg) {
           document.body.style.backgroundImage = `url(${bg})`;
         }
         if (this.els.removeBg) this.els.removeBg.classList.remove("hidden");
-      } else if (randomBgTime && Date.now() - randomBgTime > 259200000) {
+      } else if (dmRandomBgTime && Date.now() - dmRandomBgTime > 259200000) {
         backgroundReady = this.fetchRandomBackground("startup");
-      } else if (state.get("savedBgUrl")) {
-        document.body.style.backgroundImage = `url(${state.get("savedBgUrl")})`;
+      } else if (state.get("dmSavedBgUrl")) {
+        document.body.style.backgroundImage = `url(${state.get("dmSavedBgUrl")})`;
         if (this.els.removeBg) this.els.removeBg.classList.remove("hidden");
       } else if (bg) {
         document.body.style.backgroundImage = `url(${bg})`;
@@ -1723,7 +1723,7 @@ export class SettingsManager {
     if (this.els.bgBlurSelect) {
       this.els.bgBlurSelect.addEventListener("change", (e) => {
         const val = e.target.value;
-        state.set("bgBlurIntensity", val);
+        state.set("dmBgBlurIntensity", val);
 
         const blurMap = {
           0: 0,
@@ -1986,8 +1986,8 @@ export class SettingsManager {
         this.fetchRandomBackground();
       });
     }
-    if (this.els.randomBgSchedule) {
-      this.els.randomBgSchedule.addEventListener("change", async (event) => {
+    if (this.els.dmRandomBgSchedule) {
+      this.els.dmRandomBgSchedule.addEventListener("change", async (event) => {
         const previous = this.getRandomBackgroundSchedule();
         const accepted = await this.setRandomBackgroundSchedule(
           event.target.value,
@@ -2295,9 +2295,9 @@ export class SettingsManager {
   hasCustomBackground() {
     return (
       document.body.classList.contains("has-custom-bg") ||
-      !!state.get("backgroundImage") ||
-      !!state.get("randomBgMode") ||
-      localStorage.getItem("has_idb_bg") === "true"
+      !!state.get("dmBackgroundImage") ||
+      !!state.get("dmRandomBgMode") ||
+      localStorage.getItem("dmHasIdbBg") === "true"
     );
   }
 
@@ -2829,14 +2829,14 @@ export class SettingsManager {
   }
 
   async freezeRandomBackground() {
-    const currentMode = state.get("randomBgMode");
+    const currentMode = state.get("dmRandomBgMode");
     if (currentMode === "freeze") {
       if (
         await this.fetchRandomBackground("user", null, {
           preserveSchedule: true,
         })
       ) {
-        state.set("randomBgTime", null);
+        state.set("dmRandomBgTime", null);
       }
     } else {
       const result = await showCustomModal(
@@ -2859,15 +2859,15 @@ export class SettingsManager {
       if (result === "cancel" || !result) return;
 
       if (
-        !state.get("savedBgUrl") ||
+        !state.get("dmSavedBgUrl") ||
         !document.body.classList.contains("has-custom-bg")
       ) {
         if (!(await this.fetchRandomBackground())) return;
       }
 
-      state.set("randomBgMode", "freeze");
+      state.set("dmRandomBgMode", "freeze");
       await this._clearRandomBackgroundQueue();
-      state.set("randomBgTime", result === "forever" ? -1 : Date.now());
+      state.set("dmRandomBgTime", result === "forever" ? -1 : Date.now());
       this.updateRandomBgButtons();
 
       const message = result === "forever"
@@ -3238,7 +3238,7 @@ export class SettingsManager {
 
   // Random background settings
   getRandomBackgroundSchedule() {
-    const schedule = state.get("randomBgSchedule");
+    const schedule = state.get("dmRandomBgSchedule");
     return Object.prototype.hasOwnProperty.call(RANDOM_BG_SCHEDULES, schedule)
       ? schedule
       : "refresh";
@@ -3254,24 +3254,24 @@ export class SettingsManager {
   _isRandomBackgroundDue(schedule = this.getRandomBackgroundSchedule()) {
     if (schedule === "refresh") return false;
     if (schedule === "day") {
-      return state.get("randomBgLastChangedDate") !==
+      return state.get("dmRandomBgLastChangedDate") !==
         this._getRandomBackgroundDateKey();
     }
 
     const interval = RANDOM_BG_SCHEDULES[schedule]?.interval;
-    const lastChangedAt = Number(state.get("randomBgLastChangedAt")) || 0;
+    const lastChangedAt = Number(state.get("dmRandomBgLastChangedAt")) || 0;
     return !lastChangedAt || Date.now() - lastChangedAt >= interval;
   }
 
   _getRandomBackgroundCurrentPreview() {
-    const value = state.get("randomBgCurrentPreview");
+    const value = state.get("dmRandomBgCurrentPreview");
     return typeof value === "string" && value.startsWith("data:image/")
       ? value
       : null;
   }
 
   _getRandomBackgroundCurrentUrls() {
-    return [state.get("savedBgUrl"), state.get("backgroundImage")].filter(
+    return [state.get("dmSavedBgUrl"), state.get("dmBackgroundImage")].filter(
       (url) =>
         typeof url === "string" &&
         url &&
@@ -3351,7 +3351,7 @@ export class SettingsManager {
   }
 
   _getRandomBackgroundFallbackCurrent() {
-    const url = state.get("savedBgUrl") || state.get("backgroundImage");
+    const url = state.get("dmSavedBgUrl") || state.get("dmBackgroundImage");
     const normalized = this._normalizeRandomBackgroundEntry({
       url,
       preview: this._getRandomBackgroundCurrentPreview(),
@@ -3373,7 +3373,7 @@ export class SettingsManager {
     const normalized = this._normalizeRandomBackgroundEntry(entry);
     if (!normalized) return false;
 
-    state.set("randomBgCurrentPreview", normalized.preview || "");
+    state.set("dmRandomBgCurrentPreview", normalized.preview || "");
     try {
       await secondStorage.saveRandomBackgroundCurrent(normalized);
       return true;
@@ -3384,7 +3384,7 @@ export class SettingsManager {
   }
 
   async _clearRandomBackgroundCurrent() {
-    state.set("randomBgCurrentPreview", "");
+    state.set("dmRandomBgCurrentPreview", "");
     try {
       await secondStorage.deleteRandomBackgroundCurrent();
     } catch (error) {
@@ -3393,19 +3393,19 @@ export class SettingsManager {
   }
 
   _markRandomBackgroundChanged() {
-    state.set("randomBgLastChangedAt", Date.now());
-    state.set("randomBgLastChangedDate", this._getRandomBackgroundDateKey());
+    state.set("dmRandomBgLastChangedAt", Date.now());
+    state.set("dmRandomBgLastChangedDate", this._getRandomBackgroundDateKey());
   }
 
   async setRandomBackgroundSchedule(schedule) {
     if (!Object.prototype.hasOwnProperty.call(RANDOM_BG_SCHEDULES, schedule)) {
       return false;
     }
-    if (state.get("randomBgMode") !== "random") return false;
+    if (state.get("dmRandomBgMode") !== "random") return false;
 
     if (
       schedule === "refresh" &&
-      state.get("randomBgRefreshWarningDismissed") !== true
+      state.get("dmRandomBgRefreshWarningDismissed") !== true
     ) {
       const result = await showCustomModal(
         RANDOM_BG_REFRESH_WARNING,
@@ -3439,12 +3439,12 @@ export class SettingsManager {
         return false;
       }
       if (result.remember === true) {
-        state.set("randomBgRefreshWarningDismissed", true);
+        state.set("dmRandomBgRefreshWarningDismissed", true);
       }
     }
 
     this.dismissRandomBackgroundScheduleBadge();
-    state.set("randomBgSchedule", schedule);
+    state.set("dmRandomBgSchedule", schedule);
     if (schedule !== "refresh") this._markRandomBackgroundChanged();
     this.updateRandomBgButtons();
     this._scheduleRandomBackgroundRefresh();
@@ -3452,8 +3452,8 @@ export class SettingsManager {
   }
 
   dismissRandomBackgroundScheduleBadge() {
-    if (state.get("randomBgScheduleBadgeDismissed") === true) return;
-    state.set("randomBgScheduleBadgeDismissed", true);
+    if (state.get("dmRandomBgScheduleBadgeDismissed") === true) return;
+    state.set("dmRandomBgScheduleBadgeDismissed", true);
     if (this.els.randomBgUpdatedSticker) {
       this.els.randomBgUpdatedSticker.hidden = true;
     }
@@ -3465,7 +3465,7 @@ export class SettingsManager {
       window.clearTimeout(this._randomBgScheduleTimer);
       this._randomBgScheduleTimer = null;
     }
-    if (state.get("randomBgMode") !== "random") return;
+    if (state.get("dmRandomBgMode") !== "random") return;
 
     const schedule = this.getRandomBackgroundSchedule();
     if (schedule === "refresh") return;
@@ -3478,7 +3478,7 @@ export class SettingsManager {
       delay = Math.max(1000, nextDay.getTime() - now.getTime() + 100);
     } else {
       const interval = RANDOM_BG_SCHEDULES[schedule].interval;
-      const lastChangedAt = Number(state.get("randomBgLastChangedAt")) || 0;
+      const lastChangedAt = Number(state.get("dmRandomBgLastChangedAt")) || 0;
       delay = lastChangedAt
         ? Math.max(1000, interval - (Date.now() - lastChangedAt))
         : 1000;
@@ -3487,7 +3487,7 @@ export class SettingsManager {
     this._randomBgScheduleTimer = window.setTimeout(async () => {
       this._randomBgScheduleTimer = null;
       if (
-        state.get("randomBgMode") === "random" &&
+        state.get("dmRandomBgMode") === "random" &&
         this._isRandomBackgroundDue()
       ) {
         await this._advanceRandomBackground("schedule");
@@ -3497,7 +3497,7 @@ export class SettingsManager {
   }
 
   _getRandomBackgroundNextUrl() {
-    const value = state.get("randomBgNextUrl");
+    const value = state.get("dmRandomBgNextUrl");
     if (typeof value !== "string" || !value.trim()) return null;
 
     try {
@@ -3511,19 +3511,19 @@ export class SettingsManager {
   }
 
   _getRandomBackgroundNextPreview() {
-    const value = state.get("randomBgNextPreview");
+    const value = state.get("dmRandomBgNextPreview");
     return typeof value === "string" && value.startsWith("data:image/")
       ? value
       : null;
   }
 
   _setRandomBackgroundNextUrl(url) {
-    return state.set("randomBgNextUrl", url || null);
+    return state.set("dmRandomBgNextUrl", url || null);
   }
 
   _setRandomBackgroundNextMetadata(entry) {
     this._setRandomBackgroundNextUrl(entry?.url || null);
-    state.set("randomBgNextPreview", entry?.preview || null);
+    state.set("dmRandomBgNextPreview", entry?.preview || null);
   }
 
   _normalizeRandomBackgroundEntry(entry) {
@@ -3576,10 +3576,10 @@ export class SettingsManager {
     this._releaseActiveBackgroundObjectUrl();
     this._removePreloadedBackgroundStyles();
     this._applyBackgroundUrl(displayUrl);
-    state.set("savedBgUrl", url);
-    state.set("backgroundImage", url);
-    state.set("randomBgMode", "random");
-    state.set("randomBgTime", null);
+    state.set("dmSavedBgUrl", url);
+    state.set("dmBackgroundImage", url);
+    state.set("dmRandomBgMode", "random");
+    state.set("dmRandomBgTime", null);
   }
 
   async _waitForImageDecode(url) {
@@ -3936,7 +3936,7 @@ export class SettingsManager {
       try {
         if (
           operationId !== this._backgroundOperationId ||
-          state.get("randomBgMode") !== "random"
+          state.get("dmRandomBgMode") !== "random"
         ) {
           return storedQueue.length > 0;
         }
@@ -3953,7 +3953,7 @@ export class SettingsManager {
         );
         if (
           operationId !== this._backgroundOperationId ||
-          state.get("randomBgMode") !== "random"
+          state.get("dmRandomBgMode") !== "random"
         ) {
           return storedQueue.length > 0;
         }
@@ -3995,12 +3995,12 @@ export class SettingsManager {
       this._removePreloadedBackgroundStyles();
       this._applyBackgroundUrl(objectUrl);
 
-      localStorage.setItem("has_idb_bg", "true");
-      localStorage.removeItem("lowResBg");
-      state.set("randomBgMode", null);
-      state.set("randomBgTime", null);
-      state.set("savedBgUrl", null);
-      state.set("backgroundImage", null);
+      localStorage.setItem("dmHasIdbBg", "true");
+      localStorage.removeItem("dmLowResBg");
+      state.set("dmRandomBgMode", null);
+      state.set("dmRandomBgTime", null);
+      state.set("dmSavedBgUrl", null);
+      state.set("dmBackgroundImage", null);
       this.disableAutoTheme();
       this._syncBackgroundControls();
       return true;
@@ -4026,12 +4026,12 @@ export class SettingsManager {
       await this._clearRandomBackgroundCurrent();
       this._releaseActiveBackgroundObjectUrl();
       this._removePreloadedBackgroundStyles();
-      state.set("backgroundImage", null);
-      state.set("savedBgUrl", null);
-      state.set("randomBgMode", null);
-      state.set("randomBgTime", null);
-      localStorage.removeItem("has_idb_bg");
-      localStorage.removeItem("lowResBg");
+      state.set("dmBackgroundImage", null);
+      state.set("dmSavedBgUrl", null);
+      state.set("dmRandomBgMode", null);
+      state.set("dmRandomBgTime", null);
+      localStorage.removeItem("dmHasIdbBg");
+      localStorage.removeItem("dmLowResBg");
       document.documentElement.classList.remove("ydd-custom-bg-pending");
       document.body.classList.remove("has-custom-bg");
       document.body.style.removeProperty("background-image");
@@ -4385,7 +4385,7 @@ export class SettingsManager {
       try {
         backgroundBlob = await secondStorage.getImage();
       } catch (error) {
-        if (localStorage.getItem("has_idb_bg") === "true") throw error;
+        if (localStorage.getItem("dmHasIdbBg") === "true") throw error;
         console.warn("IndexedDB was unavailable during backup:", error);
       }
       const data = {
@@ -4457,7 +4457,7 @@ export class SettingsManager {
       try {
         previousBackground = await secondStorage.getImage();
       } catch (error) {
-        if (localStorage.getItem("has_idb_bg") === "true") {
+        if (localStorage.getItem("dmHasIdbBg") === "true") {
           throw new Error(
             "The existing background could not be read safely before restore.",
             { cause: error },
@@ -4490,13 +4490,13 @@ export class SettingsManager {
       if (isCurrentFormat) {
         if (restoredBackground) {
           await secondStorage.saveImage(restoredBackground);
-          localStorage.setItem("has_idb_bg", "true");
+          localStorage.setItem("dmHasIdbBg", "true");
         } else {
           await secondStorage.deleteImage();
-          localStorage.removeItem("has_idb_bg");
+          localStorage.removeItem("dmHasIdbBg");
         }
-      } else if (entries.has_idb_bg === "true" && !previousBackground) {
-        localStorage.removeItem("has_idb_bg");
+      } else if (entries.dmHasIdbBg === "true" && !previousBackground) {
+        localStorage.removeItem("dmHasIdbBg");
       }
 
       await secondStorage.deleteRandomBackgroundQueue();
@@ -4598,8 +4598,8 @@ export class SettingsManager {
         return false;
       }
       await this._persistRandomBackgroundQueue([]);
-      localStorage.removeItem("has_idb_bg");
-      localStorage.removeItem("lowResBg");
+      localStorage.removeItem("dmHasIdbBg");
+      localStorage.removeItem("dmLowResBg");
       this.disableAutoTheme();
       this._syncBackgroundControls();
       void this._fillRandomBackgroundQueue(operationId, []);
@@ -4628,7 +4628,7 @@ export class SettingsManager {
   }
 
   updateRandomBgButtons() {
-    const mode = state.get("randomBgMode");
+    const mode = state.get("dmRandomBgMode");
     const schedule = this.getRandomBackgroundSchedule();
 
     if (this.els.randomBgFreeze) {
@@ -4659,13 +4659,13 @@ export class SettingsManager {
         ? "var(--accent-color)"
         : "";
     }
-    if (this.els.randomBgSchedule) {
-      this.els.randomBgSchedule.value = schedule;
-      this.els.randomBgSchedule.classList.toggle("hidden", mode !== "random");
+    if (this.els.dmRandomBgSchedule) {
+      this.els.dmRandomBgSchedule.value = schedule;
+      this.els.dmRandomBgSchedule.classList.toggle("hidden", mode !== "random");
     }
     if (this.els.randomBgUpdatedSticker) {
       this.els.randomBgUpdatedSticker.hidden =
-        state.get("randomBgScheduleBadgeDismissed") === true;
+        state.get("dmRandomBgScheduleBadgeDismissed") === true;
     }
   }
 

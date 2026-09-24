@@ -19,9 +19,9 @@ const EXTRA_STORAGE_KEYS = [
   "customApps",
   "customSearchEngines",
   "customSocialLinks",
-  "backgroundImage",
-  "bgBlurIntensity",
-  "bgSavedDate",
+  "dmBackgroundImage",
+  "dmBgBlurIntensity",
+  "dmBgSavedDate",
   "completedDefaultTaskIds",
   "defaultTasksPinned",
   "dmScreenMenuList",
@@ -29,25 +29,25 @@ const EXTRA_STORAGE_KEYS = [
   "googleAppsOrder",
   "gradientModeActive",
   "gradientThemeId",
-  "has_idb_bg",
+  "dmHasIdbBg",
   "hideGpsConsent",
   "hideGreetings",
   "hideVoiceSearch",
   "keyMap",
   "lastSettingsView",
   "locationUpdate",
-  "lowResBg",
-  "randomBgMode",
-  "randomBgCurrentPreview",
-  "randomBgLastChangedAt",
-  "randomBgLastChangedDate",
-  "randomBgNextPreview",
-  "randomBgNextUrl",
-  "randomBgScheduleBadgeDismissed",
-  "randomBgRefreshWarningDismissed",
-  "randomBgSchedule",
-  "randomBgTime",
-  "savedBgUrl",
+  "dmLowResBg",
+  "dmRandomBgMode",
+  "dmRandomBgCurrentPreview",
+  "dmRandomBgLastChangedAt",
+  "dmRandomBgLastChangedDate",
+  "dmRandomBgNextPreview",
+  "dmRandomBgNextUrl",
+  "dmRandomBgScheduleBadgeDismissed",
+  "dmRandomBgRefreshWarningDismissed",
+  "dmRandomBgSchedule",
+  "dmRandomBgTime",
+  "dmSavedBgUrl",
   "showDate",
   "showEditableText",
   "showShortcuts",
@@ -71,20 +71,20 @@ const YDD_STORAGE_KEYS = new Set([
 // Storage key categories
 const RAW_STORAGE_KEYS = new Set([
   "activeToolTab",
-  "has_idb_bg",
+  "dmHasIdbBg",
   "hideGpsConsent",
-  "lowResBg",
+  "dmLowResBg",
 ]);
 
 const INTERNAL_STORAGE_KEYS = new Set(["ydd_daily_greeting"]);
 const BACKGROUND_URL_KEYS = new Set([
-  "backgroundImage",
-  "savedBgUrl",
-  "randomBgNextUrl",
+  "dmBackgroundImage",
+  "dmSavedBgUrl",
+  "dmRandomBgNextUrl",
 ]);
 const BACKGROUND_PREVIEW_KEYS = new Set([
-  "randomBgCurrentPreview",
-  "randomBgNextPreview",
+  "dmRandomBgCurrentPreview",
+  "dmRandomBgNextPreview",
 ]);
 // Import validation
 const IMPORT_VALUE_NORMALIZERS = new Map([
@@ -211,7 +211,7 @@ export function validateYddStorageEntries(entries) {
       throw new TypeError("Invalid active tool tab.");
     }
     if (
-      ["has_idb_bg", "hideGpsConsent"].includes(key) &&
+      ["dmHasIdbBg", "hideGpsConsent"].includes(key) &&
       !["true", "false"].includes(rawValue)
     ) {
       throw new TypeError(`Invalid stored flag for ${key}.`);

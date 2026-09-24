@@ -87,14 +87,14 @@ try {
   }
 
   // Background state
-  var bgMode = localStorage.getItem("randomBgMode");
-  var bg = localStorage.getItem("backgroundImage");
-  var savedBg = localStorage.getItem("savedBgUrl");
-  var randomBgSchedule = localStorage.getItem("randomBgSchedule");
-  var randomBgCurrentPreview = localStorage.getItem("randomBgCurrentPreview");
-  var randomBgNextPreview = localStorage.getItem("randomBgNextPreview");
-  var randomBgNext = localStorage.getItem("randomBgNextUrl");
-  var bgTime = localStorage.getItem("randomBgTime");
+  var bgMode = localStorage.getItem("dmRandomBgMode");
+  var bg = localStorage.getItem("dmBackgroundImage");
+  var savedBg = localStorage.getItem("dmSavedBgUrl");
+  var dmRandomBgSchedule = localStorage.getItem("dmRandomBgSchedule");
+  var dmRandomBgCurrentPreview = localStorage.getItem("dmRandomBgCurrentPreview");
+  var dmRandomBgNextPreview = localStorage.getItem("dmRandomBgNextPreview");
+  var randomBgNext = localStorage.getItem("dmRandomBgNextUrl");
+  var bgTime = localStorage.getItem("dmRandomBgTime");
   var imgUrl = null;
   var RANDOM_BG_MAX_WIDTH = 1920;
   var RANDOM_BG_MAX_HEIGHT = 1080;
@@ -200,7 +200,7 @@ try {
     return isCompatiblePicsumUrl(value);
   };
 
-  var randomBgNextUrl = readStoredRandomUrl(randomBgNext);
+  var dmRandomBgNextUrl = readStoredRandomUrl(randomBgNext);
   var readStoredString = function (value, fallback) {
     if (!value || value === "null" || value === '"null"') return fallback;
     var parsed = value;
@@ -211,13 +211,13 @@ try {
     return typeof parsed === "string" && parsed ? parsed : fallback;
   };
 
-  var parsedRandomBgSchedule = readStoredString(randomBgSchedule, "1m");
+  var parsedRandomBgSchedule = readStoredString(dmRandomBgSchedule, "1m");
   var randomBgCurrentPreviewUrl = (function (value) {
     var parsed = readStoredString(value, null);
     return typeof parsed === "string" && parsed.startsWith("data:image/")
       ? parsed
       : null;
-  })(randomBgCurrentPreview);
+  })(dmRandomBgCurrentPreview);
   var randomBgNextPreviewUrl = (function (value) {
     if (!value || value === "null" || value === '"null"') return null;
     var parsed = value;
@@ -228,7 +228,7 @@ try {
     return typeof parsed === "string" && parsed.startsWith("data:image/")
       ? parsed
       : null;
-  })(randomBgNextPreview);
+  })(dmRandomBgNextPreview);
 
   if (
     !["refresh", "30s", "1m", "1h", "6h", "day"].includes(
@@ -251,18 +251,18 @@ try {
       String(date.getMonth() + 1).padStart(2, "0")
     }-${String(date.getDate()).padStart(2, "0")}`;
   };
-  var randomBgLastChangedAt = readStoredNumber(
-    localStorage.getItem("randomBgLastChangedAt"),
+  var dmRandomBgLastChangedAt = readStoredNumber(
+    localStorage.getItem("dmRandomBgLastChangedAt"),
     0,
   );
-  var randomBgLastChangedDate = readStoredString(
-    localStorage.getItem("randomBgLastChangedDate"),
+  var dmRandomBgLastChangedDate = readStoredString(
+    localStorage.getItem("dmRandomBgLastChangedDate"),
     "",
   );
   var randomBgTimedChangeDue = false;
   if (parsedRandomBgSchedule === "day") {
     randomBgTimedChangeDue =
-      randomBgLastChangedDate !== localDateKey(new Date());
+      dmRandomBgLastChangedDate !== localDateKey(new Date());
   } else if (parsedRandomBgSchedule !== "refresh") {
     var randomBgIntervals = {
       "30s": 30000,
@@ -270,13 +270,13 @@ try {
       "1h": 3600000,
       "6h": 21600000,
     };
-    randomBgTimedChangeDue = !randomBgLastChangedAt ||
-      Date.now() - randomBgLastChangedAt >=
+    randomBgTimedChangeDue = !dmRandomBgLastChangedAt ||
+      Date.now() - dmRandomBgLastChangedAt >=
         randomBgIntervals[parsedRandomBgSchedule];
   }
 
   // Background preload
-  var bgBlur = localStorage.getItem("bgBlurIntensity");
+  var bgBlur = localStorage.getItem("dmBgBlurIntensity");
   if (bgBlur) {
     var cleanBlur = bgBlur.replace(/^"|"$/g, "");
     var blurMap = { "0": 0, "10": 2, "20": 4, "30": 6, "40": 8, "50": 10 };
@@ -303,19 +303,19 @@ try {
   } else if (bgMode === '"random"') {
     if (parsedRandomBgSchedule === "refresh") {
       imgUrl = randomBgNextPreviewUrl ||
-        randomBgNextUrl ||
+        dmRandomBgNextUrl ||
         readStoredRandomUrl(savedBg) ||
         readStoredRandomUrl(bg);
     } else {
       var queuedTimedPreview = randomBgTimedChangeDue
-        ? randomBgNextPreviewUrl || randomBgNextUrl
+        ? randomBgNextPreviewUrl || dmRandomBgNextUrl
         : null;
       imgUrl = queuedTimedPreview ||
         randomBgCurrentPreviewUrl ||
         readStoredRandomUrl(savedBg) ||
         readStoredRandomUrl(bg) ||
         randomBgNextPreviewUrl ||
-        randomBgNextUrl;
+        dmRandomBgNextUrl;
     }
   } else if (bg && bg !== '"null"' && bgMode !== '"random"') {
     imgUrl = readStoredUrl(bg);
@@ -334,7 +334,7 @@ try {
     document.head.appendChild(style);
   }
 
-  var hasIdbBg = localStorage.getItem("has_idb_bg") === "true";
+  var hasIdbBg = localStorage.getItem("dmHasIdbBg") === "true";
   if (imgUrl || hasIdbBg) {
     document.documentElement.classList.add("ydd-custom-bg-pending");
   }
@@ -368,7 +368,7 @@ try {
       var randomUsesCurrentRecord = bgMode === '"random"' &&
         parsedRandomBgSchedule !== "refresh" &&
         !(randomBgTimedChangeDue &&
-          (randomBgNextPreviewUrl || randomBgNextUrl));
+          (randomBgNextPreviewUrl || dmRandomBgNextUrl));
       var getRequest = store.get(
         randomUsesCurrentRecord ? "random_bg_current" : "current_bg",
       );

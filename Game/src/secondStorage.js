@@ -1,5 +1,5 @@
 // IndexedDB configuration
-const DB_NAME = "YDD_Storage";
+const DB_NAME = "YDD_Storage_Game";
 const STORE_NAME = "images";
 const DB_VERSION = 2;
 const RANDOM_BACKGROUND_QUEUE_KEY = "random_bg_queue";
