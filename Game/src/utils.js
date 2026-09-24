@@ -25,6 +25,14 @@ export function formatTime(number) {
   return String(number).padStart(2, "0");
 }
 
+export function escapeHtml(str) {
+  return String(str || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 // Timer helpers
 export function createHoverPauseTimer(
   element,

@@ -18,6 +18,7 @@ import {
 import { KeyboardManager } from "./modules/keyboard.js";
 import { CommandPalette } from "./modules/palette.js";
 import { ZenModeController } from "./modules/zenMode.js";
+import { DmMenuManager } from "./modules/dmMenu.js";
 import { initializeDefaultTasks } from "./utils.js";
 import { isYddStorageKey } from "./storageKeys.js";
 
@@ -306,6 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initialize("Google Apps", () => new AppGrid());
   initialize("AI Tools", () => new AiTools());
   initialize("Shortcuts", () => new Shortcuts());
+  initialize("DM Menu", () => new DmMenuManager());
   const settingsManager = initialize("Settings", () => new SettingsManager());
 
   // Deferred module startup

@@ -623,6 +623,7 @@ export class FullSettingsModal {
       { id: "fs-tab-appearance", label: "Appearance" },
       { id: "fs-tab-news", label: "News" },
       { id: "fs-tab-shortcuts", label: "Shortcuts" },
+      { id: "fs-tab-dmmenu", label: "DM Menu" },
       { id: "fs-tab-data", label: "Extras" },
     ];
     this.els.tabBtns = [];
@@ -646,17 +647,23 @@ export class FullSettingsModal {
     const newsPane = this.buildNewsPane();
     const appearancePane = this.buildAppearancePane();
     const shortcutsPane = this.buildShortcutsPane();
+    const dmMenuPane = this.buildDmMenuPane();
     const dataPane = this.buildDataPane();
 
-    [generalPane, appearancePane, newsPane, shortcutsPane, dataPane].forEach(
-      (pane, i) => {
-        pane.id = tabDefs[i].id;
-        pane.classList.add("fs-pane");
-        if (i === 0) pane.classList.add("active");
-        this.els.panes.push(pane);
-        content.appendChild(pane);
-      },
-    );
+    [
+      generalPane,
+      appearancePane,
+      newsPane,
+      shortcutsPane,
+      dmMenuPane,
+      dataPane,
+    ].forEach((pane, i) => {
+      pane.id = tabDefs[i].id;
+      pane.classList.add("fs-pane");
+      if (i === 0) pane.classList.add("active");
+      this.els.panes.push(pane);
+      content.appendChild(pane);
+    });
 
     const yearSpan = this._el("span", {
       className: "fs-copyright-year",
@@ -1268,6 +1275,67 @@ export class FullSettingsModal {
     return pane;
   }
 
+  // DM menu settings
+  buildDmMenuPane() {
+    const pane = this._el("div");
+
+    const listContainer = this._el("div", {
+      className: "fs-shortcuts-list",
+      id: "fs-dmmenu-editor-list",
+    });
+    this.els.fsDmMenuList = listContainer;
+    pane.appendChild(this._section("DM Menu Items", [listContainer]));
+
+    const form = this._el("form", { id: "fs-add-dmmenu-form" });
+    form.appendChild(
+      this._el("h3", {
+        className: "settings-header",
+        textContent: "Add New DM Menu Item",
+      }),
+    );
+
+    const inputsDiv = this._el("div", { className: "add-shortcut-inputs" });
+    const catInput = this._el("input", {
+      type: "text",
+      id: "fs-dm-category-input",
+      placeholder: "Category (e.g., Rules)",
+      maxlength: "35",
+      required: "",
+    });
+    const nameInput = this._el("input", {
+      type: "text",
+      id: "fs-dm-name-input",
+      placeholder: "Name (e.g., Conditions Reference)",
+      maxlength: "35",
+      required: "",
+    });
+    const urlInput = this._el("input", {
+      type: "text",
+      id: "fs-dm-url-input",
+      placeholder: "URL / Link (e.g., https://...)",
+      maxlength: "2048",
+      required: "",
+    });
+    inputsDiv.append(catInput, nameInput, urlInput);
+    form.appendChild(inputsDiv);
+
+    const submitBtn = this._el("button", {
+      type: "submit",
+      className: "settings-button",
+      textContent: "Add Item",
+    });
+    form.appendChild(submitBtn);
+
+    this.els.fsDmMenuForm = form;
+    this.els.fsDmCategoryInput = catInput;
+    this.els.fsDmNameInput = nameInput;
+    this.els.fsDmUrlInput = urlInput;
+
+    pane.appendChild(form);
+
+    return pane;
+  }
+
   // Data settings
   buildDataPane() {
     const pane = this._el("div");
@@ -1693,6 +1761,40 @@ export class FullSettingsModal {
       }
     });
 
+    if (this.els.fsDmMenuForm) {
+      this.els.fsDmMenuForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const cat = this.els.fsDmCategoryInput?.value.trim();
+        const name = this.els.fsDmNameInput?.value.trim();
+        let url = this.els.fsDmUrlInput?.value.trim();
+
+        if (!cat || !name || !url) return;
+        if (!/^https?:\/\//i.test(url) && !/^\//.test(url)) {
+          url = "https://" + url;
+        }
+
+        const items = this._getDmMenuItems();
+        items.push({
+          category: cat,
+          name,
+          url,
+          icon: `https://www.google.com/s2/favicons?sz=64&domain=${encodeURIComponent(url)}`,
+        });
+
+        this._saveDmMenuItems(items);
+
+        if (this.els.fsDmCategoryInput) this.els.fsDmCategoryInput.value = "";
+        if (this.els.fsDmNameInput) this.els.fsDmNameInput.value = "";
+        if (this.els.fsDmUrlInput) this.els.fsDmUrlInput.value = "";
+      });
+    }
+
+    window.addEventListener("storage", (e) => {
+      if (e.key === "dmScreenMenuList" || e.key === null) {
+        if (this.isOpen) this._renderDmMenuEditor();
+      }
+    });
+
     this.els.fsResetKeys.addEventListener("click", async () => {
       if (await showCustomModal("Reset keyboard shortcuts to default?", true)) {
         state.set("keyMap", structuredClone(DEFAULT_KEY_MAP));
@@ -2045,6 +2147,7 @@ export class FullSettingsModal {
     this._renderThemes();
     this._renderSavedThemes();
     this._renderShortcutEditor();
+    this._renderDmMenuEditor();
     this._renderKeyEditor();
     this._renderLinkDirectionEditor();
     this._populateNewsSettings();
@@ -3353,6 +3456,196 @@ export class FullSettingsModal {
     const nextMap = { ...currentMap, [action]: structuredClone(defaults) };
     state.set("keyMap", nextMap);
     this._renderKeyEditor();
+  }
+
+  // DM menu editor
+  _getDmMenuItems() {
+    try {
+      const raw = localStorage.getItem("dmScreenMenuList");
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+
+  _saveDmMenuItems(items) {
+    localStorage.setItem("dmScreenMenuList", JSON.stringify(items));
+    this._renderDmMenuEditor();
+    window.__dmMenuManagerInstance?.render();
+  }
+
+  _reorderDmMenuItems(fromIndex, toIndex) {
+    const items = this._getDmMenuItems();
+    if (
+      fromIndex < 0 ||
+      fromIndex >= items.length ||
+      toIndex < 0 ||
+      toIndex >= items.length
+    ) {
+      return;
+    }
+    const [moved] = items.splice(fromIndex, 1);
+    items.splice(toIndex, 0, moved);
+    this._saveDmMenuItems(items);
+  }
+
+  _renderDmMenuEditor() {
+    const list = this.els.fsDmMenuList;
+    if (!list) return;
+    list.replaceChildren();
+
+    const items = this._getDmMenuItems();
+
+    if (items.length === 0) {
+      list.appendChild(
+        this._el("p", {
+          style: {
+            color: "var(--text-secondary)",
+            fontSize: "0.85rem",
+            padding: "0.5rem 0",
+            textAlign: "center",
+          },
+          textContent: "No DM menu items added yet.",
+        }),
+      );
+      return;
+    }
+
+    items.forEach((item, index) => {
+      const div = this._el("div", {
+        className: "shortcut-editor-item",
+        draggable: "true",
+      });
+      div.dataset.index = index;
+
+      const handle = this._el("div", {
+        className: "drag-handle",
+        title: "Drag to reorder",
+        textContent: "☰",
+      });
+
+      const iconSrc =
+        item.customIcon ||
+        item.icon ||
+        `https://www.google.com/s2/favicons?sz=64&domain=${encodeURIComponent(item.url || "")}`;
+
+      const iconImg = this._el("img", {
+        src: iconSrc,
+        className: "icon",
+        alt: `${item.name || "Item"} icon`,
+        style: {
+          width: "32px",
+          height: "32px",
+          borderRadius: "6px",
+          objectFit: "contain",
+          flexShrink: "0",
+        },
+      });
+      iconImg.addEventListener("error", () => {
+        iconImg.style.display = "none";
+      });
+
+      const inputsDiv = this._el("div", { className: "inputs" });
+
+      const topRow = this._el("div", {
+        style: { display: "flex", gap: "6px", width: "100%" },
+      });
+
+      const catInput = this._el("input", {
+        type: "text",
+        className: "category-input",
+        value: item.category || "",
+        placeholder: "Category",
+        maxlength: "35",
+        style: { width: "35%", minWidth: "70px" },
+        "aria-label": "Category name",
+      });
+
+      const nameInput = this._el("input", {
+        type: "text",
+        className: "name-input",
+        value: item.name || "",
+        placeholder: "Name",
+        maxlength: "35",
+        style: { width: "65%" },
+        "aria-label": "Item title",
+      });
+
+      topRow.append(catInput, nameInput);
+
+      const urlInput = this._el("input", {
+        type: "text",
+        className: "url-input",
+        value: item.url || "",
+        placeholder: "URL",
+        maxlength: "2048",
+        "aria-label": "Item URL",
+      });
+
+      inputsDiv.append(topRow, urlInput);
+
+      const triggerSave = () => {
+        const catVal = catInput.value.trim();
+        const nameVal = nameInput.value.trim();
+        let urlVal = urlInput.value.trim();
+        if (!catVal || !nameVal || !urlVal) return;
+        if (!/^https?:\/\//i.test(urlVal) && !/^\//.test(urlVal)) {
+          urlVal = "https://" + urlVal;
+        }
+        const currentItems = this._getDmMenuItems();
+        if (currentItems[index]) {
+          currentItems[index].category = catVal;
+          currentItems[index].name = nameVal;
+          currentItems[index].url = urlVal;
+          currentItems[index].icon =
+            `https://www.google.com/s2/favicons?sz=64&domain=${encodeURIComponent(urlVal)}`;
+          this._saveDmMenuItems(currentItems);
+        }
+      };
+
+      catInput.addEventListener("blur", triggerSave);
+      nameInput.addEventListener("blur", triggerSave);
+      urlInput.addEventListener("blur", triggerSave);
+
+      const actionsDiv = this._el("div", { className: "actions" });
+      const delBtn = this._el("button", {
+        type: "button",
+        className: "action-btn delete",
+        title: "Delete Item",
+        "aria-label": `Delete ${item.name || "item"}`,
+      });
+      delBtn.appendChild(createDeleteIcon());
+      delBtn.addEventListener("click", () => {
+        const currentItems = this._getDmMenuItems();
+        currentItems.splice(index, 1);
+        this._saveDmMenuItems(currentItems);
+      });
+
+      actionsDiv.appendChild(delBtn);
+      div.append(handle, iconImg, inputsDiv, actionsDiv);
+
+      div.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("text/plain", index);
+        div.classList.add("dragging");
+        list.classList.add("is-reordering");
+      });
+      div.addEventListener("dragend", () => {
+        div.classList.remove("dragging");
+        list.classList.remove("is-reordering");
+      });
+      div.addEventListener("dragover", (e) => e.preventDefault());
+      div.addEventListener("drop", (e) => {
+        e.preventDefault();
+        const from = parseInt(e.dataTransfer.getData("text/plain"));
+        if (!isNaN(from) && from !== index) {
+          this._reorderDmMenuItems(from, index);
+        }
+      });
+
+      list.appendChild(div);
+    });
   }
 
   // Key editor
