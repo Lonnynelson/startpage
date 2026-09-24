@@ -1,6 +1,7 @@
 import { escapeHtml } from "../utils.js";
 
 const STORAGE_KEY = "dmBoardItems";
+const COLUMN_WIDTH_KEY = "dmBoardColumnWidths";
 const MAX_TITLE_LENGTH = 60;
 const MAX_CONTENT_LENGTH = 20000;
 const COLUMN_COUNT = 4;
@@ -71,7 +72,10 @@ export class BoardManager {
 
     // Fallback persistence: catches a completed resize on mouse release,
     // independent of ResizeObserver (which browsers may throttle/delay).
-    document.addEventListener("mouseup", () => this._persistAllBoxSizes());
+    document.addEventListener("mouseup", () => {
+      this._persistAllBoxSizes();
+      this._persistAllColumnWidths();
+    });
 
     this.render();
   }
@@ -84,6 +88,34 @@ export class BoardManager {
         box.dataset.id,
         `${box.offsetWidth}px`,
         `${box.offsetHeight}px`,
+      );
+    });
+  }
+
+  getColumnWidths() {
+    try {
+      const raw = localStorage.getItem(COLUMN_WIDTH_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+
+  persistColumnWidth(columnIndex, width) {
+    const widths = this.getColumnWidths();
+    if (widths[columnIndex] === width) return;
+    widths[columnIndex] = width;
+    localStorage.setItem(COLUMN_WIDTH_KEY, JSON.stringify(widths));
+  }
+
+  _persistAllColumnWidths() {
+    if (!this.gridContainer) return;
+    this.gridContainer.querySelectorAll(".board-column").forEach((column) => {
+      if (column.offsetWidth === 0) return;
+      this.persistColumnWidth(
+        Number(column.dataset.column),
+        `${column.offsetWidth}px`,
       );
     });
   }
@@ -208,10 +240,14 @@ export class BoardManager {
     items.forEach((item) => columns[item.column].push(item));
     columns.forEach((columnItems) => columnItems.sort((a, b) => a.order - b.order));
 
+    const savedWidths = this.getColumnWidths();
+
     columns.forEach((columnItems, columnIndex) => {
       const column = document.createElement("div");
       column.className = "board-column";
       column.dataset.column = String(columnIndex);
+      column.style.width = savedWidths[columnIndex] ||
+        `calc(${100 / COLUMN_COUNT}% - 9px)`;
 
       column.addEventListener("dragover", (e) => {
         e.preventDefault();

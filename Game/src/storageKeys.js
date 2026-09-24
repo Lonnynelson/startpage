@@ -25,6 +25,7 @@ const EXTRA_STORAGE_KEYS = [
   "completedDefaultTaskIds",
   "defaultTasksPinned",
   "dmBoardItems",
+  "dmBoardColumnWidths",
   "dmScreenMenuList",
   "glowEffect",
   "googleAppsOrder",
@@ -100,6 +101,10 @@ const IMPORT_VALUE_NORMALIZERS = new Map([
   [
     "dmBoardItems",
     (value) => requireArray(value, "board items") && value,
+  ],
+  [
+    "dmBoardColumnWidths",
+    (value) => requireArray(value, "board column widths") && value,
   ],
   [
     "customAiTools",

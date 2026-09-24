@@ -22,7 +22,7 @@
       }
       .column-one {
         display: block;
-        width: 65%;
+        width: 95%;
         margin: 0 auto;
       }
       .column-one-inner {
@@ -30,7 +30,7 @@
       }
       @media (max-width: 768px) {
         .column-one {
-          width: 95%;
+          width: 98%;
         }
       }
       .categories-container {
@@ -55,13 +55,18 @@
         gap: 12px;
         padding-top: 20px;
         padding-bottom: 80px;
+        overflow-x: auto;
       }
       .board-column {
-        flex: 1 1 0;
-        min-width: 0;
+        flex: 0 0 auto;
+        min-width: 200px;
         display: flex;
         flex-direction: column;
         gap: 12px;
+        resize: horizontal;
+        overflow: hidden;
+        padding-right: 4px;
+        box-sizing: border-box;
       }
       .board-column.is-drop-target {
         background: rgba(255, 255, 255, 0.06);
