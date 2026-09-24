@@ -1,5 +1,5 @@
 <div align="center">
-  <h1 align="center">🚀 Lonny's Rework of...</h1>
+  <h1 align="center">🚀 Lonny's Customized Rework of...</h1>
   <h1 align="center">YourDynamicDashboard (v3.0.0)</h1>
   <p align="center">
     <strong>The Biggest Update Ever.</strong><br>
