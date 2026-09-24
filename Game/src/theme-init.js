@@ -353,7 +353,7 @@ try {
   }
 
   // IndexedDB background preload
-  var request = indexedDB.open("YDD_Storage", 2);
+  var request = indexedDB.open("YDD_Storage_Game", 2);
   request.onupgradeneeded = function (event) {
     var db = event.target.result;
     if (!db.objectStoreNames.contains("images")) {
