@@ -3,6 +3,7 @@ import { escapeHtml } from "../utils.js";
 const STORAGE_KEY = "dmBoardItems";
 const MAX_TITLE_LENGTH = 60;
 const MAX_CONTENT_LENGTH = 20000;
+const COLUMN_COUNT = 4;
 
 function autoLink(escapedText) {
   return escapedText.replace(
@@ -21,6 +22,35 @@ let uidCounter = 0;
 function makeId() {
   uidCounter += 1;
   return `box-${Date.now()}-${uidCounter}`;
+}
+
+// Ensures every item has a valid column/order, assigning missing ones
+// round-robin so existing boards migrate into the fixed column layout.
+function normalizeItems(items) {
+  let changed = false;
+  const columnCounts = new Array(COLUMN_COUNT).fill(0);
+
+  const normalized = items.map((item, index) => {
+    let { column, order } = item;
+    if (
+      !Number.isInteger(column) ||
+      column < 0 ||
+      column >= COLUMN_COUNT
+    ) {
+      column = index % COLUMN_COUNT;
+      changed = true;
+    }
+    if (!Number.isFinite(order)) {
+      order = columnCounts[column];
+      changed = true;
+    }
+    columnCounts[column] += 1;
+    return changed && (item.column !== column || item.order !== order)
+      ? { ...item, column, order }
+      : item;
+  });
+
+  return { items: normalized, changed };
 }
 
 export class BoardManager {
@@ -68,13 +98,18 @@ export class BoardManager {
             title: "Welcome",
             type: "text",
             content: "Click the pencil icon to edit this box.\nAdd text with links (https://example.com) or switch to an image.",
+            column: 0,
+            order: 0,
           },
         ];
         localStorage.setItem(STORAGE_KEY, JSON.stringify(defaults));
         return defaults;
       }
       const parsed = JSON.parse(raw);
-      return Array.isArray(parsed) ? parsed : [];
+      if (!Array.isArray(parsed)) return [];
+      const { items, changed } = normalizeItems(parsed);
+      if (changed) localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+      return items;
     } catch (e) {
       console.error("[BoardManager] Failed to parse dmBoardItems:", e);
       return [];
@@ -99,11 +134,21 @@ export class BoardManager {
 
   addBox() {
     const items = this.getItems();
+    const columnCounts = new Array(COLUMN_COUNT).fill(0);
+    let maxOrder = new Array(COLUMN_COUNT).fill(-1);
+    items.forEach((item) => {
+      columnCounts[item.column] += 1;
+      maxOrder[item.column] = Math.max(maxOrder[item.column], item.order);
+    });
+    const targetColumn = columnCounts.indexOf(Math.min(...columnCounts));
+
     const newItem = {
       id: makeId(),
       title: "New Box",
       type: "text",
       content: "",
+      column: targetColumn,
+      order: maxOrder[targetColumn] + 1,
     };
     items.push(newItem);
     this.saveItems(items);
@@ -123,6 +168,33 @@ export class BoardManager {
     this.saveItems(items);
   }
 
+  // Moves a box to a target column/position and renumbers order within
+  // affected columns so ordering stays consistent.
+  moveBox(id, targetColumn, targetIndex) {
+    const items = this.getItems();
+    const moving = items.find((item) => item.id === id);
+    if (!moving) return;
+
+    const remaining = items.filter((item) => item.id !== id);
+    const destColumnItems = remaining
+      .filter((item) => item.column === targetColumn)
+      .sort((a, b) => a.order - b.order);
+
+    const clampedIndex = Math.max(
+      0,
+      Math.min(targetIndex, destColumnItems.length),
+    );
+    destColumnItems.splice(clampedIndex, 0, moving);
+
+    destColumnItems.forEach((item, index) => {
+      item.column = targetColumn;
+      item.order = index;
+    });
+
+    const untouched = remaining.filter((item) => item.column !== targetColumn);
+    this.saveItems([...untouched, ...destColumnItems]);
+  }
+
   render() {
     if (!this.gridContainer) return;
     this._observers.forEach((observer) => observer.disconnect());
@@ -132,8 +204,46 @@ export class BoardManager {
     this.gridContainer.innerHTML = "";
 
     const items = this.getItems();
-    items.forEach((item) => {
-      this.gridContainer.appendChild(this.renderBox(item));
+    const columns = Array.from({ length: COLUMN_COUNT }, () => []);
+    items.forEach((item) => columns[item.column].push(item));
+    columns.forEach((columnItems) => columnItems.sort((a, b) => a.order - b.order));
+
+    columns.forEach((columnItems, columnIndex) => {
+      const column = document.createElement("div");
+      column.className = "board-column";
+      column.dataset.column = String(columnIndex);
+
+      column.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        column.classList.add("is-drop-target");
+      });
+      column.addEventListener("dragleave", (e) => {
+        if (e.target === column) column.classList.remove("is-drop-target");
+      });
+      column.addEventListener("drop", (e) => {
+        e.preventDefault();
+        column.classList.remove("is-drop-target");
+        const id = e.dataTransfer.getData("text/plain");
+        if (!id) return;
+        const siblings = Array.from(
+          column.querySelectorAll(".board-box:not(.is-dragging)"),
+        );
+        let targetIndex = siblings.length;
+        for (let i = 0; i < siblings.length; i += 1) {
+          const rect = siblings[i].getBoundingClientRect();
+          if (e.clientY < rect.top + rect.height / 2) {
+            targetIndex = i;
+            break;
+          }
+        }
+        this.moveBox(id, columnIndex, targetIndex);
+      });
+
+      columnItems.forEach((item) => {
+        column.appendChild(this.renderBox(item));
+      });
+
+      this.gridContainer.appendChild(column);
     });
   }
 
@@ -141,14 +251,27 @@ export class BoardManager {
     const box = document.createElement("div");
     box.className = "board-box";
     box.dataset.id = item.id;
-    if (item.width) box.style.width = item.width;
+    box.draggable = true;
     if (item.height) box.style.height = item.height;
+
+    box.addEventListener("dragstart", (e) => {
+      box.classList.add("is-dragging");
+      e.dataTransfer.effectAllowed = "move";
+      e.dataTransfer.setData("text/plain", item.id);
+    });
+    box.addEventListener("dragend", () => {
+      box.classList.remove("is-dragging");
+      this.gridContainer
+        .querySelectorAll(".board-column.is-drop-target")
+        .forEach((el) => el.classList.remove("is-drop-target"));
+    });
 
     const header = document.createElement("div");
     header.className = "board-box-header";
 
     const title = document.createElement("span");
-    title.className = "board-box-title";
+    title.className = "board-box-title board-box-drag-handle";
+    title.title = "Drag to move";
     title.textContent = item.title || "Untitled";
 
     const editBtn = document.createElement("button");
