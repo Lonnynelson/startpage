@@ -65,6 +65,8 @@
         bottom: 6rem;
         transform: translateX(-50%);
         z-index: 100;
+        display: flex;
+        gap: 10px;
       }
       .board-toolbar .settings-button {
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
@@ -1367,6 +1369,18 @@
       <button id="board-add-box-btn" class="settings-button" type="button">
         + Add Box
       </button>
+      <button id="board-backup-btn" class="settings-button" type="button">
+        Backup
+      </button>
+      <button id="board-restore-btn" class="settings-button" type="button">
+        Restore
+      </button>
+      <input
+        type="file"
+        id="board-restore-input"
+        accept="application/json"
+        class="hidden"
+      />
     </div>
 
     <script type="module" src="src/main.js"></script>

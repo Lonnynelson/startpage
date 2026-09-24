@@ -1,4 +1,4 @@
-import { escapeHtml } from "../utils.js";
+import { escapeHtml, showCustomModal } from "../utils.js";
 
 const STORAGE_KEY = "dmBoardItems";
 const COLUMN_WIDTH_KEY = "dmBoardColumnWidths";
@@ -60,6 +60,9 @@ export class BoardManager {
   constructor() {
     this.gridContainer = document.getElementById("board-grid");
     this.addButton = document.getElementById("board-add-box-btn");
+    this.backupButton = document.getElementById("board-backup-btn");
+    this.restoreButton = document.getElementById("board-restore-btn");
+    this.restoreInput = document.getElementById("board-restore-input");
     if (!this.gridContainer) return;
 
     this._resizeTimers = new Map();
@@ -67,6 +70,15 @@ export class BoardManager {
     window.__boardManagerInstance = this;
 
     this.addButton?.addEventListener("click", () => this.addBox());
+    this.backupButton?.addEventListener("click", () => this.backupBoard());
+    this.restoreButton?.addEventListener(
+      "click",
+      () => this.restoreInput?.click(),
+    );
+    this.restoreInput?.addEventListener(
+      "change",
+      (e) => this.restoreBoard(e),
+    );
     this._wirePageTitle();
 
     window.addEventListener("storage", (e) => {
@@ -81,6 +93,70 @@ export class BoardManager {
     });
 
     this.render();
+  }
+
+  backupBoard() {
+    const data = {
+      format: "YDD-Board",
+      version: 1,
+      createdAt: new Date().toISOString(),
+      pageTitle: localStorage.getItem(PAGE_TITLE_KEY) || "",
+      items: this.getItems(),
+      columnWidths: this.getColumnWidths(),
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Board_Backup.json";
+    a.click();
+    window.setTimeout(() => URL.revokeObjectURL(url), 0);
+  }
+
+  async restoreBoard(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    try {
+      const data = JSON.parse(await file.text());
+      if (data?.format !== "YDD-Board" || !Array.isArray(data.items)) {
+        throw new TypeError("Invalid board backup file.");
+      }
+
+      const { items } = normalizeItems(data.items);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+
+      if (Array.isArray(data.columnWidths)) {
+        localStorage.setItem(
+          COLUMN_WIDTH_KEY,
+          JSON.stringify(data.columnWidths),
+        );
+      } else {
+        localStorage.removeItem(COLUMN_WIDTH_KEY);
+      }
+
+      if (typeof data.pageTitle === "string" && data.pageTitle.trim()) {
+        localStorage.setItem(
+          PAGE_TITLE_KEY,
+          data.pageTitle.trim().slice(0, MAX_PAGE_TITLE_LENGTH),
+        );
+      } else {
+        localStorage.removeItem(PAGE_TITLE_KEY);
+      }
+
+      const titleEl = document.getElementById("board-page-title");
+      if (titleEl) titleEl.textContent = localStorage.getItem(PAGE_TITLE_KEY) || "";
+
+      this.render();
+    } catch (error) {
+      console.error("Board restore failed:", error);
+      showCustomModal(
+        "The board backup could not be restored. The file was invalid or corrupted.",
+      );
+    } finally {
+      e.target.value = "";
+    }
   }
 
   _persistAllBoxSizes() {
