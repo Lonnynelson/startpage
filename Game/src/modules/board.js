@@ -39,14 +39,30 @@ export class BoardManager {
       if (e.key === STORAGE_KEY || e.key === null) this.render();
     });
 
+    // Fallback persistence: catches a completed resize on mouse release,
+    // independent of ResizeObserver (which browsers may throttle/delay).
+    document.addEventListener("mouseup", () => this._persistAllBoxSizes());
+
     this.render();
+  }
+
+  _persistAllBoxSizes() {
+    if (!this.gridContainer) return;
+    this.gridContainer.querySelectorAll(".board-box").forEach((box) => {
+      if (box.offsetWidth === 0 || box.offsetHeight === 0) return;
+      this.persistBoxSize(
+        box.dataset.id,
+        `${box.offsetWidth}px`,
+        `${box.offsetHeight}px`,
+      );
+    });
   }
 
   getItems() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw === null) {
-        return [
+        const defaults = [
           {
             id: makeId(),
             title: "Welcome",
@@ -54,6 +70,8 @@ export class BoardManager {
             content: "Click the pencil icon to edit this box.\nAdd text with links (https://example.com) or switch to an image.",
           },
         ];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(defaults));
+        return defaults;
       }
       const parsed = JSON.parse(raw);
       return Array.isArray(parsed) ? parsed : [];
@@ -66,6 +84,17 @@ export class BoardManager {
   saveItems(items) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     this.render();
+  }
+
+  // Persists a box's size without a full grid re-render, so an in-progress
+  // resize isn't interrupted and no self-triggering render loop occurs.
+  persistBoxSize(id, width, height) {
+    const items = this.getItems();
+    const index = items.findIndex((item) => item.id === id);
+    if (index === -1) return;
+    if (items[index].width === width && items[index].height === height) return;
+    items[index] = { ...items[index], width, height };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }
 
   addBox() {
@@ -153,10 +182,11 @@ export class BoardManager {
             if (!box.isConnected || box.offsetWidth === 0 || box.offsetHeight === 0) {
               return;
             }
-            this.updateBox(item.id, {
-              width: `${box.offsetWidth}px`,
-              height: `${box.offsetHeight}px`,
-            });
+            this.persistBoxSize(
+              item.id,
+              `${box.offsetWidth}px`,
+              `${box.offsetHeight}px`,
+            );
           }, 400),
         );
       });
