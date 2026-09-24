@@ -40,15 +40,21 @@
         padding: 20px 0;
       }
       .board-toolbar {
-        display: flex;
-        justify-content: flex-end;
-        padding: 10px 0 20px;
+        position: fixed;
+        left: 50%;
+        bottom: 6rem;
+        transform: translateX(-50%);
+        z-index: 100;
+      }
+      .board-toolbar .settings-button {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
       }
       .board-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
         gap: 12px;
         padding-top: 20px;
+        padding-bottom: 80px;
       }
       .board-box {
         position: relative;
@@ -898,11 +904,6 @@
       <div class="column-one">
         <div class="column-one-inner">
           <div id="board-grid" class="board-grid"></div>
-          <div class="board-toolbar">
-            <button id="board-add-box-btn" class="settings-button" type="button">
-              + Add Box
-            </button>
-          </div>
         </div>
       </div>
       <div class="column-left">
@@ -1278,6 +1279,12 @@
     </a>
 
     <div id="shortcuts-container"></div>
+
+    <div class="board-toolbar">
+      <button id="board-add-box-btn" class="settings-button" type="button">
+        + Add Box
+      </button>
+    </div>
 
     <script type="module" src="src/main.js"></script>
   </body>
