@@ -58,15 +58,41 @@
         overflow-x: auto;
       }
       .board-column {
+        position: relative;
         flex: 0 0 auto;
         min-width: 200px;
+        min-height: 220px;
         display: flex;
         flex-direction: column;
         gap: 12px;
-        resize: horizontal;
-        overflow: hidden;
-        padding-right: 4px;
+        padding-right: 14px;
         box-sizing: border-box;
+      }
+      .board-column-resize-handle {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 18px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: col-resize;
+        touch-action: none;
+        z-index: 5;
+      }
+      .board-column-resize-handle::before {
+        content: "";
+        width: 6px;
+        height: 64px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.35);
+        transition: background-color 0.15s ease, height 0.15s ease, width 0.15s ease;
+      }
+      .board-column-resize-handle:hover::before,
+      .board-column-resize-handle.is-active::before {
+        background: var(--accent-color);
+        height: 80px;
       }
       .board-column.is-drop-target {
         background: rgba(255, 255, 255, 0.06);

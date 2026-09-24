@@ -279,7 +279,39 @@ export class BoardManager {
         column.appendChild(this.renderBox(item));
       });
 
+      const resizeHandle = document.createElement("div");
+      resizeHandle.className = "board-column-resize-handle";
+      resizeHandle.setAttribute("aria-label", "Drag to resize column");
+      this._wireColumnResizeHandle(resizeHandle, column, columnIndex);
+      column.appendChild(resizeHandle);
+
       this.gridContainer.appendChild(column);
+    });
+  }
+
+  _wireColumnResizeHandle(handle, column, columnIndex) {
+    handle.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+      const startX = e.clientX;
+      const startWidth = column.offsetWidth;
+      handle.classList.add("is-active");
+      document.body.style.cursor = "col-resize";
+      document.body.style.userSelect = "none";
+
+      const onMouseMove = (moveEvent) => {
+        const newWidth = Math.max(200, startWidth + (moveEvent.clientX - startX));
+        column.style.width = `${newWidth}px`;
+      };
+      const onMouseUp = () => {
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup", onMouseUp);
+        handle.classList.remove("is-active");
+        document.body.style.cursor = "";
+        document.body.style.userSelect = "";
+        this.persistColumnWidth(columnIndex, column.style.width);
+      };
+      document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("mouseup", onMouseUp);
     });
   }
 
