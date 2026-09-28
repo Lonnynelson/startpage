@@ -78,6 +78,21 @@ a { color:inherit; }
 .map-panel footer .source { margin-left:auto; color:#9aa4a7; }
 .tax-legend i { width:12px; height:12px; border-radius:3px; }
 .loading { padding:80px 24px; color:#8d999c; text-align:center; font-size:13px; }
+.help-dialog { width:min(620px,calc(100vw - 32px)); padding:0; border:1px solid #d4dfdd; border-radius:14px; background:#fff; color:var(--ink); box-shadow:0 26px 70px rgba(26,53,61,.28); }
+.help-dialog::backdrop { background:rgba(22,43,53,.42); backdrop-filter:blur(2px); }
+.help-dialog header { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:22px 24px 16px; border-bottom:1px solid var(--line); }
+.help-dialog h2 { margin:0; font-family:Georgia,serif; font-size:24px; font-weight:500; }
+.help-dialog header p { margin:4px 0 0; color:var(--muted); font-size:12px; }
+.help-dialog .close { border:0; background:none; color:#718085; font-size:26px; line-height:1; cursor:pointer; }
+.help-body { max-height:min(62vh,560px); overflow:auto; padding:18px 24px 24px; }
+.help-body h3 { margin:18px 0 6px; font-size:11px; font-weight:800; letter-spacing:.14em; color:#829095; }
+.help-body h3:first-child { margin-top:0; }
+.help-body p, .help-body li { margin:0 0 7px; color:#556770; font-size:13px; line-height:1.55; }
+.help-body ul { margin:0; padding-left:18px; }
+.help-body .key { display:flex; align-items:center; gap:9px; margin-bottom:7px; font-size:13px; color:#556770; }
+.help-body .key i { width:13px; height:13px; border-radius:3px; flex:none; }
+.help-body .key b { color:#2c4149; }
+.help-footnote { margin-top:18px; padding-top:14px; border-top:1px solid var(--line); color:#8d999c; font-size:11px; line-height:1.5; }
 @media(max-width:800px){
   .app-shell { grid-template-columns:1fr; }
   .sidebar { height:auto; max-height:42vh; border-right:0; border-bottom:1px solid var(--line); }
@@ -105,7 +120,7 @@ a { color:inherit; }
         <h1>North American Division</h1>
         <p class="sub">Unions, Conferences &amp; Church Sales-Tax Exemption</p>
       </div>
-      <button class="help" aria-label="Map guide" title="Choose a union or conference, then click a state, province, territory, or Bermuda for details. Switch to sales-tax view to color states by church purchase exemption.">?</button>
+      <button class="help" id="help-button" aria-label="Open the map guide" title="Map guide">?</button>
     </header>
 
     <div class="map-panel">
@@ -123,6 +138,40 @@ a { color:inherit; }
     </div>
   </section>
 </main>
+
+<dialog class="help-dialog" id="help-dialog" aria-labelledby="help-title">
+  <header>
+    <div>
+      <h2 id="help-title">Map guide</h2>
+      <p>How to read and use this atlas</p>
+    </div>
+    <button class="close" id="help-close" aria-label="Close the map guide">&times;</button>
+  </header>
+  <div class="help-body">
+    <h3>SIDEBAR</h3>
+    <p>Click a <b>Union</b> to highlight everything it covers and to expand its conferences. Click a <b>Conference</b> to narrow the highlight to that conference's territory. Some states belong to more than one conference, so territories overlap.</p>
+
+    <h3>THE TWO VIEWS</h3>
+    <ul>
+      <li><b>Territory</b> &mdash; colors the map with the selected union's color so you can see its footprint.</li>
+      <li><b>Sales tax</b> &mdash; colors every state by whether a church can buy free of sales tax. Your sidebar selection stays visible as a dark outline, so you can see a union's territory and the tax picture at the same time.</li>
+    </ul>
+
+    <h3>SALES-TAX COLORS</h3>
+    <div id="help-swatches"></div>
+
+    <h3>AREA DETAILS</h3>
+    <p>Click any state, province, territory, or the Bermuda inset to open a detail card showing its conferences, its union, its sales-tax status, and a link to the official state source. Alaska, Hawaii, and Bermuda sit in their own boxes below the main map.</p>
+
+    <h3>COUNTY EXCEPTIONS</h3>
+    <p>A few conferences reach across a state line. When you select one, the affected county is outlined on the map &mdash; San Juan County, New Mexico and Cherokee County, North Carolina. Notes about these appear in the bar under the map.</p>
+
+    <h3>KEYBOARD</h3>
+    <p>Press <b>Tab</b> to move between areas and <b>Enter</b> or <b>Space</b> to open one. <b>Esc</b> closes this guide.</p>
+
+    <p class="help-footnote">Sales-tax classifications describe ordinary purchases made by a church for church operations. They do not cover property tax, income tax, fundraising sales, purchases by individual members, or every local tax. Always confirm with the linked state source.</p>
+  </div>
+</dialog>
 
 <script type="module">
 import { geoConicConformal, geoConicEqualArea, geoMercator, geoPath } from 'https://esm.sh/d3-geo@3.1.1';
@@ -595,6 +644,22 @@ function render() {
 
 document.getElementById('view-territory').addEventListener('click', () => { state.view = 'territory'; render(); });
 document.getElementById('view-tax').addEventListener('click', () => { state.view = 'tax'; render(); });
+
+const helpDialog = document.getElementById('help-dialog');
+const helpSwatches = document.getElementById('help-swatches');
+for (const level of ['green','yellow','orange','red']) {
+  const row = document.createElement('div');
+  row.className = 'key';
+  const swatch = document.createElement('i');
+  swatch.style.background = taxLevelMeta[level].color;
+  const label = document.createElement('b');
+  label.textContent = taxLevelMeta[level].label;
+  row.append(swatch, label, document.createTextNode('\u2014 ' + taxLevelMeta[level].blurb));
+  helpSwatches.append(row);
+}
+document.getElementById('help-button').addEventListener('click', () => helpDialog.showModal());
+document.getElementById('help-close').addEventListener('click', () => helpDialog.close());
+helpDialog.addEventListener('click', (event) => { if (event.target === helpDialog) helpDialog.close(); });
 
 const loadJson = (path) => fetch(path).then((response) => {
   if (!response.ok) throw new Error('Could not load ' + path + ' (' + response.status + ')');
