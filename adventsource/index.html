@@ -45,6 +45,9 @@ a { color:inherit; }
 .map-toolbar strong { font-family:Georgia,serif; font-size:18px; font-weight:600; }
 .map-toolbar small { grid-column:2; color:#879397; margin-top:2px; }
 .status-dot { width:10px; height:10px; border-radius:50%; grid-row:1/3; }
+.toolbar-tip { flex:1; min-width:0; padding:0 12px; color:#6e7d83; font-size:13px; font-style:italic; text-align:center; transition:opacity .35s ease; }
+.toolbar-tip.fading { opacity:0; }
+@media(prefers-reduced-motion:reduce){ .toolbar-tip { transition:none; } }
 .view-toggle { display:inline-flex; gap:4px; padding:5px; border:1px solid var(--line); border-radius:999px; background:#f2f6f5; flex:none; }
 .view-toggle button { border:0; border-radius:999px; padding:12px 26px; background:transparent; color:#5d6c72; font-size:15px; font-weight:800; letter-spacing:.02em; cursor:pointer; transition:background .18s ease,color .18s ease,box-shadow .18s ease; }
 .view-toggle button:hover { background:#e4ebea; color:#163d48; }
@@ -126,6 +129,7 @@ a { color:inherit; }
     <div class="map-panel">
       <div class="map-toolbar">
         <div class="current"><span class="status-dot" id="status-dot"></span><strong id="current-name"></strong><small id="current-count"></small></div>
+        <div class="toolbar-tip" id="toolbar-tip" aria-live="polite"></div>
         <div class="view-toggle" role="group" aria-label="Map coloring mode">
           <button id="view-territory" aria-pressed="true">Territory</button>
           <button id="view-tax" aria-pressed="false">Sales tax</button>
@@ -660,6 +664,25 @@ for (const level of ['green','yellow','orange','red']) {
 document.getElementById('help-button').addEventListener('click', () => helpDialog.showModal());
 document.getElementById('help-close').addEventListener('click', () => helpDialog.close());
 helpDialog.addEventListener('click', (event) => { if (event.target === helpDialog) helpDialog.close(); });
+
+const tips = [
+  'Select Territory or Sales tax to the right',
+  'In Territory view, select a state below',
+  'In Territory view, select a Conference or Union in the left column',
+  'In Sales tax view, green states allow tax exemption.',
+  'In Sales tax view, yellow states require extra steps',
+];
+const tipEl = document.getElementById('toolbar-tip');
+let tipIndex = 0;
+tipEl.textContent = tips[0];
+setInterval(() => {
+  tipEl.classList.add('fading');
+  setTimeout(() => {
+    tipIndex = (tipIndex + 1) % tips.length;
+    tipEl.textContent = tips[tipIndex];
+    tipEl.classList.remove('fading');
+  }, 350);
+}, 5000);
 
 const loadJson = (path) => fetch(path).then((response) => {
   if (!response.ok) throw new Error('Could not load ' + path + ' (' + response.status + ')');
