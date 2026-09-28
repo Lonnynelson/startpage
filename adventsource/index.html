@@ -59,6 +59,7 @@ a { color:inherit; }
 .map-stage svg path { outline:none; transition:fill .18s ease,opacity .18s ease,filter .18s ease; cursor:pointer; vector-effect:non-scaling-stroke; }
 .map-stage svg path:hover, .map-stage svg path:focus-visible { opacity:1; filter:brightness(.94); stroke:#173944; stroke-width:1.8px; }
 .map-stage svg path.county-highlight { opacity:1; stroke:#173944; stroke-width:2.8px; filter:drop-shadow(0 0 4px rgba(22,57,68,.55)); }
+.map-stage svg path.focused-area, .map-stage svg rect.focused-area { opacity:1; stroke:#162b35; stroke-width:3px; filter:drop-shadow(0 0 6px rgba(22,43,53,.5)); }
 .map-inset text { fill:#7d8c90; font-size:9px; font-weight:800; letter-spacing:.14em; }
 .map-inset path { cursor:pointer; }
 .bermuda-inset { cursor:pointer; outline:none; }
@@ -626,6 +627,7 @@ function render() {
     const paint = paintFor(target.area);
     for (const [key, value] of Object.entries(paint)) target.node.setAttribute(key, value);
     const active = target.area && areas.includes(target.area);
+    target.node.classList.toggle('focused-area', !!target.area && target.area === state.focusedArea);
     target.node.setAttribute('aria-label', target.label + (active ? ', in ' + state.selected : ''));
   }
 
@@ -633,6 +635,7 @@ function render() {
     const shown = counties.includes(county.id);
     county.node.style.display = shown ? '' : 'none';
     county.node.setAttribute('fill', union.color);
+    county.node.classList.toggle('focused-area', county.id === state.focusedArea);
     county.node.setAttribute('aria-label', areaNames[county.id] + ', in ' + state.selected);
   }
 
@@ -640,6 +643,7 @@ function render() {
     const bermudaActive = state.view === 'territory' && areas.includes('BM');
     bermudaShape.setAttribute('fill', bermudaActive ? union.color : '#dce3e1');
     bermudaShape.setAttribute('opacity', bermudaActive ? 1 : .5);
+    bermudaShape.classList.toggle('focused-area', state.focusedArea === 'BM');
   }
 
   renderCard();
