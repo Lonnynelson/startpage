@@ -595,6 +595,9 @@ document.getElementById('view-tax').addEventListener('click', () => { state.view
 
 const loadJson = (path) => fetch(path).then((response) => {
   if (!response.ok) throw new Error('Could not load ' + path + ' (' + response.status + ')');
+  // A host that falls back to its own index.html returns 200 with HTML, so check the type.
+  const type = response.headers.get('content-type') ?? '';
+  if (!type.includes('json')) throw new Error(path + ' returned "' + type + '" instead of JSON, so the path is probably wrong or misspelled (paths are case-sensitive)');
   return response.json();
 });
 
