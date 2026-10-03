@@ -42,6 +42,9 @@
       background: #333;
       color: #fff;
     }
+    .division-buttons button {
+      font-weight: 600;
+    }
     .viewbox {
       display: flex;
       align-items: center;
@@ -96,11 +99,15 @@
 <body>
   <div class="container">
     <div class="column">
-      <div class="buttons">
-        <button data-svg="Uniform-Woman.svg" class="active">Women's</button>
-        <button data-svg="Uniform-Girl.svg">Girls</button>
-        <button data-svg="Uniform-Man.svg">Men's</button>
-        <button data-svg="Uniform-Boy.svg">Boys</button>
+      <div class="buttons division-buttons" id="division-buttons" role="group" aria-label="Uniform program">
+        <button data-division="pathfinder" class="active" aria-pressed="true">Pathfinder</button>
+        <button data-division="adventurer" aria-pressed="false">Adventurer</button>
+      </div>
+      <div class="buttons uniform-buttons" id="uniform-buttons" role="group" aria-label="Uniform type">
+        <button data-svg="Uniform-Woman.svg" data-shirt-color="white" class="active">Women's</button>
+        <button data-svg="Uniform-Girl.svg" data-shirt-color="lightblue">Girls</button>
+        <button data-svg="Uniform-Man.svg" data-shirt-color="white">Men's</button>
+        <button data-svg="Uniform-Boy.svg" data-shirt-color="lightblue">Boys</button>
       </div>
       <div class="viewbox" id="uniform"></div>
     </div>
@@ -113,32 +120,59 @@
   <script>
     // Keys are element ids in the SVG files; the most specific match wins.
     const parts = {
-      'beret':                 { title: 'Beret',              body: '' },
-      'beret-badge':           { title: 'Beret Patch',        body: '' },
-      'right-shoulder-patch':  { title: 'Shoulder Patches',   body: '' },
-      'left-shoulder-patch':   { title: 'Shoulder Patches',   body: '' },
-      'shoulder-cord':         { title: 'Shoulder Cords',     body: '' },
-      'yellow-scarf':          { title: 'Scarf',              body: '' },
-      'black-scarf-slide':     { title: 'Slide',              body: '' },
-      'black-tie':             { title: 'Men\'s/Boys Tie',    body: '' },
-      'black-bow-tie':         { title: 'Tuxedo Tie',         body: '' },
-      'sash':                  { title: 'Sash',               body: '' },
-      'left-pocket-pins':      { title: 'MG/Staff Pins',      body: '' },
-      'right-pocket-name-tag': { title: 'Name Tag',           body: '' },
-      'shirt':                 { title: 'Shirt',              body: '' },
-      'belt':                  { title: 'Belt',               body: '' },
-      'belt-buckle':           { title: 'Belt Buckle',        body: '' },
-      'pants':                 { title: 'Pants/Skirt',        body: '' },
-      'shoes':                 { title: 'Shoes/Socks',        body: '' }
+      'beret':                 { title: 'PF Beret',            body: { pathfinder: '', adventurer: '' } },
+      'beret-badge':           { title: 'PF Beret Patch',      body: { pathfinder: '', adventurer: '' } },
+      'right-shoulder-patch':  { title: 'PF Shoulder Patches', body: { pathfinder: '', adventurer: '' } },
+      'left-shoulder-patch':   { title: 'Shoulder Patches',    body: { pathfinder: '', adventurer: '' } },
+      'shoulder-cord':         { title: 'PF Shoulder Cords',   body: { pathfinder: '', adventurer: '' } },
+      'yellow-scarf':          { title: 'PF Scarf',            body: { pathfinder: '', adventurer: '' } },
+      'black-scarf-slide':     { title: 'Slide',               body: { pathfinder: '', adventurer: '' } },
+      'black-tie':             { title: 'PF Men\'s/Boys Tie',  body: { pathfinder: '', adventurer: '' } },
+      'black-bow-tie':         { title: 'PF Tuxedo Tie',       body: { pathfinder: '', adventurer: '' } },
+      'sash':                  { title: 'PF Sash',             body: { pathfinder: '', adventurer: '' } },
+      'left-pocket-pins':      { title: 'PF MG/Staff Pins',    body: { pathfinder: '', adventurer: '' } },
+      'right-pocket-name-tag': { title: 'PF Name Tag',         body: { pathfinder: '', adventurer: '' } },
+      'shirt':                 { title: 'PF Shirt',            body: { pathfinder: '', adventurer: '' } },
+      'belt':                  { title: 'PF Belt',             body: { pathfinder: '', adventurer: '' } },
+      'belt-buckle':           { title: 'PF Belt Buckle',      body: { pathfinder: '', adventurer: '' } },
+      'pants':                 { title: 'PF Pants/Skirt',      body: { pathfinder: '', adventurer: '' } },
+      'shoes':                 { title: 'Shoes/Socks',         body: { pathfinder: '', adventurer: '' } }
     };
 
     const viewbox = document.getElementById('uniform');
     const detailsTitle = document.getElementById('details-title');
     const detailsBody = document.getElementById('details-body');
-    const buttons = document.querySelectorAll('.buttons button');
+    const divisionButtons = document.querySelectorAll('#division-buttons button');
+    const uniformButtons = document.querySelectorAll('#uniform-buttons button');
+    let division = 'pathfinder';
     let selectedId = null;
 
-    async function loadUniform(file, label) {
+    function applyAdventurerColors(svg, shirtColor) {
+      svg.querySelectorAll('[fill], [stroke]').forEach(el => {
+        if (el.id === 'belt') return;
+        if (el.getAttribute('fill')?.toLowerCase() === '#000000') {
+          el.setAttribute('fill', '#080833');
+        }
+        if (el.getAttribute('stroke')?.toLowerCase() === '#000000') {
+          el.setAttribute('stroke', '#080833');
+        }
+      });
+      ['shirt', 'collar', 'shirt-placket', 'pockets'].forEach(id => {
+        const el = svg.querySelector('#' + id);
+        if (el) el.setAttribute('fill', shirtColor);
+      });
+      if (shirtColor === 'white') {
+        const shirt = svg.querySelector('#shirt');
+        if (shirt) {
+          shirt.setAttribute('stroke', '#000000');
+          shirt.setAttribute('stroke-width', '2');
+        }
+      }
+    }
+
+    async function loadUniform(button) {
+      const file = button.dataset.svg;
+      const label = button.textContent;
       const res = await fetch(file);
       if (!res.ok) {
         viewbox.textContent = 'Could not load ' + file;
@@ -147,7 +181,10 @@
       const doc = new DOMParser().parseFromString(await res.text(), 'image/svg+xml');
       const svg = doc.documentElement;
       svg.querySelectorAll('script').forEach(el => el.remove());
-      svg.setAttribute('aria-label', label + ' uniform');
+      svg.setAttribute('aria-label', division + ' ' + label + ' uniform');
+      if (division === 'adventurer') {
+        applyAdventurerColors(svg, button.dataset.shirtColor);
+      }
       Object.keys(parts).forEach(id => {
         const el = svg.querySelector('#' + id);
         if (el) el.classList.add('part');
@@ -167,8 +204,10 @@
       const el = viewbox.querySelector('#' + id);
       if (el) el.classList.add('selected');
       selectedId = id;
-      detailsTitle.textContent = parts[id].title;
-      detailsBody.textContent = parts[id].body;
+      detailsTitle.textContent = division === 'pathfinder'
+        ? parts[id].title
+        : 'ADV ' + parts[id].title.replace(/^PF /, '');
+      detailsBody.textContent = parts[id].body[division];
     }
 
     viewbox.addEventListener('click', e => {
@@ -176,15 +215,28 @@
       if (part) selectPart(part.id);
     });
 
-    buttons.forEach(btn => {
+    divisionButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('active'));
+        divisionButtons.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
         btn.classList.add('active');
-        loadUniform(btn.dataset.svg, btn.textContent);
+        btn.setAttribute('aria-pressed', 'true');
+        division = btn.dataset.division;
+        loadUniform(document.querySelector('#uniform-buttons button.active'));
       });
     });
 
-    loadUniform('Uniform-Woman.svg', "Women's");
+    uniformButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        uniformButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        loadUniform(btn);
+      });
+    });
+
+    loadUniform(document.querySelector('#uniform-buttons button.active'));
   </script>
 </body>
 </html>
