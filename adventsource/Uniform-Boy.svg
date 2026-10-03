@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="800" viewBox="0 0 480 800" role="img" aria-labelledby="title desc">
+  <title id="title">Man wearing a uniform</title>
+  <desc id="desc">Front view with shoulder patches, pins on the wearer's left pocket, a name tag on his right pocket, pants, belt, sash, beret, black tie, and a yellow scarf with a black slide. Each item has an editable ID. Transparent background.</desc>
+  <!-- Left and right refer to the wearer, opposite the viewer. -->
+  <g id="man" fill="#c58d68">
+    <rect id="neck" x="216" y="137" width="48" height="55" rx="14"/>
+    <ellipse id="head" cx="240" cy="106" rx="47" ry="59"/>
+    <ellipse cx="192" cy="112" rx="9" ry="15"/>
+    <ellipse cx="288" cy="112" rx="9" ry="15"/>
+    <path id="right-arm" d="M136 279 L171 290 L146 449 Q143 469 123 465 Q104 462 109 439 Z"/>
+    <path id="left-arm" d="M344 279 L309 290 L334 449 Q337 469 357 465 Q376 462 371 439 Z"/>
+  </g>
+  <g id="face" fill="#382923">
+    <circle cx="223" cy="105" r="3"/>
+    <circle cx="257" cy="105" r="3"/>
+    <path d="M227 132 Q240 143 253 132 Q240 138 227 132Z"/>
+  </g>
+  <path id="pants" fill="#000000" d="M172 395 H308 L318 725 H256 L240 487 L224 725 H162Z"/>
+  <g id="shoes" fill="#25272a">
+    <path d="M163 717 H224 V758 H142 Q139 733 163 731Z"/>
+    <path d="M256 717 H317 V731 Q341 733 338 758 H256Z"/>
+  </g>
+  <path id="shirt" fill="#d9c59c" d="M213 172 L178 178 Q149 180 135 205 L114 284 L164 301 L177 254 L172 406 H308 L303 254 L316 301 L366 284 L345 205 Q331 180 302 178 L267 172 L240 194Z"/>
+  <g id="collar" fill="#b8a47f">
+    <path d="M213 172 L240 194 L221 217 L200 180Z"/>
+    <path d="M267 172 L240 194 L259 217 L280 180Z"/>
+  </g>
+  <rect id="shirt-placket" x="237" y="216" width="6" height="178" fill="#c6b18a"/>
+  <g id="pockets" fill="#baa681">
+    <path id="right-pocket" d="M185 250 H225 V290 L205 300 L185 290Z"/>
+    <path id="left-pocket" d="M255 250 H295 V290 L275 300 L255 290Z"/>
+  </g>
+  <path id="sash" fill="#000000" d="M187 177 L161 189 L287 406 H315Z"/>
+  <g id="shoulder-patches" fill="#27658a">
+    <path id="right-shoulder-patch" d="M140 208 L166 216 L159 246 L145 253 L132 239Z"/>
+    <path id="left-shoulder-patch" d="M314 216 L340 208 L348 239 L335 253 L321 246Z"/>
+  </g>
+  <g id="left-pocket-pins" fill="#e8bb45">
+    <circle id="pin-1" cx="263" cy="262" r="5"/>
+    <circle id="pin-2" cx="278" cy="262" r="5"/>
+    <path id="pin-3" d="M285 273 H296 V282 H285Z"/>
+  </g>
+  <rect id="right-pocket-name-tag" x="182" y="255" width="46" height="13" rx="2" fill="#24313c"/>
+  <rect id="belt" x="171" y="392" width="138" height="23" rx="3" fill="#000000"/>
+  <rect id="belt-buckle" x="225" y="390" width="30" height="27" rx="3" fill="#c0c0c0"/>
+  <path id="beret" fill="#000000" d="M190 85 Q175 59 205 42 Q248 20 284 45 Q307 59 292 80 L273 89 L196 91Z"/>
+  <path id="beret-band" fill="#000000" d="M196 81 L274 78 L278 91 L196 95Z"/>
+  <path id="beret-badge" fill="#e8bb45" d="M208 58 L220 62 L218 76 L211 81 L204 75 L203 62Z"/>
+  <!-- Neckwear is drawn last so the scarf lies over the uniform. -->
+  <g id="black-tie" fill="#000000">
+    <path id="tie-knot" d="M229 194 H251 L247 211 H233Z"/>
+    <path id="tie-blade" d="M233 210 H247 L254 375 L240 392 L226 375Z"/>
+  </g>
+  <g id="yellow-scarf" fill="#f5cf24">
+    <path id="scarf-right-shoulder" d="M211 166 L240 213 L229 235 L191 180Z"/>
+    <path id="scarf-left-shoulder" d="M269 166 L289 180 L251 235 L240 213Z"/>
+    <path id="scarf-right-tail" d="M231 227 L244 233 L233 281 L218 294 L221 271Z"/>
+    <path id="scarf-left-tail" d="M239 233 L251 227 L261 273 L257 294 L242 280Z"/>
+  </g>
+  <rect id="black-scarf-slide" x="227" y="222" width="26" height="18" rx="4" fill="#000000"/>
+</svg>

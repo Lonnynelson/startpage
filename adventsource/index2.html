@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uniforms</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      padding: 1rem;
+      min-height: 100vh;
+    }
+    .column {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .buttons {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .buttons button {
+      flex: 1;
+      padding: 0.6rem;
+      font-size: 1rem;
+      border: 1px solid #888;
+      border-radius: 4px;
+      background: #f4f4f4;
+      cursor: pointer;
+    }
+    .buttons button.active {
+      background: #333;
+      color: #fff;
+    }
+    .viewbox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 70vh;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: #fafafa;
+    }
+    .viewbox svg {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: 100%;
+    }
+    .viewbox .part {
+      cursor: pointer;
+    }
+    .viewbox .part:hover {
+      opacity: 0.75;
+    }
+    .viewbox .part.selected {
+      stroke: #0a84ff;
+      stroke-width: 3;
+    }
+    #details h2 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="column">
+      <div class="buttons">
+        <button data-svg="Uniform-Woman.svg" class="active">Women's</button>
+        <button data-svg="Uniform-Girl.svg">Girls</button>
+        <button data-svg="Uniform-Man.svg">Men's</button>
+        <button data-svg="Uniform-Boy.svg">Boys</button>
+      </div>
+      <div class="viewbox" id="uniform"></div>
+    </div>
+    <div class="column" id="details">
+      <h2 id="details-title">Select a uniform item</h2>
+      <p id="details-body">Click part of the uniform to see details here.</p>
+    </div>
+  </div>
+
+  <script>
+    // Keys are element ids in the SVG files; the most specific match wins.
+    const parts = {
+      'beret':                 { title: 'Beret',              body: '' },
+      'beret-badge':           { title: 'Beret Badge',        body: '' },
+      'right-shoulder-patch':  { title: 'Right Shoulder Patch', body: '' },
+      'left-shoulder-patch':   { title: 'Left Shoulder Patch',  body: '' },
+      'shoulder-cord':         { title: 'Shoulder Cord',      body: '' },
+      'yellow-scarf':          { title: 'Scarf',              body: '' },
+      'black-scarf-slide':     { title: 'Scarf Slide',        body: '' },
+      'black-tie':             { title: 'Tie',                body: '' },
+      'black-bow-tie':         { title: 'Bow Tie',            body: '' },
+      'sash':                  { title: 'Sash',               body: '' },
+      'left-pocket-pins':      { title: 'Pins',               body: '' },
+      'right-pocket-name-tag': { title: 'Name Tag',           body: '' },
+      'shirt':                 { title: 'Shirt',              body: '' },
+      'belt':                  { title: 'Belt',               body: '' },
+      'pants':                 { title: 'Pants',              body: '' },
+      'shoes':                 { title: 'Shoes',              body: '' }
+    };
+
+    const viewbox = document.getElementById('uniform');
+    const detailsTitle = document.getElementById('details-title');
+    const detailsBody = document.getElementById('details-body');
+    const buttons = document.querySelectorAll('.buttons button');
+    let selectedId = null;
+
+    async function loadUniform(file, label) {
+      const res = await fetch(file);
+      if (!res.ok) {
+        viewbox.textContent = 'Could not load ' + file;
+        return;
+      }
+      const doc = new DOMParser().parseFromString(await res.text(), 'image/svg+xml');
+      const svg = doc.documentElement;
+      svg.querySelectorAll('script').forEach(el => el.remove());
+      svg.setAttribute('aria-label', label + ' uniform');
+      Object.keys(parts).forEach(id => {
+        const el = svg.querySelector('#' + id);
+        if (el) el.classList.add('part');
+      });
+      viewbox.replaceChildren(document.importNode(svg, true));
+      if (selectedId && viewbox.querySelector('#' + selectedId)) {
+        selectPart(selectedId);
+      } else {
+        selectedId = null;
+        detailsTitle.textContent = 'Select a uniform item';
+        detailsBody.textContent = 'Click part of the uniform to see details here.';
+      }
+    }
+
+    function selectPart(id) {
+      viewbox.querySelectorAll('.part.selected').forEach(el => el.classList.remove('selected'));
+      const el = viewbox.querySelector('#' + id);
+      if (el) el.classList.add('selected');
+      selectedId = id;
+      detailsTitle.textContent = parts[id].title;
+      detailsBody.textContent = parts[id].body;
+    }
+
+    viewbox.addEventListener('click', e => {
+      const part = e.target.closest('.part');
+      if (part) selectPart(part.id);
+    });
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        loadUniform(btn.dataset.svg, btn.textContent);
+      });
+    });
+
+    loadUniform('Uniform-Woman.svg', "Women's");
+  </script>
+</body>
+</html>
