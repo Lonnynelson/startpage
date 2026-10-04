@@ -83,12 +83,42 @@
       margin: 1rem 0;
     }
     .details-toolbar button,
-    .editor-actions button {
+    .editor-actions button,
+    #settings-menu button {
       padding: 0.55rem 0.8rem;
       border: 1px solid #888;
       border-radius: 4px;
       background: #f4f4f4;
       cursor: pointer;
+    }
+    #settings-toggle {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      width: 3rem;
+      height: 3rem;
+      border: 1px solid #888;
+      border-radius: 50%;
+      background: #f4f4f4;
+      font-size: 1.75rem;
+      cursor: pointer;
+      z-index: 1;
+    }
+    #settings-menu {
+      position: fixed;
+      inset: auto 1rem 4.5rem auto;
+      margin: 0;
+      width: min(22rem, calc(100vw - 2rem));
+      max-height: calc(100vh - 6rem);
+      overflow-y: auto;
+      padding: 1rem;
+      border: 1px solid #888;
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 4px 16px #0003;
+    }
+    #settings-menu h2 {
+      margin-top: 0;
     }
     .table-scroll {
       overflow-x: auto;
@@ -186,11 +216,8 @@
       <p id="details-body">Click part of the uniform to see details here.</p>
       <div class="details-toolbar">
         <button id="edit-table" type="button" disabled>Edit Table</button>
-        <button id="backup-tables" type="button">Save Backup</button>
-        <button id="restore-tables" type="button">Load Restore</button>
-        <input id="backup-file" type="file" accept="application/json,.json" hidden>
+        <button id="save-table" type="button" hidden>Save Table</button>
       </div>
-      <p>Load Restore replaces all saved table data.</p>
       <p id="table-status" role="status" aria-live="polite"></p>
       <div id="table-display" hidden>
         <div class="table-scroll">
@@ -201,6 +228,21 @@
       <section id="table-editor" aria-label="Edit table" hidden></section>
     </div>
   </div>
+  <button id="settings-toggle" type="button" popovertarget="settings-menu" aria-label="Settings" title="Settings">
+    <span aria-hidden="true">&#9881;</span>
+  </button>
+  <section id="settings-menu" popover aria-labelledby="settings-title">
+    <h2 id="settings-title">Settings</h2>
+    <div class="editor-actions">
+      <button id="backup-tables" type="button">Backup All</button>
+      <button id="restore-tables" type="button">Restore All</button>
+    </div>
+    <input id="backup-file" type="file" accept="application/json,.json" hidden>
+    <p>Backup All includes all saved tables, column titles, and rows.
+      Use Save Table first to include your current edits.</p>
+    <p>Restore All replaces all saved table data and discards open table edits after confirmation.</p>
+    <button type="button" popovertarget="settings-menu" popovertargetaction="hide">Close</button>
+  </section>
 
   <script>
     // Keys are element ids in the SVG files; the most specific match wins.
@@ -230,9 +272,11 @@
     const divisionButtons = document.querySelectorAll('#division-buttons button');
     const uniformButtons = document.querySelectorAll('#uniform-buttons button');
     const editTableButton = document.getElementById('edit-table');
+    const saveTableButton = document.getElementById('save-table');
     const backupButton = document.getElementById('backup-tables');
     const restoreButton = document.getElementById('restore-tables');
     const backupFileInput = document.getElementById('backup-file');
+    const settingsMenu = document.getElementById('settings-menu');
     const tableStatus = document.getElementById('table-status');
     const tableDisplay = document.getElementById('table-display');
     const contentTable = document.getElementById('content-table');
@@ -448,12 +492,6 @@
       });
       actions.append(addRowButton);
 
-      const saveButton = document.createElement('button');
-      saveButton.type = 'button';
-      saveButton.textContent = 'Save table';
-      saveButton.addEventListener('click', saveTableEditor);
-      actions.append(saveButton);
-
       const cancelButton = document.createElement('button');
       cancelButton.type = 'button';
       cancelButton.textContent = 'Cancel';
@@ -470,6 +508,7 @@
       editorOpen = true;
       tableDisplay.hidden = true;
       editTableButton.hidden = true;
+      saveTableButton.hidden = false;
       tableEditor.hidden = false;
       renderEditor();
     }
@@ -479,6 +518,7 @@
       draft = null;
       tableEditor.hidden = true;
       editTableButton.hidden = false;
+      saveTableButton.hidden = true;
       if (selectedId) renderTable();
     }
 
@@ -495,8 +535,11 @@
         draft = null;
         tableEditor.hidden = true;
         editTableButton.hidden = false;
+        saveTableButton.hidden = true;
         renderTable();
+        return true;
       }
+      return false;
     }
 
     function discardEditorBeforeNavigation() {
@@ -509,7 +552,7 @@
     function restoreBackup(file) {
       return file.text().then(contents => {
         const restoredTables = validateBackup(JSON.parse(contents));
-        if (!window.confirm('Replace all saved table data with this backup?')) return;
+        if (!window.confirm('Replace all saved table data with this backup and discard any open table edits?')) return;
         if (persistTables(restoredTables)) {
           if (editorOpen) cancelTableEditor();
           if (selectedId) renderTable();
@@ -619,6 +662,13 @@
     });
 
     editTableButton.addEventListener('click', startTableEditor);
+    saveTableButton.addEventListener('click', saveTableEditor);
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && settingsMenu.matches(':popover-open')) {
+        settingsMenu.hidePopover();
+        document.getElementById('settings-toggle').focus();
+      }
+    });
     backupButton.addEventListener('click', () => {
       const backup = new Blob([JSON.stringify({ version: 1, tables }, null, 2)], {
         type: 'application/json'
@@ -629,7 +679,9 @@
       download.download = 'uniform-details-backup.json';
       download.click();
       setTimeout(() => URL.revokeObjectURL(url), 0);
-      setTableStatus('Backup downloaded.');
+      setTableStatus(editorOpen
+        ? 'Backup downloaded. Open table edits are not included; use Save Table to save them.'
+        : 'Backup downloaded.');
     });
     restoreButton.addEventListener('click', () => backupFileInput.click());
     backupFileInput.addEventListener('change', () => {
