@@ -260,6 +260,7 @@
       'left-pocket-pins':      { title: 'PF MG/Staff Pins',    body: { pathfinder: '', adventurer: '' } },
       'right-pocket-name-tag': { title: 'PF Name Tag',         body: { pathfinder: '', adventurer: '' } },
       'shirt':                 { title: 'PF Shirt',            body: { pathfinder: '', adventurer: '' } },
+      'jumper':                { title: 'Jumper',               body: { pathfinder: '', adventurer: '' } },
       'belt':                  { title: 'PF Belt',             body: { pathfinder: '', adventurer: '' } },
       'belt-buckle':           { title: 'PF Belt Buckle',      body: { pathfinder: '', adventurer: '' } },
       'pants':                 { title: 'PF Pants/Skirt',      body: { pathfinder: '', adventurer: '' } },
@@ -601,12 +602,18 @@
       if (division === 'adventurer') {
         applyAdventurerColors(svg, button.dataset.shirtColor);
       }
+      const isAdventurerGirl = division === 'adventurer' && file === 'Uniform-Girl.svg';
+      svg.querySelector('#pants')?.setAttribute('display', isAdventurerGirl ? 'none' : 'inline');
+      svg.querySelector('#jumper')?.setAttribute('display', isAdventurerGirl ? 'inline' : 'none');
+      svg.querySelector('#jumper-legs')?.setAttribute('display', isAdventurerGirl ? 'inline' : 'none');
+      svg.querySelector('#jumper-socks')?.setAttribute('display', isAdventurerGirl ? 'inline' : 'none');
       Object.keys(parts).forEach(id => {
         const el = svg.querySelector('#' + id);
         if (el) el.classList.add('part');
       });
       viewbox.replaceChildren(document.importNode(svg, true));
-      if (selectedId && viewbox.querySelector('#' + selectedId)) {
+      const selectedPart = selectedId && viewbox.querySelector('#' + selectedId);
+      if (selectedPart && !selectedPart.closest('[display="none"]')) {
         selectPart(selectedId, true);
       } else {
         selectedId = null;

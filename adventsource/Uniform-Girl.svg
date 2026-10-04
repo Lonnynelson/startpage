@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="480" height="800" viewBox="0 0 480 800" role="img" aria-labelledby="title desc">
-  <title id="title">Woman wearing a uniform</title>
-  <desc id="desc">Front view with shoulder patches, pins on the wearer's left pocket, a name tag on her right pocket, pants, belt, sash, beret, black bow tie, and a yellow scarf with a black slide. Each item has an editable ID. Transparent background.</desc>
+  <title id="title">Girl wearing a uniform</title>
+  <desc id="desc">Front view with shoulder patches, pins on the wearer's left pocket, a name tag on her right pocket, pants or a jumper, belt, sash, beret, black bow tie, and a yellow scarf with a black slide. Each item has an editable ID. Transparent background.</desc>
   <!-- Left and right refer to the wearer, opposite the viewer. -->
   <path id="hair" fill="#382923" d="M191 82 Q184 40 239 39 Q294 39 291 87 L298 173 Q281 186 263 174 L260 118 H220 L217 174 Q197 186 182 171Z"/>
   <g id="woman" fill="#c58d68">
@@ -17,16 +17,28 @@
     <path d="M227 132 Q240 143 253 132 Q240 138 227 132Z"/>
   </g>
   <path id="pants" fill="#000000" d="M172 395 H308 L318 725 H256 L240 487 L224 725 H162Z"/>
-  <g id="shoes" fill="#25272a">
-    <path d="M163 717 H224 V758 H142 Q139 733 163 731Z"/>
-    <path d="M256 717 H317 V731 Q341 733 338 758 H256Z"/>
-  </g>
   <path id="shirt" fill="#d9c59c" d="M213 172 L178 178 Q149 180 135 205 L114 284 L164 301 L177 254 Q189 329 172 406 H308 Q291 329 303 254 L316 301 L366 284 L345 205 Q331 180 302 178 L267 172 L240 194Z"/>
   <g id="collar" fill="#b8a47f">
     <path d="M213 172 L240 194 L221 217 L200 180Z"/>
     <path d="M267 172 L240 194 L259 217 L280 180Z"/>
   </g>
   <rect id="shirt-placket" x="237" y="216" width="6" height="178" fill="#c6b18a"/>
+  <g id="jumper-legs" fill="#c58d68" display="none">
+    <path d="M184 570 H224 L221 685 L224 725 H202 L196 685Z"/>
+    <path d="M256 570 H296 L284 685 L278 725 H256 L259 685Z"/>
+  </g>
+  <g id="jumper" fill="#000000" display="none">
+    <path d="M178 179 H210 L240 222 L270 179 H302 L317 205 L304 254 L308 405 L326 578 Q240 597 154 578 L172 405 L176 254 L163 205Z"/>
+    <path d="M190 413 L178 574 M220 413 L214 586 M240 413 V591 M260 413 L266 586 M290 413 L302 574" fill="none" stroke="#25254d" stroke-width="2"/>
+  </g>
+  <g id="jumper-socks" fill="#080833" display="none">
+    <path d="M197 666 H222 L224 725 H202Z"/>
+    <path d="M258 666 H287 L278 725 H256Z"/>
+  </g>
+  <g id="shoes" fill="#25272a">
+    <path d="M163 717 H224 V758 H142 Q139 733 163 731Z"/>
+    <path d="M256 717 H317 V731 Q341 733 338 758 H256Z"/>
+  </g>
   <g id="pockets" fill="#baa681">
     <path id="right-pocket" d="M185 250 H225 V290 L205 300 L185 290Z"/>
     <path id="left-pocket" d="M255 250 H295 V290 L275 300 L255 290Z"/>
