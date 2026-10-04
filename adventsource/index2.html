@@ -285,6 +285,20 @@
     const tableEditor = document.getElementById('table-editor');
     const storageKey = 'uniform-details-tables-v1';
     const uniformFiles = new Set(Array.from(uniformButtons, button => button.dataset.svg));
+    const sharedTableParts = {
+      beret: 'beret',
+      'beret-badge': 'beret-badge',
+      'right-shoulder-patch': 'left-shoulder-patch',
+      'left-shoulder-patch': 'left-shoulder-patch',
+      'shoulder-cord': 'shoulder-cord',
+      'yellow-scarf': 'yellow-scarf',
+      'black-scarf-slide': 'black-scarf-slide',
+      belt: 'belt',
+      'belt-buckle': 'belt-buckle',
+      sash: 'sash',
+      'left-pocket-pins': 'left-pocket-pins',
+      'right-pocket-name-tag': 'right-pocket-name-tag'
+    };
     let division = 'pathfinder';
     let selectedId = null;
     let tables = {};
@@ -333,10 +347,80 @@
     function readSavedTables() {
       try {
         const saved = localStorage.getItem(storageKey);
-        if (saved) tables = validateBackup(JSON.parse(saved));
+        if (saved) {
+          const validatedTables = validateBackup(JSON.parse(saved));
+          const migration = migrateSharedTables(validatedTables);
+          tables = migration.tables;
+          const migrationMessages = [];
+          if (migration.hasChanges) {
+            try {
+              localStorage.setItem(storageKey, JSON.stringify({ version: 1, tables }));
+            } catch (error) {
+              migrationMessages.push('Could not save shared uniform tables: ' + error.message);
+            }
+          }
+          if (migration.hasColumnConflicts) {
+            migrationMessages.push('Some previous shared uniform item tables used different columns. Their original data is retained in the saved tables.');
+          }
+          if (migrationMessages.length > 0) {
+            setTableStatus(migrationMessages.join(' '), true);
+          }
+        }
       } catch (error) {
         setTableStatus('Could not load saved tables: ' + error.message, true);
       }
+    }
+
+    function tableKeyForIdentity(identity) {
+      const [program, uniform, part] = identity;
+      const sharedPart = sharedTableParts[part];
+      return JSON.stringify(sharedPart
+        ? [program, 'Uniform-Woman.svg', sharedPart]
+        : identity);
+    }
+
+    function migrateSharedTables(savedTables) {
+      const groups = new Map();
+      Object.entries(savedTables).forEach(([key, table]) => {
+        const canonicalKey = tableKeyForIdentity(JSON.parse(key));
+        if (!groups.has(canonicalKey)) groups.set(canonicalKey, []);
+        groups.get(canonicalKey).push({ key, table });
+      });
+
+      const migrated = { ...savedTables };
+      let hasColumnConflicts = false;
+      groups.forEach((entries, canonicalKey) => {
+        const canonicalEntry = entries.find(entry => entry.key === canonicalKey);
+        const source = canonicalEntry || entries[0];
+        const compatible = entries.every(entry =>
+          JSON.stringify(entry.table.columns) === JSON.stringify(source.table.columns));
+        if (!compatible) {
+          hasColumnConflicts = true;
+          migrated[canonicalKey] = source.table;
+          return;
+        }
+
+        const rows = [];
+        const seenRows = new Set();
+        entries.forEach(entry => entry.table.rows.forEach(row => {
+          const rowKey = JSON.stringify(row);
+          if (seenRows.has(rowKey)) return;
+          seenRows.add(rowKey);
+          rows.push([...row]);
+        }));
+        migrated[canonicalKey] = {
+          columns: [...source.table.columns],
+          rows
+        };
+        entries.forEach(entry => {
+          if (entry.key !== canonicalKey) delete migrated[entry.key];
+        });
+      });
+      return {
+        tables: migrated,
+        hasColumnConflicts,
+        hasChanges: JSON.stringify(migrated) !== JSON.stringify(savedTables)
+      };
     }
 
     function persistTables(nextTables) {
@@ -356,7 +440,7 @@
     }
 
     function currentTableKey() {
-      return JSON.stringify([division, activeUniformButton().dataset.svg, selectedId]);
+      return tableKeyForIdentity([division, activeUniformButton().dataset.svg, selectedId]);
     }
 
     function defaultTable() {
