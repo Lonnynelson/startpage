@@ -75,6 +75,76 @@
     #details h2 {
       margin-top: 0;
     }
+    .details-toolbar,
+    .editor-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .details-toolbar button,
+    .editor-actions button {
+      padding: 0.55rem 0.8rem;
+      border: 1px solid #888;
+      border-radius: 4px;
+      background: #f4f4f4;
+      cursor: pointer;
+    }
+    .table-scroll {
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    #content-table,
+    #editor-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    #content-table th,
+    #content-table td,
+    #editor-table th,
+    #editor-table td {
+      border: 1px solid #bbb;
+      padding: 0.5rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    #content-table td {
+      white-space: pre-wrap;
+    }
+    #content-table th {
+      background: #f4f4f4;
+    }
+    #editor-table input,
+    #editor-table textarea {
+      width: 100%;
+      min-width: 7rem;
+      padding: 0.4rem;
+      font: inherit;
+    }
+    #editor-table textarea {
+      min-height: 4rem;
+      resize: vertical;
+    }
+    #editor-table button {
+      padding: 0.35rem 0.5rem;
+    }
+    #table-editor label {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    #table-editor select {
+      display: block;
+      margin-top: 0.35rem;
+      padding: 0.4rem;
+      font: inherit;
+    }
+    #table-status {
+      min-height: 1.5em;
+    }
+    #table-status[data-error="true"] {
+      color: #940d0d;
+    }
     @media (max-width: 768px) {
       .container {
         grid-template-columns: 1fr;
@@ -98,7 +168,7 @@
 </head>
 <body>
   <div class="container">
-    <div class="column">
+    <div class="column" id="image-map">
       <div class="buttons division-buttons" id="division-buttons" role="group" aria-label="Uniform program">
         <button data-division="pathfinder" class="active" aria-pressed="true">Pathfinder</button>
         <button data-division="adventurer" aria-pressed="false">Adventurer</button>
@@ -114,6 +184,21 @@
     <div class="column" id="details">
       <h2 id="details-title">Select a uniform item</h2>
       <p id="details-body">Click part of the uniform to see details here.</p>
+      <div class="details-toolbar">
+        <button id="edit-table" type="button" disabled>Edit Table</button>
+        <button id="backup-tables" type="button">Save Backup</button>
+        <button id="restore-tables" type="button">Load Restore</button>
+        <input id="backup-file" type="file" accept="application/json,.json" hidden>
+      </div>
+      <p>Load Restore replaces all saved table data.</p>
+      <p id="table-status" role="status" aria-live="polite"></p>
+      <div id="table-display" hidden>
+        <div class="table-scroll">
+          <table id="content-table"></table>
+        </div>
+        <p id="empty-table" hidden>No rows have been added to this table.</p>
+      </div>
+      <section id="table-editor" aria-label="Edit table" hidden></section>
     </div>
   </div>
 
@@ -144,8 +229,296 @@
     const detailsBody = document.getElementById('details-body');
     const divisionButtons = document.querySelectorAll('#division-buttons button');
     const uniformButtons = document.querySelectorAll('#uniform-buttons button');
+    const editTableButton = document.getElementById('edit-table');
+    const backupButton = document.getElementById('backup-tables');
+    const restoreButton = document.getElementById('restore-tables');
+    const backupFileInput = document.getElementById('backup-file');
+    const tableStatus = document.getElementById('table-status');
+    const tableDisplay = document.getElementById('table-display');
+    const contentTable = document.getElementById('content-table');
+    const emptyTableMessage = document.getElementById('empty-table');
+    const tableEditor = document.getElementById('table-editor');
+    const storageKey = 'uniform-details-tables-v1';
+    const uniformFiles = new Set(Array.from(uniformButtons, button => button.dataset.svg));
     let division = 'pathfinder';
     let selectedId = null;
+    let tables = {};
+    let editorOpen = false;
+    let draft = null;
+
+    function setTableStatus(message, isError = false) {
+      tableStatus.textContent = message;
+      tableStatus.dataset.error = String(isError);
+    }
+
+    function validateBackup(data) {
+      if (!data || data.version !== 1 || !data.tables || typeof data.tables !== 'object' || Array.isArray(data.tables)) {
+        throw new Error('Unsupported or invalid backup format.');
+      }
+      const validated = {};
+      Object.entries(data.tables).forEach(([key, table]) => {
+        let identity;
+        try {
+          identity = JSON.parse(key);
+        } catch {
+          throw new Error('A table has an invalid identity.');
+        }
+        if (!Array.isArray(identity) || identity.length !== 3 ||
+            !['pathfinder', 'adventurer'].includes(identity[0]) ||
+            !uniformFiles.has(identity[1]) || !Object.hasOwn(parts, identity[2])) {
+          throw new Error('A table has an unknown program, uniform, or item.');
+        }
+        if (!table || !Array.isArray(table.columns) ||
+            ![3, 4, 6].includes(table.columns.length) ||
+            !table.columns.every(column => typeof column === 'string') ||
+            !Array.isArray(table.rows) ||
+            !table.rows.every(row => Array.isArray(row) &&
+              row.length === table.columns.length &&
+              row.every(cell => typeof cell === 'string'))) {
+          throw new Error('A table has invalid columns or rows.');
+        }
+        validated[key] = {
+          columns: [...table.columns],
+          rows: table.rows.map(row => [...row])
+        };
+      });
+      return validated;
+    }
+
+    function readSavedTables() {
+      try {
+        const saved = localStorage.getItem(storageKey);
+        if (saved) tables = validateBackup(JSON.parse(saved));
+      } catch (error) {
+        setTableStatus('Could not load saved tables: ' + error.message, true);
+      }
+    }
+
+    function persistTables(nextTables) {
+      try {
+        localStorage.setItem(storageKey, JSON.stringify({ version: 1, tables: nextTables }));
+        tables = nextTables;
+        setTableStatus('Table data saved in this browser.');
+        return true;
+      } catch (error) {
+        setTableStatus('Could not save table data: ' + error.message, true);
+        return false;
+      }
+    }
+
+    function activeUniformButton() {
+      return document.querySelector('#uniform-buttons button.active');
+    }
+
+    function currentTableKey() {
+      return JSON.stringify([division, activeUniformButton().dataset.svg, selectedId]);
+    }
+
+    function defaultTable() {
+      return {
+        columns: ['Column 1', 'Column 2', 'Column 3'],
+        rows: []
+      };
+    }
+
+    function selectedTable() {
+      return tables[currentTableKey()] || defaultTable();
+    }
+
+    function renderTable() {
+      const table = selectedTable();
+      const header = document.createElement('thead');
+      const headerRow = document.createElement('tr');
+      table.columns.forEach(column => {
+        const cell = document.createElement('th');
+        cell.scope = 'col';
+        cell.textContent = column;
+        headerRow.append(cell);
+      });
+      header.append(headerRow);
+
+      const body = document.createElement('tbody');
+      table.rows.forEach(row => {
+        const rowElement = document.createElement('tr');
+        row.forEach(value => {
+          const cell = document.createElement('td');
+          cell.textContent = value;
+          rowElement.append(cell);
+        });
+        body.append(rowElement);
+      });
+
+      contentTable.replaceChildren(header, body);
+      emptyTableMessage.hidden = table.rows.length > 0;
+      tableDisplay.hidden = false;
+      detailsBody.hidden = true;
+      editTableButton.disabled = false;
+    }
+
+    function makeEditorInput(value, label, onInput, multiline = false) {
+      const input = document.createElement(multiline ? 'textarea' : 'input');
+      if (!multiline) input.type = 'text';
+      input.value = value;
+      input.setAttribute('aria-label', label);
+      input.addEventListener('input', () => onInput(input.value));
+      return input;
+    }
+
+    function renderEditor() {
+      tableEditor.replaceChildren();
+
+      const countLabel = document.createElement('label');
+      countLabel.textContent = 'Number of columns';
+      const countSelect = document.createElement('select');
+      countSelect.setAttribute('aria-label', 'Number of columns');
+      [3, 4, 6].forEach(count => {
+        const option = document.createElement('option');
+        option.value = String(count);
+        option.textContent = String(count);
+        option.selected = draft.columns.length === count;
+        countSelect.append(option);
+      });
+      countSelect.addEventListener('change', () => {
+        const count = Number(countSelect.value);
+        draft.columns = Array.from({ length: count }, (_, index) =>
+          draft.columns[index] || 'Column ' + (index + 1));
+        draft.rows = draft.rows.map(row =>
+          Array.from({ length: count }, (_, index) => row[index] || ''));
+        renderEditor();
+      });
+      countLabel.append(countSelect);
+      tableEditor.append(countLabel);
+
+      const tableWrap = document.createElement('div');
+      tableWrap.className = 'table-scroll';
+      const editorTable = document.createElement('table');
+      editorTable.id = 'editor-table';
+      const editorHead = document.createElement('thead');
+      const headerRow = document.createElement('tr');
+      draft.columns.forEach((column, index) => {
+        const cell = document.createElement('th');
+        cell.scope = 'col';
+        cell.append(makeEditorInput(column, 'Column ' + (index + 1) + ' header', value => {
+          draft.columns[index] = value;
+        }));
+        headerRow.append(cell);
+      });
+      const actionHeader = document.createElement('th');
+      actionHeader.scope = 'col';
+      actionHeader.textContent = 'Row actions';
+      headerRow.append(actionHeader);
+      editorHead.append(headerRow);
+      editorTable.append(editorHead);
+
+      const editorBody = document.createElement('tbody');
+      draft.rows.forEach((row, rowIndex) => {
+        const rowElement = document.createElement('tr');
+        row.forEach((value, columnIndex) => {
+          const cell = document.createElement('td');
+          cell.append(makeEditorInput(value, 'Row ' + (rowIndex + 1) + ', column ' + (columnIndex + 1), inputValue => {
+            draft.rows[rowIndex][columnIndex] = inputValue;
+          }, true));
+          rowElement.append(cell);
+        });
+        const actionCell = document.createElement('td');
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.textContent = 'Remove';
+        removeButton.setAttribute('aria-label', 'Remove row ' + (rowIndex + 1));
+        removeButton.addEventListener('click', () => {
+          draft.rows.splice(rowIndex, 1);
+          renderEditor();
+        });
+        actionCell.append(removeButton);
+        rowElement.append(actionCell);
+        editorBody.append(rowElement);
+      });
+      editorTable.append(editorBody);
+      tableWrap.append(editorTable);
+      tableEditor.append(tableWrap);
+
+      const actions = document.createElement('div');
+      actions.className = 'editor-actions';
+      const addRowButton = document.createElement('button');
+      addRowButton.type = 'button';
+      addRowButton.textContent = 'Add row';
+      addRowButton.addEventListener('click', () => {
+        draft.rows.push(Array(draft.columns.length).fill(''));
+        renderEditor();
+      });
+      actions.append(addRowButton);
+
+      const saveButton = document.createElement('button');
+      saveButton.type = 'button';
+      saveButton.textContent = 'Save table';
+      saveButton.addEventListener('click', saveTableEditor);
+      actions.append(saveButton);
+
+      const cancelButton = document.createElement('button');
+      cancelButton.type = 'button';
+      cancelButton.textContent = 'Cancel';
+      cancelButton.addEventListener('click', cancelTableEditor);
+      actions.append(cancelButton);
+      tableEditor.append(actions);
+    }
+
+    function startTableEditor() {
+      draft = {
+        columns: [...selectedTable().columns],
+        rows: selectedTable().rows.map(row => [...row])
+      };
+      editorOpen = true;
+      tableDisplay.hidden = true;
+      editTableButton.hidden = true;
+      tableEditor.hidden = false;
+      renderEditor();
+    }
+
+    function cancelTableEditor() {
+      editorOpen = false;
+      draft = null;
+      tableEditor.hidden = true;
+      editTableButton.hidden = false;
+      if (selectedId) renderTable();
+    }
+
+    function saveTableEditor() {
+      const nextTables = {
+        ...tables,
+        [currentTableKey()]: {
+          columns: [...draft.columns],
+          rows: draft.rows.map(row => [...row])
+        }
+      };
+      if (persistTables(nextTables)) {
+        editorOpen = false;
+        draft = null;
+        tableEditor.hidden = true;
+        editTableButton.hidden = false;
+        renderTable();
+      }
+    }
+
+    function discardEditorBeforeNavigation() {
+      if (!editorOpen) return true;
+      if (!window.confirm('Discard unsaved table changes?')) return false;
+      cancelTableEditor();
+      return true;
+    }
+
+    function restoreBackup(file) {
+      return file.text().then(contents => {
+        const restoredTables = validateBackup(JSON.parse(contents));
+        if (!window.confirm('Replace all saved table data with this backup?')) return;
+        if (persistTables(restoredTables)) {
+          if (editorOpen) cancelTableEditor();
+          if (selectedId) renderTable();
+          setTableStatus('Backup restored.');
+        }
+      }).catch(error => {
+        setTableStatus('Could not restore backup: ' + error.message, true);
+      });
+    }
 
     function applyAdventurerColors(svg, shirtColor) {
       svg.querySelectorAll('[fill], [stroke]').forEach(el => {
@@ -191,15 +564,22 @@
       });
       viewbox.replaceChildren(document.importNode(svg, true));
       if (selectedId && viewbox.querySelector('#' + selectedId)) {
-        selectPart(selectedId);
+        selectPart(selectedId, true);
       } else {
         selectedId = null;
         detailsTitle.textContent = 'Select a uniform item';
         detailsBody.textContent = 'Click part of the uniform to see details here.';
+        detailsBody.hidden = false;
+        tableDisplay.hidden = true;
+        tableEditor.hidden = true;
+        editTableButton.hidden = false;
+        editTableButton.disabled = true;
       }
     }
 
-    function selectPart(id) {
+    function selectPart(id, forceRefresh = false) {
+      if (id === selectedId && !forceRefresh) return;
+      if (id !== selectedId && !discardEditorBeforeNavigation()) return;
       viewbox.querySelectorAll('.part.selected').forEach(el => el.classList.remove('selected'));
       const el = viewbox.querySelector('#' + id);
       if (el) el.classList.add('selected');
@@ -207,7 +587,7 @@
       detailsTitle.textContent = division === 'pathfinder'
         ? parts[id].title
         : 'ADV ' + parts[id].title.replace(/^PF /, '');
-      detailsBody.textContent = parts[id].body[division];
+      renderTable();
     }
 
     viewbox.addEventListener('click', e => {
@@ -217,6 +597,7 @@
 
     divisionButtons.forEach(btn => {
       btn.addEventListener('click', () => {
+        if (btn.dataset.division === division || !discardEditorBeforeNavigation()) return;
         divisionButtons.forEach(b => {
           b.classList.remove('active');
           b.setAttribute('aria-pressed', 'false');
@@ -230,12 +611,34 @@
 
     uniformButtons.forEach(btn => {
       btn.addEventListener('click', () => {
+        if (btn.classList.contains('active') || !discardEditorBeforeNavigation()) return;
         uniformButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         loadUniform(btn);
       });
     });
 
+    editTableButton.addEventListener('click', startTableEditor);
+    backupButton.addEventListener('click', () => {
+      const backup = new Blob([JSON.stringify({ version: 1, tables }, null, 2)], {
+        type: 'application/json'
+      });
+      const url = URL.createObjectURL(backup);
+      const download = document.createElement('a');
+      download.href = url;
+      download.download = 'uniform-details-backup.json';
+      download.click();
+      setTimeout(() => URL.revokeObjectURL(url), 0);
+      setTableStatus('Backup downloaded.');
+    });
+    restoreButton.addEventListener('click', () => backupFileInput.click());
+    backupFileInput.addEventListener('change', () => {
+      const file = backupFileInput.files[0];
+      if (file) restoreBackup(file);
+      backupFileInput.value = '';
+    });
+
+    readSavedTables();
     loadUniform(document.querySelector('#uniform-buttons button.active'));
   </script>
 </body>
