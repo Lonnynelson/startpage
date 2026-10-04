@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="480" height="800" viewBox="0 0 480 800" role="img" aria-labelledby="title desc">
   <title id="title">Woman wearing a uniform</title>
-  <desc id="desc">Front view with shoulder patches, pins on the wearer's left pocket, a name tag on her right pocket, pants, belt, sash, beret, shoulder cord, black bow tie, and a yellow scarf with a black slide. Each item has an editable ID. Transparent background.</desc>
+  <desc id="desc">Front view with shoulder patches, pins on the wearer's left pocket, a name tag on her right pocket, pants, belt, sash, beret, shoulder cord, black bow tie, and a burgundy scarf with a white slide. Each item has an editable ID. Transparent background.</desc>
   <!-- Left and right refer to the wearer, opposite the viewer. -->
   <path id="hair" fill="#382923" d="M191 82 Q184 40 239 39 Q294 39 291 87 L298 173 Q281 186 263 174 L260 118 H220 L217 174 Q197 186 182 171Z"/>
   <g id="woman" fill="#c58d68">

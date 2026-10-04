@@ -585,6 +585,10 @@
           shirt.setAttribute('stroke-width', '2');
         }
       }
+      const scarf = svg.querySelector('#yellow-scarf');
+      if (scarf) scarf.setAttribute('fill', '#800020');
+      const scarfSlide = svg.querySelector('#black-scarf-slide');
+      if (scarfSlide) scarfSlide.setAttribute('fill', '#ffffff');
     }
 
     async function loadUniform(button) {
@@ -603,6 +607,13 @@
         applyAdventurerColors(svg, button.dataset.shirtColor);
       }
       const isAdventurerGirl = division === 'adventurer' && file === 'Uniform-Girl.svg';
+      if (isAdventurerGirl) {
+        const sash = svg.querySelector('#sash');
+        if (sash) {
+          sash.setAttribute('stroke', '#ffffff');
+          sash.setAttribute('stroke-width', '3');
+        }
+      }
       svg.querySelector('#pants')?.setAttribute('display', isAdventurerGirl ? 'none' : 'inline');
       svg.querySelector('#jumper')?.setAttribute('display', isAdventurerGirl ? 'inline' : 'none');
       svg.querySelector('#jumper-legs')?.setAttribute('display', isAdventurerGirl ? 'inline' : 'none');
