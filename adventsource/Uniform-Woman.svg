@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="480" height="800" viewBox="0 0 480 800" role="img" aria-labelledby="title desc">
   <title id="title">Woman wearing a uniform</title>
-  <desc id="desc">Front view with shoulder patches, pins on the wearer's left pocket, a name tag on her right pocket, pants, belt, sash, beret, shoulder cord, black bow tie, and a burgundy scarf with a white slide. Each item has an editable ID. Transparent background.</desc>
+  <desc id="desc">Front view with shoulder patches, pins on the wearer's left pocket, a name tag on her right pocket, pants or a skirt, belt, sash, beret, shoulder cord, black bow tie, and a burgundy scarf with a white slide. Each item has an editable ID. Transparent background.</desc>
   <!-- Left and right refer to the wearer, opposite the viewer. -->
   <path id="hair" fill="#382923" d="M191 82 Q184 40 239 39 Q294 39 291 87 L298 173 Q281 186 263 174 L260 118 H220 L217 174 Q197 186 182 171Z"/>
   <g id="woman" fill="#c58d68">
@@ -17,6 +17,10 @@
     <path d="M227 132 Q240 143 253 132 Q240 138 227 132Z"/>
   </g>
   <path id="pants" fill="#000000" d="M172 395 H308 L318 725 H256 L240 487 L224 725 H162Z"/>
+  <g id="skirt" fill="#080833" display="none">
+    <path d="M172 405 H308 L334 690 Q240 710 146 690Z"/>
+    <path d="M184 416 L164 686 M211 416 L200 698 M240 416 V703 M269 416 L280 698 M296 416 L316 686" fill="none" stroke="#25254d" stroke-width="2"/>
+  </g>
   <g id="shoes" fill="#25272a">
     <path d="M163 717 H224 V758 H142 Q139 733 163 731Z"/>
     <path d="M256 717 H317 V731 Q341 733 338 758 H256Z"/>

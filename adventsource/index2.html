@@ -264,6 +264,7 @@
       'belt':                  { title: 'PF Belt',             body: { pathfinder: '', adventurer: '' } },
       'belt-buckle':           { title: 'PF Belt Buckle',      body: { pathfinder: '', adventurer: '' } },
       'pants':                 { title: 'PF Pants/Skirt',      body: { pathfinder: '', adventurer: '' } },
+      'skirt':                 { title: 'PF Skirt',             body: { pathfinder: '', adventurer: '' } },
       'shoes':                 { title: 'Shoes/Socks',         body: { pathfinder: '', adventurer: '' } }
     };
 
@@ -687,8 +688,13 @@
       const svg = doc.documentElement;
       svg.querySelectorAll('script').forEach(el => el.remove());
       svg.setAttribute('aria-label', division + ' ' + label + ' uniform');
+      const isAdventurerWoman = division === 'adventurer' && file === 'Uniform-Woman.svg';
       if (division === 'adventurer') {
         applyAdventurerColors(svg, button.dataset.shirtColor);
+      }
+      if (isAdventurerWoman) {
+        svg.querySelector('#title').textContent = 'Woman wearing an Adventurer uniform with a skirt';
+        svg.querySelector('#desc').textContent = "Front view with shoulder patches, pins on the wearer's left pocket, a name tag on her right pocket, a skirt, belt, sash, beret, shoulder cord, black bow tie, and a burgundy scarf with a white slide. Each item has an editable ID. Transparent background.";
       }
       const isAdventurerGirl = division === 'adventurer' && file === 'Uniform-Girl.svg';
       if (isAdventurerGirl) {
@@ -698,7 +704,8 @@
           sash.setAttribute('stroke-width', '3');
         }
       }
-      svg.querySelector('#pants')?.setAttribute('display', isAdventurerGirl ? 'none' : 'inline');
+      svg.querySelector('#pants')?.setAttribute('display', isAdventurerGirl || isAdventurerWoman ? 'none' : 'inline');
+      svg.querySelector('#skirt')?.setAttribute('display', isAdventurerWoman ? 'inline' : 'none');
       svg.querySelector('#jumper')?.setAttribute('display', isAdventurerGirl ? 'inline' : 'none');
       svg.querySelector('#jumper-legs')?.setAttribute('display', isAdventurerGirl ? 'inline' : 'none');
       svg.querySelector('#jumper-socks')?.setAttribute('display', isAdventurerGirl ? 'inline' : 'none');
