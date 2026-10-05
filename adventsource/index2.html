@@ -218,6 +218,10 @@
         <button id="edit-table" type="button" disabled>Edit Table</button>
         <button id="save-table" type="button" hidden>Save Table</button>
       </div>
+      <div class="details-toolbar" id="belt-table-switcher" role="group" aria-label="Belt material" hidden>
+        <button type="button" data-belt-material="cloth" aria-pressed="true">Cloth Belts</button>
+        <button type="button" data-belt-material="leather" aria-pressed="false">Leather Belts</button>
+      </div>
       <p id="table-status" role="status" aria-live="polite"></p>
       <div id="table-display" hidden>
         <div class="table-scroll">
@@ -262,6 +266,7 @@
       'shirt':                 { title: 'PF Shirt',            body: { pathfinder: '', adventurer: '' } },
       'jumper':                { title: 'Jumper',               body: { pathfinder: '', adventurer: '' } },
       'belt':                  { title: 'PF Belt',             body: { pathfinder: '', adventurer: '' } },
+      'leather-belt':          { title: 'Leather Belt',        body: { pathfinder: '', adventurer: '' } },
       'belt-buckle':           { title: 'PF Belt Buckle',      body: { pathfinder: '', adventurer: '' } },
       'pants':                 { title: 'PF Pants/Skirt',      body: { pathfinder: '', adventurer: '' } },
       'skirt':                 { title: 'PF Skirt',             body: { pathfinder: '', adventurer: '' } },
@@ -275,6 +280,8 @@
     const uniformButtons = document.querySelectorAll('#uniform-buttons button');
     const editTableButton = document.getElementById('edit-table');
     const saveTableButton = document.getElementById('save-table');
+    const beltTableSwitcher = document.getElementById('belt-table-switcher');
+    const beltMaterialButtons = beltTableSwitcher.querySelectorAll('button');
     const backupButton = document.getElementById('backup-tables');
     const restoreButton = document.getElementById('restore-tables');
     const backupFileInput = document.getElementById('backup-file');
@@ -295,6 +302,7 @@
       'yellow-scarf': 'yellow-scarf',
       'black-scarf-slide': 'black-scarf-slide',
       belt: 'belt',
+      'leather-belt': 'leather-belt',
       'belt-buckle': 'belt-buckle',
       sash: 'sash',
       'left-pocket-pins': 'left-pocket-pins',
@@ -302,6 +310,7 @@
     };
     let division = 'pathfinder';
     let selectedId = null;
+    let beltMaterial = 'cloth';
     let tables = {};
     let editorOpen = false;
     let draft = null;
@@ -440,8 +449,17 @@
       return document.querySelector('#uniform-buttons button.active');
     }
 
+    function supportsBeltTableSwitcher() {
+      const uniformFile = activeUniformButton().dataset.svg;
+      return division === 'pathfinder' ||
+        division === 'adventurer' && ['Uniform-Woman.svg', 'Uniform-Man.svg'].includes(uniformFile);
+    }
+
     function currentTableKey() {
-      return tableKeyForIdentity([division, activeUniformButton().dataset.svg, selectedId]);
+      const part = selectedId === 'belt' && supportsBeltTableSwitcher() && beltMaterial === 'leather'
+        ? 'leather-belt'
+        : selectedId;
+      return tableKeyForIdentity([division, activeUniformButton().dataset.svg, part]);
     }
 
     function defaultTable() {
@@ -457,6 +475,12 @@
 
     function renderTable() {
       const table = selectedTable();
+      const supportsBeltTables = supportsBeltTableSwitcher();
+      beltTableSwitcher.hidden = selectedId !== 'belt' || !supportsBeltTables;
+      beltMaterialButtons.forEach(button => {
+        const activeMaterial = supportsBeltTables ? beltMaterial : 'cloth';
+        button.setAttribute('aria-pressed', String(button.dataset.beltMaterial === activeMaterial));
+      });
       const header = document.createElement('thead');
       const headerRow = document.createElement('tr');
       table.columns.forEach(column => {
@@ -725,6 +749,7 @@
         detailsBody.hidden = false;
         tableDisplay.hidden = true;
         tableEditor.hidden = true;
+        beltTableSwitcher.hidden = true;
         editTableButton.hidden = false;
         editTableButton.disabled = true;
       }
@@ -768,6 +793,14 @@
         uniformButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         loadUniform(btn);
+      });
+    });
+
+    beltMaterialButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        if (button.dataset.beltMaterial === beltMaterial || !discardEditorBeforeNavigation()) return;
+        beltMaterial = button.dataset.beltMaterial;
+        renderTable();
       });
     });
 
