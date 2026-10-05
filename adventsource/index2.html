@@ -82,6 +82,13 @@
       gap: 0.5rem;
       margin: 1rem 0;
     }
+    #belt-table-switcher[hidden] {
+      display: none;
+    }
+    #belt-table-switcher button[aria-pressed="true"] {
+      background: #333;
+      color: #fff;
+    }
     .details-toolbar button,
     .editor-actions button,
     #settings-menu button {
@@ -221,6 +228,7 @@
       <div class="details-toolbar" id="belt-table-switcher" role="group" aria-label="Belt material" hidden>
         <button type="button" data-belt-material="cloth" aria-pressed="true">Cloth Belts</button>
         <button type="button" data-belt-material="leather" aria-pressed="false">Leather Belts</button>
+        <p>Cloth and leather belts have separate tables. Save Table before switching to keep your edits.</p>
       </div>
       <p id="table-status" role="status" aria-live="polite"></p>
       <div id="table-display" hidden>
@@ -481,6 +489,10 @@
         const activeMaterial = supportsBeltTables ? beltMaterial : 'cloth';
         button.setAttribute('aria-pressed', String(button.dataset.beltMaterial === activeMaterial));
       });
+      if (selectedId === 'belt' && supportsBeltTables) {
+        detailsTitle.textContent = (division === 'pathfinder' ? 'PF ' : 'ADV ') +
+          (beltMaterial === 'leather' ? 'Leather Belts' : 'Cloth Belts');
+      }
       const header = document.createElement('thead');
       const headerRow = document.createElement('tr');
       table.columns.forEach(column => {
@@ -798,6 +810,7 @@
 
     beltMaterialButtons.forEach(button => {
       button.addEventListener('click', () => {
+        if (selectedId !== 'belt' || !supportsBeltTableSwitcher()) return;
         if (button.dataset.beltMaterial === beltMaterial || !discardEditorBeforeNavigation()) return;
         beltMaterial = button.dataset.beltMaterial;
         renderTable();
