@@ -85,6 +85,12 @@
     #belt-table-switcher[hidden] {
       display: none;
     }
+    .shirt-table-card {
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
     #belt-table-switcher button[aria-pressed="true"] {
       background: #333;
       color: #fff;
@@ -132,12 +138,15 @@
       margin: 1rem 0;
     }
     #content-table,
+    .shirt-content-table,
     #editor-table {
       width: 100%;
       border-collapse: collapse;
     }
     #content-table th,
     #content-table td,
+    .shirt-content-table th,
+    .shirt-content-table td,
     #editor-table th,
     #editor-table td {
       border: 1px solid #bbb;
@@ -146,6 +155,9 @@
       vertical-align: top;
     }
     #content-table td {
+      white-space: pre-wrap;
+    }
+    .shirt-content-table td {
       white-space: pre-wrap;
     }
     #content-table th {
@@ -238,6 +250,7 @@
         <p id="empty-table" hidden>No rows have been added to this table.</p>
       </div>
       <section id="table-editor" aria-label="Edit table" hidden></section>
+      <section id="shirt-tables" aria-label="Pathfinder shirt tables" hidden></section>
     </div>
   </div>
   <button id="settings-toggle" type="button" popovertarget="settings-menu" aria-label="Settings" title="Settings">
@@ -253,6 +266,7 @@
     <p>Backup All includes all saved tables, column titles, and rows.
       Use Save Table first to include your current edits.</p>
     <p>Restore All replaces all saved table data and discards open table edits after confirmation.</p>
+    <p>Pathfinder shirts have separate stacked tables. Each table has its own Edit Table and Save Table controls.</p>
     <button type="button" popovertarget="settings-menu" popovertargetaction="hide">Close</button>
   </section>
 
@@ -299,6 +313,7 @@
     const contentTable = document.getElementById('content-table');
     const emptyTableMessage = document.getElementById('empty-table');
     const tableEditor = document.getElementById('table-editor');
+    const shirtTables = document.getElementById('shirt-tables');
     const storageKey = 'uniform-details-tables-v1';
     const uniformFiles = new Set(Array.from(uniformButtons, button => button.dataset.svg));
     const sharedTableParts = {
@@ -322,6 +337,8 @@
     let tables = {};
     let editorOpen = false;
     let draft = null;
+    let draftTableKey = null;
+    let shirtTableIndex = 0;
 
     function setTableStatus(message, isError = false) {
       tableStatus.textContent = message;
@@ -340,7 +357,11 @@
         } catch {
           throw new Error('A table has an invalid identity.');
         }
-        if (!Array.isArray(identity) || identity.length !== 3 ||
+        const isExtraShirtTable = Array.isArray(identity) && identity.length === 4 &&
+          identity[0] === 'pathfinder' && identity[2] === 'shirt' &&
+          Number.isInteger(identity[3]) && identity[3] >= 1 &&
+          identity[3] < (identity[1] === 'Uniform-Girl.svg' ? 4 : 2);
+        if (!Array.isArray(identity) || (identity.length !== 3 && !isExtraShirtTable) ||
             !['pathfinder', 'adventurer'].includes(identity[0]) ||
             !uniformFiles.has(identity[1]) || !Object.hasOwn(parts, identity[2])) {
           throw new Error('A table has an unknown program, uniform, or item.');
@@ -467,7 +488,18 @@
       const part = selectedId === 'belt' && supportsBeltTableSwitcher() && beltMaterial === 'leather'
         ? 'leather-belt'
         : selectedId;
+      if (usesStackedShirtTables()) return shirtTableKey(shirtTableIndex);
       return tableKeyForIdentity([division, activeUniformButton().dataset.svg, part]);
+    }
+
+    function usesStackedShirtTables() {
+      return division === 'pathfinder' && selectedId === 'shirt';
+    }
+
+    function shirtTableKey(index) {
+      const identity = ['pathfinder', activeUniformButton().dataset.svg, 'shirt'];
+      if (index > 0) identity.push(index);
+      return JSON.stringify(identity);
     }
 
     function defaultTable() {
@@ -482,6 +514,12 @@
     }
 
     function renderTable() {
+      if (usesStackedShirtTables()) {
+        renderShirtTables();
+        return;
+      }
+      shirtTables.hidden = true;
+      editTableButton.hidden = false;
       const table = selectedTable();
       const supportsBeltTables = supportsBeltTableSwitcher();
       beltTableSwitcher.hidden = selectedId !== 'belt' || !supportsBeltTables;
@@ -493,6 +531,14 @@
         detailsTitle.textContent = (division === 'pathfinder' ? 'PF ' : 'ADV ') +
           (beltMaterial === 'leather' ? 'Leather Belts' : 'Cloth Belts');
       }
+      renderTableContents(contentTable, table);
+      emptyTableMessage.hidden = table.rows.length > 0;
+      tableDisplay.hidden = false;
+      detailsBody.hidden = true;
+      editTableButton.disabled = false;
+    }
+
+    function renderTableContents(target, table) {
       const header = document.createElement('thead');
       const headerRow = document.createElement('tr');
       table.columns.forEach(column => {
@@ -514,11 +560,59 @@
         body.append(rowElement);
       });
 
-      contentTable.replaceChildren(header, body);
-      emptyTableMessage.hidden = table.rows.length > 0;
-      tableDisplay.hidden = false;
+      target.replaceChildren(header, body);
+    }
+
+    function renderShirtTables() {
+      document.getElementById('details').append(tableEditor);
+      shirtTables.replaceChildren();
+      shirtTables.hidden = false;
+      tableDisplay.hidden = true;
       detailsBody.hidden = true;
-      editTableButton.disabled = false;
+      editTableButton.hidden = true;
+      saveTableButton.hidden = true;
+      beltTableSwitcher.hidden = true;
+      const count = activeUniformButton().dataset.svg === 'Uniform-Girl.svg' ? 4 : 2;
+      for (let index = 0; index < count; index++) {
+        const card = document.createElement('section');
+        card.className = 'shirt-table-card';
+        card.setAttribute('aria-label', 'Shirt table ' + (index + 1));
+        const title = document.createElement('h3');
+        title.textContent = 'Shirt Table ' + (index + 1);
+        card.append(title);
+        const actions = document.createElement('div');
+        actions.className = 'details-toolbar';
+        const edit = document.createElement('button');
+        edit.type = 'button';
+        edit.textContent = 'Edit Table';
+        edit.addEventListener('click', () => {
+          if (!discardEditorBeforeNavigation()) return;
+          shirtTableIndex = index;
+          startTableEditor();
+        });
+        const save = document.createElement('button');
+        save.type = 'button';
+        save.textContent = 'Save Table';
+        save.hidden = true;
+        save.addEventListener('click', saveTableEditor);
+        actions.append(edit, save);
+        card.append(actions);
+        const table = tables[shirtTableKey(index)] || defaultTable();
+        const display = document.createElement('div');
+        display.className = 'table-scroll';
+        const content = document.createElement('table');
+        content.className = 'shirt-content-table';
+        content.setAttribute('aria-label', 'Shirt table ' + (index + 1));
+        renderTableContents(content, table);
+        display.append(content);
+        if (table.rows.length === 0) {
+          const empty = document.createElement('p');
+          empty.textContent = 'No rows have been added to this table.';
+          display.append(empty);
+        }
+        card.append(display);
+        shirtTables.append(card);
+      }
     }
 
     function makeEditorInput(value, label, onInput, multiline = false) {
@@ -623,6 +717,7 @@
     }
 
     function startTableEditor() {
+      draftTableKey = currentTableKey();
       draft = {
         columns: [...selectedTable().columns],
         rows: selectedTable().rows.map(row => [...row])
@@ -633,11 +728,21 @@
       saveTableButton.hidden = false;
       tableEditor.hidden = false;
       renderEditor();
+      if (usesStackedShirtTables()) {
+        const card = shirtTables.children[shirtTableIndex];
+        card.querySelector('.table-scroll').hidden = true;
+        const buttons = card.querySelectorAll('.details-toolbar button');
+        buttons[0].hidden = true;
+        buttons[1].hidden = false;
+        saveTableButton.hidden = true;
+        card.append(tableEditor);
+      }
     }
 
     function cancelTableEditor() {
       editorOpen = false;
       draft = null;
+      draftTableKey = null;
       tableEditor.hidden = true;
       editTableButton.hidden = false;
       saveTableButton.hidden = true;
@@ -647,7 +752,7 @@
     function saveTableEditor() {
       const nextTables = {
         ...tables,
-        [currentTableKey()]: {
+        [draftTableKey]: {
           columns: [...draft.columns],
           rows: draft.rows.map(row => [...row])
         }
@@ -655,6 +760,7 @@
       if (persistTables(nextTables)) {
         editorOpen = false;
         draft = null;
+        draftTableKey = null;
         tableEditor.hidden = true;
         editTableButton.hidden = false;
         saveTableButton.hidden = true;
@@ -756,6 +862,7 @@
         selectPart(selectedId, true);
       } else {
         selectedId = null;
+        shirtTables.hidden = true;
         detailsTitle.textContent = 'Select a uniform item';
         detailsBody.textContent = 'Click part of the uniform to see details here.';
         detailsBody.hidden = false;
@@ -774,6 +881,7 @@
       const el = viewbox.querySelector('#' + id);
       if (el) el.classList.add('selected');
       selectedId = id;
+      shirtTableIndex = 0;
       detailsTitle.textContent = division === 'pathfinder'
         ? parts[id].title
         : 'ADV ' + parts[id].title.replace(/^PF /, '');
