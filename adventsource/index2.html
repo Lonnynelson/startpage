@@ -250,7 +250,7 @@
         <p id="empty-table" hidden>No rows have been added to this table.</p>
       </div>
       <section id="table-editor" aria-label="Edit table" hidden></section>
-      <section id="shirt-tables" aria-label="Pathfinder shirt tables" hidden></section>
+      <section id="shirt-tables" aria-label="Shirt tables" hidden></section>
     </div>
   </div>
   <button id="settings-toggle" type="button" popovertarget="settings-menu" aria-label="Settings" title="Settings">
@@ -266,7 +266,9 @@
     <p>Backup All includes all saved tables, column titles, and rows.
       Use Save Table first to include your current edits.</p>
     <p>Restore All replaces all saved table data and discards open table edits after confirmation.</p>
-    <p>Pathfinder shirts have separate stacked tables. Each table has its own Edit Table and Save Table controls.</p>
+    <p>Pathfinder and Adventurer shirts have separate stacked tables. Each table has its own Edit Table and Save Table controls.</p>
+    <p>Pathfinder Girls have four shirt tables; the other Pathfinder uniforms have two.
+      Adventurer Women and Men have four shirt tables; Girls and Boys have two.</p>
     <button type="button" popovertarget="settings-menu" popovertargetaction="hide">Close</button>
   </section>
 
@@ -358,9 +360,9 @@
           throw new Error('A table has an invalid identity.');
         }
         const isExtraShirtTable = Array.isArray(identity) && identity.length === 4 &&
-          identity[0] === 'pathfinder' && identity[2] === 'shirt' &&
+          identity[2] === 'shirt' &&
           Number.isInteger(identity[3]) && identity[3] >= 1 &&
-          identity[3] < (identity[1] === 'Uniform-Girl.svg' ? 4 : 2);
+          identity[3] < shirtTableCount(identity[0], identity[1]);
         if (!Array.isArray(identity) || (identity.length !== 3 && !isExtraShirtTable) ||
             !['pathfinder', 'adventurer'].includes(identity[0]) ||
             !uniformFiles.has(identity[1]) || !Object.hasOwn(parts, identity[2])) {
@@ -493,11 +495,16 @@
     }
 
     function usesStackedShirtTables() {
-      return division === 'pathfinder' && selectedId === 'shirt';
+      return selectedId === 'shirt';
+    }
+
+    function shirtTableCount(program, uniformFile) {
+      if (program === 'pathfinder') return uniformFile === 'Uniform-Girl.svg' ? 4 : 2;
+      return ['Uniform-Woman.svg', 'Uniform-Man.svg'].includes(uniformFile) ? 4 : 2;
     }
 
     function shirtTableKey(index) {
-      const identity = ['pathfinder', activeUniformButton().dataset.svg, 'shirt'];
+      const identity = [division, activeUniformButton().dataset.svg, 'shirt'];
       if (index > 0) identity.push(index);
       return JSON.stringify(identity);
     }
@@ -572,7 +579,7 @@
       editTableButton.hidden = true;
       saveTableButton.hidden = true;
       beltTableSwitcher.hidden = true;
-      const count = activeUniformButton().dataset.svg === 'Uniform-Girl.svg' ? 4 : 2;
+      const count = shirtTableCount(division, activeUniformButton().dataset.svg);
       for (let index = 0; index < count; index++) {
         const card = document.createElement('section');
         card.className = 'shirt-table-card';
