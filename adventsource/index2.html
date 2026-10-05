@@ -580,12 +580,26 @@
       saveTableButton.hidden = true;
       beltTableSwitcher.hidden = true;
       const count = shirtTableCount(division, activeUniformButton().dataset.svg);
+      const pathfinderShirtTitles = {
+        'Uniform-Woman.svg': ['Short Sleeve Blouse', 'Long Sleeve Blouse'],
+        'Uniform-Man.svg': ['Short Sleeve Shirt', 'Long Sleeve Shirt'],
+        'Uniform-Girl.svg': ['Short Sleeve Blouse', 'Long Sleeve Blouse', 'Teen Short Sleeve Blouse', 'Teen Long Sleeve Blouse'],
+        'Uniform-Boy.svg': ['Short Sleeve Shirt', 'Long Sleeve Shirt']
+      };
+      const adventurerShirtTitles = {
+        'Uniform-Woman.svg': ['White Short Sleeve Blouse', 'White Long Sleeve Blouse', 'Blue Short Sleeve Blouse', 'Blue Long Sleeve Blouse'],
+        'Uniform-Man.svg': ['White Short Sleeve Shirt', 'White Long Sleeve Shirt', 'Blue Short Sleeve Shirt', 'Blue Long Sleeve Shirt'],
+        'Uniform-Girl.svg': ['Blue Short Sleeve Blouse', 'White Short Sleeve Blouse'],
+        'Uniform-Boy.svg': ['Blue Short Sleeve Shirt', 'White Short Sleeve Shirt']
+      };
+      const shirtTitles = division === 'pathfinder' ? pathfinderShirtTitles : adventurerShirtTitles;
       for (let index = 0; index < count; index++) {
+        const tableTitle = shirtTitles[activeUniformButton().dataset.svg]?.[index] || 'Shirt Table ' + (index + 1);
         const card = document.createElement('section');
         card.className = 'shirt-table-card';
-        card.setAttribute('aria-label', 'Shirt table ' + (index + 1));
+        card.setAttribute('aria-label', tableTitle);
         const title = document.createElement('h3');
-        title.textContent = 'Shirt Table ' + (index + 1);
+        title.textContent = tableTitle;
         card.append(title);
         const actions = document.createElement('div');
         actions.className = 'details-toolbar';
@@ -609,7 +623,7 @@
         display.className = 'table-scroll';
         const content = document.createElement('table');
         content.className = 'shirt-content-table';
-        content.setAttribute('aria-label', 'Shirt table ' + (index + 1));
+        content.setAttribute('aria-label', tableTitle);
         renderTableContents(content, table);
         display.append(content);
         if (table.rows.length === 0) {
