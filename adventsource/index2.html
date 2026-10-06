@@ -269,6 +269,8 @@
     <p>Pathfinder and Adventurer shirts have separate stacked tables. Each table has its own Edit Table and Save Table controls.</p>
     <p>Pathfinder Girls have four shirt tables; the other Pathfinder uniforms have two.
       Adventurer Women and Men have four shirt tables; Girls and Boys have two.</p>
+    <p>Pathfinder Women's and Boys' pants options have two separate stacked tables;
+      Girls' pants and skirt options have four. Existing content stays in the first table.</p>
     <button type="button" popovertarget="settings-menu" popovertargetaction="hide">Close</button>
   </section>
 
@@ -318,6 +320,11 @@
     const shirtTables = document.getElementById('shirt-tables');
     const storageKey = 'uniform-details-tables-v1';
     const uniformFiles = new Set(Array.from(uniformButtons, button => button.dataset.svg));
+    const pathfinderPantsTitles = {
+      'Uniform-Woman.svg': ["Women's Pants", "Women's Skirts"],
+      'Uniform-Boy.svg': ["Boy's Pants", "Husky Boy's Pants"],
+      'Uniform-Girl.svg': ["Girl's Pants", "Girl's Teen Pants", "Girl's Skirts", "Girl's Teen Skirts"]
+    };
     const sharedTableParts = {
       beret: 'beret',
       'beret-badge': 'beret-badge',
@@ -359,11 +366,10 @@
         } catch {
           throw new Error('A table has an invalid identity.');
         }
-        const isExtraShirtTable = Array.isArray(identity) && identity.length === 4 &&
-          identity[2] === 'shirt' &&
+        const isExtraStackedTable = Array.isArray(identity) && identity.length === 4 &&
           Number.isInteger(identity[3]) && identity[3] >= 1 &&
-          identity[3] < shirtTableCount(identity[0], identity[1]);
-        if (!Array.isArray(identity) || (identity.length !== 3 && !isExtraShirtTable) ||
+          identity[3] < stackedTableCount(identity[0], identity[1], identity[2]);
+        if (!Array.isArray(identity) || (identity.length !== 3 && !isExtraStackedTable) ||
             !['pathfinder', 'adventurer'].includes(identity[0]) ||
             !uniformFiles.has(identity[1]) || !Object.hasOwn(parts, identity[2])) {
           throw new Error('A table has an unknown program, uniform, or item.');
@@ -490,12 +496,20 @@
       const part = selectedId === 'belt' && supportsBeltTableSwitcher() && beltMaterial === 'leather'
         ? 'leather-belt'
         : selectedId;
-      if (usesStackedShirtTables()) return shirtTableKey(shirtTableIndex);
+      if (usesStackedTables()) return stackedTableKey(shirtTableIndex);
       return tableKeyForIdentity([division, activeUniformButton().dataset.svg, part]);
     }
 
-    function usesStackedShirtTables() {
-      return selectedId === 'shirt';
+    function usesStackedTables() {
+      return stackedTableCount(division, activeUniformButton().dataset.svg, selectedId) > 1;
+    }
+
+    function stackedTableCount(program, uniformFile, part) {
+      if (part === 'shirt') return shirtTableCount(program, uniformFile);
+      if (program === 'pathfinder' && part === 'pants') {
+        return pathfinderPantsTitles[uniformFile]?.length || 1;
+      }
+      return 1;
     }
 
     function shirtTableCount(program, uniformFile) {
@@ -503,8 +517,8 @@
       return ['Uniform-Woman.svg', 'Uniform-Man.svg'].includes(uniformFile) ? 4 : 2;
     }
 
-    function shirtTableKey(index) {
-      const identity = [division, activeUniformButton().dataset.svg, 'shirt'];
+    function stackedTableKey(index) {
+      const identity = [division, activeUniformButton().dataset.svg, selectedId];
       if (index > 0) identity.push(index);
       return JSON.stringify(identity);
     }
@@ -521,8 +535,8 @@
     }
 
     function renderTable() {
-      if (usesStackedShirtTables()) {
-        renderShirtTables();
+      if (usesStackedTables()) {
+        renderStackedTables();
         return;
       }
       shirtTables.hidden = true;
@@ -570,7 +584,7 @@
       target.replaceChildren(header, body);
     }
 
-    function renderShirtTables() {
+    function renderStackedTables() {
       document.getElementById('details').append(tableEditor);
       shirtTables.replaceChildren();
       shirtTables.hidden = false;
@@ -579,7 +593,9 @@
       editTableButton.hidden = true;
       saveTableButton.hidden = true;
       beltTableSwitcher.hidden = true;
-      const count = shirtTableCount(division, activeUniformButton().dataset.svg);
+      shirtTables.setAttribute('aria-label', selectedId === 'pants' ? 'Pants and skirt tables' : 'Shirt tables');
+      if (selectedId === 'pants') detailsTitle.textContent = 'PF Pants and Skirts';
+      const count = stackedTableCount(division, activeUniformButton().dataset.svg, selectedId);
       const pathfinderShirtTitles = {
         'Uniform-Woman.svg': ['Short Sleeve Blouse', 'Long Sleeve Blouse'],
         'Uniform-Man.svg': ['Short Sleeve Shirt', 'Long Sleeve Shirt'],
@@ -592,7 +608,8 @@
         'Uniform-Girl.svg': ['Blue Short Sleeve Blouse', 'White Short Sleeve Blouse'],
         'Uniform-Boy.svg': ['Blue Short Sleeve Shirt', 'White Short Sleeve Shirt']
       };
-      const shirtTitles = division === 'pathfinder' ? pathfinderShirtTitles : adventurerShirtTitles;
+      const shirtTitles = selectedId === 'pants' ? pathfinderPantsTitles :
+        division === 'pathfinder' ? pathfinderShirtTitles : adventurerShirtTitles;
       for (let index = 0; index < count; index++) {
         const tableTitle = shirtTitles[activeUniformButton().dataset.svg]?.[index] || 'Shirt Table ' + (index + 1);
         const card = document.createElement('section');
@@ -618,7 +635,7 @@
         save.addEventListener('click', saveTableEditor);
         actions.append(edit, save);
         card.append(actions);
-        const table = tables[shirtTableKey(index)] || defaultTable();
+        const table = tables[stackedTableKey(index)] || defaultTable();
         const display = document.createElement('div');
         display.className = 'table-scroll';
         const content = document.createElement('table');
@@ -749,7 +766,7 @@
       saveTableButton.hidden = false;
       tableEditor.hidden = false;
       renderEditor();
-      if (usesStackedShirtTables()) {
+      if (usesStackedTables()) {
         const card = shirtTables.children[shirtTableIndex];
         card.querySelector('.table-scroll').hidden = true;
         const buttons = card.querySelectorAll('.details-toolbar button');
