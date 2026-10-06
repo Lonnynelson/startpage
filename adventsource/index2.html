@@ -229,6 +229,12 @@
         <button data-svg="Uniform-Boy.svg" data-shirt-color="lightblue">Boys</button>
       </div>
       <div class="viewbox" id="uniform"></div>
+      <div class="buttons" id="special-table-buttons" role="group" aria-label="Additional uniform tables">
+        <button type="button" data-table-id="adventurer-investiture">Adventurer Investiture</button>
+        <button type="button" data-table-id="pathfinder-investiture">Pathfinder Investiture</button>
+        <button type="button" data-table-id="tlt">TLT</button>
+        <button type="button" data-table-id="master-guide">Master Guide</button>
+      </div>
     </div>
     <div class="column" id="details">
       <h2 id="details-title">Select a uniform item</h2>
@@ -296,6 +302,10 @@
       'belt-buckle':           { title: 'PF Belt Buckle',      body: { pathfinder: '', adventurer: '' } },
       'pants':                 { title: 'PF Pants/Skirt',      body: { pathfinder: '', adventurer: '' } },
       'skirt':                 { title: 'PF Skirt',             body: { pathfinder: '', adventurer: '' } },
+      'adventurer-investiture': { title: 'Adventurer Investiture', body: { pathfinder: '', adventurer: '' } },
+      'pathfinder-investiture': { title: 'Pathfinder Investiture', body: { pathfinder: '', adventurer: '' } },
+      'tlt':                    { title: 'TLT',                    body: { pathfinder: '', adventurer: '' } },
+      'master-guide':           { title: 'Master Guide',           body: { pathfinder: '', adventurer: '' } },
       'shoes':                 { title: 'Shoes/Socks',         body: { pathfinder: '', adventurer: '' } }
     };
 
@@ -304,6 +314,8 @@
     const detailsBody = document.getElementById('details-body');
     const divisionButtons = document.querySelectorAll('#division-buttons button');
     const uniformButtons = document.querySelectorAll('#uniform-buttons button');
+    const specialTableButtons = document.querySelectorAll('#special-table-buttons button');
+    const standaloneTableIds = new Set(Array.from(specialTableButtons, button => button.dataset.tableId));
     const editTableButton = document.getElementById('edit-table');
     const saveTableButton = document.getElementById('save-table');
     const beltTableSwitcher = document.getElementById('belt-table-switcher');
@@ -493,6 +505,9 @@
     }
 
     function currentTableKey() {
+      if (standaloneTableIds.has(selectedId)) {
+        return JSON.stringify(['pathfinder', 'Uniform-Woman.svg', selectedId]);
+      }
       const part = selectedId === 'belt' && supportsBeltTableSwitcher() && beltMaterial === 'leather'
         ? 'leather-belt'
         : selectedId;
@@ -895,6 +910,10 @@
         if (el) el.classList.add('part');
       });
       viewbox.replaceChildren(document.importNode(svg, true));
+      if (standaloneTableIds.has(selectedId)) {
+        selectPart(selectedId, true);
+        return;
+      }
       const selectedPart = selectedId && viewbox.querySelector('#' + selectedId);
       if (selectedPart && !selectedPart.closest('[display="none"]')) {
         selectPart(selectedId, true);
@@ -920,11 +939,17 @@
       if (el) el.classList.add('selected');
       selectedId = id;
       shirtTableIndex = 0;
-      detailsTitle.textContent = division === 'pathfinder'
+      detailsTitle.textContent = standaloneTableIds.has(id)
+        ? parts[id].title
+        : division === 'pathfinder'
         ? parts[id].title
         : 'ADV ' + parts[id].title.replace(/^PF /, '');
       renderTable();
     }
+
+    specialTableButtons.forEach(button => {
+      button.addEventListener('click', () => selectPart(button.dataset.tableId));
+    });
 
     viewbox.addEventListener('click', e => {
       const part = e.target.closest('.part');
