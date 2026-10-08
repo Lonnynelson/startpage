@@ -83,7 +83,9 @@
       gap: 0.5rem;
       margin: 1rem 0;
     }
-    #belt-table-switcher[hidden] {
+    #belt-table-switcher[hidden],
+    #adventurer-t-shirt-switcher[hidden],
+    #pathfinder-t-shirt-switcher[hidden] {
       display: none;
     }
     .shirt-table-card {
@@ -92,7 +94,9 @@
       padding: 1rem;
       margin-bottom: 1rem;
     }
-    #belt-table-switcher button[aria-pressed="true"] {
+    #belt-table-switcher button[aria-pressed="true"],
+    #adventurer-t-shirt-switcher button[aria-pressed="true"],
+    #pathfinder-t-shirt-switcher button[aria-pressed="true"] {
       background: #333;
       color: #fff;
     }
@@ -235,6 +239,8 @@
         <button type="button" data-table-id="pathfinder-investiture">Pathfinder Investiture</button>
         <button type="button" data-table-id="tlt">TLT</button>
         <button type="button" data-table-id="master-guide">Master Guide</button>
+        <button type="button" data-table-id="adventurer-t-shirts">Adventurer T-shirts</button>
+        <button type="button" data-table-id="pathfinder-t-shirts">Pathfinder T-shirts</button>
       </div>
     </div>
     <div class="column" id="details">
@@ -250,6 +256,8 @@
         <p>Cloth and leather belts have separate tables. Save Table before switching to keep your edits.</p>
       </div>
       <p id="table-status" role="status" aria-live="polite"></p>
+      <div class="details-toolbar" id="adventurer-t-shirt-switcher" role="group" aria-label="Adventurer T-shirt options" hidden></div>
+      <div class="details-toolbar" id="pathfinder-t-shirt-switcher" role="group" aria-label="Pathfinder T-shirt options" hidden></div>
       <div id="table-display" hidden>
         <div class="table-scroll">
           <table id="content-table"></table>
@@ -273,6 +281,10 @@
     <p>Backup All includes all saved tables, column titles, and rows.
       Use Save Table first to include your current edits.</p>
     <p>Restore All replaces all saved table data and discards open table edits after confirmation.</p>
+    <p>Each Adventurer T-shirt option has its own table. Existing T-shirt content stays
+      in New Adventurer Logo T-shirt (White). Save Table before switching to keep edits.</p>
+    <p>Each Pathfinder T-shirt option has its own table. Existing Pathfinder T-shirt content stays
+      in Black T-shirt with NAD Logo. Save Table before switching to keep edits.</p>
     <p>Pathfinder and Adventurer shirts have separate stacked tables. Each table has its own Edit Table and Save Table controls.</p>
     <p>Pathfinder Girls have four shirt tables; the other Pathfinder uniforms have two.
       Adventurer Women and Men have four shirt tables; Girls and Boys have two.</p>
@@ -307,6 +319,8 @@
       'pathfinder-investiture': { title: 'Pathfinder Investiture', body: { pathfinder: '', adventurer: '' } },
       'tlt':                    { title: 'TLT',                    body: { pathfinder: '', adventurer: '' } },
       'master-guide':           { title: 'Master Guide',           body: { pathfinder: '', adventurer: '' } },
+      'adventurer-t-shirts':    { title: 'Adventurer T-shirts',    body: { pathfinder: '', adventurer: '' } },
+      'pathfinder-t-shirts':    { title: 'Pathfinder T-shirts',    body: { pathfinder: '', adventurer: '' } },
       'shoes':                 { title: 'Shoes/Socks',         body: { pathfinder: '', adventurer: '' } }
     };
 
@@ -321,6 +335,78 @@
     const saveTableButton = document.getElementById('save-table');
     const beltTableSwitcher = document.getElementById('belt-table-switcher');
     const beltMaterialButtons = beltTableSwitcher.querySelectorAll('button');
+    const adventurerTShirtSwitcher = document.getElementById('adventurer-t-shirt-switcher');
+    const adventurerTShirtOptions = [
+      ['logo-white', 'New Adventurer Logo T-shirt (White)'],
+      ['home-school-play-blue', 'At Home, At School, At Play (Blue)'],
+      ['home-school-play-maroon', 'At Home, At School, At Play (Maroon)'],
+      ['pure-kind-true-blue', 'Pure Kind True (Blue)'],
+      ['pure-kind-true-maroon', 'Pure Kind True (Maroon)'],
+      ['song', 'Adventurer Song T-shirt'],
+      ['youth-light-blue', 'Adventurer Youth T-shirt (Light Blue)'],
+      ['pledge', 'Adventurer Pledge T-shirt'],
+      ['little-lamb', 'Little Lamb T-shirt'],
+      ['eager-beaver', 'Eager Beaver T-shirt'],
+      ['busy-bee', 'Busy Bee T-shirt'],
+      ['sunbeam', 'Sunbeam T-shirt'],
+      ['builder', 'Builder T-shirt'],
+      ['helping-hand', 'Helping Hand T-shirt']
+    ];
+    const pathfinderTShirtOptions = [
+      ['nad-black', 'Black T-shirt with NAD Logo'],
+      ['nad-white', 'white T-Shirt with NAD Logo'],
+      ['two-color-red', 'Red T-shirt with 2-Color Logo'],
+      ['forest-green', 'Forest Green T-Shirt'],
+      ['two-color-gray', 'Gray T-Shirt with 2-color logo'],
+      ['blue-logo-gray', 'Gray T-shirt with Blue Logo'],
+      ['song-english-light-green', 'Light Green Song T-shirt - English'],
+      ['song-spanish-red', 'Red Song T-shirt - Spanish'],
+      ['nad-adult-royal-blue', 'Royal Blue Adult T-shirt with NAD Logo'],
+      ['nad-adult-light-blue', 'Light Blue Adult T-Shirt with NAD Logo'],
+      ['triangle-adult-gold', 'Gold Adult T-shirt with Triangle'],
+      ['museum-red', 'Red PF Museum T-Shirts'],
+      ['museum-breathable-red', 'Red PF Museum Breathable T-shirt'],
+      ['museum-blue', 'Blue PF Museum T-Shirts'],
+      ['historian-chosen-blue', 'Blue NAD Historian Ministry Chosen T-shirt'],
+      ['pf-4-life-black', 'Black PF 4 Life T-shirt'],
+      ['established-1950-white', 'White PF: Established 1950 - T-shirt'],
+      ['established-1950-garnet-red', 'Garnet Red PF: Established 1950 T-shirt'],
+      ['museum-forever-faithful', 'PF Museum Forever Faithful T-shirt'],
+      ['dna-white', "White It's In My DNA T-Shirt"],
+      ['dna-green', "Green PF: It's In My DNA T-shirt"],
+      ['faithful-march-tan', 'Tan Faithful As We March T-shirt'],
+      ['countries-2024-yellow', 'Yellow 2024 Countries T-Shirt'],
+      ['keep-calm-march-red', 'Red Keep Calm and March On T-shirt'],
+      ['keep-calm-camp-forest-green', 'Forest Green Keep Calm Camp On T-shirt']
+    ];
+    const tShirtToolbars = {
+      'adventurer-t-shirts': {
+        element: adventurerTShirtSwitcher,
+        options: adventurerTShirtOptions,
+        selectedOption: adventurerTShirtOptions[0][0]
+      },
+      'pathfinder-t-shirts': {
+        element: document.getElementById('pathfinder-t-shirt-switcher'),
+        options: pathfinderTShirtOptions,
+        selectedOption: pathfinderTShirtOptions[0][0]
+      }
+    };
+    Object.entries(tShirtToolbars).forEach(([tableId, toolbar]) => {
+      toolbar.options.forEach(([id, title]) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = title;
+        button.dataset.tShirtOption = id;
+        button.setAttribute('aria-pressed', String(id === toolbar.selectedOption));
+        button.addEventListener('click', () => {
+          if (selectedId !== tableId || id === toolbar.selectedOption ||
+              !discardEditorBeforeNavigation()) return;
+          toolbar.selectedOption = id;
+          renderTable();
+        });
+        toolbar.element.append(button);
+      });
+    });
     const backupButton = document.getElementById('backup-tables');
     const restoreButton = document.getElementById('restore-tables');
     const backupFileInput = document.getElementById('backup-file');
@@ -382,13 +468,17 @@
         const isExtraStackedTable = Array.isArray(identity) && identity.length === 4 &&
           Number.isInteger(identity[3]) && identity[3] >= 1 &&
           identity[3] < stackedTableCount(identity[0], identity[1], identity[2]);
-        if (!Array.isArray(identity) || (identity.length !== 3 && !isExtraStackedTable) ||
+        const isTShirtOptionTable = Array.isArray(identity) && identity.length === 4 &&
+          identity[0] === 'pathfinder' && identity[1] === 'Uniform-Woman.svg' &&
+          Object.hasOwn(tShirtToolbars, identity[2]) &&
+          tShirtToolbars[identity[2]].options.slice(1).some(([id]) => id === identity[3]);
+        if (!Array.isArray(identity) || (identity.length !== 3 && !isExtraStackedTable && !isTShirtOptionTable) ||
             !['pathfinder', 'adventurer'].includes(identity[0]) ||
             !uniformFiles.has(identity[1]) || !Object.hasOwn(parts, identity[2])) {
           throw new Error('A table has an unknown program, uniform, or item.');
         }
         if (!table || !Array.isArray(table.columns) ||
-            ![3, 4, 6].includes(table.columns.length) ||
+            ![3, 4, 5, 6].includes(table.columns.length) ||
             !table.columns.every(column => typeof column === 'string') ||
             !Array.isArray(table.rows) ||
             !table.rows.every(row => Array.isArray(row) &&
@@ -507,7 +597,12 @@
 
     function currentTableKey() {
       if (standaloneTableIds.has(selectedId)) {
-        return JSON.stringify(['pathfinder', 'Uniform-Woman.svg', selectedId]);
+        const identity = ['pathfinder', 'Uniform-Woman.svg', selectedId];
+        const toolbar = tShirtToolbars[selectedId];
+        if (toolbar && toolbar.selectedOption !== toolbar.options[0][0]) {
+          identity.push(toolbar.selectedOption);
+        }
+        return JSON.stringify(identity);
       }
       const part = selectedId === 'belt' && supportsBeltTableSwitcher() && beltMaterial === 'leather'
         ? 'leather-belt'
@@ -551,6 +646,15 @@
     }
 
     function renderTable() {
+      Object.entries(tShirtToolbars).forEach(([tableId, toolbar]) => {
+        toolbar.element.hidden = selectedId !== tableId;
+        if (toolbar.element.hidden) return;
+        toolbar.element.querySelectorAll('button').forEach(button => {
+          const active = button.dataset.tShirtOption === toolbar.selectedOption;
+          button.setAttribute('aria-pressed', String(active));
+          if (active) detailsTitle.textContent = button.textContent;
+        });
+      });
       if (usesStackedTables()) {
         renderStackedTables();
         return;
@@ -609,6 +713,7 @@
       editTableButton.hidden = true;
       saveTableButton.hidden = true;
       beltTableSwitcher.hidden = true;
+      Object.values(tShirtToolbars).forEach(toolbar => { toolbar.element.hidden = true; });
       shirtTables.setAttribute('aria-label', selectedId === 'pants' ? 'Pants and skirt tables' : 'Shirt tables');
       if (selectedId === 'pants') detailsTitle.textContent = 'PF Pants and Skirts';
       const count = stackedTableCount(division, activeUniformButton().dataset.svg, selectedId);
@@ -685,7 +790,7 @@
       countLabel.textContent = 'Number of columns';
       const countSelect = document.createElement('select');
       countSelect.setAttribute('aria-label', 'Number of columns');
-      [3, 4, 6].forEach(count => {
+      [3, 4, 5, 6].forEach(count => {
         const option = document.createElement('option');
         option.value = String(count);
         option.textContent = String(count);
@@ -894,6 +999,7 @@
       }
       const isAdventurerGirl = division === 'adventurer' && file === 'Uniform-Girl.svg';
       if (isAdventurerGirl) {
+        svg.querySelector('#desc').textContent = "Front view with shoulder patches, pins on the wearer's left pocket, a name tag on her right pocket, a jumper, sash, beret, and a burgundy scarf with a white slide. Each item has an editable ID. Transparent background.";
         const sash = svg.querySelector('#sash');
         if (sash) {
           sash.setAttribute('stroke', '#ffffff');
@@ -906,6 +1012,9 @@
       svg.querySelector('#jumper')?.setAttribute('display', isAdventurerGirl ? 'inline' : 'none');
       svg.querySelector('#jumper-legs')?.setAttribute('display', isAdventurerGirl ? 'inline' : 'none');
       svg.querySelector('#jumper-socks')?.setAttribute('display', isAdventurerGirl ? 'inline' : 'none');
+      svg.querySelector('#belt')?.setAttribute('display', isAdventurerGirl ? 'none' : 'inline');
+      svg.querySelector('#belt-buckle')?.setAttribute('display', isAdventurerGirl ? 'none' : 'inline');
+      svg.querySelector('#black-bow-tie')?.setAttribute('display', isAdventurerGirl ? 'none' : 'inline');
       Object.keys(parts).forEach(id => {
         const el = svg.querySelector('#' + id);
         if (el) el.classList.add('part');
@@ -927,6 +1036,7 @@
         tableDisplay.hidden = true;
         tableEditor.hidden = true;
         beltTableSwitcher.hidden = true;
+        Object.values(tShirtToolbars).forEach(toolbar => { toolbar.element.hidden = true; });
         editTableButton.hidden = false;
         editTableButton.disabled = true;
       }
