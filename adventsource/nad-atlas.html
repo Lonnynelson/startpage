@@ -6,17 +6,18 @@
 <title>NAD Union Atlas — Unions, Conferences &amp; Church Sales-Tax Exemption</title>
 <meta name="description" content="Explore North American Division unions and conferences alongside each state's sales-tax exemption status for church purchases.">
 <link rel="icon" href="./public/favicon.svg">
+<link rel="stylesheet" href="page-background.css">
 <meta property="og:title" content="NAD Union Atlas">
 <meta property="og:description" content="Explore North American Division unions, conferences, and church sales-tax exemption by state.">
 <meta property="og:image" content="./public/og.png">
 <style>
 :root { --ink:#162b35; --muted:#6e7d83; --line:#dce4e3; --paper:#f6f8f7; }
 * { box-sizing:border-box; }
-body { margin:0; color:var(--ink); background:var(--paper); font-family:Arial, Helvetica, sans-serif; -webkit-font-smoothing:antialiased; }
+body { margin:0; color:var(--ink); background:#162b35; font-family:Arial, Helvetica, sans-serif; -webkit-font-smoothing:antialiased; }
 button { font:inherit; }
 a { color:inherit; }
-.app-shell { min-height:100vh; display:grid; grid-template-columns:300px 1fr; }
-.sidebar { height:100vh; overflow:auto; padding:28px 18px 22px; background:#fff; border-right:1px solid var(--line); }
+.app-shell { min-height:100vh; display:grid; grid-template-columns:300px 1fr; background:rgba(255,255,255,.78); -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px); }
+.sidebar { height:100vh; overflow:auto; padding:28px 18px 22px; background:rgba(255,255,255,.18); border-right:1px solid var(--line); }
 .brand { display:flex; align-items:center; gap:12px; padding:0 8px 28px; border-bottom:1px solid var(--line); }
 .brand-mark { display:grid; place-items:center; width:42px; height:42px; border-radius:50%; background:#163d48; color:white; font-family:Georgia,serif; font-size:15px; letter-spacing:.04em; box-shadow:0 0 0 5px #e8efee; }
 .brand div { display:flex; flex-direction:column; line-height:1.2; }
@@ -33,7 +34,7 @@ a { color:inherit; }
 .conference-list button { display:block; width:100%; border:0; background:none; color:#708086; padding:5px 6px; text-align:left; cursor:pointer; border-radius:4px; font-size:12px; line-height:1.25; }
 .conference-list button:hover, .conference-list button.active { color:#173e49; background:#edf3f2; font-weight:700; }
 .sidebar-note { margin:28px 9px 0; border-top:1px solid var(--line); padding-top:17px; color:#839095; font-size:11px; line-height:1.55; }
-.workspace { min-width:0; padding:36px clamp(25px,4vw,64px); background:radial-gradient(circle at 80% 10%,#fff 0,transparent 36%),var(--paper); }
+.workspace { min-width:0; padding:36px clamp(25px,4vw,64px); background:radial-gradient(circle at 80% 10%,rgba(255,255,255,.3) 0,transparent 36%); }
 .workspace > header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:26px; }
 .eyebrow { margin:0 0 8px; color:#718287; font-size:10px; font-weight:800; letter-spacing:.18em; }
 .workspace h1 { margin:0; font-family:Georgia,serif; font-size:clamp(30px,4vw,48px); font-weight:500; letter-spacing:-.035em; }
@@ -112,6 +113,8 @@ a { color:inherit; }
 </style>
 </head>
 <body>
+<div class="page-background page-background-first" aria-hidden="true"></div>
+<div class="page-background page-background-second" aria-hidden="true"></div>
 <a class="home-button" href="index.html" aria-label="Home" title="AdventSource home">
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
     <path d="M3 10 12 3 21 10M5 9v12h5v-7h4v7h5V9"/>

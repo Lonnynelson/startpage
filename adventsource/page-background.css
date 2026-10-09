@@ -1,0 +1,29 @@
+.page-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  pointer-events: none;
+}
+
+.page-background-first {
+  background-image: url("AdventSource_1.jpg");
+}
+
+.page-background-second {
+  background-image: url("AdventSource_2.jpg");
+  opacity: 0;
+  animation: alternate-background 16s ease-in-out infinite;
+}
+
+@keyframes alternate-background {
+  0%, 40%, 100% { opacity: 0; }
+  50%, 90% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-background-second {
+    animation: none;
+  }
+}

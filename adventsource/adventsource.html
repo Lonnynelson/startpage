@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Uniforms</title>
   <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="page-background.css">
   <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
+      background: #162b35;
+      color: #162b35;
       font-family: system-ui, -apple-system, sans-serif;
     }
     .container {
@@ -22,6 +25,12 @@
       border: 1px solid #ccc;
       border-radius: 6px;
       padding: 1rem;
+    }
+    #image-map,
+    #details {
+      background: rgba(255, 255, 255, 0.78);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
     }
     .buttons {
       display: flex;
@@ -53,7 +62,9 @@
       height: 70vh;
       border: 1px solid #ddd;
       border-radius: 4px;
-      background: #fafafa;
+      background: rgba(255, 255, 255, 0.38);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
     }
     .viewbox svg {
       max-width: 100%;
@@ -243,6 +254,8 @@
   </style>
 </head>
 <body>
+  <div class="page-background page-background-first" aria-hidden="true"></div>
+  <div class="page-background page-background-second" aria-hidden="true"></div>
   <a class="home-button" href="index.html" aria-label="Home" title="AdventSource home">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
       <path d="M3 10 12 3 21 10M5 9v12h5v-7h4v7h5V9"/>
