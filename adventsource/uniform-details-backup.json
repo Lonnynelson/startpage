@@ -1,0 +1,9652 @@
+{
+  "version": 1,
+  "tables": {
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"belt\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "008585",
+          "Web Belt & Buckle 26\"",
+          "$4.95"
+        ],
+        [
+          "008587",
+          "Web Belt & Buckle 36\"",
+          "$5.95"
+        ],
+        [
+          "008589",
+          "Web Belt & Buckle 46\"",
+          "$6.96"
+        ],
+        [
+          "008827",
+          "Web Belt & Buckle 56\"",
+          "$7.96"
+        ],
+        [
+          "008629",
+          "Web Belt & Buckle 66\"",
+          "$8.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "008590",
+          "Pathfinder Buckle Only",
+          "$2.95"
+        ],
+        [
+          "008592",
+          "Web Belt Strap Only 26\"",
+          "$3.95"
+        ],
+        [
+          "008594",
+          "Web Belt Strap Only 36\"",
+          "$4.95"
+        ],
+        [
+          "008596",
+          "Web Belt Strap Only 46\"",
+          "$5.95"
+        ],
+        [
+          "008597",
+          "Web Belt Strap Only 56\"",
+          "$6.96"
+        ],
+        [
+          "008598",
+          "Web Belt Strap Only 66\"",
+          "$7.96"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"leather-belt\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "008570",
+          "Strap & Buckle 34\"",
+          "$19.95"
+        ],
+        [
+          "008571",
+          "Strap & Buckle 38\"",
+          "$19.95"
+        ],
+        [
+          "008572",
+          "Strap & Buckle 42\"",
+          "$19.95"
+        ],
+        [
+          "008573",
+          "Strap & Buckle 46\"",
+          "$19.95"
+        ],
+        [
+          "008574",
+          "Strap & Buckle 50\"",
+          "$19.95"
+        ],
+        [
+          "008575",
+          "Strap & Buckle 54\"",
+          "$19.95"
+        ],
+        [
+          "008576",
+          "Strap & Buckle 58\"",
+          "$19.95"
+        ],
+        [
+          "008577",
+          "Strap & Buckle 62\"",
+          "$21.95"
+        ],
+        [
+          "008578",
+          "Strap & Buckle 66\"",
+          "$21.95"
+        ],
+        [
+          "008579",
+          "Strap & Buckle 70\"",
+          "$21.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "008631",
+          "Master Guide Buckle",
+          "$9.95"
+        ],
+        [
+          "008630",
+          "PF Buckle",
+          "$9.95"
+        ],
+        [
+          "003300",
+          "Leather Strap Only 34\"",
+          "$11.95"
+        ],
+        [
+          "003301",
+          "Leather Strap Only 38\"",
+          "$11.95"
+        ],
+        [
+          "003302",
+          "Leather Strap Only 42\"",
+          "$11.95"
+        ],
+        [
+          "003303",
+          "Leather Strap Only 46\"",
+          "$11.95"
+        ],
+        [
+          "003304",
+          "Leather Strap Only 50\"",
+          "$14.95"
+        ],
+        [
+          "003305",
+          "Leather Strap Only 54\"",
+          "$14.95"
+        ],
+        [
+          "003306",
+          "Leather Strap Only 58\"",
+          "$14.95"
+        ],
+        [
+          "003307",
+          "Leather Strap Only 62\"",
+          "$17.95"
+        ],
+        [
+          "003308",
+          "Leather Strap Only 66\"",
+          "$17.95"
+        ],
+        [
+          "003309",
+          "Leather Strap Only 70\"",
+          "$17.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"sash\"]": {
+      "columns": [
+        "Product #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003736",
+          "Black Small 21.5\"",
+          "$5.95"
+        ],
+        [
+          "003737",
+          "Black Medium 24.5\"",
+          "$6.95"
+        ],
+        [
+          "003738",
+          "Black Large 28\"",
+          "$7.95"
+        ],
+        [
+          "003739",
+          "Black Large 28\" 3Wide",
+          "$8.95"
+        ],
+        [
+          "003740",
+          "Black XL 35\"",
+          "$8.95"
+        ],
+        [
+          "003741",
+          "Black XL 35\" 3Wide",
+          "$9.95"
+        ],
+        [
+          "009685",
+          "Black 2XL 39\" 3Wide",
+          "$11.95"
+        ],
+        [
+          "009686",
+          "Black 3XL 43\" 3Wide",
+          "$14.95"
+        ],
+        [
+          "009529",
+          "MG - Green L",
+          "$7.95"
+        ],
+        [
+          "009530",
+          "MG - Green XL",
+          "$8.95"
+        ],
+        [
+          "009531",
+          "MG - Green L 3-Wide",
+          "$8.95"
+        ],
+        [
+          "009532",
+          "MG - Green XL 3-Wide",
+          "$9.95"
+        ],
+        [
+          "009687",
+          "MG - Green 2XL 3-Wide",
+          "$11.95"
+        ],
+        [
+          "009688",
+          "MG - Green 3XL 3-Wide",
+          "$14.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"sash\"]": {
+      "columns": [
+        "Product #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003711",
+          "Navy Small 21.5\"",
+          "$5.95"
+        ],
+        [
+          "003712",
+          "Navy Medium 24.5\"",
+          "$6.95"
+        ],
+        [
+          "009606",
+          "Navy Medium 3-Wide",
+          "$7.95"
+        ],
+        [
+          "003713",
+          "Navy Large 28\"",
+          "$7.95"
+        ],
+        [
+          "003714",
+          "Navy Large 3-Wide",
+          "$8.95"
+        ],
+        [
+          "009608",
+          "Navy XLarge 35\"",
+          "$8.95"
+        ],
+        [
+          "009610",
+          "Navy XLarge 3-Wide",
+          "$9.95"
+        ],
+        [
+          "009529",
+          "MG - Green L",
+          "$7.95"
+        ],
+        [
+          "009530",
+          "MG - Green XL",
+          "$8.95"
+        ],
+        [
+          "009531",
+          "MG - Green L 3-Wide",
+          "$8.95"
+        ],
+        [
+          "009532",
+          "MG - Green XL 3-Wide",
+          "$9.95"
+        ],
+        [
+          "009687",
+          "MG - Green 2XL 3-Wide",
+          "$11.95"
+        ],
+        [
+          "009688",
+          "MG - Green 3XL 3-Wide",
+          "$14.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"beret-badge\"]": {
+      "columns": [
+        "Product #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "002174",
+          "Adventurer Beret Patch",
+          "$1.20"
+        ],
+        [
+          "009547",
+          "Master Guide Beret Patch",
+          "$1.20"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"beret\"]": {
+      "columns": [
+        "Product #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "009550",
+          "Youth Small - 17.5\"",
+          "$9.95"
+        ],
+        [
+          "009551",
+          "Youth Medium - 19\"",
+          "$9.95"
+        ],
+        [
+          "009552",
+          "Youth Large - 21\"",
+          "$9.95"
+        ],
+        [
+          "009553",
+          "Adult Medium - 22.5\"",
+          "$10.95"
+        ],
+        [
+          "009554",
+          "Adult Large - 23.5\"",
+          "$10.95"
+        ],
+        [
+          "009694",
+          "Adult XLarge - 24.5\"",
+          "$11.95"
+        ],
+        [
+          "009550",
+          "Youth Small - 17.5",
+          "$9.95"
+        ],
+        [
+          "009551",
+          "Youth Medium - 19",
+          "$9.95"
+        ],
+        [
+          "009552",
+          "Youth Large - 21",
+          "$9.95"
+        ],
+        [
+          "009553",
+          "Adult Medium - 22.5",
+          "$10.95"
+        ],
+        [
+          "009554",
+          "Adult Large - 23.5",
+          "$10.95"
+        ],
+        [
+          "009694",
+          "Adult XLarge - 24.5",
+          "$11.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"yellow-scarf\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003750",
+          "Child Neckerchief",
+          "$5.95"
+        ],
+        [
+          "003751",
+          "Adult Neckerchief",
+          "$6.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "009658",
+          "MG Embroidered Scarf Adv.",
+          "$15.95"
+        ],
+        [
+          "002171",
+          "Adv Cloth Slide",
+          "$2.50"
+        ],
+        [
+          "002200",
+          "Master Guide Cloth Slide",
+          "$2.95"
+        ],
+        [
+          "009689",
+          "Master Guide Metal Slide",
+          "$5.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"black-scarf-slide\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "002171",
+          "Adventurer Embroidered Slide",
+          "$2.50"
+        ],
+        [
+          "002200",
+          "Master Guide Cloth Slide",
+          "$2.95"
+        ],
+        [
+          "009689",
+          "Master Guide Metal Slide",
+          "$5.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"beret\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003650",
+          "Small 22\"",
+          "$10.95"
+        ],
+        [
+          "003651",
+          "Medium 22.5\"",
+          "$10.95"
+        ],
+        [
+          "003652",
+          "Large 23.5\"",
+          "$10.95"
+        ],
+        [
+          "003653",
+          "XLarge 24\"",
+          "$10.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "003002",
+          "Beret Triangle 2\"",
+          "$1.20"
+        ],
+        [
+          "009547",
+          "MG Beret Crest 2\"",
+          "$1.20"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"beret-badge\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003003",
+          "Beret Triangle 2\"",
+          "$1.20"
+        ],
+        [
+          "009547",
+          "MG Beret Crest 2\"",
+          "$1.20"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"shirt\"]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Chart Bust",
+        "Actual Bust",
+        "Price",
+        ""
+      ],
+      "rows": [
+        [
+          "003508",
+          "4/6",
+          "36",
+          "40",
+          "$31.95",
+          ""
+        ],
+        [
+          "003509",
+          "8/10",
+          "38",
+          "42",
+          "$31.95",
+          ""
+        ],
+        [
+          "003510",
+          "12",
+          "40",
+          "44",
+          "$31.95",
+          ""
+        ],
+        [
+          "003511",
+          "14",
+          "42",
+          "46",
+          "$31.95",
+          ""
+        ],
+        [
+          "003515",
+          "16",
+          "44",
+          "48",
+          "$31.95",
+          ""
+        ],
+        [
+          "003512",
+          "18",
+          "46",
+          "50",
+          "$31.95",
+          ""
+        ],
+        [
+          "003516",
+          "20",
+          "48",
+          "52",
+          "$35.95",
+          ""
+        ],
+        [
+          "003517",
+          "22",
+          "50",
+          "54",
+          "$35.95",
+          ""
+        ],
+        [
+          "003499",
+          "24",
+          "52",
+          "56",
+          "$35.95",
+          ""
+        ],
+        [
+          "003498",
+          "26",
+          "54",
+          "58",
+          "$39.95",
+          ""
+        ],
+        [
+          "003507",
+          "28",
+          "56",
+          "60",
+          "$39.95",
+          ""
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"yellow-scarf\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003754",
+          "Childs",
+          "$5.95"
+        ],
+        [
+          "009516",
+          "TLT Scarf - Red Edge",
+          "$5.95"
+        ],
+        [
+          "003758",
+          "Adult",
+          "$6.95"
+        ],
+        [
+          "009604",
+          "Adult Embroidered Scarf",
+          "$16.95"
+        ],
+        [
+          "009603",
+          "MG PF Embroidered Scarf",
+          "$18.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "002195",
+          "Pathfinder embroidered Slide",
+          "$2.50"
+        ],
+        [
+          "009771",
+          "Pathfinder Metal Slide",
+          "$4.95"
+        ],
+        [
+          "002200",
+          "MG Embroidered Slide",
+          "$2.95"
+        ],
+        [
+          "009689",
+          "MG Metal Slide",
+          "$5.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"black-scarf-slide\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "002195",
+          "Pathfinder embroidered Slide",
+          "$2.50"
+        ],
+        [
+          "009771",
+          "Pathfinder Metal Slide",
+          "$4.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "009603",
+          "MG PF Embroidered Scarf",
+          "$18.95"
+        ],
+        [
+          "002200",
+          "MG Embroidered Slide",
+          "$2.95"
+        ],
+        [
+          "009689",
+          "MG Metal Slide",
+          "$5.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"left-shoulder-patch\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "002999",
+          "PF Uniform Triangle Patch",
+          "$2.50"
+        ],
+        [
+          "003003",
+          "PF World Patch",
+          "$2.50"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "003031",
+          "PF Club Crest - Not Blank",
+          "$1.95"
+        ],
+        [
+          "003032",
+          "PF Club Crest - Customized (Packs of 12)",
+          "$47.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "003020",
+          "Sleeve Strip - Area Coord.",
+          "$1.95"
+        ],
+        [
+          "003021",
+          "Sleeve Strip - Director",
+          "$1.95"
+        ],
+        [
+          "003022",
+          "Sleeve Strip - Deputy Dir.",
+          "$1.95"
+        ],
+        [
+          "003026",
+          "Sleeve Strip - Assoc. Dir.",
+          "$1.95"
+        ],
+        [
+          "003023",
+          "Sleeve Strip - Counselor",
+          "$1.95"
+        ],
+        [
+          "003024",
+          "Sleeve Strip - Instructor",
+          "$1.95"
+        ],
+        [
+          "003027",
+          "Sleeve Strip - Pastor",
+          "$1.95"
+        ],
+        [
+          "003025",
+          "Sleeve Strip - Jr Couns.",
+          "$1.95"
+        ],
+        [
+          "003028",
+          "Sleeve Strip - TLT",
+          "$1.95"
+        ],
+        [
+          "003029",
+          "Sleeve Strip - Blank",
+          "$1.95"
+        ],
+        [
+          "003033",
+          "Sleeve Strip - Customized",
+          "$4.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "002250",
+          "Friend Class Chevron",
+          "$0.95"
+        ],
+        [
+          "00225",
+          "Companion Class Chevron",
+          "$0.95"
+        ],
+        [
+          "00225",
+          "Explorer Class Chevron",
+          "$0.95"
+        ],
+        [
+          "00225",
+          "Ranger Class Chevron",
+          "$0.95"
+        ],
+        [
+          "002264",
+          "Voyager Class Chevron",
+          "$0.95"
+        ],
+        [
+          "002260",
+          "Guide Class Chevron",
+          "$0.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "009841",
+          "Mid-America Union 4\"",
+          "$3.50"
+        ],
+        [
+          "009842",
+          "Mid-America Union 3\"",
+          "$3.50"
+        ],
+        [
+          "009028",
+          "Southern Union",
+          "$2.50"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "009038",
+          "Carolina Conf",
+          ""
+        ],
+        [
+          "009020",
+          "Georgia-Cumbrlnd Conf",
+          ""
+        ],
+        [
+          "009045",
+          "KS/NE Large Conf",
+          "$3.00"
+        ],
+        [
+          "009046",
+          "KS/NE Small Conf",
+          "$2.50"
+        ],
+        [
+          "009042",
+          "KY / TN Conf",
+          ""
+        ],
+        [
+          "009033",
+          "Minnesota Conf",
+          ""
+        ],
+        [
+          "009048",
+          "Ohio Conf",
+          ""
+        ],
+        [
+          "009040",
+          "Rocky Mountain Conf",
+          ""
+        ],
+        [
+          "009049",
+          "South Atlantic Conf",
+          ""
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"shirt\",1]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Chart Bust",
+        "Actual Bust",
+        "Price",
+        ""
+      ],
+      "rows": [
+        [
+          "008700",
+          "4/6",
+          "36",
+          "40",
+          "$33.95",
+          ""
+        ],
+        [
+          "008705",
+          "8/10",
+          "38",
+          "42",
+          "$33.95",
+          ""
+        ],
+        [
+          "008710",
+          "12",
+          "40",
+          "44",
+          "$33.95",
+          ""
+        ],
+        [
+          "008715",
+          "14",
+          "42",
+          "46",
+          "$33.95",
+          ""
+        ],
+        [
+          "008720",
+          "16",
+          "44",
+          "48",
+          "$33.95",
+          ""
+        ],
+        [
+          "008725",
+          "18",
+          "46",
+          "50",
+          "$33.95",
+          ""
+        ],
+        [
+          "008730",
+          "20",
+          "48",
+          "52",
+          "$37.95",
+          ""
+        ],
+        [
+          "008735",
+          "22",
+          "50",
+          "54",
+          "$37.95",
+          ""
+        ],
+        [
+          "008740",
+          "24",
+          "52",
+          "56",
+          "$37.95",
+          ""
+        ],
+        [
+          "008745",
+          "26",
+          "54",
+          "58",
+          "$41.95",
+          ""
+        ],
+        [
+          "008750",
+          "28",
+          "56",
+          "60",
+          "$41.95",
+          ""
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Girl.svg\",\"shirt\"]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Chart Bust",
+        "Actual Bust",
+        "Price",
+        ""
+      ],
+      "rows": [
+        [
+          "003503",
+          "S 7/8",
+          "29",
+          "31",
+          "$21.95",
+          ""
+        ],
+        [
+          "003504",
+          " M 10/12",
+          "32",
+          "34",
+          "$21.95",
+          ""
+        ],
+        [
+          "003494",
+          " L 14/16",
+          "35",
+          "37",
+          "$21.95",
+          ""
+        ],
+        [
+          "003505",
+          "XL 18/20",
+          "38",
+          "40",
+          "$21.95",
+          ""
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Girl.svg\",\"shirt\",1]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Chart Bust",
+        "Actual Bust",
+        "Price",
+        ""
+      ],
+      "rows": [
+        [
+          "003244",
+          "S 7/8",
+          "29",
+          "31",
+          "$26.95",
+          ""
+        ],
+        [
+          "003245",
+          " M 10/12",
+          "32",
+          "34",
+          "$26.95",
+          ""
+        ],
+        [
+          "003246",
+          " L 14/16",
+          "35",
+          "37",
+          "$26.95",
+          ""
+        ],
+        [
+          "003247",
+          "XL 18/20",
+          "38",
+          "40",
+          "$26.95",
+          ""
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Girl.svg\",\"shirt\",2]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Chart Bust",
+        "Actual Bust",
+        "Price",
+        ""
+      ],
+      "rows": [
+        [
+          "003230",
+          "S 3/5",
+          "37",
+          "39",
+          "$24.95",
+          ""
+        ],
+        [
+          "003231",
+          "M 7/9",
+          "39",
+          "41",
+          "$24.95",
+          ""
+        ],
+        [
+          "003232",
+          "L 11/13",
+          "42",
+          "44",
+          "$24.95",
+          ""
+        ],
+        [
+          "003233",
+          "XL 15",
+          "44",
+          "46",
+          "$24.95",
+          ""
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Girl.svg\",\"shirt\",3]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Chart Bust",
+        "Actual Bust",
+        "Price",
+        ""
+      ],
+      "rows": [
+        [
+          "003236",
+          "S 3/5",
+          "37",
+          "39",
+          "$29.95",
+          ""
+        ],
+        [
+          "003237",
+          "M 7/9",
+          "39",
+          "41",
+          "$29.95",
+          ""
+        ],
+        [
+          "003238",
+          "L 11/13",
+          "42",
+          "44",
+          "$29.95",
+          ""
+        ],
+        [
+          "003239",
+          "XL 15",
+          "44",
+          "46",
+          "$29.95",
+          ""
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"belt-buckle\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "008590",
+          "Belt Buckle Only (Cloth)",
+          "$2.95"
+        ],
+        [
+          "008630",
+          "Belt Buckle Only (Staff Leather)",
+          "9.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"pants\"]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "008840",
+          "Size 4 waist 30\"",
+          "$31.95"
+        ],
+        [
+          "008841",
+          "Size 6 waist 31\"",
+          "$31.95"
+        ],
+        [
+          "008842",
+          "Size 8 waist 32\"",
+          "$31.95"
+        ],
+        [
+          "008843",
+          "Size 10 waist 33\"",
+          "$31.95"
+        ],
+        [
+          "008844",
+          "Size 12 waist 34\"",
+          "$31.95"
+        ],
+        [
+          "008845",
+          "Size 14 waist 35.5\"",
+          "$31.95"
+        ],
+        [
+          "008846",
+          "Size 16 waist 37\"",
+          "$31.95"
+        ],
+        [
+          "008847",
+          "Size 18 waist 39\"",
+          "$31.95"
+        ],
+        [
+          "008848",
+          "Size 20 waist 41\"",
+          "$35.95"
+        ],
+        [
+          "008849",
+          "Size 22 waist 43\"",
+          "$35.95"
+        ],
+        [
+          "008850",
+          "Size 24 waist 46\"",
+          "$39.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Man.svg\",\"shirt\"]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Chart Chest",
+        "Actual Chest",
+        "Price",
+        ""
+      ],
+      "rows": [
+        [
+          "003531",
+          "S 14-14.5",
+          "34-36",
+          "",
+          "$31.95",
+          ""
+        ],
+        [
+          "003533",
+          "M 15-15.5 ",
+          "38-40",
+          "",
+          "31.95",
+          ""
+        ],
+        [
+          "003535",
+          "L 16-16.5",
+          "42-44",
+          "",
+          "$31.95",
+          ""
+        ],
+        [
+          "003540",
+          "XL 17-17.5",
+          "46-48",
+          "",
+          "$31.95",
+          ""
+        ],
+        [
+          "003544",
+          "2XL 18-18.5",
+          "50-52",
+          "",
+          "$35.95",
+          ""
+        ],
+        [
+          "003546",
+          "3XL 19-19.5",
+          "54-56",
+          "",
+          "$39.95",
+          ""
+        ],
+        [
+          "003547",
+          "4XL 20-20.5",
+          "58-60",
+          "",
+          "$43.95",
+          ""
+        ],
+        [
+          "003548",
+          "5XL 21-21.5",
+          "62-64",
+          "",
+          "$47.95",
+          ""
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Man.svg\",\"shirt\",1]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003660",
+          "14x31",
+          "$33.95"
+        ],
+        [
+          "003661",
+          "14x33",
+          "$33.95"
+        ],
+        [
+          "003663",
+          "14.5x31",
+          "$33.95"
+        ],
+        [
+          "003664",
+          "14.5x33",
+          "$33.95"
+        ],
+        [
+          "003666",
+          "15x32",
+          "$33.95"
+        ],
+        [
+          "003668",
+          "15x36",
+          "$33.95"
+        ],
+        [
+          "003667",
+          "15x34",
+          "$33.95"
+        ],
+        [
+          "003681",
+          "17.5x32",
+          "$33.95"
+        ],
+        [
+          "003682",
+          "17.5x34",
+          "$33.95"
+        ],
+        [
+          "003683",
+          "17.5x36",
+          "$33.95"
+        ],
+        [
+          "003675",
+          "16.5x32",
+          "$33.95"
+        ],
+        [
+          "003676",
+          "16.5x34",
+          "$33.95"
+        ],
+        [
+          "003677",
+          "16.5x36",
+          "$33.95"
+        ],
+        [
+          "003678",
+          "17x32",
+          "$33.95"
+        ],
+        [
+          "003679",
+          "17x34",
+          "$33.95"
+        ],
+        [
+          "003680",
+          "17x36",
+          "$33.95"
+        ],
+        [
+          "003669",
+          "15.5x32",
+          "$33.95"
+        ],
+        [
+          "003670",
+          "15.5x34",
+          "$33.95"
+        ],
+        [
+          "003671",
+          "15.5x36",
+          "$33.95"
+        ],
+        [
+          "003672",
+          "16x32",
+          "$33.95"
+        ],
+        [
+          "003673",
+          "16x34",
+          "$33.95"
+        ],
+        [
+          "003674",
+          "16x36",
+          "$33.95"
+        ],
+        [
+          "003689",
+          "18.5x36",
+          "$37.95"
+        ],
+        [
+          "003685",
+          "18x34",
+          "$37.95"
+        ],
+        [
+          "003686",
+          "18x36",
+          "$37.95"
+        ],
+        [
+          "003688",
+          "18.5x34",
+          "$37.95"
+        ],
+        [
+          "20x34",
+          "003694",
+          "$41.95"
+        ],
+        [
+          "20x36",
+          "003695",
+          "$41.95"
+        ],
+        [
+          "20x38",
+          "003698",
+          "$41.95"
+        ],
+        [
+          "19x34",
+          "003690",
+          "$41.95"
+        ],
+        [
+          "19x36",
+          "003691",
+          "$41.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Boy.svg\",\"shirt\"]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003522",
+          "S 8-Chest 32",
+          "$21.95"
+        ],
+        [
+          "003525",
+          "M 10/12-Chest 35",
+          "$21.95"
+        ],
+        [
+          "003528",
+          "L 14/16-Chest 38",
+          "$21.95"
+        ],
+        [
+          "003518",
+          "XL 18/20-Chest 41",
+          "$21.95"
+        ],
+        [
+          "003519",
+          "2XL (22/24) Chest 43",
+          "$23.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Boy.svg\",\"shirt\",1]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Prive"
+      ],
+      "rows": [
+        [
+          "003622",
+          "S 8-Chest 32",
+          "$26.95"
+        ],
+        [
+          "003625",
+          "M 10/12-Chest 35",
+          "$26.95"
+        ],
+        [
+          "003628",
+          "L 14/16-Chest 38",
+          "$26.95"
+        ],
+        [
+          "003618",
+          "XL 18/20-Chest 41",
+          "$26.95"
+        ],
+        [
+          "003619",
+          "2XL (22/24) Chest 43",
+          "$28.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"black-bow-tie\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003125",
+          "Women's Tuxedo Tie",
+          "$3.95"
+        ],
+        [
+          "003117",
+          "Women's Staff Tie (Pathfinder)",
+          "$14.95"
+        ],
+        [
+          "003119",
+          "Master Guide Women's Tie",
+          "$14.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Girl.svg\",\"black-bow-tie\"]": {
+      "columns": [
+        "Column 1",
+        "Column 2",
+        "Column 3"
+      ],
+      "rows": [
+        [
+          "003125",
+          "Pathfinder Women's Tuxedo Tie",
+          "$3.95"
+        ],
+        [
+          "003117",
+          "Women's Staff Tie (Pathfinder)",
+          "$14.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Man.svg\",\"black-tie\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003266",
+          "Pathfinder Men's Tie (No Logo)",
+          "$7.95"
+        ],
+        [
+          "002240",
+          "Pathfinder Tie With Logo",
+          "$24.95"
+        ],
+        [
+          "002241",
+          "Master Guide Tie",
+          "$24.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Man.svg\",\"pants\"]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "008900",
+          "Size 28",
+          "$31.95"
+        ],
+        [
+          "008901",
+          "Size 30",
+          "$31.95"
+        ],
+        [
+          "008902",
+          "Size 32",
+          "$31.95"
+        ],
+        [
+          "008903",
+          "Size 34",
+          "$31.95"
+        ],
+        [
+          "008904",
+          "Size 36",
+          "$31.95"
+        ],
+        [
+          "008905",
+          "Size 38",
+          "$31.95"
+        ],
+        [
+          "008906",
+          "Size 40",
+          "$35.95"
+        ],
+        [
+          "008907",
+          "Size 42",
+          "$35.95"
+        ],
+        [
+          "008908",
+          "Size 44",
+          "$35.95"
+        ],
+        [
+          "008909",
+          "Size 46",
+          "$39.95"
+        ],
+        [
+          "008910",
+          "Size 48",
+          "$39.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Boy.svg\",\"black-tie\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003234",
+          "Boy's Tie",
+          "$6.95"
+        ],
+        [
+          "003266",
+          "Men's Tie No Logo",
+          "$7.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"left-pocket-pins\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "002134",
+          "Baptismal Pin",
+          "$1.95"
+        ],
+        [
+          "002304",
+          "Good Conduct Ribbon Bar",
+          "$1.95"
+        ],
+        [
+          "002305",
+          "Good Conduct Star",
+          "$0.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "002135",
+          "Pathfinder Triangle Pin",
+          "$1.95"
+        ],
+        [
+          "002120",
+          "Friend Class Pin",
+          "$1.20"
+        ],
+        [
+          "002121",
+          "Companion Class Pin",
+          "$1.20"
+        ],
+        [
+          "002122",
+          "Explorer Class Pin",
+          "$1.20"
+        ],
+        [
+          "002123",
+          "Ranger Class Pin",
+          "$1.20"
+        ],
+        [
+          "002124",
+          "Voyager Class Pin",
+          "$1.20"
+        ],
+        [
+          "002130",
+          "Guide Class Pin",
+          "$1.20"
+        ],
+        [
+          "002300",
+          "Friend Ribbon Bar",
+          "$1.30"
+        ],
+        [
+          "002301",
+          "Companion Ribbon Bar",
+          "$1.30"
+        ],
+        [
+          "002302",
+          "Explorer Ribbon Bar",
+          "$1.30"
+        ],
+        [
+          "002303",
+          "Ranger Ribbon Bar",
+          "$1.30"
+        ],
+        [
+          "002306",
+          "Voyager Ribbon Bar",
+          "$1.30"
+        ],
+        [
+          "002307",
+          "Guide Ribbon Bar",
+          "$1.30"
+        ],
+        [
+          "002131",
+          "Master Guide Six-Star Pin",
+          "$1.25"
+        ],
+        [
+          "009778",
+          "Master Guide Class Level Pins",
+          "$14.95"
+        ],
+        [
+          "003040",
+          "Master Guide Ribbon Bars",
+          "$24.95"
+        ],
+        [
+          "002436",
+          "TLT Service Star Year 1",
+          "$2.00"
+        ],
+        [
+          "002437",
+          "TLT Service Star Year 2",
+          "$2.00"
+        ],
+        [
+          "002438",
+          "TLT Service Star Year 3",
+          "$2.00"
+        ],
+        [
+          "002439",
+          "TLT Service Star Year 4",
+          "$2.00"
+        ],
+        [
+          "002401",
+          "Service Star Pin - Year 1",
+          "$2.50"
+        ],
+        [
+          "002402",
+          "Service Star Pin - Year 2",
+          "$2.50"
+        ],
+        [
+          "002403",
+          "Service Star Pin - Year 3",
+          "$3.00"
+        ],
+        [
+          "002404",
+          "Service Star Pin - Year 4",
+          "$3.00"
+        ],
+        [
+          "002405",
+          "Service Star Pin - Year 5",
+          "$3.50"
+        ],
+        [
+          "002406",
+          "Service Star Pin - Year 6",
+          "$3.50"
+        ],
+        [
+          "002407",
+          "Service Star Pin - Year 7",
+          "$3.50"
+        ],
+        [
+          "002408",
+          "Service Star Pin - Year 8",
+          "$3.50"
+        ],
+        [
+          "002409",
+          "Service Star Pin - Year 9",
+          "$3.50"
+        ],
+        [
+          "002410",
+          "Service Star Pin - Year 10",
+          "$3.50"
+        ],
+        [
+          "002411",
+          "Service Star Pin - Year 11",
+          "$4.00"
+        ],
+        [
+          "002412",
+          "Service Star Pin - Year 12",
+          "$4.00"
+        ],
+        [
+          "002413",
+          "Service Star Pin - Year 13",
+          "$4.00"
+        ],
+        [
+          "002414",
+          "Service Star Pin - Year 14",
+          "$4.00"
+        ],
+        [
+          "002415",
+          "Service Star Pin - Year 15",
+          "$4.00"
+        ],
+        [
+          "002420",
+          "Service Star Pin - Year 20",
+          "$4.00"
+        ],
+        [
+          "002425",
+          "Service Star Pin - Year 25",
+          "$4.00"
+        ],
+        [
+          "002430",
+          "Service Star Pin - Year 30",
+          "$5.00"
+        ],
+        [
+          "002435",
+          "Service Star Pin - Year 35",
+          "$5.00"
+        ],
+        [
+          "002450",
+          "Service Star Pin - Year 40",
+          "$5.00"
+        ],
+        [
+          "002455",
+          "Service Star Pin - Year 45",
+          "$5.00"
+        ],
+        [
+          "002460",
+          "Service Star Pin - Year 50",
+          "$5.00"
+        ],
+        [
+          "002465",
+          "Service Star Pin - Year 55",
+          "$5.00"
+        ],
+        [
+          "002470",
+          "Service Star Pin - Year 60",
+          "$5.00"
+        ],
+        [
+          "002475",
+          "Service Star Pin - Year 65",
+          "$5.00"
+        ],
+        [
+          "002480",
+          "Service Star Pin - Year 70",
+          "$5.00"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"shoulder-cord\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "002062",
+          "Staff Cord - Royal Blue",
+          "$11.95"
+        ],
+        [
+          "002063",
+          "Staff Cord - Kelly Green",
+          "$11.95"
+        ],
+        [
+          "002064",
+          "Staff Cord - Grey",
+          "$11.95"
+        ],
+        [
+          "002065",
+          "Staff Cord - Medium Blue (Light Blue)",
+          "$11.95"
+        ],
+        [
+          "002066",
+          "Staff Cord - Scarlet",
+          "$11.95"
+        ],
+        [
+          "002067",
+          "Drill & Drum Team - White",
+          "$11.95"
+        ],
+        [
+          "002071",
+          "Staff Cord - Cardinal",
+          "$11.95"
+        ],
+        [
+          "002072",
+          "Staff Cord - Purple",
+          "$11.95"
+        ],
+        [
+          "002073",
+          "Staff Cord - Navy Blue",
+          "$11.95"
+        ],
+        [
+          "002061",
+          "Staff Cord - Club Director - Gold",
+          "$14.95"
+        ],
+        [
+          "002075",
+          "Staff Cord - Coordinator - Scarlet/Gold",
+          "$19.95"
+        ],
+        [
+          "002076",
+          "Staff Cord - Conference/Union Directors - Scarlet/Royal Blue/Gold",
+          "$19.95"
+        ],
+        [
+          "002074",
+          "Staff Cord - Assistant & Associate Coordinator - Kelly Green/Gold",
+          "$19.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "002060",
+          "Teen Leadership Training (TLT) Cord",
+          "$12.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"right-pocket-name-tag\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003036",
+          "Pathfinder Custom Engraved Name Badge",
+          "$5.95"
+        ],
+        [
+          "003038",
+          "Master Guide Custom Engraved Name Badge",
+          "$5.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "003037",
+          "Adventurer Custom Engraved Name Badge",
+          "$5.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"pants\",1]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "008861",
+          "S waist 30\"",
+          "$26.95"
+        ],
+        [
+          "008862",
+          "M waist 33\"",
+          "$26.95"
+        ],
+        [
+          "008863",
+          "L waist 37\"",
+          "$26.95"
+        ],
+        [
+          "008864",
+          "XL waist 41\"",
+          "$26.95"
+        ],
+        [
+          "008865",
+          "2XL waist 45\"",
+          "$30.95"
+        ],
+        [
+          "008866",
+          "3XL waist 49\"",
+          "$34.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Girl.svg\",\"pants\"]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "008820",
+          "Size 6-Waist 20\"",
+          "$25.95"
+        ],
+        [
+          "008821",
+          "Size 8-Waist 21\"",
+          "$25.95"
+        ],
+        [
+          "008822",
+          "Size 10-Waist 22\"",
+          "$25.95"
+        ],
+        [
+          "008823",
+          "Size 12-Waist 23.25\"",
+          "$25.95"
+        ],
+        [
+          "008824",
+          "Size 14-Waist 24.5\"",
+          "$25.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Girl.svg\",\"pants\",1]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "008826",
+          "Size 5/6-Waist 25.5\"",
+          "$28.95"
+        ],
+        [
+          "008827",
+          "Size 7/8-Waist 26.5\"",
+          "$28.95"
+        ],
+        [
+          "008828",
+          "Size 9/10-Waist 27.5\"",
+          "$28.95"
+        ],
+        [
+          "008829",
+          "Size 11/12-Waist 29\"",
+          "$28.95"
+        ],
+        [
+          "008830",
+          "Size 13/14-Waist 30.5\"",
+          "$28.95"
+        ],
+        [
+          "008831",
+          "Size 15/16-Waist 32\"",
+          "$28.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Girl.svg\",\"pants\",2]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "008801",
+          "Size 8-Waist 21\"",
+          "$22.95"
+        ],
+        [
+          "008802",
+          "Size 10-Waist 22\"",
+          "$22.95"
+        ],
+        [
+          "008803",
+          "Size 12-Waist 23.25\"",
+          "$22.95"
+        ],
+        [
+          "008804",
+          "Size 14-Waist 24.5\"",
+          "$22.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Girl.svg\",\"pants\",3]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "008807",
+          "Size 7/8 waist 26.5",
+          "$25.95"
+        ],
+        [
+          "008808",
+          "Size 9/10 waist 27.5",
+          "$25.95"
+        ],
+        [
+          "008809",
+          "Size 11/12 waist 29",
+          "$25.95"
+        ],
+        [
+          "008810",
+          "Size 13/14 waist 30.5",
+          "$25.95"
+        ],
+        [
+          "008811",
+          "Size 15/16 waist 32",
+          "$25.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Boy.svg\",\"pants\"]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "008876",
+          "Size 8-Waist 26\"",
+          "$25.95"
+        ],
+        [
+          "008877",
+          "Size 10-Waist 27\"",
+          "$25.95"
+        ],
+        [
+          "008878",
+          "Size 12-Waist 28\"",
+          "$25.95"
+        ],
+        [
+          "008879",
+          "Size 14-Waist 29\"",
+          "$25.95"
+        ],
+        [
+          "008880",
+          "Size 16-Waist 30\"",
+          "$28.95"
+        ],
+        [
+          "008881",
+          "Size 18-Waist 31\"",
+          "$28.95"
+        ],
+        [
+          "008882",
+          "Size 20-Waist 32\"",
+          "$28.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Boy.svg\",\"pants\",1]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "008883",
+          "Size 16H-Waist 33\"",
+          "$29.95"
+        ],
+        [
+          "008884",
+          "Size 18H-Waist 35\"",
+          "$29.95"
+        ],
+        [
+          "008885",
+          "Size 20H-Waist 37\"",
+          "$29.95"
+        ],
+        [
+          "008886",
+          "Size 14H-Waist 31\"",
+          "$29.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"left-pocket-pins\"]": {
+      "columns": [
+        "Item#",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "002930",
+          "Adventurer Uniform Pin",
+          "$2.95"
+        ],
+        [
+          "002134",
+          "Baptismal Pin",
+          "$1.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "002131",
+          "Master Guide Six-Star Pin",
+          "$1.25"
+        ],
+        [
+          "000150",
+          "Little Lamb Pin",
+          "$1.45"
+        ],
+        [
+          "002905",
+          "Eager Beaver Pin",
+          "$1.45"
+        ],
+        [
+          "002110",
+          "Busy Bee Pin",
+          "$1.45"
+        ],
+        [
+          "002111",
+          "Sunbeam Pin",
+          "$1.45"
+        ],
+        [
+          "002112",
+          "Builder Pin",
+          "$1.45"
+        ],
+        [
+          "002113",
+          "Helping Hand Pin",
+          "$1.45"
+        ],
+        [
+          "009560",
+          "Little Lamb Parent Pin",
+          "$2.25"
+        ],
+        [
+          "009561",
+          "Eager Beaver Parent Pin",
+          "$2.25"
+        ],
+        [
+          "002105",
+          "Busy Bee Parent Pin",
+          "$2.25"
+        ],
+        [
+          "002106",
+          "Sunbeam Parent Pin",
+          "$2.25"
+        ],
+        [
+          "002107",
+          "Builder Parent Pin",
+          "$2.25"
+        ],
+        [
+          "002108",
+          "Helping Hand Parent Pin",
+          "$2.25"
+        ],
+        [
+          "002401",
+          "Service Star Pin - Year 1",
+          "$2.50"
+        ],
+        [
+          "002402",
+          "Service Star Pin - Year 2",
+          "$2.50"
+        ],
+        [
+          "002403",
+          "Service Star Pin - Year 3",
+          "$3.00"
+        ],
+        [
+          "002404",
+          "Service Star Pin - Year 4",
+          "$3.00"
+        ],
+        [
+          "002405",
+          "Service Star Pin - Year 5",
+          "$3.50"
+        ],
+        [
+          "002406",
+          "Service Star Pin - Year 6",
+          "$3.50"
+        ],
+        [
+          "002407",
+          "Service Star Pin - Year 7",
+          "$3.50"
+        ],
+        [
+          "002408",
+          "Service Star Pin - Year 8",
+          "$3.50"
+        ],
+        [
+          "002409",
+          "Service Star Pin - Year 9",
+          "$3.50"
+        ],
+        [
+          "002410",
+          "Service Star Pin - Year 10",
+          "$3.50"
+        ],
+        [
+          "002411",
+          "Service Star Pin - Year 11",
+          "$4.00"
+        ],
+        [
+          "002412",
+          "Service Star Pin - Year 12",
+          "$4.00"
+        ],
+        [
+          "002413",
+          "Service Star Pin - Year 13",
+          "$4.00"
+        ],
+        [
+          "002414",
+          "Service Star Pin - Year 14",
+          "$4.00"
+        ],
+        [
+          "002415",
+          "Service Star Pin - Year 15",
+          "$4.00"
+        ],
+        [
+          "002420",
+          "Service Star Pin - Year 20",
+          "$4.00"
+        ],
+        [
+          "002425",
+          "Service Star Pin - Year 25",
+          "$4.00"
+        ],
+        [
+          "002430",
+          "Service Star Pin - Year 30",
+          "$5.00"
+        ],
+        [
+          "002435",
+          "Service Star Pin - Year 35",
+          "$5.00"
+        ],
+        [
+          "002450",
+          "Service Star Pin - Year 40",
+          "$5.00"
+        ],
+        [
+          "002455",
+          "Service Star Pin - Year 45",
+          "$5.00"
+        ],
+        [
+          "002460",
+          "Service Star Pin - Year 50",
+          "$5.00"
+        ],
+        [
+          "002465",
+          "Service Star Pin - Year 55",
+          "$5.00"
+        ],
+        [
+          "002470",
+          "Service Star Pin - Year 60",
+          "$5.00"
+        ],
+        [
+          "002475",
+          "Service Star Pin - Year 65",
+          "$5.00"
+        ],
+        [
+          "002480",
+          "Service Star Pin - Year 70",
+          "$5.00"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"pathfinder-investiture\"]": {
+      "columns": [
+        "Item #",
+        "Name",
+        "Category",
+        "Skill Level",
+        "Price",
+        ""
+      ],
+      "rows": [
+        [
+          "002120",
+          "Friend Class Pin",
+          "",
+          "",
+          "$1.20",
+          ""
+        ],
+        [
+          "002121",
+          "Companion Class Pin",
+          "",
+          "",
+          "$1.20",
+          ""
+        ],
+        [
+          "002122",
+          "Explorer Class Pin",
+          "",
+          "",
+          "$1.20",
+          ""
+        ],
+        [
+          "002123",
+          "Ranger Class Pin",
+          "",
+          "",
+          "$1.20",
+          ""
+        ],
+        [
+          "002124",
+          "Voyager Class Pin",
+          "",
+          "",
+          "$1.20",
+          ""
+        ],
+        [
+          "002130",
+          "Guide Class Pin",
+          "",
+          "",
+          "$1.20",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "002300",
+          "Friend Ribbon Bar",
+          "",
+          "",
+          "$1.30",
+          ""
+        ],
+        [
+          "002301",
+          "Companion Ribbon Bar",
+          "",
+          "",
+          "$1.30",
+          ""
+        ],
+        [
+          "002302",
+          "Explorer Ribbon Bar",
+          "",
+          "",
+          "$1.30",
+          ""
+        ],
+        [
+          "002303",
+          "Ranger Ribbon Bar",
+          "",
+          "",
+          "$1.30",
+          ""
+        ],
+        [
+          "002306",
+          "Voyager Ribbon Bar",
+          "",
+          "",
+          "$1.30",
+          ""
+        ],
+        [
+          "002307",
+          "Guide Ribbon Bar",
+          "",
+          "",
+          "$1.30",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "002250",
+          "Friend Class Chevron",
+          "",
+          "",
+          "$0.95",
+          ""
+        ],
+        [
+          "00225",
+          "Companion Class Chevron",
+          "",
+          "",
+          "$0.95",
+          ""
+        ],
+        [
+          "00225",
+          "Explorer Class Chevron",
+          "",
+          "",
+          "$0.95",
+          ""
+        ],
+        [
+          "00225",
+          "Ranger Class Chevron",
+          "",
+          "",
+          "$0.95",
+          ""
+        ],
+        [
+          "002264",
+          "Voyager Class Chevron",
+          "",
+          "",
+          "$0.95",
+          ""
+        ],
+        [
+          "002260",
+          "Guide Class Chevron",
+          "",
+          "",
+          "$0.95",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "4995",
+          "Aboriginal Lore",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "4997",
+          "Abseiling",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "2100",
+          "Abseiling - Instructor (Instructor Diamond)",
+          "Recreation",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "7600",
+          "Accounting",
+          "Vocational",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5008",
+          "Adapted Sports",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "4996",
+          "Adolescent Mental Health Response",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5005",
+          "Adventist Pioneer Heritage",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5000",
+          "Adventurer for Christ",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "4999",
+          "African American Adventist Heritage in the NAD",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "4998",
+          "African Lore",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5010",
+          "Agriculture",
+          "Outdoor Industries",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5020",
+          "Airplane Modeling",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5118",
+          "Alive Bible",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5025",
+          "Alternative Fuels",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5030",
+          "Amphibians",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5035",
+          "Animal Camouflage",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5040",
+          "Animal Tracking",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5045",
+          "Antelopes",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5047",
+          "Arboriculture",
+          "Vocational",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5050",
+          "Archery",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5055",
+          "Artificial Intelligence",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5057",
+          "Audio Technician",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5060",
+          "Automobile Mechanics",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5063",
+          "Aviators",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5065",
+          "Backpacking",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5070",
+          "Baking",
+          "Household Arts",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "7605",
+          "Barbering and Hairstyling",
+          "Vocational",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5082",
+          "Basic Rescue",
+          "Health and Science",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5081",
+          "Basic Sewing",
+          "Household Arts",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5085",
+          "Basic Water Safety",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5086",
+          "Basketball",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5090",
+          "Basketry",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5095",
+          "Bats",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5100",
+          "Beekeeping",
+          "Outdoor Industries",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5120",
+          "Bible Evangelism",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5123",
+          "Bible Marking",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5124",
+          "Biblical Archaeology",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5127",
+          "Biosafety",
+          "Health and Science",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5130",
+          "Bird Pets",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5140",
+          "Birds",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5145",
+          "Blacksmithing",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5150",
+          "Block Printing",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5155",
+          "Blood and the Body's Defenses",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5157",
+          "Bogs & Fens",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5165",
+          "Bones, Muscles, and Movement",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "7610",
+          "Bookbinding",
+          "Vocational",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5160",
+          "Bookkeeping",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5170",
+          "Braiding",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5171",
+          "Braille",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5175",
+          "Brain and Behavior",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5180",
+          "Bread Dough",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5185",
+          "Bridges",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5188",
+          "Bubbles",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5181",
+          "Bully Prevention I",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5182",
+          "Bully Prevention II",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5189",
+          "Business",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5190",
+          "Cacti",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5200",
+          "Cake Decorating",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5210",
+          "Camp Craft",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6069",
+          "Camp Safety",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5211",
+          "Camping Skills I",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5212",
+          "Camping Skills II",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5213",
+          "Camping Skills III",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5214",
+          "Camping Skills IV",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5220",
+          "Candle Making",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5235",
+          "Canoe Building",
+          "Recreation",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5230",
+          "Canoeing",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5245",
+          "Card Making",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5240",
+          "Carpentry",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5250",
+          "Cats",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5260",
+          "Cattle Husbandry",
+          "Outdoor Industries",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5270",
+          "Caving",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5280",
+          "Ceramics",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5285",
+          "Cetaceans",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5290",
+          "Chemistry",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5295",
+          "Child Care",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5298",
+          "Christian Art of Preaching",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5300",
+          "Christian Citizenship",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5305",
+          "Christian Drama",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5310",
+          "Christian Grooming & Manners",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5320",
+          "Christian Sales Principles",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5330",
+          "Christian Storytelling",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5335",
+          "Christian Teambuilding",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5336",
+          "Christian Visitation",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5338",
+          "Climate Science",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5343",
+          "Coal",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5345",
+          "Cold Weather Survival",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5350",
+          "Communications",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "7105",
+          "Community Improvement",
+          "Spiritual Growth, Outreach and Heritage",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5900",
+          "Community Water Safety (Lifesaving)",
+          "Recreation",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5355",
+          "Computers",
+          "Vocational",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5355",
+          "Computers and Mobile Devices",
+          "Vocational",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5360",
+          "Cooking",
+          "Household Arts",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5370",
+          "Copper Enameling",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5372",
+          "Coral Reefs",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5376",
+          "Counted Cross Stitch",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5375",
+          "CPR",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5377",
+          "Creationism",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "7115",
+          "Crisis Intervention",
+          "Spiritual Growth, Outreach and Heritage",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5380",
+          "Crocheting",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5395",
+          "Cryptography",
+          "Vocational",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6060",
+          "Cultural Diversity Appreciation",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5387",
+          "Cultural Food Preparation",
+          "Household Arts",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5388",
+          "Cultural Heritage",
+          "",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5340",
+          "Currency",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5390",
+          "Cycling",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5400",
+          "Dairying",
+          "Outdoor Industries",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5405",
+          "Dams and Levees",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5410",
+          "Découpage",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5415",
+          "Digestion",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5417",
+          "Digital Photography",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5419",
+          "Dinosaurs",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "7045",
+          "Disaster Ministries",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5418",
+          "Disc Golf",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5455",
+          "Disciples and Apostles",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5420",
+          "Dog Care and Training",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5430",
+          "Dogs",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5445",
+          "Drawing",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5460",
+          "Dressmaking",
+          "Household Arts",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5470",
+          "Drilling & Marching",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5435",
+          "Drones",
+          "Vocational",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5473",
+          "Drumming & Percussion",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5476",
+          "Duct Tape",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5474",
+          "Dunes",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5475",
+          "Dutch Oven Cooking",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5479",
+          "Early Adventist Missionaries",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5480",
+          "Ecology",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5490",
+          "Edible Wild Plants",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5500",
+          "Electricity",
+          "Vocational",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5505",
+          "Endangered Species",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5507",
+          "Engineering",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5510",
+          "Environmental Conservation",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5485",
+          "Eucalypts",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5520",
+          "Family Life",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "7055",
+          "Feeding Ministries",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5530",
+          "Felt Craft",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5540",
+          "Ferns",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5550",
+          "Fire Building & Camp Cookery",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5551",
+          "Fire Safety",
+          "Vocational",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5560",
+          "First Aid",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5570",
+          "Fishes",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5833",
+          "Flag Football",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5575",
+          "Flags",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5580",
+          "Flower Arrangement",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5590",
+          "Flower Culture",
+          "Outdoor Industries",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5600",
+          "Flowers",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6170",
+          "Food - Canning",
+          "Household Arts",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5605",
+          "Food - Drying",
+          "Household Arts",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5606",
+          "Food - Freezing",
+          "Household Arts",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5609",
+          "Foreign Mission Trips",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5608",
+          "Forestry",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5610",
+          "Fossils",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5620",
+          "Fruit Growing",
+          "Outdoor Industries",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5630",
+          "Fungi",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5640",
+          "Gardening",
+          "Outdoor Industries",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5643",
+          "Genealogy",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5645",
+          "Geocaching",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5646",
+          "Geological Geocaching",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5650",
+          "Geology",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5653",
+          "Gift Wrapping",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5658",
+          "Glaciers",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5660",
+          "Glass Craft",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5665",
+          "Glass Etching",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5670",
+          "Glass Painting",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5675",
+          "Goat Husbandry",
+          "Outdoor Industries",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5676",
+          "God's Messenger",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5677",
+          "Gold Prospecting",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5678",
+          "Golf",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5680",
+          "Grasses",
+          "Nature",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5659",
+          "Guitar",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5690",
+          "Health and Healing",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5693",
+          "Heart and Circulation",
+          "Health and Science",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5695",
+          "Herbs",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5697",
+          "Heredity",
+          "Health and Science",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5700",
+          "Hiking",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5710",
+          "Home Nursing",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5720",
+          "Horse Husbandry",
+          "Outdoor Industries",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5730",
+          "Horsemanship",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5735",
+          "Hot Air Balloons",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "7615",
+          "House Painting, Exterior",
+          "Vocational",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "7620",
+          "House Painting, Interior",
+          "Vocational",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5750",
+          "House Plants",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5737",
+          "Household Budgeting",
+          "Household Arts",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5740",
+          "Housekeeping",
+          "Household Arts",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5753",
+          "Hydroponics and Aquaponics",
+          "Outdoor Industries",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5755",
+          "Hymns",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "7025",
+          "Identifying Community Needs",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5770",
+          "Insects",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5783",
+          "Internet",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5006",
+          "Introduction to Adventist Pioneer Heritage",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5785",
+          "Island Fishing",
+          "Outdoor Industries",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5790",
+          "Journalism",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5795",
+          "Judges of Israel",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5796",
+          "Juggling",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5800",
+          "Junior Witness",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "5810",
+          "Junior Youth Leadership",
+          "Spiritual Growth, Outreach and Heritage",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5813",
+          "Kanzashi",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5835",
+          "Kayaking",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5814",
+          "Kings of Israel",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5815",
+          "Kites",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5820",
+          "Knitting",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5830",
+          "Knot Tying",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5838",
+          "Land Surveying",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5840",
+          "Language Study",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5850",
+          "Lapidary",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5855",
+          "Lashing",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5860",
+          "Laundering",
+          "Household Arts",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5870",
+          "Leather Craft",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5871",
+          "Legacy of Healing",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5872",
+          "LEGO® Design",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5878",
+          "Letterboxing",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5880",
+          "Lettering & Poster Making",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5890",
+          "Lichens, Liverworts & Mosses",
+          "Nature",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5900",
+          "Lifesaving (Community Water Safety)",
+          "Recreation",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5895",
+          "Lighthouses",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5910",
+          "Literature Evangelism",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5440",
+          "Livestock",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5920",
+          "Macramé",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5930",
+          "Mammals",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5938",
+          "Māori Lore",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5936",
+          "Maple Sugar",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5940",
+          "Marine Algae",
+          "Nature",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5950",
+          "Marine Invertebrates",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5955",
+          "Marine Mammals",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5956",
+          "Marsupials",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "7625",
+          "Masonry",
+          "Vocational",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5957",
+          "Mat Making",
+          "Household Arts",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5959",
+          "Media Broadcast Ministry",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5960",
+          "Metal Craft",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5962",
+          "Meteorites",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5965",
+          "Microscopic Life",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5966",
+          "Midnight Sun",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5986",
+          "Migration",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5964",
+          "Missionary Life",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5968",
+          "Mobile Technology",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5970",
+          "Model Boats",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5967",
+          "Model Cars",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5969",
+          "Model Railroad",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5980",
+          "Model Rocketry",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5985",
+          "Mosaic Tile",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5990",
+          "Moths & Butterflies",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5995",
+          "Mountain Biking",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5993",
+          "Mountains",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6000",
+          "Music",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6007",
+          "National Parks and Heritage Sites",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "5760",
+          "Native American Lore",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6005",
+          "Native Brush Construction",
+          "Arts, Crafts and Hobbies",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "6010",
+          "Navigation",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6015",
+          "Neckwear",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6020",
+          "Needle Craft",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6022",
+          "Noah's Flood",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6025",
+          "Nutrition",
+          "Household Arts",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6028",
+          "Oceans",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6045",
+          "Odonates",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6030",
+          "Optics",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6040",
+          "Orchids",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6050",
+          "Orienteering",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6053",
+          "Origami",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6055",
+          "Outdoor Leadership",
+          "Recreation",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "5450",
+          "Painting",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6056",
+          "Palm Trees",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6065",
+          "Paper Maché",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6067",
+          "Paper Quilling",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "7630",
+          "Paperhanging",
+          "Vocational",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "6071",
+          "Parade Floats",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6057",
+          "Parrots and Cockatoos",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6061",
+          "Patriarchs of the Bible",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6068",
+          "Peace Maker",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6068",
+          "Peacemaker",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "6070",
+          "Personal Evangelism",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6072",
+          "Personal Health and Wellness",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6187",
+          "Pewter Casting",
+          "Vocational",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6080",
+          "Photography",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6090",
+          "Physical Fitness",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6095",
+          "Physics",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6097",
+          "Pickleball",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6100",
+          "Pigeon Raising",
+          "Outdoor Industries",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6102",
+          "Pin Trading",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6103",
+          "Pinecar Derby (Pinewood Derby)",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6103",
+          "Pinewood Derby (Pinecar Derby)",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6105",
+          "Pioneering",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6109",
+          "Pizza Maker",
+          "Household Arts",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6110",
+          "Plaster Craft",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6118",
+          "Plastic Canvas",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6120",
+          "Plastics",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "7635",
+          "Plumbing",
+          "Vocational",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "6122",
+          "Poetry and Songwriting",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6125",
+          "Postcards",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6130",
+          "Pottery",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6140",
+          "Poultry",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6150",
+          "Poultry Raising",
+          "Outdoor Industries",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6160",
+          "Power Boating",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6163",
+          "Praise and Worship",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6175",
+          "Prayer",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6165",
+          "Preach It",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6178",
+          "Predatory Plants",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6180",
+          "Printing",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6183",
+          "Prophets & Prophecy",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6185",
+          "Puppetry",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6190",
+          "Quilting",
+          "Household Arts",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6200",
+          "Radio",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6210",
+          "Radio Electronics",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6211",
+          "Rainforests",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6212",
+          "Raptors",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6213",
+          "Recycling",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6215",
+          "Red Alert I",
+          "Health and Science",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6216",
+          "Red Alert II",
+          "Health and Science",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "7065",
+          "Refugee Assistance",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6214",
+          "Renewable Energy",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6220",
+          "Reptiles",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6225",
+          "Rivers and Streams",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6223",
+          "Robotics",
+          "Vocational",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6230",
+          "Rock Climbing",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6240",
+          "Rocks & Minerals",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6250",
+          "Rowing",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "7085",
+          "Rural Development",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6253",
+          "Sabbath Appreciation",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6260",
+          "Sailing",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6265",
+          "Sanctuary",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6270",
+          "Sand",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6275",
+          "Scrapbooking",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6280",
+          "Scuba Diving",
+          "Recreation",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "6290",
+          "Sculpturing",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6305",
+          "Search and Rescue",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6310",
+          "Seeds",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "7035",
+          "Serving Communities",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6295",
+          "Sharks",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6300",
+          "Sheep Husbandry",
+          "Outdoor Industries",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6320",
+          "Shells",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "7640",
+          "Shoe Repair",
+          "Vocational",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "7645",
+          "Shorthand",
+          "Vocational",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "6323",
+          "Shrubs",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6325",
+          "Sign Language",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6327",
+          "Signs, Signals and Symbols",
+          "Vocational",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6330",
+          "Silk Screen Printing",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6336",
+          "Skateboarding",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5385",
+          "Skiing - Cross Country",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6340",
+          "Skiing Downhill",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6350",
+          "Skin Diving",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6378",
+          "Slow-Pitch Softball",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6360",
+          "Small Engines",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6365",
+          "Small Fruit Growing",
+          "Outdoor Industries",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6366",
+          "Small Group Bible Study",
+          "Spiritual Growth, Outreach and Heritage",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6367",
+          "Small Mammal Pets",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6368",
+          "Snowshoeing",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6370",
+          "Soap Craft",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6369",
+          "Soap Making",
+          "Vocational",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "6377",
+          "Soccer",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6376",
+          "Social Determinants of Health",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6371",
+          "Social Media",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6373",
+          "Soils",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6380",
+          "Spiders",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6384",
+          "Spinning Yarn",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6390",
+          "Springboard Diving",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6400",
+          "Stamps",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6410",
+          "Stars",
+          "Nature",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6415",
+          "Stewardship",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6417",
+          "Street Art",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6420",
+          "String Art",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6425",
+          "Subsistence Farming",
+          "Outdoor Industries",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5110",
+          "Swimming - Beginner",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6430",
+          "Swimming",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "5780",
+          "Swimming - Intermediate",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6435",
+          "Taiga",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6440",
+          "Tailoring",
+          "Household Arts",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "6445",
+          "Tapa Cloth",
+          "Household Arts",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6450",
+          "Teaching",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6460",
+          "Temperance",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6462",
+          "Temperate Deciduous Forests",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6463",
+          "Temperate Grasslands",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6464",
+          "Tennis",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6466",
+          "Tents",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6470",
+          "Textile Painting",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6473",
+          "Thatching",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6471",
+          "Three Angels' Messages",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6474",
+          "Tie-Dye",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6472",
+          "Tile Laying",
+          "Vocational",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "6476",
+          "Tole Painting",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6477",
+          "Toy Boat Regatta",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6475",
+          "Track & Field",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6478",
+          "Travel",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6485",
+          "Tree Climbing",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6480",
+          "Trees",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6487",
+          "Triathlon",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6490",
+          "Tumbling & Balancing",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "7095",
+          "Tutoring",
+          "Spiritual Growth, Outreach and Heritage",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6500",
+          "Typewriting",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6502",
+          "Ultimate Disc",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6503",
+          "Unicycling",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6505",
+          "Upholstery",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "7365",
+          "Video",
+          "Vocational",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6506",
+          "Viruses",
+          "Health and Science",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6600",
+          "Visual Media Critique",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6507",
+          "Volleyball",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6508",
+          "Wakeboarding",
+          "Recreation",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6512",
+          "Water Safety Instructor",
+          "Recreation",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "6511",
+          "Water Science",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6510",
+          "Water Skiing",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6509",
+          "Waterfalls",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6515",
+          "Wattles",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6520",
+          "Weather",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6530",
+          "Weaving",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6535",
+          "Welding",
+          "Vocational",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "6538",
+          "Whistles",
+          "Arts, Crafts and Hobbies",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "6540",
+          "Wilderness Leadership",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6550",
+          "Wilderness Living",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6553",
+          "Wildfire Preparation and Prevention",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6555",
+          "Wind Surfing",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6560",
+          "Winter Camping",
+          "Recreation",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6565",
+          "Women in Adventist History",
+          "Spiritual Growth, Outreach and Heritage",
+          "3",
+          "",
+          ""
+        ],
+        [
+          "6570",
+          "Wood Carving",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6580",
+          "Wood Handicraft",
+          "Arts, Crafts and Hobbies",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6590",
+          "Woodworking",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6592",
+          "Word Processing",
+          "Vocational",
+          "2",
+          "",
+          ""
+        ],
+        [
+          "6595",
+          "Worms",
+          "Nature",
+          "1",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004010",
+          "Artisan Master",
+          "",
+          "",
+          "$1.40",
+          ""
+        ],
+        [
+          "004000",
+          "Aquatic Master",
+          "",
+          "",
+          "$1.40",
+          ""
+        ],
+        [
+          "004020",
+          "Conservation Master",
+          "",
+          "",
+          "$1.40",
+          ""
+        ],
+        [
+          "004025",
+          "Family, Origins and Heritage Master",
+          "",
+          "",
+          "$1.40",
+          ""
+        ],
+        [
+          "004030",
+          "Farming Master",
+          "",
+          "",
+          "$1.40",
+          ""
+        ],
+        [
+          "004035",
+          "Health and Science Master",
+          "",
+          "",
+          "$1.40",
+          ""
+        ],
+        [
+          "004040",
+          "Homemaking Master",
+          "",
+          "",
+          "$1.40",
+          ""
+        ],
+        [
+          "004045",
+          "Modern Technology Master",
+          "",
+          "",
+          "$1.40",
+          ""
+        ],
+        [
+          "004050",
+          "Naturalist Master",
+          "",
+          "",
+          "$1.40",
+          ""
+        ],
+        [
+          "004057",
+          "Spiritual Growth and Ministries Master",
+          "",
+          "",
+          "$1.40",
+          ""
+        ],
+        [
+          "004055",
+          "Recreation Master",
+          "",
+          "",
+          "$1.40",
+          ""
+        ],
+        [
+          "004060",
+          "Sportsman Master",
+          "",
+          "",
+          "$1.40",
+          ""
+        ],
+        [
+          "004070",
+          "Technician Master",
+          "",
+          "",
+          "$1.40",
+          ""
+        ],
+        [
+          "004090",
+          "Witnessing Master",
+          "",
+          "",
+          "$1.40",
+          ""
+        ],
+        [
+          "004080",
+          "Wilderness Master",
+          "",
+          "",
+          "$1.40",
+          ""
+        ],
+        [
+          "004095",
+          "Zoology Master",
+          "",
+          "",
+          "$1.40",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "009520",
+          "AYMT Pathfinder Club Certification Pin - Instructor",
+          "",
+          "",
+          "$2.95",
+          ""
+        ],
+        [
+          "009521",
+          "AYMT Pathfinder Club Certification Pin - Leadership",
+          "",
+          "",
+          "$2.95",
+          ""
+        ],
+        [
+          "009517",
+          "AYMT Pathfinder Club Certification Pin - Basic Staff",
+          "",
+          "",
+          "$2.95",
+          ""
+        ],
+        [
+          "009518",
+          "AYMT Pathfinder Club Certification Pin - Counselor",
+          "",
+          "",
+          "$2.95",
+          ""
+        ],
+        [
+          "009519",
+          "AYMT Pathfinder Club Certification Pin - Director",
+          "",
+          "",
+          "$2.95",
+          ""
+        ],
+        [
+          "009819",
+          "AYMT Pathfinder Club Certification Pin - Secretary/Treasurer",
+          "",
+          "",
+          "$2.95",
+          ""
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"tlt\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003028",
+          "TLT Sleeve Strip",
+          "$1.95"
+        ],
+        [
+          "002060",
+          "TLT Shoulder Cord",
+          "$12.95"
+        ],
+        [
+          "002138",
+          "TLT Pin",
+          "$2.95"
+        ],
+        [
+          "002139",
+          "TLT Patch",
+          "$4.95"
+        ],
+        [
+          "009516",
+          "TLT Scarf - Red Edge",
+          "$5.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "002436",
+          "TLT Service Star Year 1",
+          "$2.00"
+        ],
+        [
+          "002437",
+          "TLT Service Star Year 2",
+          "$2.00"
+        ],
+        [
+          "002438",
+          "TLT Service Star Year 3",
+          "$2.00"
+        ],
+        [
+          "002439",
+          "TLT Service Star Year 4",
+          "$2.00"
+        ],
+        [
+          "009701",
+          "Master TLT Pin",
+          "$3.95"
+        ],
+        [
+          "009698",
+          "Master TLT Patch",
+          "$4.95"
+        ],
+        [
+          "008110",
+          "TLT Red Sport Shirt S",
+          "$19.95"
+        ],
+        [
+          "008111",
+          "TLT Red Sport Shirt M",
+          "$19.95"
+        ],
+        [
+          "008112",
+          "TLT Red Sport Shirt L",
+          "$19.95"
+        ],
+        [
+          "008113",
+          "TLT Red Sport Shirt XL",
+          "$19.95"
+        ],
+        [
+          "008114",
+          "TLT Red Sport Shirt 2XL",
+          "$22.95"
+        ],
+        [
+          "008115",
+          "TLT Red Sport Shirt 3XL",
+          "$24.95"
+        ],
+        [
+          "008100",
+          "TLT Black Sport Shirt S",
+          "$19.95"
+        ],
+        [
+          "008101",
+          "TLT Black Sport Shirt M",
+          "$19.95"
+        ],
+        [
+          "008102",
+          "TLT Black Sport Shirt L",
+          "$19.95"
+        ],
+        [
+          "008103",
+          "TLT Black Sport Shirt XL",
+          "$19.95"
+        ],
+        [
+          "008104",
+          "TLT Black Sport Shirt 2XL",
+          "$22.95"
+        ],
+        [
+          "007950",
+          "TLT Red T-Shirt Small (34/36)",
+          "$6.95"
+        ],
+        [
+          "007951",
+          "TLT Red T-Shirt Medium (38/40)",
+          "$6.95"
+        ],
+        [
+          "007952",
+          "TLT Red T-Shirt Large (42/44)",
+          "$6.95"
+        ],
+        [
+          "007953",
+          "TLT Red T-Shirt X-Large (46/48)",
+          "$6.95"
+        ],
+        [
+          "007954",
+          "TLT Red T-Shirt 2X-Large (50/52)",
+          "$8.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"master-guide\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "002131",
+          "Master Guide Six-Star Pin",
+          "$1.25"
+        ],
+        [
+          "002151",
+          "Master Guide Pathfinder Name Strip",
+          "$1.60"
+        ],
+        [
+          "002960",
+          "Master Guide Adventurer Name Strip",
+          "$1.60"
+        ],
+        [
+          "009689",
+          "Master Guide Metal Slide",
+          "$5.95"
+        ],
+        [
+          "002200",
+          "Master Guide Cloth Slide",
+          "$2.95"
+        ],
+        [
+          "009603",
+          "Master Guide Pathfinder Scarf (Embroidered)",
+          "$15.95"
+        ],
+        [
+          "009658",
+          "Master Guide Adventurer Scarf (Embroidered)",
+          "$15.95"
+        ],
+        [
+          "002261",
+          "Master Guide Pathfinder Combination Chevron",
+          "$4.95"
+        ],
+        [
+          "002266",
+          "Master Guide ADV Combination Chevron",
+          "$4.95"
+        ],
+        [
+          "009547",
+          "Master Guide Beret Crest | 2x2",
+          "$1.20"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "008631",
+          "Master Guide Belt Buckle - not restricted",
+          "$9.95"
+        ],
+        [
+          "003310",
+          "Leather Belt & Buckle 34",
+          "$19.95"
+        ],
+        [
+          "003311",
+          "Leather Belt & Buckle 38",
+          "$19.95"
+        ],
+        [
+          "003312",
+          "Leather Belt & Buckle 42",
+          "$19.95"
+        ],
+        [
+          "003313",
+          "Leather Belt & Buckle 46",
+          "$19.95"
+        ],
+        [
+          "003314",
+          "Leather Belt & Buckle 50",
+          "$19.95"
+        ],
+        [
+          "003315",
+          "Leather Belt & Buckle 54",
+          "$19.95"
+        ],
+        [
+          "003316",
+          "Leather Belt & Buckle 58",
+          "$19.95"
+        ],
+        [
+          "003317",
+          "Leather Belt & Buckle 62",
+          "$21.95"
+        ],
+        [
+          "003318",
+          "Leather Belt & Buckle 66",
+          "$21.95"
+        ],
+        [
+          "003319",
+          "Leather Belt & Buckle 70",
+          "$21.95"
+        ],
+        [
+          "002161",
+          "Master Guide Achievement Certificate",
+          "$1.00"
+        ],
+        [
+          "003038",
+          "Master Guide Custom Engraved Name Badge",
+          "$5.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"adventurer-investiture\"]": {
+      "columns": [
+        "Item #",
+        "Name",
+        "Category",
+        "Skill Level",
+        "Price",
+        ""
+      ],
+      "rows": [
+        [
+          "009200",
+          "ABC's",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "004505",
+          "Acts of Kindness",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "004450",
+          "Alphabet Fun",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004507",
+          "Animal Footprints",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004370",
+          "Animal Homes",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004405",
+          "Animals",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004495",
+          "Archery",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004500",
+          "Artist",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "004510",
+          "Astronomer",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004522",
+          "Baking",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "004520",
+          "Basket Maker",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004525",
+          "Bead Craft",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004372",
+          "Beavers",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004415",
+          "Beginning Biking",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004420",
+          "Beginning Swimming",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004375",
+          "Bible Friends",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "009205",
+          "Bible Friends",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "004530",
+          "Bible I",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "004532",
+          "Bible II",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004533",
+          "Bible Royalty",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004529",
+          "Bible Story Telling",
+          "Award",
+          "Multi-Level Awards",
+          "",
+          ""
+        ],
+        [
+          "004470",
+          "Birds",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "009207",
+          "Bodies of Water",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "004539",
+          "Bread of Life",
+          "Award",
+          "Multi-Level Awards",
+          "",
+          ""
+        ],
+        [
+          "004780",
+          "Build and Fly",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004534",
+          "Building Blocks",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004535",
+          "Butterfly",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "004538",
+          "Buttons",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "004560",
+          "Camper",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "004565",
+          "Canoeing",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "002914",
+          "Caring for God's Creation Patch",
+          "Patch",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004610",
+          "Caring Friend",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004570",
+          "Carpenter",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004575",
+          "Children of the Bible",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004580",
+          "Collector",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "009210",
+          "Colors",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "004583",
+          "Communion",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "009215",
+          "Community Helpers",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "004683",
+          "Community Service",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "002912",
+          "Community Service Patch",
+          "Patch",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004590",
+          "Cooking Fun",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "004591",
+          "Cooperation",
+          "Award",
+          "Multi-Level Awards",
+          "",
+          ""
+        ],
+        [
+          "004592",
+          "Country Fun",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004595",
+          "Courtesy",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "004460",
+          "Crayons & Markers",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004597",
+          "Cupcakes and More",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004600",
+          "Cyclist",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004611",
+          "Delightful Sabbath",
+          "Award",
+          "Multi-Level Awards",
+          "",
+          ""
+        ],
+        [
+          "004616",
+          "Dinosaurs",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004612",
+          "Disciples",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004614",
+          "Dogs",
+          "Award",
+          "Multi-Level Awards",
+          "",
+          ""
+        ],
+        [
+          "004491",
+          "Eager Beaver Investiture Set of 12 Patches",
+          "Chip",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004490",
+          "Eager Beaver Patches Complete Set of 29",
+          "Chip",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004615",
+          "Early Adventist Pioneer",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004620",
+          "Environmentalist",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "002915",
+          "Evangelism Patch",
+          "Patch",
+          "Special Award Patches",
+          "",
+          ""
+        ],
+        [
+          "002916",
+          "Excellence in Reading Patch",
+          "Patch",
+          "Special Award Patches",
+          "",
+          ""
+        ],
+        [
+          "004625",
+          "Family Helper",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004540",
+          "Feathered Friends",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "009217",
+          "Finger Play",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "004380",
+          "Fire Safety",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004630",
+          "First Aid Helper",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004635",
+          "Fish",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "004710",
+          "Fitness Fun",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "004640",
+          "Flowers",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "004660",
+          "Friend of Animals",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "004650",
+          "Friend of Jesus",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "004670",
+          "Friend of Nature",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "004672",
+          "Fruits of the Spirit",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004400",
+          "Gadgets & Sand",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004680",
+          "Gardener",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "004690",
+          "Geologist",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004695",
+          "Glue Right",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "004696",
+          "God’s Universe",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004385",
+          "God’s World",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004697",
+          "Good Samaritan",
+          "Award",
+          "Multi-Level Awards",
+          "",
+          ""
+        ],
+        [
+          "004700",
+          "Guide",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "004720",
+          "Gymnast",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004725",
+          "Habitat",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004735",
+          "Hand Shadows",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004730",
+          "Handicraft",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "002913",
+          "Health and Safety Patch",
+          "Patch",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004740",
+          "Health Specialist",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "009219",
+          "Healthy Foods",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "009220",
+          "Healthy Me",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "004465",
+          "Helping at Home",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004738",
+          "His Word",
+          "Chip",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004736",
+          "Holy Spirit",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004760",
+          "Home Craft",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004750",
+          "Home Helper",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "004739",
+          "Honey",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004527",
+          "Honeybee",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004765",
+          "Horsemanship",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004770",
+          "Hygiene",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "009222",
+          "Insects",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "004388",
+          "Jesus Special Supper",
+          "Chip",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004387",
+          "Jesus Star",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004440",
+          "Jigsaw Puzzle",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004781",
+          "Knot Tying",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004425",
+          "Know Your Body",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004741",
+          "Ladybugs",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "002911",
+          "Leadership Patch",
+          "Patch",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004390",
+          "Left & Right",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004849",
+          "Listening",
+          "Award",
+          "Multi-Level Awards",
+          "",
+          ""
+        ],
+        [
+          "009242",
+          "Little Boy Jesus",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "009264",
+          "Little Lamb Induction Patch",
+          "Patch",
+          "",
+          "",
+          ""
+        ],
+        [
+          "009255",
+          "Little Lamb Investiture Set of 13 Patches",
+          "Star",
+          "",
+          "",
+          ""
+        ],
+        [
+          "009250",
+          "Little Lamb Patches Complete Set of 26",
+          "Star",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004742",
+          "Lizards",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004795",
+          "Magnet Fun I",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004796",
+          "Magnet Fun II",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004455",
+          "Manners Fun",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004800",
+          "Media Critic",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004801",
+          "Men of the Bible",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004803",
+          "Missionaries",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "009223",
+          "Music",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "004810",
+          "Music Maker",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "004811",
+          "My Church",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004395",
+          "My Community Friends",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "009260",
+          "My Family",
+          "Star",
+          "",
+          "",
+          ""
+        ],
+        [
+          "009224",
+          "My Friend Jesus",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "009261",
+          "My God",
+          "Star",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004812",
+          "My Picture Book",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "009262",
+          "My Self",
+          "Star",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004744",
+          "My Senses",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "009263",
+          "My World",
+          "Star",
+          "",
+          "",
+          ""
+        ],
+        [
+          "009241",
+          "Numbers",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "004743",
+          "Olympics",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004745",
+          "Outdoor Explorer",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004824",
+          "Parables of Jesus",
+          "Award",
+          "Multi-Level Awards",
+          "",
+          ""
+        ],
+        [
+          "004747",
+          "Pearly Gates",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004410",
+          "Pets",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004826",
+          "Photo Fun",
+          "Award",
+          "Multi-Level Awards",
+          "",
+          ""
+        ],
+        [
+          "004457",
+          "Playing with Friends",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004746",
+          "Postcards",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004827",
+          "Potato",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "004825",
+          "Prayer",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004828",
+          "Prayer Warrior",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004830",
+          "Purity",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004748",
+          "Rainbow Promise",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004820",
+          "Reading I",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "004821",
+          "Reading II",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "004822",
+          "Reading III",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004823",
+          "Reading IV",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004840",
+          "Reporter",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004850",
+          "Road Safety",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "004870",
+          "Safe Water",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004860",
+          "Safety Specialist",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "004862",
+          "Sand Art",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "004885",
+          "Saving Animals",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004475",
+          "Scavenger Hunt",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004886",
+          "Seasons",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "004887",
+          "Seeds",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "004890",
+          "Sewing Fun",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004430",
+          "Shapes & Sizes",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "009228",
+          "Sharing",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "004895",
+          "Sign Language",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004910",
+          "Skater",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004920",
+          "Skier",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "004923",
+          "Snowshoeing",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "009225",
+          "Special Helper",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "002909",
+          "Spiritual Growth Patch",
+          "Patch",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004445",
+          "Sponge Art",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004930",
+          "Spotter",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "004432",
+          "Stamping Fun",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "004933",
+          "Stamping Fun Art",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "009226",
+          "Stars",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "004934",
+          "Stay Safe",
+          "Award",
+          "Multi-Level Awards",
+          "",
+          ""
+        ],
+        [
+          "004935",
+          "Steps to Jesus",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004940",
+          "Swimmer I",
+          "Award",
+          "Busy Bee",
+          "",
+          ""
+        ],
+        [
+          "004950",
+          "Swimmer II",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004861",
+          "Tabernacle",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004952",
+          "Talent",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004585",
+          "Technology",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "004955",
+          "Temperance",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004582",
+          "Ten  Commandments",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004476",
+          "Thankful Heart",
+          "Chip",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004957",
+          "Tin Can Fun",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004435",
+          "Toys",
+          "Chip",
+          "Eager Beaver",
+          "",
+          ""
+        ],
+        [
+          "009227",
+          "Trains & Trucks",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "004960",
+          "Trees",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "009243",
+          "Trikes & Bikes",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "004970",
+          "Troubadour",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004975",
+          "Weather",
+          "Award",
+          "Helping Hand",
+          "",
+          ""
+        ],
+        [
+          "009229",
+          "Weather",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "004985",
+          "Whale",
+          "Award",
+          "Sunbeam",
+          "",
+          ""
+        ],
+        [
+          "004990",
+          "Wise Steward",
+          "Award",
+          "Builder",
+          "",
+          ""
+        ],
+        [
+          "004993",
+          "Women of the Bible",
+          "Award",
+          "",
+          "",
+          ""
+        ],
+        [
+          "009230",
+          "Wooly Lamb",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ],
+        [
+          "009240",
+          "Zoo Animals",
+          "Star",
+          "Little Lamb",
+          "",
+          ""
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"shirt\"]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Chart Bust",
+        "Actual Bust +2\"",
+        "Price",
+        ""
+      ],
+      "rows": [
+        [
+          "003893",
+          "Extra Small - 2/4",
+          "34",
+          "36",
+          "$31.95",
+          ""
+        ],
+        [
+          "003894",
+          "Small - 6/8",
+          "36",
+          "38",
+          "$31.95",
+          ""
+        ],
+        [
+          "003895",
+          "Medium - 10/12",
+          "38",
+          "40",
+          "$31.95",
+          ""
+        ],
+        [
+          "003896",
+          "Large - 14/16",
+          "40",
+          "42",
+          "$31.95",
+          ""
+        ],
+        [
+          "003897",
+          "Extra Large",
+          "42",
+          "44",
+          "$31.95",
+          ""
+        ],
+        [
+          "003898",
+          "2 Extra Large",
+          "44",
+          "46",
+          "$33.95",
+          ""
+        ],
+        [
+          "003899",
+          "3 Extra Large",
+          "46",
+          "48",
+          "$35.95",
+          ""
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"shirt\",1]": {
+      "columns": [
+        "Item  #",
+        "Size",
+        "Chart Bust",
+        "Actual Bust +2\"",
+        "Price",
+        ""
+      ],
+      "rows": [
+        [
+          "003907",
+          "Extra Small 2/4",
+          "34",
+          "36",
+          "$33.95",
+          ""
+        ],
+        [
+          "003908",
+          "Small 6/8",
+          "36",
+          "38",
+          "$33.95",
+          ""
+        ],
+        [
+          "003909",
+          "Medium 10/12",
+          "38",
+          "40",
+          "$33.95",
+          ""
+        ],
+        [
+          "003910",
+          "Large 14/16",
+          "40",
+          "42",
+          "$33.95",
+          ""
+        ],
+        [
+          "003911",
+          "Extra Large",
+          "42",
+          "44",
+          "$33.95",
+          ""
+        ],
+        [
+          "003912",
+          "2 Extra Large",
+          "44",
+          "46",
+          "$33.95",
+          ""
+        ],
+        [
+          "003913",
+          "3 Extra Large",
+          "46",
+          "48",
+          "$37.95",
+          ""
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"shirt\",2]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Chart Bust",
+        "Actual Bust",
+        "Price",
+        ""
+      ],
+      "rows": [
+        [
+          "003941",
+          "Extra Small - 2/4",
+          "34",
+          "",
+          "$31.95",
+          ""
+        ],
+        [
+          "003942",
+          "Small - 6/8",
+          "36",
+          "",
+          "$31.95",
+          ""
+        ],
+        [
+          "003943",
+          "Medium - 10/12",
+          "38",
+          "",
+          "$31.95",
+          ""
+        ],
+        [
+          "003944",
+          "Large 14/16",
+          "42.5",
+          "",
+          "$31.95",
+          ""
+        ],
+        [
+          "003945",
+          "Extra Large- 18/20",
+          "45.5",
+          "",
+          "$31.95",
+          ""
+        ],
+        [
+          "003946",
+          "2 Extra Large - 22/24",
+          "49",
+          "",
+          "$33.95",
+          ""
+        ],
+        [
+          "003947",
+          "3 Extra Large - 26/28",
+          "53",
+          "",
+          "$35.95",
+          ""
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"shirt\",3]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Chart Bust",
+        "Actual Bust",
+        "Price",
+        ""
+      ],
+      "rows": [
+        [
+          "003948",
+          "Extra Small 2/4",
+          "34",
+          "",
+          "$33.95",
+          ""
+        ],
+        [
+          "003949",
+          "Small 6/8",
+          "36",
+          "",
+          "$33.95",
+          ""
+        ],
+        [
+          "003950",
+          "Medium 10/12",
+          "38.5",
+          "",
+          "$33.95",
+          ""
+        ],
+        [
+          "003951",
+          "Large 14/16",
+          "41.5",
+          "",
+          "$33.95",
+          ""
+        ],
+        [
+          "003952",
+          "Extra Large 18/20",
+          "45.5",
+          "",
+          "$33.95",
+          ""
+        ],
+        [
+          "003953",
+          "2 Extra Large 22/24",
+          "49",
+          "",
+          "$35.95",
+          ""
+        ],
+        [
+          "003954",
+          "3 Extra Large 26/28",
+          "53",
+          "",
+          "$37.95",
+          ""
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Girl.svg\",\"shirt\"]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Bust",
+        "Price"
+      ],
+      "rows": [
+        [
+          "001865",
+          "Size 4",
+          "24",
+          "$9.95"
+        ],
+        [
+          "001870",
+          "Size 5",
+          "25",
+          "$9.95"
+        ],
+        [
+          "001875",
+          "Size 6",
+          "26",
+          "$9.95"
+        ],
+        [
+          "001885",
+          "Size 7",
+          "28",
+          "$9.95"
+        ],
+        [
+          "001890",
+          "Size 8",
+          "30",
+          "$10.95"
+        ],
+        [
+          "001895",
+          "Size 10",
+          "31",
+          "$10.95"
+        ],
+        [
+          "001900",
+          "Size 12",
+          "33",
+          "$10.95"
+        ],
+        [
+          "001905",
+          "Size 14",
+          "34",
+          "$10.95"
+        ],
+        [
+          "001910",
+          "Size 16",
+          "36",
+          "$12.95"
+        ],
+        [
+          "001915",
+          "Size 18",
+          "37",
+          "$12.95"
+        ],
+        [
+          "001920",
+          "Size 20",
+          "38",
+          "$12.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Girl.svg\",\"shirt\",1]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Bust",
+        "Price"
+      ],
+      "rows": [
+        [
+          "001921",
+          "Size 4",
+          "24",
+          "$9.95"
+        ],
+        [
+          "001922",
+          "Size 5",
+          "25",
+          "$9.95"
+        ],
+        [
+          "001923",
+          "Size 6",
+          "26",
+          "$9.95"
+        ],
+        [
+          "001924",
+          "Size 7",
+          "28",
+          "$9.95"
+        ],
+        [
+          "001925",
+          "Size 8",
+          "30",
+          "$10.95"
+        ],
+        [
+          "001926",
+          "Size 10",
+          "31",
+          "$10.95"
+        ],
+        [
+          "001927",
+          "Size 12",
+          "33",
+          "$10.95"
+        ],
+        [
+          "001928",
+          "Size 14",
+          "34",
+          "$10.95"
+        ],
+        [
+          "001929",
+          "Size 16",
+          "36",
+          "$12.95"
+        ],
+        [
+          "001930",
+          "Size 18",
+          "37",
+          "$12.95"
+        ],
+        [
+          "0019231",
+          "Size 20",
+          "38",
+          "$12.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Girl.svg\",\"jumper\"]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Waist",
+        "Length",
+        "Price",
+        ""
+      ],
+      "rows": [
+        [
+          "001810",
+          "Size 4",
+          "23.5",
+          "23.5",
+          "$10.95",
+          ""
+        ],
+        [
+          "001815",
+          "Size 5",
+          "24",
+          "25.5",
+          "$10.95",
+          ""
+        ],
+        [
+          "001820",
+          "Size 6",
+          "25",
+          "26.5",
+          "$10.95",
+          ""
+        ],
+        [
+          "001830",
+          "Size 7",
+          "26",
+          "28.75",
+          "$10.95",
+          ""
+        ],
+        [
+          "001835",
+          "Size 8",
+          "26",
+          "30",
+          "$12.95",
+          ""
+        ],
+        [
+          "001840",
+          "Size 10",
+          "26.5",
+          "31.5",
+          "$12.95",
+          ""
+        ],
+        [
+          "001845",
+          "Size 12",
+          "27",
+          "33.25",
+          "$12.95",
+          ""
+        ],
+        [
+          "001850",
+          "Size 14",
+          "28.5",
+          "35.25",
+          "$12.95",
+          ""
+        ],
+        [
+          "001855",
+          "Size 16",
+          "29",
+          "37.25",
+          "$14.95",
+          ""
+        ],
+        [
+          "001856",
+          "Size 18",
+          "30",
+          "38.75",
+          "$14.95",
+          ""
+        ],
+        [
+          "001857",
+          "Size 20",
+          "30.25",
+          "40.25",
+          "$14.95",
+          ""
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Man.svg\",\"shirt\"]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Chest Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003920",
+          "S 14-14.5",
+          "34-36",
+          "$31.95"
+        ],
+        [
+          "003921",
+          "M 15-15.5",
+          "38-40",
+          "$31.95"
+        ],
+        [
+          "003922",
+          "L 16-16.5",
+          "42-44",
+          "$31.95"
+        ],
+        [
+          "003923",
+          "XL 17-17.5",
+          "46-48",
+          "$31.95"
+        ],
+        [
+          "003924",
+          "2XL 18-18.5",
+          "50-52",
+          "$35.95"
+        ],
+        [
+          "003925",
+          "3XL 19-19.5",
+          "54-56",
+          "$39.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Man.svg\",\"shirt\",1]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003930",
+          "S - 14x30/31",
+          "$33.95"
+        ],
+        [
+          "003931",
+          "S- 14x32/33",
+          "$33.95"
+        ],
+        [
+          "003932",
+          "M - 15x32/33",
+          "$33.95"
+        ],
+        [
+          "003933",
+          "M - 15x34/35",
+          "$33.95"
+        ],
+        [
+          "003934",
+          "L - 16x32/33",
+          "$33.95"
+        ],
+        [
+          "003935",
+          "L - 16x34/35",
+          "$33.95"
+        ],
+        [
+          "003936",
+          "L - 16x36/37",
+          "$33.95"
+        ],
+        [
+          "003937",
+          "XL - 17x34/35",
+          "$33.95"
+        ],
+        [
+          "003938",
+          "XL - 17x36/37",
+          "$33.95"
+        ],
+        [
+          "003939",
+          "2XL - 18x34/35",
+          "$37.95"
+        ],
+        [
+          "003940",
+          "2XL - 18x36/37",
+          "$37.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Man.svg\",\"shirt\",2]": {
+      "columns": [
+        "Item #",
+        "Neck Size",
+        "Chest Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003955",
+          "S 14-14.5",
+          "34-36",
+          "$31.95"
+        ],
+        [
+          "003956",
+          "M 15-15.5",
+          "38-40",
+          "$31.95"
+        ],
+        [
+          "003957",
+          "Large 16-16.5",
+          "42-44",
+          "$31.95"
+        ],
+        [
+          "003958",
+          "XLarge 17-17.5",
+          "46-48",
+          "$31.95"
+        ],
+        [
+          "003959",
+          "2XLarge 18-18.5",
+          "50-52",
+          "$35.95"
+        ],
+        [
+          "003960",
+          "3XLarge 19-19.5",
+          "54-56",
+          "$39.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Man.svg\",\"shirt\",3]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003970",
+          "14X30/31",
+          "$33.95"
+        ],
+        [
+          "003971",
+          "14X32/33",
+          "$33.95"
+        ],
+        [
+          "003972",
+          "15x32/33",
+          "$33.95"
+        ],
+        [
+          "003973",
+          "15-34/35",
+          "$33.95"
+        ],
+        [
+          "003974",
+          "16x33",
+          "$33.95"
+        ],
+        [
+          "003975",
+          "16x34/35",
+          "$33.95"
+        ],
+        [
+          "003976",
+          "16x36/37",
+          "$33.95"
+        ],
+        [
+          "003977",
+          "17x34/35",
+          "$33.95"
+        ],
+        [
+          "003978",
+          "17x36/37",
+          "$33.95"
+        ],
+        [
+          "003979",
+          "18x34/35",
+          "$37.95"
+        ],
+        [
+          "003980",
+          "18x36/37",
+          "$37.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Man.svg\",\"pants\"]": {
+      "columns": [
+        "NO",
+        "PANTS",
+        "AVAILABLE"
+      ],
+      "rows": []
+    },
+    "[\"adventurer\",\"Uniform-Boy.svg\",\"shirt\"]": {
+      "columns": [
+        "Item",
+        "Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "001755",
+          "Size 4-Chest 28",
+          "$9.95"
+        ],
+        [
+          "001760",
+          "Size 5-Chest 29",
+          "$9.95"
+        ],
+        [
+          "001765",
+          "Size 6-Chest 31",
+          "$9.95"
+        ],
+        [
+          "001770",
+          "Size 7-Chest 31.5",
+          "$9.95"
+        ],
+        [
+          "001790",
+          "Size 14-Chest 36.5",
+          "$10.95"
+        ],
+        [
+          "001775",
+          "Size 8-Chest 32",
+          "$10.95"
+        ],
+        [
+          "001780",
+          "Size 10-Chest 33.5",
+          "$10.95"
+        ],
+        [
+          "001785",
+          "Size 12-Chest 34",
+          "$10.95"
+        ],
+        [
+          "001795",
+          "Size 16-Chest 39",
+          "$12.95"
+        ],
+        [
+          "001800",
+          "Size 18-Chest 40",
+          "$12.95"
+        ],
+        [
+          "001805",
+          "Size 20-Chest 41.5",
+          "$12.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Boy.svg\",\"shirt\",1]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "001689",
+          "Size 04-Chest 28",
+          "$9.95"
+        ],
+        [
+          "001690",
+          "Size 05-Chest 29",
+          "$9.95"
+        ],
+        [
+          "001691",
+          "Size 06-Chest 31",
+          "$9.95"
+        ],
+        [
+          "001692",
+          "Size 07-Chest 31.5",
+          "$9.95"
+        ],
+        [
+          "001693",
+          "Size 08-Chest 32",
+          "$10.95"
+        ],
+        [
+          "001694",
+          "Size 10-Chest 33.5",
+          "$10.95"
+        ],
+        [
+          "001695",
+          "Size 12-Chest 34",
+          "$10.95"
+        ],
+        [
+          "001696",
+          "Size 14-Chest 36.5",
+          "$10.95"
+        ],
+        [
+          "001699",
+          "Size 20-Chest 41.5",
+          "$12.95"
+        ],
+        [
+          "001697",
+          "Size 16-Chest 39",
+          "$12.95"
+        ],
+        [
+          "001698",
+          "Size 18-Chest 40",
+          "$12.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"skirt\"]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Chart Waist",
+        "Actual Waist +2\"",
+        "Price",
+        ""
+      ],
+      "rows": [
+        [
+          "003840",
+          "XS 4/6",
+          "27.75",
+          "29.75",
+          "$26.95",
+          ""
+        ],
+        [
+          "003841",
+          "S 8/10",
+          "30",
+          "32",
+          "$26.95",
+          ""
+        ],
+        [
+          "003842",
+          "M 12/14",
+          "33",
+          "35",
+          "$26.95",
+          ""
+        ],
+        [
+          "003843",
+          "L 16/18",
+          "37",
+          "39",
+          "$26.95",
+          ""
+        ],
+        [
+          "003844",
+          "XL 20/22",
+          "41",
+          "43",
+          "$26.95",
+          ""
+        ],
+        [
+          "003845",
+          "2XL 24/26",
+          "45",
+          "47",
+          "$30.95",
+          ""
+        ],
+        [
+          "003846",
+          "3XL 28/30",
+          "49",
+          "51",
+          "$34.95",
+          ""
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Boy.svg\",\"pants\"]": {
+      "columns": [
+        "Item #",
+        "Size",
+        "Price"
+      ],
+      "rows": [
+        [
+          "001700",
+          "Size 4-Waist 24",
+          "$10.95"
+        ],
+        [
+          "001705",
+          "Size 5 - Waist 24",
+          "$10.95"
+        ],
+        [
+          "001710",
+          "Size 6 - Waist 24.5",
+          "$10.95"
+        ],
+        [
+          "001715",
+          "Size 7 - Waist 25",
+          "$10.95"
+        ],
+        [
+          "001720",
+          "Size 8 - Waist 27",
+          "$12.95"
+        ],
+        [
+          "001725",
+          "Size 10 - Waist 27.5",
+          "$12.95"
+        ],
+        [
+          "001730",
+          "Size 12 - Waist 28.5",
+          "$12.95"
+        ],
+        [
+          "001735",
+          "Size 14 - Waist 29",
+          "$12.95"
+        ],
+        [
+          "001740",
+          "Size 16 - Waist 29.5",
+          "$14.95"
+        ],
+        [
+          "001745",
+          "Size 18 - Waist 30",
+          "$14.95"
+        ],
+        [
+          "001750",
+          "Size 20 - Waist 32",
+          "$14.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"left-shoulder-patch\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "002172",
+          "Adventurer Club Uniform Patch",
+          "$2.50"
+        ],
+        [
+          "002173",
+          "Adventurer Club World Patch",
+          "$2.50"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "002920",
+          "Adventurer BLANK Club Crest",
+          "$1.90"
+        ],
+        [
+          "003034",
+          "Adventurer Uniform Custom Club Crest (1 DOZEN)",
+          "$47.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "002940",
+          "Staff Sleeve Strip - Director",
+          "$1.95"
+        ],
+        [
+          "002945",
+          "Staff Sleeve Strip - Associate Director",
+          "$1.95"
+        ],
+        [
+          "002955",
+          "Staff Sleeve Strip - Instructor",
+          "$1.95"
+        ],
+        [
+          "002925",
+          "Staff Sleeve Strip - BLANK",
+          "$1.90"
+        ],
+        [
+          "003035",
+          "Staff Sleeve Strip - Customized",
+          "$3.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "009842",
+          "Mid-America Union Patch 3\"",
+          "$3.50"
+        ],
+        [
+          "009841",
+          "Mid-America Union Patch 4\"",
+          "$3.50"
+        ],
+        [
+          "009028",
+          "Southern Union Patch",
+          "$2.50"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "009039",
+          "Carolina Conf Adv Patch - Child Size",
+          "$3.50"
+        ],
+        [
+          "009037",
+          "Carolina Conf Adv Patch - Adult Size",
+          "$3.50"
+        ],
+        [
+          "009027",
+          "Georgia-Cumberland Conf Adv Patch",
+          "$2.50"
+        ],
+        [
+          "009046",
+          "Kansas / Nebraska Conf Patch 3\"",
+          "$2.50"
+        ],
+        [
+          "009045",
+          "Kansas / Nebraska Conf Patch 4\"",
+          "$3.00"
+        ],
+        [
+          "009043",
+          "Kentucky / Tennessee Conf Adv Patch",
+          "$3.00"
+        ],
+        [
+          "009032",
+          "Minnesota Conf Adv ADULT Patch",
+          "$4.00"
+        ],
+        [
+          "009031",
+          "Minnesota Conf Adv CHILD Patch",
+          "$3.00"
+        ],
+        [
+          "009047",
+          "Ohio Conference Adventurer Patch",
+          "$3.50"
+        ],
+        [
+          "009050",
+          "Ohio Conference Adventurer Patch",
+          "$3.50"
+        ],
+        [
+          "009040",
+          "Rocky Mountain Conference Patch\n",
+          ""
+        ],
+        [
+          "009049",
+          "South Atlantic Patch",
+          ""
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"belt-buckle\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003290",
+          "Web Buckle Only",
+          "$2.95"
+        ],
+        [
+          "003295",
+          "Adventurer Staff Buckle (for Leather)",
+          "$9.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "008631",
+          "Master Guide Belt Buckle (for Leather)",
+          "$9.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Girl.svg\",\"shoes\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003348",
+          "Pathfinder Socks",
+          "$11.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "549000",
+          "Footsteps of the Pioneers - Ellen White",
+          "$10.00"
+        ],
+        [
+          "549001",
+          "Footsteps of the Pioneers - James White",
+          "$10.00"
+        ],
+        [
+          "549003",
+          "Footsteps of the Pioneers - William Spicer",
+          "$10.00"
+        ],
+        [
+          "549005",
+          "Footsteps of the Pioneers - Annie Smith",
+          "$10.00"
+        ],
+        [
+          "549006",
+          "Footsteps of the Pioneers - Uriah Smith",
+          "$10.00"
+        ],
+        [
+          "549007",
+          "Footsteps of the Pioneers - William Miller",
+          "$10.00"
+        ],
+        [
+          "549008",
+          "Footsteps of the Pioneers - J.N. Andrews",
+          "$10.00"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"belt\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003290",
+          "Web Buckle Only",
+          "$2.95"
+        ],
+        [
+          "003280",
+          "Web Belt and Buckle - 30\"",
+          "$4.95"
+        ],
+        [
+          "003281",
+          "Web Belt and Buckle - 40\"",
+          "$5.95"
+        ],
+        [
+          "003282",
+          "Web Belt and Buckle - 50\"",
+          "$6.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"leather-belt\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003270",
+          "Adv Leather Belt Strap & Buckle - 34",
+          "$19.95"
+        ],
+        [
+          "003271",
+          "Adv Leather Belt Strap & Buckle - 38",
+          "$19.95"
+        ],
+        [
+          "003272",
+          "Adv Leather Belt Strap & Buckle - 42",
+          "$19.95"
+        ],
+        [
+          "003273",
+          "Adv Leather Belt Strap & Buckle - 46",
+          "$19.95"
+        ],
+        [
+          "003274",
+          "Adv Leather Belt Strap & Buckle - 50",
+          "$19.95"
+        ],
+        [
+          "003275",
+          "Adv Leather Belt Strap & Buckle - 54",
+          "$19.95"
+        ],
+        [
+          "003276",
+          "Adv Leather Belt Strap & Buckle - 58",
+          "$19.95"
+        ],
+        [
+          "003277",
+          "Adv Leather Belt Strap & Buckle - 62",
+          "$21.95"
+        ],
+        [
+          "003278",
+          "Adv Leather Belt Strap & Buckle - 66",
+          "$21.95"
+        ],
+        [
+          "003279",
+          "Adv Leather Belt Strap & Buckle - 70",
+          "$21.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "008631",
+          "Master Guide Belt Buckle (for Leather)",
+          "$9.95"
+        ],
+        [
+          "003295",
+          "Adventurer Staff Buckle (for Leather)",
+          "$9.95"
+        ],
+        [
+          "003300",
+          "Leather Belt Strap Only - 34",
+          "$11.95"
+        ],
+        [
+          "003301",
+          "Leather Belt Strap Only - 38",
+          "$11.95"
+        ],
+        [
+          "003302",
+          "Leather Belt Strap Only - 42",
+          "$11.95"
+        ],
+        [
+          "003303",
+          "Leather Belt Strap Only - 46",
+          "$11.95"
+        ],
+        [
+          "003304",
+          "Leather Belt Strap Only - 50",
+          "$14.95"
+        ],
+        [
+          "003305",
+          "Leather Belt Strap Only - 54",
+          "$14.95"
+        ],
+        [
+          "003306",
+          "Leather Belt Strap Only - 58",
+          "$14.95"
+        ],
+        [
+          "003307",
+          "Leather Belt Strap Only - 62",
+          "$17.95"
+        ],
+        [
+          "003308",
+          "Leather Belt Strap Only - 66",
+          "$17.95"
+        ],
+        [
+          "003309",
+          "Leather Belt Strap Only - 70",
+          "$17.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Boy.svg\",\"black-tie\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003262",
+          "Adv Boys Tie - Navy 4-7",
+          "$6.95"
+        ],
+        [
+          "003263",
+          "Adv Boys Tie - Navy 8-12",
+          "$6.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Girl.svg\",\"black-bow-tie\"]": {
+      "columns": [
+        "Column 1",
+        "Column 2",
+        "Column 3"
+      ],
+      "rows": []
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"right-pocket-name-tag\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003037",
+          "Adventurer Custom Engraved Name Badge",
+          "$5.95"
+        ],
+        [
+          "003038",
+          "Master Guide Custom Engraved Name Badge",
+          "$5.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "003036",
+          "Pathfinder Custom Engraved Name Badge",
+          "$5.95"
+        ]
+      ]
+    },
+    "[\"adventurer\",\"Uniform-Woman.svg\",\"shoulder-cord\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "002062",
+          "Staff Cord - Royal Blue",
+          "$11.95"
+        ],
+        [
+          "002063",
+          "Staff Cord - Kelly Green",
+          "$11.95"
+        ],
+        [
+          "002064",
+          "Staff Cord - Grey",
+          "$11.95"
+        ],
+        [
+          "002065",
+          "Staff Cord - Medium Blue (Light Blue)",
+          "$11.95"
+        ],
+        [
+          "002066",
+          "Staff Cord - Scarlet",
+          "$11.95"
+        ],
+        [
+          "002067",
+          "Drill & Drum Team - White",
+          "$11.95"
+        ],
+        [
+          "002071",
+          "Staff Cord - Cardinal",
+          "$11.95"
+        ],
+        [
+          "002072",
+          "Staff Cord - Purple",
+          "$11.95"
+        ],
+        [
+          "002073",
+          "Staff Cord - Navy Blue",
+          "$11.95"
+        ],
+        [
+          "002061",
+          "Staff Cord - Club Director - Gold",
+          "$14.95"
+        ],
+        [
+          "002075",
+          "Staff Cord - Coordinator - Scarlet/Gold",
+          "$19.95"
+        ],
+        [
+          "002076",
+          "Staff Cord - Conference/Union Directors - Scarlet/Royal Blue/Gold",
+          "$19.95"
+        ],
+        [
+          "002074",
+          "Staff Cord - Assistant & Associate Coordinator - Kelly Green/Gold",
+          "$19.95"
+        ]
+      ]
+    }
+  }
+}
