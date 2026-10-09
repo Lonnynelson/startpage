@@ -109,6 +109,28 @@
       background: #f4f4f4;
       cursor: pointer;
     }
+    .home-button {
+      position: fixed;
+      left: max(1rem, env(safe-area-inset-left));
+      bottom: max(1rem, env(safe-area-inset-bottom));
+      display: grid;
+      place-items: center;
+      width: 3rem;
+      height: 3rem;
+      border: 1px solid #888;
+      border-radius: 50%;
+      background: #f4f4f4;
+      color: #162b35;
+      box-shadow: 0 2px 8px #0003;
+      z-index: 4;
+    }
+    .home-button:hover {
+      background: #e4ebea;
+    }
+    .home-button:focus-visible {
+      outline: 3px solid #0a84ff;
+      outline-offset: 3px;
+    }
     #settings-toggle {
       position: fixed;
       right: 1rem;
@@ -221,6 +243,11 @@
   </style>
 </head>
 <body>
+  <a class="home-button" href="index.html" aria-label="Home" title="AdventSource home">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <path d="M3 10 12 3 21 10M5 9v12h5v-7h4v7h5V9"/>
+    </svg>
+  </a>
   <div class="container">
     <div class="column" id="image-map">
       <div class="buttons division-buttons" id="division-buttons" role="group" aria-label="Uniform program">

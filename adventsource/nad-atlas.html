@@ -97,6 +97,9 @@ a { color:inherit; }
 .help-body .key i { width:13px; height:13px; border-radius:3px; flex:none; }
 .help-body .key b { color:#2c4149; }
 .help-footnote { margin-top:18px; padding-top:14px; border-top:1px solid var(--line); color:#8d999c; font-size:11px; line-height:1.5; }
+.home-button { position:fixed; left:max(1rem,env(safe-area-inset-left)); bottom:max(1rem,env(safe-area-inset-bottom)); display:grid; place-items:center; width:3rem; height:3rem; border:1px solid #888; border-radius:50%; background:#f4f4f4; color:#162b35; box-shadow:0 2px 8px #0003; z-index:4; }
+.home-button:hover { background:#e4ebea; }
+.home-button:focus-visible { outline:3px solid #0a84ff; outline-offset:3px; }
 @media(max-width:800px){
   .app-shell { grid-template-columns:1fr; }
   .sidebar { height:auto; max-height:42vh; border-right:0; border-bottom:1px solid var(--line); }
@@ -109,6 +112,11 @@ a { color:inherit; }
 </style>
 </head>
 <body>
+<a class="home-button" href="index.html" aria-label="Home" title="AdventSource home">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <path d="M3 10 12 3 21 10M5 9v12h5v-7h4v7h5V9"/>
+  </svg>
+</a>
 <main class="app-shell">
   <aside class="sidebar">
     <div class="brand"><span class="brand-mark">LN</span><div><strong>NAD Atlas</strong><small>Conferences &amp; Unions</small></div></div>
