@@ -314,12 +314,12 @@
       <button id="restore-tables" type="button">Restore from Backup</button>
     </div>
     <input id="backup-file" type="file" accept="application/json,.json" hidden>
-    <p>Backup All includes all saved tables, column titles, and rows.
+    <p>Backup All includes all currently displayed tables, column titles, and rows.
       Use Save Table first to include your current edits.</p>
-    <p>Restore All replaces all saved table data and discards open table edits after confirmation.</p>
-    <p>Every page load and refresh fetches the latest uniform-details-backup.json.
-      Saved browser data is not used or overwritten during loading. Restored data is displayed only until the next page load or refresh.</p>
-    <p>Retired Adventurer and Pathfinder T-shirt tables are removed when loading saved data or restoring older backups.</p>
+    <p>Restore from Backup replaces the displayed tables only until the next page load or refresh.</p>
+    <p>Every page load fetches the latest uniform-details-backup.json.
+      Saved browser data is neither read nor overwritten.</p>
+    <p>Retired Adventurer and Pathfinder T-shirt tables are ignored when loading published data or restoring older backups.</p>
     <p>Pathfinder and Adventurer shirts have separate stacked tables. Each table has its own Edit Table and Save Table controls.</p>
     <p>Pathfinder Girls have four shirt tables; the other Pathfinder uniforms have two.
       Adventurer Women and Men have four shirt tables; Girls and Boys have two.</p>
@@ -378,7 +378,6 @@
     const emptyTableMessage = document.getElementById('empty-table');
     const tableEditor = document.getElementById('table-editor');
     const shirtTables = document.getElementById('shirt-tables');
-    const storageKey = 'uniform-details-tables-v1';
     const uniformFiles = new Set(Array.from(uniformButtons, button => button.dataset.svg));
     const pathfinderPantsTitles = {
       'Uniform-Woman.svg': ["Women's Pants", "Women's Skirts"],
@@ -452,7 +451,9 @@
       return validated;
     }
 
-    async function loadPublishedTables() {
+    async function loadDefaultTables() {
+      restoreButton.disabled = true;
+      setTableStatus('Loading published tables...');
       try {
         const response = await fetch('uniform-details-backup.json', { cache: 'no-store' });
         if (!response.ok) {
@@ -462,9 +463,11 @@
         tables = migration.tables;
         setTableStatus(migration.hasColumnConflicts
           ? 'Published tables loaded. Some shared item tables use different columns; their original data is retained.'
-          : 'Tables loaded from uniform-details-backup.json.', migration.hasColumnConflicts);
+          : 'Published tables loaded.', migration.hasColumnConflicts);
       } catch (error) {
         setTableStatus('Could not load published tables: ' + error.message, true);
+      } finally {
+        restoreButton.disabled = false;
       }
     }
 
@@ -520,16 +523,10 @@
       };
     }
 
-    function persistTables(nextTables) {
-      try {
-        localStorage.setItem(storageKey, JSON.stringify({ version: 1, tables: nextTables }));
-        tables = nextTables;
-        setTableStatus('Table data saved in this browser.');
-        return true;
-      } catch (error) {
-        setTableStatus('Could not save table data: ' + error.message, true);
-        return false;
-      }
+    function updateSessionTables(nextTables) {
+      tables = nextTables;
+      setTableStatus('Table data updated until the next page load or refresh.');
+      return true;
     }
 
     function activeUniformButton() {
@@ -848,7 +845,7 @@
           rows: draft.rows.map(row => [...row])
         }
       };
-      if (persistTables(nextTables)) {
+      if (updateSessionTables(nextTables)) {
         editorOpen = false;
         draft = null;
         draftTableKey = null;
@@ -871,11 +868,11 @@
     function restoreBackup(file) {
       return file.text().then(contents => {
         const restoredTables = validateBackup(JSON.parse(contents));
-        if (!window.confirm('Replace all saved table data with this backup and discard any open table edits?')) return;
-        if (persistTables(restoredTables)) {
+        if (!window.confirm('Replace the displayed tables with this backup until the next page load or refresh and discard any open table edits?')) return;
+        if (updateSessionTables(restoredTables)) {
           if (editorOpen) cancelTableEditor();
           if (selectedId) renderTable();
-          setTableStatus('Backup restored.');
+          setTableStatus('Backup restored for this page only. Reload to return to the published tables.');
         }
       }).catch(error => {
         setTableStatus('Could not restore backup: ' + error.message, true);
@@ -1059,7 +1056,7 @@
       backupFileInput.value = '';
     });
 
-    loadPublishedTables().then(() => {
+    loadDefaultTables().then(() => {
       if (selectedId && !editorOpen) renderTable();
     });
     loadUniform(document.querySelector('#uniform-buttons button.active'));
