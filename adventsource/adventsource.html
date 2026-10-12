@@ -317,8 +317,8 @@
     <p>Backup All includes all saved tables, column titles, and rows.
       Use Save Table first to include your current edits.</p>
     <p>Restore All replaces all saved table data and discards open table edits after confirmation.</p>
-    <p>On devices with no saved table data, uniform-details-backup.json loads automatically.
-      Existing browser data takes priority. The loaded tables are saved locally when browser storage is available.</p>
+    <p>Every page load and refresh fetches the latest uniform-details-backup.json.
+      Saved browser data is not used or overwritten during loading. Restored data is displayed only until the next page load or refresh.</p>
     <p>Retired Adventurer and Pathfinder T-shirt tables are removed when loading saved data or restoring older backups.</p>
     <p>Pathfinder and Adventurer shirts have separate stacked tables. Each table has its own Edit Table and Save Table controls.</p>
     <p>Pathfinder Girls have four shirt tables; the other Pathfinder uniforms have two.
@@ -452,55 +452,19 @@
       return validated;
     }
 
-    async function readSavedTables() {
+    async function loadPublishedTables() {
       try {
-        const saved = localStorage.getItem(storageKey);
-        if (saved === null) {
-          await loadDefaultTables();
-        } else {
-          const savedBackup = JSON.parse(saved);
-          const validatedTables = validateBackup(savedBackup);
-          const migration = migrateSharedTables(validatedTables);
-          tables = migration.tables;
-          const migrationMessages = [];
-          if (migration.hasChanges || JSON.stringify(validatedTables) !== JSON.stringify(savedBackup.tables)) {
-            try {
-              localStorage.setItem(storageKey, JSON.stringify({ version: 1, tables }));
-            } catch (error) {
-              migrationMessages.push('Could not save shared uniform tables: ' + error.message);
-            }
-          }
-          if (migration.hasColumnConflicts) {
-            migrationMessages.push('Some previous shared uniform item tables used different columns. Their original data is retained in the saved tables.');
-          }
-          if (migrationMessages.length > 0) {
-            setTableStatus(migrationMessages.join(' '), true);
-          }
-        }
-      } catch (error) {
-        setTableStatus('Could not load saved tables: ' + error.message, true);
-      }
-    }
-
-    async function loadDefaultTables() {
-      try {
-        const response = await fetch('uniform-details-backup.json');
+        const response = await fetch('uniform-details-backup.json', { cache: 'no-store' });
         if (!response.ok) {
           throw new Error('uniform-details-backup.json returned HTTP ' + response.status + '.');
         }
         const migration = migrateSharedTables(validateBackup(await response.json()));
-        if (localStorage.getItem(storageKey) !== null) {
-          await readSavedTables();
-          return;
-        }
         tables = migration.tables;
-        if (persistTables(tables)) {
-          setTableStatus(migration.hasColumnConflicts
-            ? 'Default tables loaded. Some shared item tables use different columns; their original data is retained.'
-            : 'Default tables loaded and saved in this browser.', migration.hasColumnConflicts);
-        }
+        setTableStatus(migration.hasColumnConflicts
+          ? 'Published tables loaded. Some shared item tables use different columns; their original data is retained.'
+          : 'Tables loaded from uniform-details-backup.json.', migration.hasColumnConflicts);
       } catch (error) {
-        setTableStatus('Could not load default tables: ' + error.message, true);
+        setTableStatus('Could not load published tables: ' + error.message, true);
       }
     }
 
@@ -1095,7 +1059,7 @@
       backupFileInput.value = '';
     });
 
-    readSavedTables().then(() => {
+    loadPublishedTables().then(() => {
       if (selectedId && !editorOpen) renderTable();
     });
     loadUniform(document.querySelector('#uniform-buttons button.active'));
