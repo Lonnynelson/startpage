@@ -797,11 +797,6 @@
           "$47.95"
         ],
         [
-          "",
-          "",
-          ""
-        ],
-        [
           "003020",
           "Sleeve Strip - Area Coord.",
           "$1.95"
@@ -857,11 +852,6 @@
           "$4.95"
         ],
         [
-          "",
-          "",
-          ""
-        ],
-        [
           "002250",
           "Friend Class Chevron",
           "$0.95"
@@ -892,11 +882,6 @@
           "$0.95"
         ],
         [
-          "",
-          "",
-          ""
-        ],
-        [
           "009841",
           "Mid-America Union 4\"",
           "$3.50"
@@ -910,11 +895,6 @@
           "009028",
           "Southern Union",
           "$2.50"
-        ],
-        [
-          "",
-          "",
-          ""
         ],
         [
           "009038",
@@ -2798,6 +2778,30 @@
           ""
         ],
         [
+          "2100",
+          "Instructor Diamond",
+          "",
+          "",
+          "$0.45",
+          ""
+        ],
+        [
+          "007400",
+          "Advanced Honor Star",
+          "",
+          "",
+          "0.85",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
           "4995",
           "Aboriginal Lore",
           "Arts, Crafts and Hobbies",
@@ -2810,14 +2814,6 @@
           "Abseiling",
           "Recreation",
           "1",
-          "",
-          ""
-        ],
-        [
-          "2100",
-          "Abseiling - Instructor (Instructor Diamond)",
-          "Recreation",
-          "3",
           "",
           ""
         ],
@@ -6118,14 +6114,6 @@
           ""
         ],
         [
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
           "004010",
           "Artisan Master",
           "",
@@ -6251,14 +6239,6 @@
           "",
           "",
           "$1.40",
-          ""
-        ],
-        [
-          "",
-          "",
-          "",
-          "",
-          "",
           ""
         ],
         [
@@ -6483,14 +6463,9 @@
           "$1.60"
         ],
         [
-          "009689",
-          "Master Guide Metal Slide",
-          "$5.95"
-        ],
-        [
-          "002200",
-          "Master Guide Cloth Slide",
-          "$2.95"
+          "",
+          "",
+          ""
         ],
         [
           "009603",
@@ -6503,6 +6478,31 @@
           "$15.95"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
+          "009689",
+          "Master Guide Metal Slide",
+          "$5.95"
+        ],
+        [
+          "002200",
+          "Master Guide Cloth Slide",
+          "$2.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "002263",
+          "Master Guide Pathfinder Star",
+          "$1.35"
+        ],
+        [
           "002261",
           "Master Guide Pathfinder Combination Chevron",
           "$4.95"
@@ -6511,6 +6511,11 @@
           "002266",
           "Master Guide ADV Combination Chevron",
           "$4.95"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "009547",
@@ -6526,6 +6531,11 @@
           "008631",
           "Master Guide Belt Buckle - not restricted",
           "$9.95"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "003310",
@@ -6578,9 +6588,19 @@
           "$21.95"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "002161",
           "Master Guide Achievement Certificate",
           "$1.00"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "003038",
@@ -6595,8 +6615,7 @@
         "Name",
         "Category",
         "Skill Level",
-        "Price",
-        ""
+        "Price"
       ],
       "rows": [
         [
@@ -6604,127 +6623,6 @@
           "ABC's",
           "Star",
           "Little Lamb",
-          "",
-          ""
-        ],
-        [
-          "004505",
-          "Acts of Kindness",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "004450",
-          "Alphabet Fun",
-          "Chip",
-          "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004507",
-          "Animal Footprints",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004370",
-          "Animal Homes",
-          "Chip",
-          "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004405",
-          "Animals",
-          "Chip",
-          "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004495",
-          "Archery",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004500",
-          "Artist",
-          "Award",
-          "Busy Bee",
-          "",
-          ""
-        ],
-        [
-          "004510",
-          "Astronomer",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004522",
-          "Baking",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "004520",
-          "Basket Maker",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004525",
-          "Bead Craft",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004372",
-          "Beavers",
-          "Chip",
-          "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004415",
-          "Beginning Biking",
-          "Chip",
-          "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004420",
-          "Beginning Swimming",
-          "Chip",
-          "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004375",
-          "Bible Friends",
-          "Chip",
-          "Eager Beaver",
-          "",
           ""
         ],
         [
@@ -6732,47 +6630,6 @@
           "Bible Friends",
           "Star",
           "Little Lamb",
-          "",
-          ""
-        ],
-        [
-          "004530",
-          "Bible I",
-          "Award",
-          "Busy Bee",
-          "",
-          ""
-        ],
-        [
-          "004532",
-          "Bible II",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004533",
-          "Bible Royalty",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004529",
-          "Bible Story Telling",
-          "Award",
-          "Multi-Level Awards",
-          "",
-          ""
-        ],
-        [
-          "004470",
-          "Birds",
-          "Chip",
-          "Eager Beaver",
-          "",
           ""
         ],
         [
@@ -6780,103 +6637,6 @@
           "Bodies of Water",
           "Star",
           "Little Lamb",
-          "",
-          ""
-        ],
-        [
-          "004539",
-          "Bread of Life",
-          "Award",
-          "Multi-Level Awards",
-          "",
-          ""
-        ],
-        [
-          "004780",
-          "Build and Fly",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004534",
-          "Building Blocks",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004535",
-          "Butterfly",
-          "Award",
-          "Busy Bee",
-          "",
-          ""
-        ],
-        [
-          "004538",
-          "Buttons",
-          "Award",
-          "Busy Bee",
-          "",
-          ""
-        ],
-        [
-          "004560",
-          "Camper",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "004565",
-          "Canoeing",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "002914",
-          "Caring for God's Creation Patch",
-          "Patch",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004610",
-          "Caring Friend",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004570",
-          "Carpenter",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004575",
-          "Children of the Bible",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004580",
-          "Collector",
-          "Award",
-          "Sunbeam",
-          "",
           ""
         ],
         [
@@ -6884,15 +6644,6 @@
           "Colors",
           "Star",
           "Little Lamb",
-          "",
-          ""
-        ],
-        [
-          "004583",
-          "Communion",
-          "Award",
-          "",
-          "",
           ""
         ],
         [
@@ -6900,175 +6651,6 @@
           "Community Helpers",
           "Star",
           "Little Lamb",
-          "",
-          ""
-        ],
-        [
-          "004683",
-          "Community Service",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "002912",
-          "Community Service Patch",
-          "Patch",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004590",
-          "Cooking Fun",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "004591",
-          "Cooperation",
-          "Award",
-          "Multi-Level Awards",
-          "",
-          ""
-        ],
-        [
-          "004592",
-          "Country Fun",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004595",
-          "Courtesy",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "004460",
-          "Crayons & Markers",
-          "Chip",
-          "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004597",
-          "Cupcakes and More",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004600",
-          "Cyclist",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004611",
-          "Delightful Sabbath",
-          "Award",
-          "Multi-Level Awards",
-          "",
-          ""
-        ],
-        [
-          "004616",
-          "Dinosaurs",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004612",
-          "Disciples",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004614",
-          "Dogs",
-          "Award",
-          "Multi-Level Awards",
-          "",
-          ""
-        ],
-        [
-          "004491",
-          "Eager Beaver Investiture Set of 12 Patches",
-          "Chip",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004490",
-          "Eager Beaver Patches Complete Set of 29",
-          "Chip",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004615",
-          "Early Adventist Pioneer",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004620",
-          "Environmentalist",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "002915",
-          "Evangelism Patch",
-          "Patch",
-          "Special Award Patches",
-          "",
-          ""
-        ],
-        [
-          "002916",
-          "Excellence in Reading Patch",
-          "Patch",
-          "Special Award Patches",
-          "",
-          ""
-        ],
-        [
-          "004625",
-          "Family Helper",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004540",
-          "Feathered Friends",
-          "Award",
-          "Sunbeam",
-          "",
           ""
         ],
         [
@@ -7076,191 +6658,6 @@
           "Finger Play",
           "Star",
           "Little Lamb",
-          "",
-          ""
-        ],
-        [
-          "004380",
-          "Fire Safety",
-          "Chip",
-          "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004630",
-          "First Aid Helper",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004635",
-          "Fish",
-          "Award",
-          "Busy Bee",
-          "",
-          ""
-        ],
-        [
-          "004710",
-          "Fitness Fun",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "004640",
-          "Flowers",
-          "Award",
-          "Busy Bee",
-          "",
-          ""
-        ],
-        [
-          "004660",
-          "Friend of Animals",
-          "Award",
-          "Busy Bee",
-          "",
-          ""
-        ],
-        [
-          "004650",
-          "Friend of Jesus",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "004670",
-          "Friend of Nature",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "004672",
-          "Fruits of the Spirit",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004400",
-          "Gadgets & Sand",
-          "Chip",
-          "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004680",
-          "Gardener",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "004690",
-          "Geologist",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004695",
-          "Glue Right",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "004696",
-          "God’s Universe",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004385",
-          "God’s World",
-          "Chip",
-          "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004697",
-          "Good Samaritan",
-          "Award",
-          "Multi-Level Awards",
-          "",
-          ""
-        ],
-        [
-          "004700",
-          "Guide",
-          "Award",
-          "Busy Bee",
-          "",
-          ""
-        ],
-        [
-          "004720",
-          "Gymnast",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004725",
-          "Habitat",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004735",
-          "Hand Shadows",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004730",
-          "Handicraft",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "002913",
-          "Health and Safety Patch",
-          "Patch",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004740",
-          "Health Specialist",
-          "Award",
-          "Busy Bee",
-          "",
           ""
         ],
         [
@@ -7268,7 +6665,6 @@
           "Healthy Foods",
           "Star",
           "Little Lamb",
-          "",
           ""
         ],
         [
@@ -7276,79 +6672,6 @@
           "Healthy Me",
           "Star",
           "Little Lamb",
-          "",
-          ""
-        ],
-        [
-          "004465",
-          "Helping at Home",
-          "Chip",
-          "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004738",
-          "His Word",
-          "Chip",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004736",
-          "Holy Spirit",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004760",
-          "Home Craft",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004750",
-          "Home Helper",
-          "Award",
-          "Busy Bee",
-          "",
-          ""
-        ],
-        [
-          "004739",
-          "Honey",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004527",
-          "Honeybee",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004765",
-          "Horsemanship",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004770",
-          "Hygiene",
-          "Award",
-          "Helping Hand",
-          "",
           ""
         ],
         [
@@ -7356,79 +6679,6 @@
           "Insects",
           "Star",
           "Little Lamb",
-          "",
-          ""
-        ],
-        [
-          "004388",
-          "Jesus Special Supper",
-          "Chip",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004387",
-          "Jesus Star",
-          "Chip",
-          "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004440",
-          "Jigsaw Puzzle",
-          "Chip",
-          "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004781",
-          "Knot Tying",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004425",
-          "Know Your Body",
-          "Chip",
-          "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004741",
-          "Ladybugs",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "002911",
-          "Leadership Patch",
-          "Patch",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004390",
-          "Left & Right",
-          "Chip",
-          "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004849",
-          "Listening",
-          "Award",
-          "Multi-Level Awards",
-          "",
           ""
         ],
         [
@@ -7436,13 +6686,123 @@
           "Little Boy Jesus",
           "Star",
           "Little Lamb",
-          "",
           ""
         ],
         [
           "009264",
           "Little Lamb Induction Patch",
-          "Patch",
+          "Star",
+          "",
+          ""
+        ],
+        [
+          "009223",
+          "Music",
+          "Star",
+          "Little Lamb",
+          ""
+        ],
+        [
+          "009260",
+          "My Family",
+          "Star",
+          "",
+          ""
+        ],
+        [
+          "009224",
+          "My Friend Jesus",
+          "Star",
+          "Little Lamb",
+          ""
+        ],
+        [
+          "009261",
+          "My God",
+          "Star",
+          "",
+          ""
+        ],
+        [
+          "009262",
+          "My Self",
+          "Star",
+          "",
+          ""
+        ],
+        [
+          "009263",
+          "My World",
+          "Star",
+          "",
+          ""
+        ],
+        [
+          "009241",
+          "Numbers",
+          "Star",
+          "Little Lamb",
+          ""
+        ],
+        [
+          "009228",
+          "Sharing",
+          "Star",
+          "Little Lamb",
+          ""
+        ],
+        [
+          "009225",
+          "Special Helper",
+          "Star",
+          "Little Lamb",
+          ""
+        ],
+        [
+          "009226",
+          "Stars",
+          "Star",
+          "Little Lamb",
+          ""
+        ],
+        [
+          "009227",
+          "Trains & Trucks",
+          "Star",
+          "Little Lamb",
+          ""
+        ],
+        [
+          "009243",
+          "Trikes & Bikes",
+          "Star",
+          "Little Lamb",
+          ""
+        ],
+        [
+          "009229",
+          "Weather",
+          "Star",
+          "Little Lamb",
+          ""
+        ],
+        [
+          "009230",
+          "Wooly Lamb",
+          "Star",
+          "Little Lamb",
+          ""
+        ],
+        [
+          "009240",
+          "Zoo Animals",
+          "Star",
+          "Little Lamb",
+          ""
+        ],
+        [
+          "",
+          "",
           "",
           "",
           ""
@@ -7452,7 +6812,6 @@
           "Little Lamb Investiture Set of 13 Patches",
           "Star",
           "",
-          "",
           ""
         ],
         [
@@ -7460,31 +6819,146 @@
           "Little Lamb Patches Complete Set of 26",
           "Star",
           "",
-          "",
           ""
         ],
         [
-          "004742",
-          "Lizards",
-          "Award",
-          "Builder",
           "",
-          ""
-        ],
-        [
-          "004795",
-          "Magnet Fun I",
-          "Award",
+          "",
           "",
           "",
           ""
         ],
         [
-          "004796",
-          "Magnet Fun II",
-          "Award",
-          "Builder",
+          "004450",
+          "Alphabet Fun",
+          "Chip",
+          "Eager Beaver",
+          ""
+        ],
+        [
+          "004370",
+          "Animal Homes",
+          "Chip",
+          "Eager Beaver",
+          ""
+        ],
+        [
+          "004405",
+          "Animals",
+          "Chip",
+          "Eager Beaver",
+          ""
+        ],
+        [
+          "004372",
+          "Beavers",
+          "Chip",
+          "Eager Beaver",
+          ""
+        ],
+        [
+          "004415",
+          "Beginning Biking",
+          "Chip",
+          "Eager Beaver",
+          ""
+        ],
+        [
+          "004420",
+          "Beginning Swimming",
+          "Chip",
+          "Eager Beaver",
+          ""
+        ],
+        [
+          "004375",
+          "Bible Friends",
+          "Chip",
+          "Eager Beaver",
+          ""
+        ],
+        [
+          "004470",
+          "Birds",
+          "Chip",
+          "Eager Beaver",
+          ""
+        ],
+        [
+          "004460",
+          "Crayons & Markers",
+          "Chip",
+          "Eager Beaver",
+          ""
+        ],
+        [
+          "004380",
+          "Fire Safety",
+          "Chip",
+          "Eager Beaver",
+          ""
+        ],
+        [
+          "004400",
+          "Gadgets & Sand",
+          "Chip",
+          "Eager Beaver",
+          ""
+        ],
+        [
+          "004385",
+          "God’s World",
+          "Chip",
+          "Eager Beaver",
+          ""
+        ],
+        [
+          "004465",
+          "Helping at Home",
+          "Chip",
+          "Eager Beaver",
+          ""
+        ],
+        [
+          "004738",
+          "His Word",
+          "Chip",
           "",
+          ""
+        ],
+        [
+          "004388",
+          "Jesus Special Supper",
+          "Chip",
+          "",
+          ""
+        ],
+        [
+          "004387",
+          "Jesus Star",
+          "Chip",
+          "Eager Beaver",
+          ""
+        ],
+        [
+          "004440",
+          "Jigsaw Puzzle",
+          "Chip",
+          "Eager Beaver",
+          ""
+        ],
+        [
+          "004425",
+          "Know Your Body",
+          "Chip",
+          "Eager Beaver",
+          ""
+        ],
+        [
+          "004390",
+          "Left & Right",
+          "Chip",
+          "Eager Beaver",
           ""
         ],
         [
@@ -7492,55 +6966,6 @@
           "Manners Fun",
           "Chip",
           "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004800",
-          "Media Critic",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004801",
-          "Men of the Bible",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004803",
-          "Missionaries",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "009223",
-          "Music",
-          "Star",
-          "Little Lamb",
-          "",
-          ""
-        ],
-        [
-          "004810",
-          "Music Maker",
-          "Award",
-          "Busy Bee",
-          "",
-          ""
-        ],
-        [
-          "004811",
-          "My Church",
-          "Award",
-          "Helping Hand",
-          "",
           ""
         ],
         [
@@ -7548,103 +6973,6 @@
           "My Community Friends",
           "Chip",
           "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "009260",
-          "My Family",
-          "Star",
-          "",
-          "",
-          ""
-        ],
-        [
-          "009224",
-          "My Friend Jesus",
-          "Star",
-          "Little Lamb",
-          "",
-          ""
-        ],
-        [
-          "009261",
-          "My God",
-          "Star",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004812",
-          "My Picture Book",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "009262",
-          "My Self",
-          "Star",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004744",
-          "My Senses",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "009263",
-          "My World",
-          "Star",
-          "",
-          "",
-          ""
-        ],
-        [
-          "009241",
-          "Numbers",
-          "Star",
-          "Little Lamb",
-          "",
-          ""
-        ],
-        [
-          "004743",
-          "Olympics",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004745",
-          "Outdoor Explorer",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004824",
-          "Parables of Jesus",
-          "Award",
-          "Multi-Level Awards",
-          "",
-          ""
-        ],
-        [
-          "004747",
-          "Pearly Gates",
-          "Award",
-          "Helping Hand",
-          "",
           ""
         ],
         [
@@ -7652,15 +6980,6 @@
           "Pets",
           "Chip",
           "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004826",
-          "Photo Fun",
-          "Award",
-          "Multi-Level Awards",
-          "",
           ""
         ],
         [
@@ -7668,135 +6987,6 @@
           "Playing with Friends",
           "Chip",
           "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004746",
-          "Postcards",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004827",
-          "Potato",
-          "Award",
-          "Busy Bee",
-          "",
-          ""
-        ],
-        [
-          "004825",
-          "Prayer",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004828",
-          "Prayer Warrior",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004830",
-          "Purity",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004748",
-          "Rainbow Promise",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004820",
-          "Reading I",
-          "Award",
-          "Busy Bee",
-          "",
-          ""
-        ],
-        [
-          "004821",
-          "Reading II",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "004822",
-          "Reading III",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004823",
-          "Reading IV",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004840",
-          "Reporter",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004850",
-          "Road Safety",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "004870",
-          "Safe Water",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004860",
-          "Safety Specialist",
-          "Award",
-          "Busy Bee",
-          "",
-          ""
-        ],
-        [
-          "004862",
-          "Sand Art",
-          "Award",
-          "Busy Bee",
-          "",
-          ""
-        ],
-        [
-          "004885",
-          "Saving Animals",
-          "Award",
-          "Builder",
-          "",
           ""
         ],
         [
@@ -7804,31 +6994,6 @@
           "Scavenger Hunt",
           "Chip",
           "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004886",
-          "Seasons",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "004887",
-          "Seeds",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "004890",
-          "Sewing Fun",
-          "Award",
-          "Builder",
-          "",
           ""
         ],
         [
@@ -7836,63 +7001,6 @@
           "Shapes & Sizes",
           "Chip",
           "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "009228",
-          "Sharing",
-          "Star",
-          "Little Lamb",
-          "",
-          ""
-        ],
-        [
-          "004895",
-          "Sign Language",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004910",
-          "Skater",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004920",
-          "Skier",
-          "Award",
-          "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "004923",
-          "Snowshoeing",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "009225",
-          "Special Helper",
-          "Star",
-          "Little Lamb",
-          "",
-          ""
-        ],
-        [
-          "002909",
-          "Spiritual Growth Patch",
-          "Patch",
-          "",
-          "",
           ""
         ],
         [
@@ -7900,15 +7008,6 @@
           "Sponge Art",
           "Chip",
           "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004930",
-          "Spotter",
-          "Award",
-          "Busy Bee",
-          "",
           ""
         ],
         [
@@ -7916,110 +7015,12 @@
           "Stamping Fun",
           "Chip",
           "Eager Beaver",
-          "",
-          ""
-        ],
-        [
-          "004933",
-          "Stamping Fun Art",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "009226",
-          "Stars",
-          "Star",
-          "Little Lamb",
-          "",
-          ""
-        ],
-        [
-          "004934",
-          "Stay Safe",
-          "Award",
-          "Multi-Level Awards",
-          "",
-          ""
-        ],
-        [
-          "004935",
-          "Steps to Jesus",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004940",
-          "Swimmer I",
-          "Award",
-          "Busy Bee",
-          "",
-          ""
-        ],
-        [
-          "004950",
-          "Swimmer II",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004861",
-          "Tabernacle",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004952",
-          "Talent",
-          "Award",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004585",
-          "Technology",
-          "Award",
-          "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "004955",
-          "Temperance",
-          "Award",
-          "Builder",
-          "",
-          ""
-        ],
-        [
-          "004582",
-          "Ten  Commandments",
-          "Award",
-          "",
-          "",
           ""
         ],
         [
           "004476",
           "Thankful Heart",
           "Chip",
-          "",
-          "",
-          ""
-        ],
-        [
-          "004957",
-          "Tin Can Fun",
-          "Award",
-          "Builder",
           "",
           ""
         ],
@@ -8028,15 +7029,930 @@
           "Toys",
           "Chip",
           "Eager Beaver",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
           "",
           ""
         ],
         [
-          "009227",
-          "Trains & Trucks",
-          "Star",
-          "Little Lamb",
+          "004491",
+          "Eager Beaver Investiture Set of 12 Patches",
+          "Chip",
           "",
+          ""
+        ],
+        [
+          "004490",
+          "Eager Beaver Patches Complete Set of 29",
+          "Chip",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "004582",
+          "10 Commandments",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004505",
+          "Acts of Kindness",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004507",
+          "Animal Footprints",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004495",
+          "Archery",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004500",
+          "Artist",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004510",
+          "Astronomer",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004522",
+          "Baking",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004520",
+          "Basket Maker",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004525",
+          "Bead Craft",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004530",
+          "Bible I",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004532",
+          "Bible II",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004533",
+          "Bible Royalty",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004529",
+          "Bible Story Telling",
+          "Award",
+          "Multi-Level Awards",
+          ""
+        ],
+        [
+          "004539",
+          "Bread of Life",
+          "Award",
+          "Multi-Level Awards",
+          ""
+        ],
+        [
+          "004780",
+          "Build and Fly",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004534",
+          "Building Blocks",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004535",
+          "Butterfly",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004538",
+          "Buttons",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004560",
+          "Camper",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004562",
+          "Candles",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004565",
+          "Canoeing",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004610",
+          "Caring Friend",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004570",
+          "Carpenter",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004573",
+          "Chickens",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004575",
+          "Children of the Bible",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004580",
+          "Collector",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004583",
+          "Communion",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004683",
+          "Community Service",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004590",
+          "Cooking Fun",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004591",
+          "Cooperation",
+          "Award",
+          "Multi-Level Awards",
+          ""
+        ],
+        [
+          "004592",
+          "Country Fun",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004595",
+          "Courtesy",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004598",
+          "Creation",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004597",
+          "Cupcakes and More",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004600",
+          "Cyclist",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004611",
+          "Delightful Sabbath",
+          "Award",
+          "Multi-Level Awards",
+          ""
+        ],
+        [
+          "004616",
+          "Dinosaurs",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004612",
+          "Disciples",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004614",
+          "Dogs",
+          "Award",
+          "Multi-Level Awards",
+          ""
+        ],
+        [
+          "004615",
+          "Early Adventist Pioneer",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004620",
+          "Environmentalist",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004625",
+          "Family Helper",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004540",
+          "Feathered Friends",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004630",
+          "First Aid Helper",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004635",
+          "Fish",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004710",
+          "Fitness Fun",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004640",
+          "Flowers",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004660",
+          "Friend of Animals",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004650",
+          "Friend of Jesus",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004670",
+          "Friend of Nature",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004672",
+          "Fruits of the Spirit",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004680",
+          "Gardener",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004690",
+          "Geologist",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004693",
+          "Germs",
+          "Award",
+          "Multi-Level Awards",
+          ""
+        ],
+        [
+          "004695",
+          "Glue Right",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004696",
+          "God’s Universe",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004697",
+          "Good Samaritan",
+          "Award",
+          "Multi-Level Awards",
+          ""
+        ],
+        [
+          "004700",
+          "Guide",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004720",
+          "Gymnast",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004725",
+          "Habitat",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004735",
+          "Hand Shadows",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004730",
+          "Handicraft",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004740",
+          "Health Specialist",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004738",
+          "His Word",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004736",
+          "Holy Spirit",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004760",
+          "Home Craft",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004750",
+          "Home Helper",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004739",
+          "Honey",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004527",
+          "Honeybee",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004765",
+          "Horsemanship",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004770",
+          "Hygiene",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004781",
+          "Knot Tying",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004741",
+          "Ladybugs",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004724",
+          "Legos",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004849",
+          "Listening",
+          "Award",
+          "Multi-Level Awards",
+          ""
+        ],
+        [
+          "004742",
+          "Lizards",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004795",
+          "Magnet Fun I",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004796",
+          "Magnet Fun II",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004800",
+          "Media Critic",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004801",
+          "Men of the Bible",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004803",
+          "Missionaries",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004810",
+          "Music Maker",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004811",
+          "My Church",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004812",
+          "My Picture Book",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004744",
+          "My Senses",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004743",
+          "Olympics",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004745",
+          "Outdoor Explorer",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004824",
+          "Parables of Jesus",
+          "Award",
+          "Multi-Level Awards",
+          ""
+        ],
+        [
+          "004747",
+          "Pearly Gates",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004829",
+          "Piñata Craft Award",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004826",
+          "Photo Fun",
+          "Award",
+          "Multi-Level Awards",
+          ""
+        ],
+        [
+          "004746",
+          "Postcards",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004827",
+          "Potato",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004825",
+          "Prayer",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004828",
+          "Prayer Warrior",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004830",
+          "Purity",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004748",
+          "Rainbow Promise",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004820",
+          "Reading I",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004821",
+          "Reading II",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004822",
+          "Reading III",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004823",
+          "Reading IV",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004840",
+          "Reporter",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004850",
+          "Road Safety",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004819",
+          "Rocket Fun",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004870",
+          "Safe Water",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004860",
+          "Safety Specialist",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004862",
+          "Sand Art",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004885",
+          "Saving Animals",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004886",
+          "Seasons",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004887",
+          "Seeds",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004890",
+          "Sewing Fun",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004895",
+          "Sign Language",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004910",
+          "Skater",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004920",
+          "Skier",
+          "Award",
+          "Sunbeam",
+          ""
+        ],
+        [
+          "004923",
+          "Snowshoeing",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004930",
+          "Spotter",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004933",
+          "Stamping Fun Art",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004934",
+          "Stay Safe",
+          "Award",
+          "Multi-Level Awards",
+          ""
+        ],
+        [
+          "004935",
+          "Steps to Jesus",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004940",
+          "Swimmer I",
+          "Award",
+          "Busy Bee",
+          ""
+        ],
+        [
+          "004950",
+          "Swimmer II",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004861",
+          "Tabernacle",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004952",
+          "Talent",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004585",
+          "Technology",
+          "Award",
+          "Helping Hand",
+          ""
+        ],
+        [
+          "004955",
+          "Temperance",
+          "Award",
+          "Builder",
+          ""
+        ],
+        [
+          "004582",
+          "Ten Commandments",
+          "Award",
+          "",
+          ""
+        ],
+        [
+          "004956",
+          "Three Angels",
+          "Award",
+          "Multi-Level Awards",
+          ""
+        ],
+        [
+          "004957",
+          "Tin Can Fun",
+          "Award",
+          "Builder",
           ""
         ],
         [
@@ -8044,15 +7960,6 @@
           "Trees",
           "Award",
           "Sunbeam",
-          "",
-          ""
-        ],
-        [
-          "009243",
-          "Trikes & Bikes",
-          "Star",
-          "Little Lamb",
-          "",
           ""
         ],
         [
@@ -8060,7 +7967,6 @@
           "Troubadour",
           "Award",
           "Builder",
-          "",
           ""
         ],
         [
@@ -8068,15 +7974,6 @@
           "Weather",
           "Award",
           "Helping Hand",
-          "",
-          ""
-        ],
-        [
-          "009229",
-          "Weather",
-          "Star",
-          "Little Lamb",
-          "",
           ""
         ],
         [
@@ -8084,7 +7981,6 @@
           "Whale",
           "Award",
           "Sunbeam",
-          "",
           ""
         ],
         [
@@ -8092,7 +7988,6 @@
           "Wise Steward",
           "Award",
           "Builder",
-          "",
           ""
         ],
         [
@@ -8100,22 +7995,61 @@
           "Women of the Bible",
           "Award",
           "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
           "",
           ""
         ],
         [
-          "009230",
-          "Wooly Lamb",
-          "Star",
-          "Little Lamb",
+          "002914",
+          "Caring for God's Creation Patch",
+          "Round Patch",
           "",
           ""
         ],
         [
-          "009240",
-          "Zoo Animals",
-          "Star",
-          "Little Lamb",
+          "002912",
+          "Community Service Patch",
+          "Round Patch",
+          "",
+          ""
+        ],
+        [
+          "002915",
+          "Evangelism Patch",
+          "Round Patch",
+          "",
+          ""
+        ],
+        [
+          "002916",
+          "Excellence in Reading Patch",
+          "Round Patch",
+          "",
+          ""
+        ],
+        [
+          "002913",
+          "Health and Safety Patch",
+          "Round Patch",
+          "",
+          ""
+        ],
+        [
+          "002911",
+          "Leadership Patch",
+          "Round Patch",
+          "",
+          ""
+        ],
+        [
+          "002909",
+          "Spiritual Growth Patch",
+          "Patch",
           "",
           ""
         ]
@@ -8127,65 +8061,57 @@
         "Size",
         "Chart Bust",
         "Actual Bust +2\"",
-        "Price",
-        ""
+        "Price"
       ],
       "rows": [
         [
           "003893",
-          "Extra Small - 2/4",
+          "Extra Small - 4/6",
           "34",
           "36",
-          "$31.95",
-          ""
+          "$31.95"
         ],
         [
           "003894",
-          "Small - 6/8",
+          "Small - 8/10",
           "36",
           "38",
-          "$31.95",
-          ""
+          "$31.95"
         ],
         [
           "003895",
-          "Medium - 10/12",
+          "Medium - 12",
           "38",
           "40",
-          "$31.95",
-          ""
+          "$31.95"
         ],
         [
           "003896",
-          "Large - 14/16",
+          "Large - 14",
           "40",
           "42",
-          "$31.95",
-          ""
+          "$31.95"
         ],
         [
           "003897",
-          "Extra Large",
+          "Extra Large - 16",
           "42",
           "44",
-          "$31.95",
-          ""
+          "$31.95"
         ],
         [
           "003898",
-          "2 Extra Large",
+          "2 Extra Large - 18",
           "44",
           "46",
-          "$33.95",
-          ""
+          "$33.95"
         ],
         [
           "003899",
-          "3 Extra Large",
+          "3 Extra Large - 20",
           "46",
           "48",
-          "$35.95",
-          ""
+          "$35.95"
         ]
       ]
     },
@@ -8201,7 +8127,7 @@
       "rows": [
         [
           "003907",
-          "Extra Small 2/4",
+          "Extra Small 4/6",
           "34",
           "36",
           "$33.95",
@@ -8209,7 +8135,7 @@
         ],
         [
           "003908",
-          "Small 6/8",
+          "Small 8/10",
           "36",
           "38",
           "$33.95",
@@ -8217,7 +8143,7 @@
         ],
         [
           "003909",
-          "Medium 10/12",
+          "Medium 12",
           "38",
           "40",
           "$33.95",
@@ -8225,7 +8151,7 @@
         ],
         [
           "003910",
-          "Large 14/16",
+          "Large 14",
           "40",
           "42",
           "$33.95",
@@ -8233,7 +8159,7 @@
         ],
         [
           "003911",
-          "Extra Large",
+          "Extra Large - 16",
           "42",
           "44",
           "$33.95",
@@ -8241,7 +8167,7 @@
         ],
         [
           "003912",
-          "2 Extra Large",
+          "2 Extra Large - 18",
           "44",
           "46",
           "$33.95",
@@ -8249,7 +8175,7 @@
         ],
         [
           "003913",
-          "3 Extra Large",
+          "3 Extra Large - 20",
           "46",
           "48",
           "$37.95",
@@ -8262,66 +8188,58 @@
         "Item #",
         "Size",
         "Chart Bust",
-        "Actual Bust",
-        "Price",
-        ""
+        "Actual Bust +2",
+        "Price"
       ],
       "rows": [
         [
           "003941",
-          "Extra Small - 2/4",
+          "Extra Small - 4/6",
           "34",
-          "",
-          "$31.95",
-          ""
+          "36",
+          "$31.95"
         ],
         [
           "003942",
-          "Small - 6/8",
+          "Small - 8/10",
           "36",
-          "",
-          "$31.95",
-          ""
+          "38",
+          "$31.95"
         ],
         [
           "003943",
-          "Medium - 10/12",
+          "Medium - 12",
           "38",
-          "",
-          "$31.95",
-          ""
+          "40",
+          "$31.95"
         ],
         [
           "003944",
-          "Large 14/16",
+          "Large 14",
           "42.5",
-          "",
-          "$31.95",
-          ""
+          "42",
+          "$31.95"
         ],
         [
           "003945",
-          "Extra Large- 18/20",
+          "Extra Large - 16",
           "45.5",
-          "",
-          "$31.95",
-          ""
+          "44",
+          "$31.95"
         ],
         [
           "003946",
-          "2 Extra Large - 22/24",
+          "2 Extra Large - 18",
           "49",
-          "",
-          "$33.95",
-          ""
+          "46",
+          "$33.95"
         ],
         [
           "003947",
-          "3 Extra Large - 26/28",
+          "3 Extra Large - 20",
           "53",
-          "",
-          "$35.95",
-          ""
+          "48",
+          "$35.95"
         ]
       ]
     },
@@ -8330,66 +8248,58 @@
         "Item #",
         "Size",
         "Chart Bust",
-        "Actual Bust",
-        "Price",
-        ""
+        "Actual Bust +2",
+        "Price"
       ],
       "rows": [
         [
           "003948",
-          "Extra Small 2/4",
+          "Extra Small - 4/6",
           "34",
-          "",
-          "$33.95",
-          ""
+          "36",
+          "$33.95"
         ],
         [
           "003949",
-          "Small 6/8",
+          "Small - 8/10",
           "36",
-          "",
-          "$33.95",
-          ""
+          "38",
+          "$33.95"
         ],
         [
           "003950",
-          "Medium 10/12",
+          "Medium - 12",
           "38.5",
-          "",
-          "$33.95",
-          ""
+          "40",
+          "$33.95"
         ],
         [
           "003951",
-          "Large 14/16",
+          "Large - 14",
           "41.5",
-          "",
-          "$33.95",
-          ""
+          "42",
+          "$33.95"
         ],
         [
           "003952",
-          "Extra Large 18/20",
+          "Extra Large - 16",
           "45.5",
-          "",
-          "$33.95",
-          ""
+          "44",
+          "$33.95"
         ],
         [
           "003953",
-          "2 Extra Large 22/24",
+          "2 Extra Large - 18",
           "49",
-          "",
-          "$35.95",
-          ""
+          "46",
+          "$35.95"
         ],
         [
           "003954",
-          "3 Extra Large 26/28",
+          "3 Extra Large - 20",
           "53",
-          "",
-          "$37.95",
-          ""
+          "48",
+          "$37.95"
         ]
       ]
     },
@@ -9166,11 +9076,6 @@
           "$47.95"
         ],
         [
-          "",
-          "",
-          ""
-        ],
-        [
           "002940",
           "Staff Sleeve Strip - Director",
           "$1.95"
@@ -9196,11 +9101,6 @@
           "$3.95"
         ],
         [
-          "",
-          "",
-          ""
-        ],
-        [
           "009842",
           "Mid-America Union Patch 3\"",
           "$3.50"
@@ -9214,11 +9114,6 @@
           "009028",
           "Southern Union Patch",
           "$2.50"
-        ],
-        [
-          "",
-          "",
-          ""
         ],
         [
           "009039",
@@ -9645,6 +9540,168 @@
           "002074",
           "Staff Cord - Assistant & Associate Coordinator - Kelly Green/Gold",
           "$19.95"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Woman.svg\",\"shoes\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003348",
+          "Pathfinder Socks",
+          "$11.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "549000",
+          "Footsteps of the Pioneers - Ellen White",
+          "$10.00"
+        ],
+        [
+          "549001",
+          "Footsteps of the Pioneers - James White",
+          "$10.00"
+        ],
+        [
+          "549003",
+          "Footsteps of the Pioneers - William Spicer",
+          "$10.00"
+        ],
+        [
+          "549005",
+          "Footsteps of the Pioneers - Annie Smith",
+          "$10.00"
+        ],
+        [
+          "549006",
+          "Footsteps of the Pioneers - Uriah Smith",
+          "$10.00"
+        ],
+        [
+          "549007",
+          "Footsteps of the Pioneers - William Miller",
+          "$10.00"
+        ],
+        [
+          "549008",
+          "Footsteps of the Pioneers - J.N. Andrews",
+          "$10.00"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Man.svg\",\"shoes\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003348",
+          "Pathfinder Socks",
+          "$11.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "549000",
+          "Footsteps of the Pioneers - Ellen White",
+          "$10.00"
+        ],
+        [
+          "549001",
+          "Footsteps of the Pioneers - James White",
+          "$10.00"
+        ],
+        [
+          "549003",
+          "Footsteps of the Pioneers - William Spicer",
+          "$10.00"
+        ],
+        [
+          "549005",
+          "Footsteps of the Pioneers - Annie Smith",
+          "$10.00"
+        ],
+        [
+          "549006",
+          "Footsteps of the Pioneers - Uriah Smith",
+          "$10.00"
+        ],
+        [
+          "549007",
+          "Footsteps of the Pioneers - William Miller",
+          "$10.00"
+        ],
+        [
+          "549008",
+          "Footsteps of the Pioneers - J.N. Andrews",
+          "$10.00"
+        ]
+      ]
+    },
+    "[\"pathfinder\",\"Uniform-Boy.svg\",\"shoes\"]": {
+      "columns": [
+        "Item #",
+        "Description",
+        "Price"
+      ],
+      "rows": [
+        [
+          "003348",
+          "Pathfinder Socks",
+          "$11.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "549000",
+          "Footsteps of the Pioneers - Ellen White",
+          "$10.00"
+        ],
+        [
+          "549001",
+          "Footsteps of the Pioneers - James White",
+          "$10.00"
+        ],
+        [
+          "549003",
+          "Footsteps of the Pioneers - William Spicer",
+          "$10.00"
+        ],
+        [
+          "549005",
+          "Footsteps of the Pioneers - Annie Smith",
+          "$10.00"
+        ],
+        [
+          "549006",
+          "Footsteps of the Pioneers - Uriah Smith",
+          "$10.00"
+        ],
+        [
+          "549007",
+          "Footsteps of the Pioneers - William Miller",
+          "$10.00"
+        ],
+        [
+          "549008",
+          "Footsteps of the Pioneers - J.N. Andrews",
+          "$10.00"
         ]
       ]
     }
