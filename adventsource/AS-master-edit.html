@@ -134,6 +134,20 @@
     #settings-menu h2 {
       margin-top: 0;
     }
+    #publish-form label {
+      display: block;
+      margin: 0.75rem 0;
+    }
+    #publish-form input {
+      display: block;
+      width: 100%;
+      margin-top: 0.25rem;
+      padding: 0.4rem;
+      font: inherit;
+    }
+    #publish-status {
+      overflow-wrap: anywhere;
+    }
     .table-scroll {
       overflow-x: auto;
       margin: 1rem 0;
@@ -192,7 +206,8 @@
     #table-status {
       min-height: 1.5em;
     }
-    #table-status[data-error="true"] {
+    #table-status[data-error="true"],
+    #publish-status[data-error="true"] {
       color: #940d0d;
     }
     @media (max-width: 768px) {
@@ -270,6 +285,20 @@
       <button id="restore-tables" type="button">Restore from Backup</button>
     </div>
     <input id="backup-file" type="file" accept="application/json,.json" hidden>
+    <form id="publish-form">
+      <h3>Publish to GitHub</h3>
+      <label>Vercel service URL
+        <input id="publish-service" type="url" placeholder="https://your-project.vercel.app" required>
+      </label>
+      <label>Publishing passphrase
+        <input id="publish-passphrase" type="password" autocomplete="off" minlength="24" maxlength="1000" required>
+      </label>
+      <button id="publish-tables" type="submit">Publish Tables</button>
+      <p id="publish-status" role="status" aria-live="polite"></p>
+    </form>
+    <p>Publishing replaces uniform-details-backup.json in the GitHub repository with all saved tables.
+      Save or cancel open table edits first. Your publishing passphrase is never saved in this browser.
+      Public changes appear after GitHub Pages finishes deploying.</p>
     <p>Backup All includes all saved tables, column titles, and rows.
       Use Save Table first to include your current edits.</p>
     <p>Restore All replaces all saved table data and discards open table edits after confirmation.</p>
@@ -282,6 +311,7 @@
     <button type="button" popovertarget="settings-menu" popovertargetaction="hide">Close</button>
   </section>
 
+  <script src="uniform-table-schema.js"></script>
   <script>
     // Keys are element ids in the SVG files; the most specific match wins.
     const parts = {
@@ -325,6 +355,11 @@
     const backupButton = document.getElementById('backup-tables');
     const restoreButton = document.getElementById('restore-tables');
     const backupFileInput = document.getElementById('backup-file');
+    const publishForm = document.getElementById('publish-form');
+    const publishButton = document.getElementById('publish-tables');
+    const publishService = document.getElementById('publish-service');
+    const publishPassphrase = document.getElementById('publish-passphrase');
+    const publishStatus = document.getElementById('publish-status');
     const settingsMenu = document.getElementById('settings-menu');
     const tableStatus = document.getElementById('table-status');
     const tableDisplay = document.getElementById('table-display');
@@ -333,7 +368,6 @@
     const tableEditor = document.getElementById('table-editor');
     const shirtTables = document.getElementById('shirt-tables');
     const storageKey = 'uniform-details-tables-v1';
-    const uniformFiles = new Set(Array.from(uniformButtons, button => button.dataset.svg));
     const pathfinderPantsTitles = {
       'Uniform-Woman.svg': ["Women's Pants", "Women's Skirts"],
       'Uniform-Boy.svg': ["Boy's Pants", "Husky Boy's Pants"],
@@ -369,41 +403,71 @@
     }
 
     function validateBackup(data) {
-      if (!data || data.version !== 1 || !data.tables || typeof data.tables !== 'object' || Array.isArray(data.tables)) {
-        throw new Error('Unsupported or invalid backup format.');
+      return UniformTableSchema.validateBackup(data);
+    }
+
+    async function publishTables(event) {
+      event.preventDefault();
+      if (publishButton.disabled) return;
+      publishStatus.replaceChildren();
+      publishStatus.dataset.error = 'false';
+      try {
+        if (editorOpen) throw new Error('Save or cancel the open table edits before publishing.');
+        const service = new URL(publishService.value.trim());
+        if (service.protocol !== 'https:' || service.username || service.password ||
+            service.pathname !== '/' || service.search || service.hash) {
+          throw new Error('Enter only the HTTPS origin of your Vercel service, such as https://your-project.vercel.app.');
+        }
+        const backup = { version: 1, tables: validateBackup({ version: 1, tables }) };
+        const count = Object.keys(backup.tables).length;
+        if (count === 0) throw new Error('There are no saved tables to publish. Restore a backup or save table data first.');
+        if (!window.confirm('Publish all ' + count + ' saved tables to GitHub? This replaces the entire published backup. Restore any newer published changes before continuing.')) return;
+        publishButton.disabled = true;
+        publishStatus.textContent = 'Publishing saved tables to GitHub...';
+        const endpoint = new URL('/api/uniform-tables', service).href;
+        const headers = { Authorization: 'Bearer ' + publishPassphrase.value };
+        async function request(method, body) {
+          const response = await fetch(endpoint, {
+            method,
+            headers: body ? { ...headers, 'Content-Type': 'application/json' } : headers,
+            cache: 'no-store',
+            credentials: 'omit',
+            signal: AbortSignal.timeout(30000),
+            ...(body ? { body: JSON.stringify(body) } : {})
+          });
+          let result;
+          try {
+            result = await response.json();
+          } catch {
+            throw new Error('The publishing service did not return JSON. Check its URL and Vercel deployment settings.');
+          }
+          if (!response.ok) {
+            throw new Error(typeof result?.error === 'string' ? result.error : 'Publishing failed (HTTP ' + response.status + ').');
+          }
+          return result;
+        }
+        const current = await request('GET');
+        if (typeof current?.sha !== 'string' || !/^[a-f0-9]{40}$/.test(current.sha)) {
+          throw new Error('The publishing service returned an invalid file version.');
+        }
+        const published = await request('POST', { backup, expectedSha: current.sha });
+        if (typeof published?.commitSha !== 'string' || !/^[a-f0-9]{40}$/.test(published.commitSha)) {
+          throw new Error('The publishing service returned an invalid commit.');
+        }
+        publishStatus.textContent = 'Published to GitHub. The public page updates after deployment. ';
+        const commit = document.createElement('a');
+        commit.href = 'https://github.com/Lonnynelson/startpage/commit/' + published.commitSha;
+        commit.textContent = 'View commit';
+        commit.target = '_blank';
+        commit.rel = 'noopener noreferrer';
+        publishStatus.append(commit);
+      } catch (error) {
+        publishStatus.textContent = 'Could not publish tables: ' + error.message;
+        publishStatus.dataset.error = 'true';
+      } finally {
+        publishButton.disabled = false;
+        publishPassphrase.value = '';
       }
-      const validated = {};
-      Object.entries(data.tables).forEach(([key, table]) => {
-        let identity;
-        try {
-          identity = JSON.parse(key);
-        } catch {
-          throw new Error('A table has an invalid identity.');
-        }
-        if (Array.isArray(identity) && ['adventurer-t-shirts', 'pathfinder-t-shirts'].includes(identity[2])) return;
-        const isExtraStackedTable = Array.isArray(identity) && identity.length === 4 &&
-          Number.isInteger(identity[3]) && identity[3] >= 1 &&
-          identity[3] < stackedTableCount(identity[0], identity[1], identity[2]);
-        if (!Array.isArray(identity) || (identity.length !== 3 && !isExtraStackedTable) ||
-            !['pathfinder', 'adventurer'].includes(identity[0]) ||
-            !uniformFiles.has(identity[1]) || !Object.hasOwn(parts, identity[2])) {
-          throw new Error('A table has an unknown program, uniform, or item.');
-        }
-        if (!table || !Array.isArray(table.columns) ||
-            ![3, 4, 5, 6].includes(table.columns.length) ||
-            !table.columns.every(column => typeof column === 'string') ||
-            !Array.isArray(table.rows) ||
-            !table.rows.every(row => Array.isArray(row) &&
-              row.length === table.columns.length &&
-              row.every(cell => typeof cell === 'string'))) {
-          throw new Error('A table has invalid columns or rows.');
-        }
-        validated[key] = {
-          columns: [...table.columns],
-          rows: table.rows.map(row => [...row])
-        };
-      });
-      return validated;
     }
 
     function readSavedTables() {
@@ -1019,6 +1083,7 @@
         : 'Backup downloaded.');
     });
     restoreButton.addEventListener('click', () => backupFileInput.click());
+    publishForm.addEventListener('submit', publishTables);
     backupFileInput.addEventListener('change', () => {
       const file = backupFileInput.files[0];
       if (file) restoreBackup(file);
