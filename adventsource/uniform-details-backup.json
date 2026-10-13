@@ -399,39 +399,19 @@
           "$10.95"
         ],
         [
-          "009694",
-          "Adult XLarge - 24.5\"",
-          "$11.95"
+          "",
+          "",
+          ""
         ],
         [
-          "009550",
-          "Youth Small - 17.5",
-          "$9.95"
+          "002174",
+          "Adventurer Club Beret Patch",
+          "$1.20"
         ],
         [
-          "009551",
-          "Youth Medium - 19",
-          "$9.95"
-        ],
-        [
-          "009552",
-          "Youth Large - 21",
-          "$9.95"
-        ],
-        [
-          "009553",
-          "Adult Medium - 22.5",
-          "$10.95"
-        ],
-        [
-          "009554",
-          "Adult Large - 23.5",
-          "$10.95"
-        ],
-        [
-          "009694",
-          "Adult XLarge - 24.5",
-          "$11.95"
+          "009547",
+          "Master Guide Beret Crest 2x2\"",
+          "$1.20"
         ]
       ]
     },
@@ -458,14 +438,19 @@
           ""
         ],
         [
-          "009658",
-          "MG Embroidered Scarf Adv.",
-          "$15.95"
-        ],
-        [
           "002171",
           "Adv Cloth Slide",
           "$2.50"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "009658",
+          "MG Embroidered Scarf Adv.",
+          "$15.95"
         ],
         [
           "002200",
@@ -694,11 +679,6 @@
           "$16.95"
         ],
         [
-          "009603",
-          "MG PF Embroidered Scarf",
-          "$18.95"
-        ],
-        [
           "",
           "",
           ""
@@ -712,6 +692,16 @@
           "009771",
           "Pathfinder Metal Slide",
           "$4.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "009603",
+          "MG PF Embroidered Scarf",
+          "$18.95"
         ],
         [
           "002200",
@@ -1768,6 +1758,11 @@
       ],
       "rows": [
         [
+          "002135",
+          "Pathfinder Triangle Pin",
+          "$1.95"
+        ],
+        [
           "002134",
           "Baptismal Pin",
           "$1.95"
@@ -1786,11 +1781,6 @@
           "",
           "",
           ""
-        ],
-        [
-          "002135",
-          "Pathfinder Triangle Pin",
-          "$1.95"
         ],
         [
           "002120",
@@ -1821,6 +1811,11 @@
           "002130",
           "Guide Class Pin",
           "$1.20"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "002300",
@@ -1858,14 +1853,24 @@
           "$1.25"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "009778",
-          "Master Guide Class Level Pins",
+          "Master Guide Class Level Pins Bar",
           "$14.95"
         ],
         [
           "003040",
           "Master Guide Ribbon Bars",
           "$24.95"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "002436",
@@ -1886,6 +1891,11 @@
           "002439",
           "TLT Service Star Year 4",
           "$2.00"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "002401",
@@ -2398,14 +2408,14 @@
           "$1.95"
         ],
         [
-          "",
-          "",
-          ""
-        ],
-        [
           "002131",
           "Master Guide Six-Star Pin",
           "$1.25"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "000150",
@@ -2438,6 +2448,11 @@
           "$1.45"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "009560",
           "Little Lamb Parent Pin",
           "$2.25"
@@ -2466,6 +2481,11 @@
           "002108",
           "Helping Hand Parent Pin",
           "$2.25"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "002401",
@@ -2859,7 +2879,7 @@
         ],
         [
           "4999",
-          "African American Adventist Heritage in the NAD",
+          "African American Adv Heritage NAD",
           "Spiritual Growth, Outreach and Heritage",
           "1",
           "",
@@ -6242,8 +6262,16 @@
           ""
         ],
         [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
           "009520",
-          "AYMT Pathfinder Club Certification Pin - Instructor",
+          "AYMT PF Cert. Pin - Instructor",
           "",
           "",
           "$2.95",
@@ -6251,7 +6279,7 @@
         ],
         [
           "009521",
-          "AYMT Pathfinder Club Certification Pin - Leadership",
+          "AYMT PF Cert. Pin - Leadership",
           "",
           "",
           "$2.95",
@@ -6259,7 +6287,7 @@
         ],
         [
           "009517",
-          "AYMT Pathfinder Club Certification Pin - Basic Staff",
+          "AYMT PF Cert. Pin - Basic Staff",
           "",
           "",
           "$2.95",
@@ -6267,7 +6295,7 @@
         ],
         [
           "009518",
-          "AYMT Pathfinder Club Certification Pin - Counselor",
+          "AYMT PF Cert. Pin - Counselor",
           "",
           "",
           "$2.95",
@@ -6275,7 +6303,7 @@
         ],
         [
           "009519",
-          "AYMT Pathfinder Club Certification Pin - Director",
+          "AYMT PF Cert. Pin - Director",
           "",
           "",
           "$2.95",
@@ -6283,7 +6311,7 @@
         ],
         [
           "009819",
-          "AYMT Pathfinder Club Certification Pin - Secretary/Treasurer",
+          "AYMT PF Cert. Pin - Secretary/Treasurer",
           "",
           "",
           "$2.95",
@@ -6349,6 +6377,11 @@
           "$2.00"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "009701",
           "Master TLT Pin",
           "$3.95"
@@ -6357,6 +6390,11 @@
           "009698",
           "Master TLT Patch",
           "$4.95"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "008110",
@@ -6389,6 +6427,11 @@
           "$24.95"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "008100",
           "TLT Black Sport Shirt S",
           "$19.95"
@@ -6412,6 +6455,11 @@
           "008104",
           "TLT Black Sport Shirt 2XL",
           "$22.95"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "007950",
@@ -6453,6 +6501,11 @@
           "$1.25"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "002151",
           "Master Guide Pathfinder Name Strip",
           "$1.60"
@@ -6468,6 +6521,16 @@
           ""
         ],
         [
+          "003038",
+          "Master Guide Custom Engraved Name Badge",
+          "$5.95"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
           "009603",
           "Master Guide Pathfinder Scarf (Embroidered)",
           "$15.95"
@@ -6476,11 +6539,6 @@
           "009658",
           "Master Guide Adventurer Scarf (Embroidered)",
           "$15.95"
-        ],
-        [
-          "",
-          "",
-          ""
         ],
         [
           "009689",
@@ -6499,7 +6557,7 @@
         ],
         [
           "002263",
-          "Master Guide Pathfinder Star",
+          "Master Guide Pathfinder Star Patch",
           "$1.35"
         ],
         [
@@ -6531,11 +6589,6 @@
           "008631",
           "Master Guide Belt Buckle - not restricted",
           "$9.95"
-        ],
-        [
-          "",
-          "",
-          ""
         ],
         [
           "003310",
@@ -6596,16 +6649,6 @@
           "002161",
           "Master Guide Achievement Certificate",
           "$1.00"
-        ],
-        [
-          "",
-          "",
-          ""
-        ],
-        [
-          "003038",
-          "Master Guide Custom Engraved Name Badge",
-          "$5.95"
         ]
       ]
     },
@@ -6801,13 +6844,6 @@
           ""
         ],
         [
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
           "009255",
           "Little Lamb Investiture Set of 13 Patches",
           "Star",
@@ -6930,7 +6966,7 @@
           "004388",
           "Jesus Special Supper",
           "Chip",
-          "",
+          "Eager Beaver",
           ""
         ],
         [
@@ -7029,13 +7065,6 @@
           "Toys",
           "Chip",
           "Eager Beaver",
-          ""
-        ],
-        [
-          "",
-          "",
-          "",
-          "",
           ""
         ],
         [
@@ -8049,9 +8078,44 @@
         [
           "002909",
           "Spiritual Growth Patch",
-          "Patch",
+          "Round Patch",
           "",
           ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "009744",
+          "Adv. Basic Staff Training Certification Pin",
+          "AYMT Cert. Pin",
+          "",
+          "$2.95"
+        ],
+        [
+          "009745",
+          "Adv. Director Certification Pin",
+          "AYMT Cert. Pin",
+          "",
+          "$2.95"
+        ],
+        [
+          "009746",
+          "Secretary/Treasurer Pin",
+          "AYMT Cert. Pin",
+          "",
+          "$2.95"
+        ],
+        [
+          "009812",
+          "Secretary/Treasurer Pin",
+          "AYMT Cert. Pin",
+          "",
+          "$2.95"
         ]
       ]
     },
@@ -9076,6 +9140,11 @@
           "$47.95"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "002940",
           "Staff Sleeve Strip - Director",
           "$1.95"
@@ -9101,6 +9170,11 @@
           "$3.95"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "009842",
           "Mid-America Union Patch 3\"",
           "$3.50"
@@ -9114,6 +9188,11 @@
           "009028",
           "Southern Union Patch",
           "$2.50"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "009039",
