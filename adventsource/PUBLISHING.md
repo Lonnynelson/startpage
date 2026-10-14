@@ -1,11 +1,15 @@
 # Public Uniform Guide data
 
-The public `adventsource.html` fetches `uniform-details-backup.json` on every
-page load and refresh with `cache: 'no-store'`. Deploy the updated JSON file
-alongside the page to update the published tables.
+The public `adventsource.html` fetches
+`https://lonnystartpage.pages.dev/adventsource/uniform-details-backup.json`
+on every page load and refresh with `cache: 'no-store'`, regardless of where
+the page is hosted. Deploy the updated JSON file to that Cloudflare Pages
+site to update the published tables; local backup files are not used.
 
 - Existing browser storage is neither read nor overwritten.
 - The published backup is validated and shared-item tables are normalized before display.
+  Tables that do not require merging retain every row in its original order,
+  including repeated blank spacer rows and repeated content.
 - **Settings > Restore from Backup** replaces only the current page's tables.
   The next page load or refresh fetches the published backup again.
 - **Backup All** downloads the currently loaded tables, including a temporary

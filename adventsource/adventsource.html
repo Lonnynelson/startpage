@@ -317,7 +317,7 @@
     <p>Backup All includes all currently displayed tables, column titles, and rows.
       Use Save Table first to include your current edits.</p>
     <p>Restore from Backup replaces the displayed tables only until the next page load or refresh.</p>
-    <p>Every page load fetches the latest uniform-details-backup.json.
+    <p>Every page load fetches the latest uniform-details-backup.json from https://lonnystartpage.pages.dev/adventsource/.
       Saved browser data is neither read nor overwritten.</p>
     <p>Retired Adventurer and Pathfinder T-shirt tables are ignored when loading published data or restoring older backups.</p>
     <p>Pathfinder and Adventurer shirts have separate stacked tables. Each table has its own Edit Table and Save Table controls.</p>
@@ -455,9 +455,10 @@
       restoreButton.disabled = true;
       setTableStatus('Loading published tables...');
       try {
-        const response = await fetch('uniform-details-backup.json', { cache: 'no-store' });
+        const backupUrl = 'https://lonnystartpage.pages.dev/adventsource/uniform-details-backup.json';
+        const response = await fetch(backupUrl, { cache: 'no-store' });
         if (!response.ok) {
-          throw new Error('uniform-details-backup.json returned HTTP ' + response.status + '.');
+          throw new Error(backupUrl + ' returned HTTP ' + response.status + '.');
         }
         const migration = migrateSharedTables(validateBackup(await response.json()));
         tables = migration.tables;
@@ -492,6 +493,11 @@
       groups.forEach((entries, canonicalKey) => {
         const canonicalEntry = entries.find(entry => entry.key === canonicalKey);
         const source = canonicalEntry || entries[0];
+        if (entries.length === 1) {
+          migrated[canonicalKey] = source.table;
+          if (source.key !== canonicalKey) delete migrated[source.key];
+          return;
+        }
         const compatible = entries.every(entry =>
           JSON.stringify(entry.table.columns) === JSON.stringify(source.table.columns));
         if (!compatible) {
