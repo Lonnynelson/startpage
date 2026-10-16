@@ -28,28 +28,29 @@
     }
     #image-map,
     #details {
-      background: rgba(255, 255, 255, 0.78);
-      -webkit-backdrop-filter: blur(16px);
-      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.40);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(7px);
     }
     .buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
       margin-bottom: 1rem;
+      margin-top: 1rem;
     }
     .buttons button {
       flex: 1 1 0;
       min-width: 5.5rem;
       padding: 0.6rem;
       font-size: 1rem;
-      border: 1px solid #888;
+      border: 1px solid #fff;
       border-radius: 4px;
-      background: #f4f4f4;
+      background: #f4f4f485;
       cursor: pointer;
     }
     .buttons button.active {
-      background: #333;
+      background: #1d4e89;
       color: #fff;
     }
     .division-buttons button {
@@ -60,11 +61,11 @@
       align-items: center;
       justify-content: center;
       height: 70vh;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.38);
-      -webkit-backdrop-filter: blur(16px);
-      backdrop-filter: blur(16px);
+      border: 1px solid #fff;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.2);
+      -webkit-backdrop-filter: blur(7px);
+      backdrop-filter: blur(7px);
     }
     .viewbox svg {
       max-width: 100%;
@@ -180,6 +181,7 @@
     #editor-table {
       width: 100%;
       border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.4);
     }
     #content-table th,
     #content-table td,
@@ -199,7 +201,8 @@
       white-space: pre-wrap;
     }
     #content-table th {
-      background: #f4f4f4;
+      background: #1d4e89;
+      color: #FFFFFF;
     }
     #editor-table input,
     #editor-table textarea {
