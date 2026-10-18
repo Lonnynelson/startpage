@@ -16,7 +16,7 @@
 body { margin:0; color:var(--ink); background:#162b35; font-family:Arial, Helvetica, sans-serif; -webkit-font-smoothing:antialiased; }
 button { font:inherit; }
 a { color:inherit; }
-.app-shell { min-height:100vh; display:grid; grid-template-columns:300px 1fr; background:rgba(255,255,255,.78); -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px); }
+.app-shell { min-height:100vh; display:grid; grid-template-columns:300px 1fr; background:rgba(255,255,255,.4); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(7px); }
 .sidebar { height:100vh; overflow:auto; padding:28px 18px 22px; background:rgba(255,255,255,.18); border-right:1px solid var(--line); }
 .brand { display:flex; align-items:center; gap:12px; padding:0 8px 28px; border-bottom:1px solid var(--line); }
 .brand-mark { display:grid; place-items:center; width:42px; height:42px; border-radius:50%; background:#163d48; color:white; font-family:Georgia,serif; font-size:15px; letter-spacing:.04em; box-shadow:0 0 0 5px #e8efee; }
@@ -34,13 +34,13 @@ a { color:inherit; }
 .conference-list button { display:block; width:100%; border:0; background:none; color:#708086; padding:5px 6px; text-align:left; cursor:pointer; border-radius:4px; font-size:12px; line-height:1.25; }
 .conference-list button:hover, .conference-list button.active { color:#173e49; background:#edf3f2; font-weight:700; }
 .sidebar-note { margin:28px 9px 0; border-top:1px solid var(--line); padding-top:17px; color:#839095; font-size:11px; line-height:1.55; }
-.workspace { min-width:0; padding:36px clamp(25px,4vw,64px); background:radial-gradient(circle at 80% 10%,rgba(255,255,255,.3) 0,transparent 36%); }
+.workspace { min-width:0; padding:36px clamp(25px,4vw,64px); }
 .workspace > header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:26px; }
 .eyebrow { margin:0 0 8px; color:#718287; font-size:10px; font-weight:800; letter-spacing:.18em; }
 .workspace h1 { margin:0; font-family:Georgia,serif; font-size:clamp(30px,4vw,48px); font-weight:500; letter-spacing:-.035em; }
 .workspace header p.sub { margin:5px 0 0; color:#6e7d83; font-size:16px; }
 .help { width:34px; height:34px; border:1px solid var(--line); border-radius:50%; background:white; color:#6d7c80; cursor:pointer; flex:none; }
-.map-panel { overflow:hidden; border:1px solid #dbe4e2; border-radius:14px; background:white; box-shadow:0 18px 55px rgba(26,53,61,.08); }
+.map-panel { overflow:hidden; border:1px solid #dbe4e2; border-radius:14px; background:rgba(255,255,255,.2); -webkit-backdrop-filter:blur(7px); backdrop-filter:blur(7px); box-shadow:0 18px 55px rgba(26,53,61,.08); }
 .map-toolbar { min-height:76px; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:17px 24px; border-bottom:1px solid var(--line); }
 .map-toolbar .current { display:grid; grid-template-columns:12px auto; column-gap:9px; align-items:center; }
 .map-toolbar strong { font-family:Georgia,serif; font-size:18px; font-weight:600; }
@@ -55,7 +55,7 @@ a { color:inherit; }
 .view-toggle button:focus-visible { outline:2px solid #ee7444; outline-offset:2px; }
 .view-toggle button.on { background:#ee7444; color:#fff; box-shadow:0 4px 12px rgba(238,116,68,.4); }
 .view-toggle button.on:hover { background:#e26533; color:#fff; }
-.map-stage { position:relative; display:grid; place-items:center; overflow:hidden; padding:18px 0; background-color:#fbfcfb; background-image:linear-gradient(#edf1f0 1px,transparent 1px),linear-gradient(90deg,#edf1f0 1px,transparent 1px); background-size:36px 36px; }
+.map-stage { position:relative; display:grid; place-items:center; overflow:hidden; padding:18px 0; background-color:transparent; background-image:linear-gradient(#edf1f0 1px,transparent 1px),linear-gradient(90deg,#edf1f0 1px,transparent 1px); background-size:36px 36px; }
 .map-stage svg { display:block; width:100%; height:auto; filter:drop-shadow(0 10px 13px rgba(37,58,64,.09)); }
 .map-stage svg path { outline:none; transition:fill .18s ease,opacity .18s ease,filter .18s ease; cursor:pointer; vector-effect:non-scaling-stroke; }
 .map-stage svg path:hover, .map-stage svg path:focus-visible { opacity:1; filter:brightness(.94); stroke:#173944; stroke-width:1.8px; }
