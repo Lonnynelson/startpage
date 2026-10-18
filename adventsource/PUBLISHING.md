@@ -60,3 +60,5 @@ Both catalog pages also use `page-background.css` and `catalog-background.css`
 with `AdventSource_1.jpg` and `AdventSource_2.jpg` for alternating photo
 backgrounds and translucent, blurred panels. Deploy these assets alongside
 the pages. Reduced-motion preferences disable the background animation.
+Both catalogs display two columns at viewport widths of 1,200 pixels and above,
+and one column on smaller screens.
