@@ -55,3 +55,8 @@ An optional `image` field overrides the default thumbnail; `null` removes it.
 
 Import, export, and Save to file all use `ADV_T-shirts.json` in this same
 format. Deploy the Adventurer page, JSON, shared `app.js`, and images together.
+
+Both catalog pages also use `page-background.css` and `catalog-background.css`
+with `AdventSource_1.jpg` and `AdventSource_2.jpg` for alternating photo
+backgrounds and translucent, blurred panels. Deploy these assets alongside
+the pages. Reduced-motion preferences disable the background animation.
