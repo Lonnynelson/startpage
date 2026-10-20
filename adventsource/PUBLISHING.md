@@ -62,3 +62,39 @@ backgrounds and translucent, blurred panels. Deploy these assets alongside
 the pages. Reduced-motion preferences disable the background animation.
 Both catalogs display two columns at viewport widths of 1,200 pixels and above,
 and one column on smaller screens.
+
+## Books & Flags catalogs
+
+- [PF-Books-Flags.html](PF-Books-Flags.html) loads
+  [PF_Books_Flags.json](PF_Books_Flags.json).
+- [ADV-Books-Flags.html](ADV-Books-Flags.html) loads
+  [Adv_Books_Flags.json](Adv_Books_Flags.json).
+
+These pages reuse `app.js`, both background stylesheets, the photo backgrounds,
+and the Home link. They also display two columns on large screens and one on
+smaller screens. Browser edits and remembered save-file handles are independent
+for all four catalogs. Source JSON is fetched with caching disabled.
+
+Each JSON file contains a `tables` array. Every table has its own `title`,
+`columns`, and `rows`; rows must contain strings and match that table's column
+count. Language-specific catalog numbers, leading zeros, price text, duplicate
+rows, and blank cells remain unchanged through import/export and saving.
+The Adventurer headers identify descriptions and English/Spanish catalog
+numbers; original `000000` placeholders are retained. The three extra blank
+cells in Pathfinder Guides were removed to align those rows with their headers.
+
+Thumbnails use the first numeric catalog number in the table's first row,
+trying `assets/Cat<number>.jpg` and then `.png`. Missing files show an
+**Image not found** placeholder with the item number. The supplied assets
+currently lack `Cat001301` (Pathfinder Guides), `Cat001049` (Adventurer Leader's
+Guides), and `Cat001605` (Wall Banners). Add matching JPG or PNG images to
+`assets` to display them. No substitute images are chosen.
+
+An optional table `image` overrides automatic matching; `null` hides the image.
+In **Edit mode**, edit titles, individual column headings, and all cells, or
+add/remove rows, columns, and tables. Clearing the image field restores automatic
+matching. JSON imports are validated before asking to replace browser edits;
+invalid files leave the current catalog intact. **Export JSON** downloads the
+current tables; **Save to file** writes or downloads the page's named JSON file.
+Replace the published JSON and deploy the pages, script, stylesheets, and assets
+together to publish changes.

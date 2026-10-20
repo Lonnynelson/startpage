@@ -3,6 +3,8 @@
 
   const DATA_FILE = document.body.dataset.catalogFile || 'catalog-data.json';
   const TABLE_FORMAT = document.body.dataset.catalogFormat === 'tables';
+  const INDEPENDENT_TABLES = document.body.dataset.catalogFormat === 'independent-tables';
+  const ENTRY_NAME = INDEPENDENT_TABLES ? 'table' : 'T-shirt';
   const PROGRAM = document.body.dataset.catalogProgram || 'Pathfinder';
   const STORAGE_KEY = document.body.dataset.catalogStorage || 'pf-tshirt-catalog';
   const list = document.getElementById('list');
@@ -37,6 +39,12 @@
 
   // Plain, serializable form (what goes into catalog-data.json / localStorage).
   function toPlain(items) {
+    if (INDEPENDENT_TABLES) return items.map(s => ({
+      title: s.description,
+      columns: s.columns.slice(),
+      rows: s.rows.map(row => row.slice()),
+      ...(s.image !== undefined ? { image: s.image } : {})
+    }));
     return items.map(s => ({
       id: s.sizes.length ? s.sizes[0].item : '',
       description: s.description,
@@ -46,6 +54,13 @@
   }
 
   function fromPlain(arr) {
+    if (INDEPENDENT_TABLES) return arr.map(table => ({
+      uid: newUid(),
+      description: table.title,
+      columns: table.columns.slice(),
+      rows: table.rows.map(row => row.slice()),
+      image: table.image === undefined ? undefined : normalizeImage(table.image)
+    }));
     return (arr || []).map(s => ({
       uid: newUid(),
       description: String(s.description || ''),
@@ -71,6 +86,19 @@
   }
 
   function decodeCatalog(data) {
+    if (INDEPENDENT_TABLES) {
+      if (!data || !Array.isArray(data.tables) || !data.tables.every(table =>
+        table && typeof table.title === 'string' &&
+        Array.isArray(table.columns) && table.columns.length > 0 &&
+        table.columns.every(column => typeof column === 'string' && column.trim()) &&
+        Array.isArray(table.rows) && table.rows.every(row =>
+          Array.isArray(row) && row.length === table.columns.length &&
+          row.every(cell => typeof cell === 'string')) &&
+        (table.image === undefined || table.image === null || typeof table.image === 'string'))) {
+        throw new Error('Each table needs a title, nonempty column names, and string rows matching its own column count. An optional image must be a string or null.');
+      }
+      return data.tables;
+    }
     if (!TABLE_FORMAT) return validateCatalog(data);
     const columns = ['Item #', 'Description', 'Size', 'Price'];
     if (!data || !Array.isArray(data.tables)) {
@@ -103,6 +131,7 @@
 
   function catalogData() {
     const data = toPlain(items);
+    if (INDEPENDENT_TABLES) return { tables: data };
     if (!TABLE_FORMAT) return data;
     return {
       tables: data.map(style => {
@@ -213,25 +242,36 @@
     return s.sizes.map((z, i) => ({ z, r: ranks[i], i })).sort((a, b) => a.r - b.r || a.i - b.i).map(x => x.z);
   }
   function startPrice(s) {
+    if (INDEPENDENT_TABLES) {
+      const index = s.columns.findIndex(column => /^price(?:\s*\(\$\))?$/i.test(column.trim()));
+      const prices = s.rows.map(row => row[index]?.replace(/[$\s,]/g, ''))
+        .filter(text => text && /^\d+(?:\.\d+)?$/.test(text)).map(Number);
+      return prices.length ? Math.min(...prices) : null;
+    }
     const prices = s.sizes.map(z => z.price).filter(p => p != null);
     return prices.length ? Math.min(...prices) : null;
   }
 
   /* ---------- Rendering ---------- */
 
+  function firstItem(s) {
+    return (s.rows[0] || []).find(cell => /^\d+$/.test(cell.trim()))?.trim() || '';
+  }
+
   function headHtml(s) {
-    const src = previewUrls[s.uid] || s.image;
+    const id = INDEPENDENT_TABLES ? firstItem(s) : (s.sizes[0]?.item || '');
+    const inferredImage = INDEPENDENT_TABLES && s.image === undefined && id;
+    const src = previewUrls[s.uid] || s.image || (inferredImage ? ASSETS_DIR + 'Cat' + id + '.jpg' : null);
     const thumb = src
-      ? `<img src="${esc(src)}" alt="${esc(s.description)}" loading="lazy" onerror="this.outerHTML='<span class=&quot;placeholder&quot;>Image not found</span>'">`
+      ? `<img src="${esc(src)}" alt="${esc(s.description)}" loading="lazy"${inferredImage ? ` data-catalog-item="${esc(id)}"` : ''}>`
       : `<span class="placeholder">No image available</span>`;
-    const n = s.sizes.length;
-    const id = n ? s.sizes[0].item : '';
+    const n = INDEPENDENT_TABLES ? s.rows.length : s.sizes.length;
     return `
       <button class="card-head" type="button" aria-expanded="${openSet.has(s.uid)}" aria-controls="sizes-${s.uid}">
         <div class="thumb">${thumb}</div>
         <div class="info">
           <p class="desc">${esc(s.description) || '<em>(no description)</em>'}</p>
-          <div class="meta">${id ? 'Item # ' + esc(id) + ' &middot; ' : ''}${n} size${n === 1 ? '' : 's'}</div>
+          <div class="meta">${id ? 'Item # ' + esc(id) + ' &middot; ' : ''}${n} ${INDEPENDENT_TABLES ? 'row' : 'size'}${n === 1 ? '' : 's'}</div>
         </div>
         <div class="price-block">
           <div class="label">${n > 1 ? 'Starting at' : 'Price'}</div>
@@ -242,6 +282,12 @@
   }
 
   function viewBodyHtml(s) {
+    if (INDEPENDENT_TABLES) return `
+      <table>
+        <thead><tr>${s.columns.map(column => `<th scope="col">${esc(column)}</th>`).join('')}</tr></thead>
+        <tbody>${s.rows.map(row => `<tr>${row.map(cell => `<td>${esc(cell)}</td>`).join('')}</tr>`).join('') ||
+          `<tr><td colspan="${s.columns.length}" class="no-rows">No rows listed</td></tr>`}</tbody>
+      </table>`;
     const rows = sortedSizes(s).map(z => `
       <tr>
         <td>${esc(z.item)}</td>
@@ -257,6 +303,32 @@
   }
 
   function editBodyHtml(s) {
+    if (INDEPENDENT_TABLES) return `
+      <div class="edit-fields">
+        <label class="grow">Table title
+          <input type="text" data-shirt-field="description" value="${esc(s.description)}">
+        </label>
+        <label class="img">Image file (blank = automatic)
+          <input type="text" data-shirt-field="image" value="${esc(s.image || '')}" placeholder="assets/Cat001234.jpg">
+        </label>
+        <button type="button" class="btn" data-action="choose-image">Choose image...</button>
+        <button type="button" class="btn danger" data-action="del-shirt">Delete table</button>
+      </div>
+      <table class="edit-table">
+        <thead><tr>${s.columns.map((column, i) =>
+          `<th><input type="text" data-column="${i}" value="${esc(column)}" aria-label="Column ${i + 1} heading"></th>`).join('')}
+          <th scope="col">Remove row</th></tr></thead>
+        <tbody>${s.rows.map((row, i) => `<tr data-row="${i}">${row.map((cell, j) =>
+          `<td><input type="text" data-cell="${j}" value="${esc(cell)}" aria-label="${esc(s.columns[j])} row ${i + 1}"></td>`).join('')}
+          <td><button type="button" class="btn icon danger" data-action="del-row" aria-label="Remove row ${i + 1}">X</button></td></tr>`).join('') ||
+          `<tr><td colspan="${s.columns.length + 1}" class="no-rows">No rows yet. Click "+ Add row".</td></tr>`}</tbody>
+      </table>
+      <div class="edit-actions">
+        <button type="button" class="btn" data-action="add-row">+ Add row</button>
+        <button type="button" class="btn" data-action="add-column">+ Add column</button>
+        <button type="button" class="btn" data-action="del-column">Remove last column</button>
+        <span class="problems"></span>
+      </div>`;
     const rows = s.sizes.map((z, i) => `
       <tr data-row="${i}">
         <td><input type="text" data-field="item" value="${esc(z.item)}" aria-label="Item number"></td>
@@ -299,7 +371,7 @@
   function render() {
     list.innerHTML = '';
     if (!items.length) {
-      list.innerHTML = `<p class="empty">${editing ? 'The catalog is empty — click “+ Add T-shirt”.' : 'No styles listed in ' + esc(DATA_FILE) + '.'}</p>`;
+      list.innerHTML = `<p class="empty">${editing ? 'The catalog is empty — click “+ Add ' + ENTRY_NAME + '”.' : 'No items listed in ' + esc(DATA_FILE) + '.'}</p>`;
       count.textContent = '0 items';
       return;
     }
@@ -321,6 +393,7 @@
     const el = buildCard(s);
     el.hidden = old.hidden;
     old.replaceWith(el);
+    if (INDEPENDENT_TABLES) applyFilter();
     validate();
     return el;
   }
@@ -345,7 +418,8 @@
     items.forEach(s => {
       const el = cardEl(s.uid);
       if (!el) return;
-      const hay = (s.description + ' ' + s.sizes.map(z => z.item).join(' ')).toLowerCase();
+      const hay = (s.description + ' ' + (INDEPENDENT_TABLES
+        ? s.rows.flat().join(' ') : s.sizes.map(z => z.item).join(' '))).toLowerCase();
       el.hidden = !terms.every(t => hay.includes(t));
       if (!el.hidden) shown++;
     });
@@ -360,6 +434,15 @@
 
   function findProblems() {
     const problems = [];
+    if (INDEPENDENT_TABLES) {
+      items.forEach(s => {
+        if (!s.description.trim()) problems.push({ uid: s.uid, field: 'description', msg: 'Table title is required' });
+        s.columns.forEach((column, i) => {
+          if (!column.trim()) problems.push({ uid: s.uid, column: i, msg: (s.description || 'Untitled table') + ': column heading is blank' });
+        });
+      });
+      return problems;
+    }
     const seen = {};
     items.forEach(s => s.sizes.forEach(z => {
       const k = z.item.trim();
@@ -390,7 +473,8 @@
       if (!card) return;
       perCard[p.uid] = (perCard[p.uid] || 0) + 1;
       let input = null;
-      if (p.row != null) input = card.querySelector(`tr[data-row="${p.row}"] [data-field="${p.field}"]`);
+      if (p.column != null) input = card.querySelector(`[data-column="${p.column}"]`);
+      else if (p.row != null) input = card.querySelector(`tr[data-row="${p.row}"] [data-field="${p.field}"]`);
       else if (p.field) input = card.querySelector(`[data-shirt-field="${p.field}"]`);
       if (input) input.classList.add('invalid');
     });
@@ -404,6 +488,11 @@
   function confirmProblems() {
     const problems = findProblems();
     if (!problems.length) return true;
+    if (INDEPENDENT_TABLES) {
+      toast('Cannot save: ' + problems[0].msg + '. Fix highlighted fields first.');
+      validate();
+      return false;
+    }
     const lines = [...new Set(problems.map(p => '• ' + p.msg))].slice(0, 10);
     return confirm(`There ${problems.length === 1 ? 'is 1 problem' : 'are ' + problems.length + ' problems'} in the catalog:\n\n${lines.join('\n')}${problems.length > 10 ? '\n…' : ''}\n\nSave anyway?`);
   }
@@ -421,6 +510,14 @@
   }
 
   function addRow(s) {
+    if (INDEPENDENT_TABLES) {
+      s.rows.push(s.columns.map(() => ''));
+      persist();
+      const el = refreshCard(s);
+      refreshCounts();
+      el.querySelector(`tr[data-row="${s.rows.length - 1}"] input`).focus();
+      return;
+    }
     const prev = s.sizes[s.sizes.length - 1];
     s.sizes.push({ item: nextItemNumber(s), size: '', price: prev ? prev.price : null });
     persist();
@@ -431,6 +528,14 @@
   }
 
   function deleteRow(s, i) {
+    if (INDEPENDENT_TABLES) {
+      if (s.rows[i].some(cell => cell) && !confirm('Remove this row and all its values?')) return;
+      s.rows.splice(i, 1);
+      persist();
+      refreshCard(s);
+      refreshCounts();
+      return;
+    }
     const z = s.sizes[i];
     const what = [z.item, z.size].filter(Boolean).join(' – ') || 'this blank row';
     if ((z.item || z.size) && !confirm(`Remove size ${what}?`)) return;
@@ -440,7 +545,9 @@
   }
 
   function addShirt() {
-    const s = { uid: newUid(), description: '', image: null, sizes: [{ item: '', size: '', price: null }] };
+    const s = INDEPENDENT_TABLES
+      ? { uid: newUid(), description: '', image: undefined, columns: ['Description', 'Item #', 'Price'], rows: [['', '', '']] }
+      : { uid: newUid(), description: '', image: null, sizes: [{ item: '', size: '', price: null }] };
     items.push(s);
     openSet.add(s.uid);
     if (search.value) search.value = '';
@@ -453,12 +560,12 @@
   }
 
   function deleteShirt(s) {
-    if (!confirm(`Delete "${s.description || 'this T-shirt'}" and all of its ${s.sizes.length} size(s)?`)) return;
+    if (!confirm(`Delete "${s.description || 'this ' + ENTRY_NAME}" and all of its ${INDEPENDENT_TABLES ? s.rows.length + ' row(s)' : s.sizes.length + ' size(s)'}?`)) return;
     items = items.filter(x => x !== s);
     openSet.delete(s.uid);
     persist();
     render();
-    toast('T-shirt deleted');
+    toast(ENTRY_NAME + ' deleted');
   }
 
   function refreshCounts() { applyFilter(); }
@@ -473,6 +580,20 @@
   }
 
   /* ---------- Events ---------- */
+
+  list.addEventListener('error', e => {
+    const image = e.target;
+    if (!(image instanceof HTMLImageElement)) return;
+    if (image.dataset.catalogItem && !image.dataset.triedPng) {
+      image.dataset.triedPng = 'true';
+      image.src = ASSETS_DIR + 'Cat' + image.dataset.catalogItem + '.png';
+      return;
+    }
+    const placeholder = document.createElement('span');
+    placeholder.className = 'placeholder';
+    placeholder.textContent = 'Image not found' + (image.dataset.catalogItem ? ': ' + image.dataset.catalogItem : '');
+    image.replaceWith(placeholder);
+  }, true);
 
   list.addEventListener('click', e => {
     const head = e.target.closest('.card-head');
@@ -490,6 +611,20 @@
       case 'del-row': deleteRow(s, Number(btn.closest('tr').dataset.row)); break;
       case 'del-shirt': deleteShirt(s); break;
       case 'choose-image': pendingImageUid = s.uid; imagePicker.value = ''; imagePicker.click(); break;
+      case 'add-column':
+        s.columns.push('Column ' + (s.columns.length + 1));
+        s.rows.forEach(row => row.push(''));
+        persist();
+        refreshCard(s);
+        break;
+      case 'del-column':
+        if (s.columns.length === 1) { toast('A table must have at least one column.'); break; }
+        if (!confirm('Remove "' + s.columns.at(-1) + '" and all its values from this table?')) break;
+        s.columns.pop();
+        s.rows.forEach(row => row.pop());
+        persist();
+        refreshCard(s);
+        break;
     }
   });
 
@@ -501,11 +636,16 @@
 
     if (t.dataset.shirtField) {
       if (t.dataset.shirtField === 'image') {
-        s.image = normalizeImage(t.value);
+        s.image = INDEPENDENT_TABLES && !t.value.trim() ? undefined : normalizeImage(t.value);
+        if (previewUrls[s.uid]) URL.revokeObjectURL(previewUrls[s.uid]);
         delete previewUrls[s.uid];
       } else {
         s.description = t.value;
       }
+    } else if (INDEPENDENT_TABLES && t.dataset.column !== undefined) {
+      s.columns[Number(t.dataset.column)] = t.value;
+    } else if (INDEPENDENT_TABLES && t.dataset.cell !== undefined) {
+      s.rows[Number(t.closest('tr').dataset.row)][Number(t.dataset.cell)] = t.value;
     } else if (t.dataset.field) {
       const z = s.sizes[Number(t.closest('tr').dataset.row)];
       if (t.dataset.field === 'price') z.price = toNumber(t.value);
@@ -516,6 +656,7 @@
     persist();
     refreshHead(s);
     validate();
+    if (INDEPENDENT_TABLES) applyFilter();
   }
   list.addEventListener('input', handleFieldChange);
   list.addEventListener('change', e => {
@@ -532,6 +673,7 @@
     pendingImageUid = null;
     if (!file || !s) return;
     s.image = ASSETS_DIR + file.name;
+    if (previewUrls[s.uid]) URL.revokeObjectURL(previewUrls[s.uid]);
     previewUrls[s.uid] = URL.createObjectURL(file);
     persist();
     refreshCard(s);

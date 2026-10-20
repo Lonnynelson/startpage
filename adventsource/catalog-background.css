@@ -30,6 +30,18 @@ table {
   background: rgba(255, 255, 255, 0.2);
 }
 
+body[data-catalog-format="independent-tables"] .sizes {
+  overflow-x: auto;
+}
+
+body[data-catalog-format="independent-tables"] .edit-table input {
+  min-width: 110px;
+}
+
+body[data-catalog-format="independent-tables"] .edit-actions {
+  flex-wrap: wrap;
+}
+
 @media (min-width: 1200px) {
   main {
     display: grid;

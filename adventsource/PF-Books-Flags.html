@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pathfinder Books &amp; Flags Catalog</title>
+<style>
+  :root {
+    --bg: #f3f4f6;
+    --card: #ffffff;
+    --border: #d9dde3;
+    --text: #1f2933;
+    --muted: #6b7280;
+    --accent: #1d4e89;
+    --accent-soft: #e8f0fa;
+    --danger: #b42318;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--accent);
+    color: #fff;
+    padding: 16px 24px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+  }
+  header h1 { margin: 0 0 10px; font-size: 1.5rem; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .toolbar input {
+    flex: 1 1 260px;
+    padding: 9px 12px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+  }
+  .toolbar button {
+    padding: 9px 14px;
+    font-size: .9rem;
+    border: 1px solid rgba(255,255,255,.6);
+    background: transparent;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .toolbar button:hover { background: rgba(255,255,255,.15); }
+  #count { font-size: .9rem; opacity: .9; }
+
+  main { max-width: 960px; margin: 0 auto; padding: 20px 16px 40px; }
+  .shirt {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    transition: box-shadow .15s;
+  }
+  .shirt:hover, .shirt.open { box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+  .shirt.open { border-color: var(--accent); }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    padding: 12px 18px 12px 12px;
+    background: none;
+    border: none;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+  .card-head:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+  .thumb {
+    flex: 0 0 110px;
+    width: 110px;
+    height: 110px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .thumb img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .thumb .placeholder { color: var(--muted); font-size: .75rem; text-align: center; padding: 6px; }
+  .info { flex: 1 1 auto; min-width: 0; }
+  .info .desc { font-size: 1.1rem; font-weight: 600; margin: 0 0 4px; }
+  .info .meta { color: var(--muted); font-size: .85rem; }
+  .price-block { flex: 0 0 auto; text-align: right; }
+  .price-block .label { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .price-block .price { font-size: 1.35rem; font-weight: 700; color: var(--accent); }
+  .chevron {
+    flex: 0 0 auto;
+    width: 12px; height: 12px;
+    border-right: 3px solid var(--muted);
+    border-bottom: 3px solid var(--muted);
+    transform: rotate(45deg);
+    transition: transform .2s;
+    margin-left: 4px;
+  }
+  .shirt.open .chevron { transform: rotate(-135deg); }
+
+  .sizes { display: none; border-top: 1px solid var(--border); padding: 12px 18px 18px; background: #fafbfc; }
+  .shirt.open .sizes { display: block; }
+  table { width: 100%; border-collapse: collapse; font-size: .95rem; background: #fff; }
+  th, td { padding: 8px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+  th { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  td.num, th.num { text-align: right; white-space: nowrap; }
+  .empty { text-align: center; color: var(--muted); padding: 40px 0; }
+
+  /* ---------- Edit mode ---------- */
+  .toolbar.actions { margin-top: 10px; }
+  .toolbar button.primary { background: #fff; color: var(--accent); border-color: #fff; font-weight: 600; }
+  .toolbar button.primary:hover { background: #e8f0fa; }
+  .toolbar button[aria-pressed="true"] { background: #ffd166; color: #1f2933; border-color: #ffd166; font-weight: 600; }
+  .edit-only { display: none !important; }
+  body.editing .edit-only { display: inline-block !important; }
+  #status { font-size: .85rem; padding: 3px 10px; border-radius: 999px; background: rgba(255,255,255,.15); }
+  #status.dirty { background: #ffd166; color: #1f2933; }
+  #status:empty { display: none; }
+
+  .edit-fields { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-end; margin-bottom: 12px; }
+  .edit-fields label { display: flex; flex-direction: column; gap: 4px; font-size: .8rem; color: var(--muted); font-weight: 600; }
+  .edit-fields label.grow { flex: 1 1 320px; }
+  .edit-fields label.img { flex: 0 1 220px; }
+  .sizes input[type="text"], .sizes input[type="number"] {
+    width: 100%;
+    padding: 6px 8px;
+    font: inherit;
+    font-size: .95rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: #fff;
+    color: var(--text);
+  }
+  .sizes input:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: var(--accent); }
+  .sizes input.invalid { border-color: var(--danger); background: #fff5f4; }
+  .edit-table td { padding: 5px 8px; }
+  .edit-table td.center { text-align: center; }
+  .edit-table .col-item { width: 130px; }
+  .edit-table .col-price { width: 120px; }
+  .edit-table .col-del { width: 48px; }
+  .btn {
+    padding: 7px 12px;
+    font: inherit;
+    font-size: .9rem;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn:hover { background: var(--accent-soft); border-color: var(--accent); }
+  .btn.danger { color: var(--danger); border-color: #f1b8b3; }
+  .btn.danger:hover { background: #fdecea; border-color: var(--danger); }
+  .btn.icon { padding: 4px 9px; font-size: 1rem; line-height: 1; }
+  .edit-actions { margin-top: 10px; display: flex; gap: 10px; align-items: center; }
+  .problems { color: var(--danger); font-size: .85rem; }
+  .no-rows { text-align: center; color: var(--muted); font-style: italic; }
+  .shirt.new-flash { animation: flash 1.2s ease-out; }
+  @keyframes flash { from { box-shadow: 0 0 0 4px #ffd166; } to { box-shadow: none; } }
+
+  #toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    max-width: 90vw;
+    background: #1f2933;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: .95rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s;
+    z-index: 50;
+  }
+  #toast.show { opacity: 1; }
+
+  .home-button {
+    position: fixed;
+    left: max(1rem, env(safe-area-inset-left));
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid #888;
+    border-radius: 50%;
+    background: #f4f4f4;
+    color: #162b35;
+    box-shadow: 0 2px 8px #0003;
+    z-index: 20;
+  }
+  .home-button:hover { background: #e4ebea; }
+  .home-button:focus-visible {
+    outline: 3px solid #0a84ff;
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 560px) {
+    .card-head { flex-wrap: wrap; gap: 12px; }
+    .thumb { flex-basis: 80px; width: 80px; height: 80px; }
+    .info { flex-basis: calc(100% - 100px); }
+    .price-block { text-align: left; }
+    .chevron { margin-left: auto; }
+    .edit-table .col-item, .edit-table .col-price { width: auto; }
+  }
+</style>
+<link rel="stylesheet" href="page-background.css">
+<link rel="stylesheet" href="catalog-background.css">
+</head>
+<body data-catalog-file="PF_Books_Flags.json" data-catalog-format="independent-tables" data-catalog-program="Pathfinder" data-catalog-storage="pf-books-flags-catalog">
+<div class="page-background page-background-first" aria-hidden="true"></div>
+<div class="page-background page-background-second" aria-hidden="true"></div>
+<a class="home-button" href="index.html" aria-label="Home" title="AdventSource home">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <path d="M3 10 12 3 21 10M5 9v12h5v-7h4v7h5V9"/>
+  </svg>
+</a>
+<header>
+  <h1>Pathfinder Books &amp; Flags Catalog</h1>
+  <div class="toolbar">
+    <input id="search" type="search" placeholder="Search by description or item #…" aria-label="Search catalog">
+    <button id="expandAll" type="button">Expand all</button>
+    <button id="collapseAll" type="button">Collapse all</button>
+    <span id="count"></span>
+  </div>
+  <div class="toolbar actions">
+    <button id="editToggle" type="button" aria-pressed="false">Edit mode</button>
+    <button id="addShirt" type="button" class="primary edit-only">+ Add table</button>
+    <button id="saveFile" type="button" class="edit-only" title="Write your changes to PF_Books_Flags.json">Save to file</button>
+    <button id="exportJson" type="button" class="edit-only" title="Download the current catalog as JSON">Export JSON</button>
+    <button id="importJson" type="button" class="edit-only" title="Replace the current catalog with a JSON file">Import JSON</button>
+    <button id="discard" type="button" class="edit-only" title="Throw away browser edits and reload PF_Books_Flags.json">Discard browser changes</button>
+    <span id="status"></span>
+  </div>
+</header>
+<main id="list"></main>
+<input id="imagePicker" type="file" accept="image/*" hidden>
+<input id="catalogPicker" type="file" accept="application/json,.json" hidden>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
