@@ -242,6 +242,11 @@
           "$14.95"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "009529",
           "MG - Green L",
           "$7.95"
@@ -314,6 +319,11 @@
           "009610",
           "Navy XLarge 3-Wide",
           "$9.95"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "009529",
@@ -441,6 +451,11 @@
           "002171",
           "Adv Cloth Slide",
           "$2.50"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "009658",
@@ -689,11 +704,6 @@
           "$4.95"
         ],
         [
-          "",
-          "",
-          ""
-        ],
-        [
           "009603",
           "MG PF Embroidered Scarf",
           "$18.95"
@@ -782,6 +792,11 @@
           "$47.95"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "003020",
           "Sleeve Strip - Area Coord.",
           "$1.95"
@@ -837,22 +852,27 @@
           "$4.95"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "002250",
           "Friend Class Chevron",
           "$0.95"
         ],
         [
-          "00225",
+          "002251",
           "Companion Class Chevron",
           "$0.95"
         ],
         [
-          "00225",
+          "002252",
           "Explorer Class Chevron",
           "$0.95"
         ],
         [
-          "00225",
+          "002253",
           "Ranger Class Chevron",
           "$0.95"
         ],
@@ -865,6 +885,11 @@
           "002260",
           "Guide Class Chevron",
           "$0.95"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "009841",
@@ -880,6 +905,11 @@
           "009028",
           "Southern Union",
           "$2.50"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "009038",
@@ -1609,21 +1639,21 @@
         ],
         [
           "003117",
-          "Women's Staff Tie (Pathfinder)",
+          "Pathfinder Women's Staff Tie (Logo)",
           "$14.95"
         ],
         [
           "003119",
-          "Master Guide Women's Tie",
+          "Master Guide Women's Tie (Logo)",
           "$14.95"
         ]
       ]
     },
     "[\"pathfinder\",\"Uniform-Girl.svg\",\"black-bow-tie\"]": {
       "columns": [
-        "Column 1",
-        "Column 2",
-        "Column 3"
+        "Item #",
+        "Description",
+        "Price"
       ],
       "rows": [
         [
@@ -1633,7 +1663,7 @@
         ],
         [
           "003117",
-          "Women's Staff Tie (Pathfinder)",
+          "Pathfinder Women's Staff Tie (Logo)",
           "$14.95"
         ]
       ]
@@ -1652,12 +1682,12 @@
         ],
         [
           "002240",
-          "Pathfinder Tie With Logo",
+          "Mens Pathfinder Tie  (Logo)",
           "$24.95"
         ],
         [
           "002241",
-          "Master Guide Tie",
+          "Master Guide Men's Tie (Logo)",
           "$24.95"
         ]
       ]
@@ -1808,6 +1838,11 @@
           "$1.20"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "002300",
           "Friend Ribbon Bar",
           "$1.30"
@@ -1838,6 +1873,11 @@
           "$1.30"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "002131",
           "Master Guide Six-Star Pin",
           "$1.25"
@@ -1851,6 +1891,11 @@
           "003040",
           "Master Guide Ribbon Bars",
           "$24.95"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "002436",
@@ -1871,6 +1916,11 @@
           "002439",
           "TLT Service Star Year 4",
           "$2.00"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "002401",
@@ -2028,11 +2078,6 @@
           "$19.95"
         ],
         [
-          "",
-          "",
-          ""
-        ],
-        [
           "009935",
           "PBE Year Bar '26'",
           "$0.75"
@@ -2044,7 +2089,7 @@
         ],
         [
           "009884",
-          "PBE Year Bar '24\"",
+          "PBE Year Bar '24'",
           "$0.75"
         ]
       ]
@@ -2468,6 +2513,11 @@
           "$1.45"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "009560",
           "Little Lamb Parent Pin",
           "$2.25"
@@ -2496,6 +2546,11 @@
           "002108",
           "Helping Hand Parent Pin",
           "$2.25"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "002401",
@@ -2635,8 +2690,7 @@
         "Name",
         "Category",
         "Skill Level",
-        "Price",
-        ""
+        "Price"
       ],
       "rows": [
         [
@@ -2644,107 +2698,44 @@
           "Friend Class Pin",
           "",
           "",
-          "$1.20",
-          ""
+          "$1.20"
         ],
         [
           "002121",
           "Companion Class Pin",
           "",
           "",
-          "$1.20",
-          ""
+          "$1.20"
         ],
         [
           "002122",
           "Explorer Class Pin",
           "",
           "",
-          "$1.20",
-          ""
+          "$1.20"
         ],
         [
           "002123",
           "Ranger Class Pin",
           "",
           "",
-          "$1.20",
-          ""
+          "$1.20"
         ],
         [
           "002124",
           "Voyager Class Pin",
           "",
           "",
-          "$1.20",
-          ""
+          "$1.20"
         ],
         [
           "002130",
           "Guide Class Pin",
           "",
           "",
-          "$1.20",
-          ""
+          "$1.20"
         ],
         [
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "002300",
-          "Friend Ribbon Bar",
-          "",
-          "",
-          "$1.30",
-          ""
-        ],
-        [
-          "002301",
-          "Companion Ribbon Bar",
-          "",
-          "",
-          "$1.30",
-          ""
-        ],
-        [
-          "002302",
-          "Explorer Ribbon Bar",
-          "",
-          "",
-          "$1.30",
-          ""
-        ],
-        [
-          "002303",
-          "Ranger Ribbon Bar",
-          "",
-          "",
-          "$1.30",
-          ""
-        ],
-        [
-          "002306",
-          "Voyager Ribbon Bar",
-          "",
-          "",
-          "$1.30",
-          ""
-        ],
-        [
-          "002307",
-          "Guide Ribbon Bar",
-          "",
-          "",
-          "$1.30",
-          ""
-        ],
-        [
-          "",
           "",
           "",
           "",
@@ -2756,51 +2747,142 @@
           "Friend Class Chevron",
           "",
           "",
-          "$0.95",
-          ""
+          "$0.95"
         ],
         [
-          "00225",
+          "002251",
           "Companion Class Chevron",
           "",
           "",
-          "$0.95",
-          ""
+          "$0.95"
         ],
         [
-          "00225",
+          "002252",
           "Explorer Class Chevron",
           "",
           "",
-          "$0.95",
-          ""
+          "$0.95"
         ],
         [
-          "00225",
+          "002253",
           "Ranger Class Chevron",
           "",
           "",
-          "$0.95",
-          ""
+          "$0.95"
         ],
         [
           "002264",
           "Voyager Class Chevron",
           "",
           "",
-          "$0.95",
-          ""
+          "$0.95"
         ],
         [
           "002260",
           "Guide Class Chevron",
           "",
           "",
-          "$0.95",
-          ""
+          "$0.95"
         ],
         [
           "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "002140",
+          "Friend Class Name Strip",
+          "",
+          "",
+          "$1.10"
+        ],
+        [
+          "002141",
+          "Companion Class Name Strip",
+          "",
+          "",
+          "$1.10"
+        ],
+        [
+          "002142",
+          "Explorer Class Name Strip",
+          "",
+          "",
+          "$1.10"
+        ],
+        [
+          "002143",
+          "Ranger Class Name Strip",
+          "",
+          "",
+          "$1.10"
+        ],
+        [
+          "002152",
+          "Voyager Class Name Strip",
+          "",
+          "",
+          "$1.10"
+        ],
+        [
+          "002150",
+          "Guide Class Name Strip",
+          "",
+          "",
+          "$1.10"
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "002300",
+          "Friend Ribbon Bar",
+          "",
+          "",
+          "$1.30"
+        ],
+        [
+          "002301",
+          "Companion Ribbon Bar",
+          "",
+          "",
+          "$1.30"
+        ],
+        [
+          "002302",
+          "Explorer Ribbon Bar",
+          "",
+          "",
+          "$1.30"
+        ],
+        [
+          "002303",
+          "Ranger Ribbon Bar",
+          "",
+          "",
+          "$1.30"
+        ],
+        [
+          "002306",
+          "Voyager Ribbon Bar",
+          "",
+          "",
+          "$1.30"
+        ],
+        [
+          "002307",
+          "Guide Ribbon Bar",
+          "",
+          "",
+          "$1.30"
+        ],
+        [
           "",
           "",
           "",
@@ -2812,19 +2894,16 @@
           "Instructor Diamond",
           "",
           "",
-          "$0.45",
-          ""
+          "$0.45"
         ],
         [
           "007400",
           "Advanced Honor Star",
           "",
           "",
-          "0.85",
-          ""
+          "0.85"
         ],
         [
-          "",
           "",
           "",
           "",
@@ -2836,3315 +2915,2900 @@
           "Aboriginal Lore",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "004997",
           "Abseiling",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007600",
           "Accounting",
           "Vocational",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005008",
           "Adapted Sports",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "004996",
           "Adolescent Mental Health Response",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005005",
           "Adventist Pioneer Heritage",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005000",
           "Adventurer for Christ",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "004999",
           "African American Adv Heritage NAD",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "004998",
           "African Lore",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005010",
           "Agriculture",
           "Outdoor Industries",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005020",
           "Airplane Modeling",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005118",
           "Alive Bible",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005025",
           "Alternative Fuels",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005030",
           "Amphibians",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005035",
           "Animal Camouflage",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005040",
           "Animal Tracking",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005045",
           "Antelopes",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005047",
           "Arboriculture",
           "Vocational",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005050",
           "Archery",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005055",
           "Artificial Intelligence",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005057",
           "Audio Technician",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005060",
           "Automobile Mechanics",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005063",
           "Aviators",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005065",
           "Backpacking",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005070",
           "Baking",
           "Household Arts",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007605",
           "Barbering and Hairstyling",
           "Vocational",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005082",
           "Basic Rescue",
           "Health and Science",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005081",
           "Basic Sewing",
           "Household Arts",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005085",
           "Basic Water Safety",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005086",
           "Basketball",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005090",
           "Basketry",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005095",
           "Bats",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005100",
           "Beekeeping",
           "Outdoor Industries",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005120",
           "Bible Evangelism",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005123",
           "Bible Marking",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005124",
           "Biblical Archaeology",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005127",
           "Biosafety",
           "Health and Science",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005130",
           "Bird Pets",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005140",
           "Birds",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005145",
           "Blacksmithing",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005150",
           "Block Printing",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005155",
           "Blood and the Body's Defenses",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005157",
           "Bogs & Fens",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005165",
           "Bones, Muscles, and Movement",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007610",
           "Bookbinding",
           "Vocational",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005160",
           "Bookkeeping",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005170",
           "Braiding",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005171",
           "Braille",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005175",
           "Brain and Behavior",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005180",
           "Bread Dough",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005185",
           "Bridges",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005188",
           "Bubbles",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005181",
           "Bully Prevention I",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005182",
           "Bully Prevention II",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005189",
           "Business",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005190",
           "Cacti",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005200",
           "Cake Decorating",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005210",
           "Camp Craft",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006069",
           "Camp Safety",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005211",
           "Camping Skills I",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005212",
           "Camping Skills II",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005213",
           "Camping Skills III",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005214",
           "Camping Skills IV",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005220",
           "Candle Making",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005235",
           "Canoe Building",
           "Recreation",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005230",
           "Canoeing",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005245",
           "Card Making",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005240",
           "Carpentry",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005250",
           "Cats",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005260",
           "Cattle Husbandry",
           "Outdoor Industries",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005270",
           "Caving",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005280",
           "Ceramics",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005285",
           "Cetaceans",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005290",
           "Chemistry",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005295",
           "Child Care",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005298",
           "Christian Art of Preaching",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005300",
           "Christian Citizenship",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005305",
           "Christian Drama",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005310",
           "Christian Grooming & Manners",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005320",
           "Christian Sales Principles",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005330",
           "Christian Storytelling",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005335",
           "Christian Teambuilding",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005336",
           "Christian Visitation",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005338",
           "Climate Science",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005343",
           "Coal",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005345",
           "Cold Weather Survival",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005350",
           "Communications",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007105",
           "Community Improvement",
           "Spiritual Growth, Outreach and Heritage",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005900",
           "Community Water Safety (Lifesaving)",
           "Recreation",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005355",
           "Computers",
           "Vocational",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005355",
           "Computers and Mobile Devices",
           "Vocational",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005360",
           "Cooking",
           "Household Arts",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005370",
           "Copper Enameling",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005372",
           "Coral Reefs",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005376",
           "Counted Cross Stitch",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005375",
           "CPR",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005377",
           "Creationism",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007115",
           "Crisis Intervention",
           "Spiritual Growth, Outreach and Heritage",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005380",
           "Crocheting",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005395",
           "Cryptography",
           "Vocational",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006060",
           "Cultural Diversity Appreciation",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005387",
           "Cultural Food Preparation",
           "Household Arts",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005388",
           "Cultural Heritage",
           "",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005340",
           "Currency",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005390",
           "Cycling",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005400",
           "Dairying",
           "Outdoor Industries",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005405",
           "Dams and Levees",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005410",
           "Découpage",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005415",
           "Digestion",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005417",
           "Digital Photography",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005419",
           "Dinosaurs",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007045",
           "Disaster Ministries",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005418",
           "Disc Golf",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005455",
           "Disciples and Apostles",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005420",
           "Dog Care and Training",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005430",
           "Dogs",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005445",
           "Drawing",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005460",
           "Dressmaking",
           "Household Arts",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005470",
           "Drilling & Marching",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005435",
           "Drones",
           "Vocational",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005473",
           "Drumming & Percussion",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005476",
           "Duct Tape",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005474",
           "Dunes",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005475",
           "Dutch Oven Cooking",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005479",
           "Early Adventist Missionaries",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005480",
           "Ecology",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005490",
           "Edible Wild Plants",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005500",
           "Electricity",
           "Vocational",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005505",
           "Endangered Species",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005507",
           "Engineering",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005510",
           "Environmental Conservation",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005485",
           "Eucalypts",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005520",
           "Family Life",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007055",
           "Feeding Ministries",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005530",
           "Felt Craft",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005540",
           "Ferns",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005550",
           "Fire Building & Camp Cookery",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005551",
           "Fire Safety",
           "Vocational",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005560",
           "First Aid",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005570",
           "Fishes",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005833",
           "Flag Football",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005575",
           "Flags",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005580",
           "Flower Arrangement",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005590",
           "Flower Culture",
           "Outdoor Industries",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005600",
           "Flowers",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006170",
           "Food - Canning",
           "Household Arts",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005605",
           "Food - Drying",
           "Household Arts",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005606",
           "Food - Freezing",
           "Household Arts",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005609",
           "Foreign Mission Trips",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005608",
           "Forestry",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005610",
           "Fossils",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005620",
           "Fruit Growing",
           "Outdoor Industries",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005630",
           "Fungi",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005640",
           "Gardening",
           "Outdoor Industries",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005643",
           "Genealogy",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005645",
           "Geocaching",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005646",
           "Geological Geocaching",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005650",
           "Geology",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005653",
           "Gift Wrapping",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005658",
           "Glaciers",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005660",
           "Glass Craft",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005665",
           "Glass Etching",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005670",
           "Glass Painting",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005675",
           "Goat Husbandry",
           "Outdoor Industries",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005676",
           "God's Messenger",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005677",
           "Gold Prospecting",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005678",
           "Golf",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005680",
           "Grasses",
           "Nature",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005659",
           "Guitar",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005690",
           "Health and Healing",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005693",
           "Heart and Circulation",
           "Health and Science",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005695",
           "Herbs",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005697",
           "Heredity",
           "Health and Science",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005700",
           "Hiking",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005710",
           "Home Nursing",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005720",
           "Horse Husbandry",
           "Outdoor Industries",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005730",
           "Horsemanship",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005735",
           "Hot Air Balloons",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007615",
           "House Painting, Exterior",
           "Vocational",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007620",
           "House Painting, Interior",
           "Vocational",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005750",
           "House Plants",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005737",
           "Household Budgeting",
           "Household Arts",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005740",
           "Housekeeping",
           "Household Arts",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005753",
           "Hydroponics and Aquaponics",
           "Outdoor Industries",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005755",
           "Hymns",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007025",
           "Identifying Community Needs",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005770",
           "Insects",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005783",
           "Internet",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005006",
           "Introduction to Adventist Pioneer Heritage",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005785",
           "Island Fishing",
           "Outdoor Industries",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005790",
           "Journalism",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005795",
           "Judges of Israel",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005796",
           "Juggling",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005800",
           "Junior Witness",
           "",
           "",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005810",
           "Junior Youth Leadership",
           "Spiritual Growth, Outreach and Heritage",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005813",
           "Kanzashi",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005835",
           "Kayaking",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005814",
           "Kings of Israel",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005815",
           "Kites",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005820",
           "Knitting",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005830",
           "Knot Tying",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005838",
           "Land Surveying",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005840",
           "Language Study",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005850",
           "Lapidary",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005855",
           "Lashing",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005860",
           "Laundering",
           "Household Arts",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005870",
           "Leather Craft",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005871",
           "Legacy of Healing",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005872",
           "LEGO® Design",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005878",
           "Letterboxing",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005880",
           "Lettering & Poster Making",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005890",
           "Lichens, Liverworts & Mosses",
           "Nature",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005900",
           "Lifesaving (Community Water Safety)",
           "Recreation",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005895",
           "Lighthouses",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005910",
           "Literature Evangelism",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005440",
           "Livestock",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005920",
           "Macramé",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005930",
           "Mammals",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005938",
           "Māori Lore",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005936",
           "Maple Sugar",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005940",
           "Marine Algae",
           "Nature",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005950",
           "Marine Invertebrates",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005955",
           "Marine Mammals",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005956",
           "Marsupials",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007625",
           "Masonry",
           "Vocational",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005957",
           "Mat Making",
           "Household Arts",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005959",
           "Media Broadcast Ministry",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005960",
           "Metal Craft",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005962",
           "Meteorites",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005965",
           "Microscopic Life",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005966",
           "Midnight Sun",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005986",
           "Migration",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005964",
           "Missionary Life",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005968",
           "Mobile Technology",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005970",
           "Model Boats",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005967",
           "Model Cars",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005969",
           "Model Railroad",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005980",
           "Model Rocketry",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005985",
           "Mosaic Tile",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005990",
           "Moths & Butterflies",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005995",
           "Mountain Biking",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005993",
           "Mountains",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006000",
           "Music",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006007",
           "National Parks and Heritage Sites",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005760",
           "Native American Lore",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006005",
           "Native Brush Construction",
           "Arts, Crafts and Hobbies",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006010",
           "Navigation",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006015",
           "Neckwear",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006020",
           "Needle Craft",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006022",
           "Noah's Flood",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006025",
           "Nutrition",
           "Household Arts",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006028",
           "Oceans",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006045",
           "Odonates",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006030",
           "Optics",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006040",
           "Orchids",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006050",
           "Orienteering",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006053",
           "Origami",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006055",
           "Outdoor Leadership",
           "Recreation",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005450",
           "Painting",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006056",
           "Palm Trees",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006065",
           "Paper Maché",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006067",
           "Paper Quilling",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007630",
           "Paperhanging",
           "Vocational",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006071",
           "Parade Floats",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006057",
           "Parrots and Cockatoos",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006061",
           "Patriarchs of the Bible",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006068",
           "Peace Maker",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006068",
           "Peacemaker",
           "",
           "",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006070",
           "Personal Evangelism",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006072",
           "Personal Health and Wellness",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006187",
           "Pewter Casting",
           "Vocational",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006080",
           "Photography",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006090",
           "Physical Fitness",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006095",
           "Physics",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006097",
           "Pickleball",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006100",
           "Pigeon Raising",
           "Outdoor Industries",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006102",
           "Pin Trading",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006103",
           "Pinecar Derby (Pinewood Derby)",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006103",
           "Pinewood Derby (Pinecar Derby)",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006105",
           "Pioneering",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006109",
           "Pizza Maker",
           "Household Arts",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006110",
           "Plaster Craft",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006118",
           "Plastic Canvas",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006120",
           "Plastics",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007635",
           "Plumbing",
           "Vocational",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006122",
           "Poetry and Songwriting",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006125",
           "Postcards",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006130",
           "Pottery",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006140",
           "Poultry",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006150",
           "Poultry Raising",
           "Outdoor Industries",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006160",
           "Power Boating",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006163",
           "Praise and Worship",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006175",
           "Prayer",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006165",
           "Preach It",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006178",
           "Predatory Plants",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006180",
           "Printing",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006183",
           "Prophets & Prophecy",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006185",
           "Puppetry",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006190",
           "Quilting",
           "Household Arts",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006200",
           "Radio",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006210",
           "Radio Electronics",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006211",
           "Rainforests",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006212",
           "Raptors",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006213",
           "Recycling",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006215",
           "Red Alert I",
           "Health and Science",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006216",
           "Red Alert II",
           "Health and Science",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007065",
           "Refugee Assistance",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006214",
           "Renewable Energy",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006220",
           "Reptiles",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006225",
           "Rivers and Streams",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006223",
           "Robotics",
           "Vocational",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006230",
           "Rock Climbing",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006240",
           "Rocks & Minerals",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006250",
           "Rowing",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007085",
           "Rural Development",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006253",
           "Sabbath Appreciation",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006260",
           "Sailing",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006265",
           "Sanctuary",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006270",
           "Sand",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006275",
           "Scrapbooking",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006280",
           "Scuba Diving",
           "Recreation",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006290",
           "Sculpturing",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006305",
           "Search and Rescue",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006310",
           "Seeds",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007035",
           "Serving Communities",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006295",
           "Sharks",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006300",
           "Sheep Husbandry",
           "Outdoor Industries",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006320",
           "Shells",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007640",
           "Shoe Repair",
           "Vocational",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007645",
           "Shorthand",
           "Vocational",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006323",
           "Shrubs",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006325",
           "Sign Language",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006327",
           "Signs, Signals and Symbols",
           "Vocational",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006330",
           "Silk Screen Printing",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006336",
           "Skateboarding",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005385",
           "Skiing - Cross Country",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006340",
           "Skiing Downhill",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006350",
           "Skin Diving",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006378",
           "Slow-Pitch Softball",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006360",
           "Small Engines",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006365",
           "Small Fruit Growing",
           "Outdoor Industries",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006366",
           "Small Group Bible Study",
           "Spiritual Growth, Outreach and Heritage",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006367",
           "Small Mammal Pets",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006368",
           "Snowshoeing",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006370",
           "Soap Craft",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006369",
           "Soap Making",
           "Vocational",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006377",
           "Soccer",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006376",
           "Social Determinants of Health",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006371",
           "Social Media",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006373",
           "Soils",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006380",
           "Spiders",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006384",
           "Spinning Yarn",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006390",
           "Springboard Diving",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006400",
           "Stamps",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006410",
           "Stars",
           "Nature",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006415",
           "Stewardship",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006417",
           "Street Art",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006420",
           "String Art",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006425",
           "Subsistence Farming",
           "Outdoor Industries",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005110",
           "Swimming - Beginner",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006430",
           "Swimming",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "005780",
           "Swimming - Intermediate",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006435",
           "Taiga",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006440",
           "Tailoring",
           "Household Arts",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006445",
           "Tapa Cloth",
           "Household Arts",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006450",
           "Teaching",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006460",
           "Temperance",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006462",
           "Temperate Deciduous Forests",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006463",
           "Temperate Grasslands",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006464",
           "Tennis",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006466",
           "Tents",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006470",
           "Textile Painting",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006473",
           "Thatching",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006471",
           "Three Angels' Messages",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006474",
           "Tie-Dye",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006472",
           "Tile Laying",
           "Vocational",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006476",
           "Tole Painting",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006477",
           "Toy Boat Regatta",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006475",
           "Track & Field",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006478",
           "Travel",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006485",
           "Tree Climbing",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006480",
           "Trees",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006487",
           "Triathlon",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006490",
           "Tumbling & Balancing",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007095",
           "Tutoring",
           "Spiritual Growth, Outreach and Heritage",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006500",
           "Typewriting",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006502",
           "Ultimate Disc",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006503",
           "Unicycling",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006505",
           "Upholstery",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "007365",
           "Video",
           "Vocational",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006506",
           "Viruses",
           "Health and Science",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006600",
           "Visual Media Critique",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006507",
           "Volleyball",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006508",
           "Wakeboarding",
           "Recreation",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006512",
           "Water Safety Instructor",
           "Recreation",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006511",
           "Water Science",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006510",
           "Water Skiing",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006509",
           "Waterfalls",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006515",
           "Wattles",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006520",
           "Weather",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006530",
           "Weaving",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006535",
           "Welding",
           "Vocational",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006538",
           "Whistles",
           "Arts, Crafts and Hobbies",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006540",
           "Wilderness Leadership",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006550",
           "Wilderness Living",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006553",
           "Wildfire Preparation and Prevention",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006555",
           "Wind Surfing",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006560",
           "Winter Camping",
           "Recreation",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006565",
           "Women in Adventist History",
           "Spiritual Growth, Outreach and Heritage",
           "3",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006570",
           "Wood Carving",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006580",
           "Wood Handicraft",
           "Arts, Crafts and Hobbies",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006590",
           "Woodworking",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006592",
           "Word Processing",
           "Vocational",
           "2",
-          "",
-          ""
+          "$1.20"
         ],
         [
           "006595",
           "Worms",
           "Nature",
           "1",
-          "",
-          ""
+          "$1.20"
         ],
         [
-          "",
           "",
           "",
           "",
@@ -6156,131 +5820,114 @@
           "Artisan Master",
           "",
           "",
-          "$1.40",
-          ""
+          "$1.40"
         ],
         [
           "004000",
           "Aquatic Master",
           "",
           "",
-          "$1.40",
-          ""
+          "$1.40"
         ],
         [
           "004020",
           "Conservation Master",
           "",
           "",
-          "$1.40",
-          ""
+          "$1.40"
         ],
         [
           "004025",
           "Family, Origins and Heritage Master",
           "",
           "",
-          "$1.40",
-          ""
+          "$1.40"
         ],
         [
           "004030",
           "Farming Master",
           "",
           "",
-          "$1.40",
-          ""
+          "$1.40"
         ],
         [
           "004035",
           "Health and Science Master",
           "",
           "",
-          "$1.40",
-          ""
+          "$1.40"
         ],
         [
           "004040",
           "Homemaking Master",
           "",
           "",
-          "$1.40",
-          ""
+          "$1.40"
         ],
         [
           "004045",
           "Modern Technology Master",
           "",
           "",
-          "$1.40",
-          ""
+          "$1.40"
         ],
         [
           "004050",
           "Naturalist Master",
           "",
           "",
-          "$1.40",
-          ""
+          "$1.40"
         ],
         [
           "004057",
           "Spiritual Growth and Ministries Master",
           "",
           "",
-          "$1.40",
-          ""
+          "$1.40"
         ],
         [
           "004055",
           "Recreation Master",
           "",
           "",
-          "$1.40",
-          ""
+          "$1.40"
         ],
         [
           "004060",
           "Sportsman Master",
           "",
           "",
-          "$1.40",
-          ""
+          "$1.40"
         ],
         [
           "004070",
           "Technician Master",
           "",
           "",
-          "$1.40",
-          ""
+          "$1.40"
         ],
         [
           "004090",
           "Witnessing Master",
           "",
           "",
-          "$1.40",
-          ""
+          "$1.40"
         ],
         [
           "004080",
           "Wilderness Master",
           "",
           "",
-          "$1.40",
-          ""
+          "$1.40"
         ],
         [
           "004095",
           "Zoology Master",
           "",
           "",
-          "$1.40",
-          ""
+          "$1.40"
         ],
         [
-          "",
           "",
           "",
           "",
@@ -6292,48 +5939,42 @@
           "AYMT PF Cert. Pin - Instructor",
           "",
           "",
-          "$2.95",
-          ""
+          "$2.95"
         ],
         [
           "009521",
           "AYMT PF Cert. Pin - Leadership",
           "",
           "",
-          "$2.95",
-          ""
+          "$2.95"
         ],
         [
           "009517",
           "AYMT PF Cert. Pin - Basic Staff",
           "",
           "",
-          "$2.95",
-          ""
+          "$2.95"
         ],
         [
           "009518",
           "AYMT PF Cert. Pin - Counselor",
           "",
           "",
-          "$2.95",
-          ""
+          "$2.95"
         ],
         [
           "009519",
           "AYMT PF Cert. Pin - Director",
           "",
           "",
-          "$2.95",
-          ""
+          "$2.95"
         ],
         [
           "009819",
           "AYMT PF Cert. Pin - Secretary/Treasurer",
           "",
           "",
-          "$2.95",
-          ""
+          "$2.95"
         ]
       ]
     },
@@ -6395,6 +6036,11 @@
           "$2.00"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "009701",
           "Master TLT Pin",
           "$3.95"
@@ -6403,6 +6049,11 @@
           "009698",
           "Master TLT Patch",
           "$4.95"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "008110",
@@ -6435,6 +6086,11 @@
           "$24.95"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "008100",
           "TLT Black Sport Shirt S",
           "$19.95"
@@ -6458,6 +6114,11 @@
           "008104",
           "TLT Black Sport Shirt 2XL",
           "$22.95"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "007950",
@@ -6514,9 +6175,19 @@
           "$1.60"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "003038",
           "Master Guide Custom Engraved Name Badge",
           "$5.95"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "009603",
@@ -6539,6 +6210,11 @@
           "$5.95"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "002263",
           "Master Guide Pathfinder Star Patch 4\"",
           "$1.35"
@@ -6554,9 +6230,19 @@
           "$4.95"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "009547",
           "Master Guide Beret Crest | 2x2",
           "$1.20"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "008631",
@@ -6649,9 +6335,24 @@
           "$7.96"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "002161",
           "Master Guide Achievement Certificate",
           "$1.00"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "002241",
+          "Master Guide Men's Tie (Logo)",
+          "$24.95"
         ]
       ]
     },
@@ -6756,198 +6457,212 @@
           "$2.25"
         ],
         [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
           "009200",
           "ABC's",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009205",
           "Bible Friends",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009207",
           "Bodies of Water",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009210",
           "Colors",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009215",
           "Community Helpers",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009217",
           "Finger Play",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009219",
           "Healthy Foods",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009220",
           "Healthy Me",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009222",
           "Insects",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009242",
           "Little Boy Jesus",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009264",
           "Little Lamb Induction Patch",
           "Star",
           "",
-          ""
+          "$1.25"
         ],
         [
           "009223",
           "Music",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009260",
           "My Family",
           "Star",
           "",
-          ""
+          "$1.25"
         ],
         [
           "009224",
           "My Friend Jesus",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009261",
           "My God",
           "Star",
           "",
-          ""
+          "$1.25"
         ],
         [
           "009262",
           "My Self",
           "Star",
           "",
-          ""
+          "$1.25"
         ],
         [
           "009263",
           "My World",
           "Star",
           "",
-          ""
+          "$1.25"
         ],
         [
           "009241",
           "Numbers",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009228",
           "Sharing",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009225",
           "Special Helper",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009226",
           "Stars",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009227",
           "Trains & Trucks",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009243",
           "Trikes & Bikes",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009229",
           "Weather",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009230",
           "Wooly Lamb",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009240",
           "Zoo Animals",
           "Star",
           "Little Lamb",
-          ""
+          "$1.25"
         ],
         [
           "009255",
           "Little Lamb Investiture Set of 13 Patches",
           "Star",
           "",
-          ""
+          "$16.95"
         ],
         [
           "009250",
           "Little Lamb Patches Complete Set of 26",
           "Star",
+          "",
+          "$29.95"
+        ],
+        [
+          "",
+          "",
+          "",
           "",
           ""
         ],
@@ -6956,215 +6671,222 @@
           "Alphabet Fun",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004370",
           "Animal Homes",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004405",
           "Animals",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004372",
           "Beavers",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004415",
           "Beginning Biking",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004420",
           "Beginning Swimming",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004375",
           "Bible Friends",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004470",
           "Birds",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004460",
           "Crayons & Markers",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004380",
           "Fire Safety",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004400",
           "Gadgets & Sand",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004385",
           "God’s World",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004465",
           "Helping at Home",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004738",
           "His Word",
           "Chip",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004388",
           "Jesus Special Supper",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004387",
           "Jesus Star",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004440",
           "Jigsaw Puzzle",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004425",
           "Know Your Body",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004390",
           "Left & Right",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004455",
           "Manners Fun",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004395",
           "My Community Friends",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004410",
           "Pets",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004457",
           "Playing with Friends",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004475",
           "Scavenger Hunt",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004430",
           "Shapes & Sizes",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004445",
           "Sponge Art",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004432",
           "Stamping Fun",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004476",
           "Thankful Heart",
           "Chip",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004435",
           "Toys",
           "Chip",
           "Eager Beaver",
-          ""
+          "$1.25"
         ],
         [
           "004491",
           "Eager Beaver Investiture Set of 12 Patches",
           "Chip",
           "",
-          ""
+          "14.95"
         ],
         [
           "004490",
           "Eager Beaver Patches Complete Set of 29",
           "Chip",
+          "",
+          "29.95"
+        ],
+        [
+          "",
+          "",
+          "",
           "",
           ""
         ],
@@ -7173,936 +6895,943 @@
           "10 Commandments",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004505",
           "Acts of Kindness",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004507",
           "Animal Footprints",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004495",
           "Archery",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004500",
           "Artist",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004510",
           "Astronomer",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004522",
           "Baking",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004520",
           "Basket Maker",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004525",
           "Bead Craft",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004530",
           "Bible I",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004532",
           "Bible II",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004533",
           "Bible Royalty",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004529",
           "Bible Story Telling",
           "Award",
           "Multi-Level Awards",
-          ""
+          "$1.25"
         ],
         [
           "004539",
           "Bread of Life",
           "Award",
           "Multi-Level Awards",
-          ""
+          "$1.25"
         ],
         [
           "004780",
           "Build and Fly",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004534",
           "Building Blocks",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004535",
           "Butterfly",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004538",
           "Buttons",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004560",
           "Camper",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004562",
           "Candles",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004565",
           "Canoeing",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004610",
           "Caring Friend",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004570",
           "Carpenter",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004573",
           "Chickens",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004575",
           "Children of the Bible",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004580",
           "Collector",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004583",
           "Communion",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004683",
           "Community Service",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004590",
           "Cooking Fun",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004591",
           "Cooperation",
           "Award",
           "Multi-Level Awards",
-          ""
+          "$1.25"
         ],
         [
           "004592",
           "Country Fun",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004595",
           "Courtesy",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004598",
           "Creation",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004597",
           "Cupcakes and More",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004600",
           "Cyclist",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004611",
           "Delightful Sabbath",
           "Award",
           "Multi-Level Awards",
-          ""
+          "$1.25"
         ],
         [
           "004616",
           "Dinosaurs",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004612",
           "Disciples",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004614",
           "Dogs",
           "Award",
           "Multi-Level Awards",
-          ""
+          "$1.25"
         ],
         [
           "004615",
           "Early Adventist Pioneer",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004620",
           "Environmentalist",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004625",
           "Family Helper",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004540",
           "Feathered Friends",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004630",
           "First Aid Helper",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004635",
           "Fish",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004710",
           "Fitness Fun",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004640",
           "Flowers",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004660",
           "Friend of Animals",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004650",
           "Friend of Jesus",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004670",
           "Friend of Nature",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004672",
           "Fruits of the Spirit",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004680",
           "Gardener",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004690",
           "Geologist",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004693",
           "Germs",
           "Award",
           "Multi-Level Awards",
-          ""
+          "$1.25"
         ],
         [
           "004695",
           "Glue Right",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004696",
           "God’s Universe",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004697",
           "Good Samaritan",
           "Award",
           "Multi-Level Awards",
-          ""
+          "$1.25"
         ],
         [
           "004700",
           "Guide",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004720",
           "Gymnast",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004725",
           "Habitat",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004735",
           "Hand Shadows",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004730",
           "Handicraft",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004740",
           "Health Specialist",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004738",
           "His Word",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004736",
           "Holy Spirit",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004760",
           "Home Craft",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004750",
           "Home Helper",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004739",
           "Honey",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004527",
           "Honeybee",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004765",
           "Horsemanship",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004770",
           "Hygiene",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004781",
           "Knot Tying",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004741",
           "Ladybugs",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004724",
           "Legos",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004849",
           "Listening",
           "Award",
           "Multi-Level Awards",
-          ""
+          "$1.25"
         ],
         [
           "004742",
           "Lizards",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004795",
           "Magnet Fun I",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004796",
           "Magnet Fun II",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004800",
           "Media Critic",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004801",
           "Men of the Bible",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004803",
           "Missionaries",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004810",
           "Music Maker",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004811",
           "My Church",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004812",
           "My Picture Book",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004744",
           "My Senses",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004743",
           "Olympics",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004745",
           "Outdoor Explorer",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004824",
           "Parables of Jesus",
           "Award",
           "Multi-Level Awards",
-          ""
+          "$1.25"
         ],
         [
           "004747",
           "Pearly Gates",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004829",
           "Piñata Craft Award",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004826",
           "Photo Fun",
           "Award",
           "Multi-Level Awards",
-          ""
+          "$1.25"
         ],
         [
           "004746",
           "Postcards",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004827",
           "Potato",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004825",
           "Prayer",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004828",
           "Prayer Warrior",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004830",
           "Purity",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004748",
           "Rainbow Promise",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004820",
           "Reading I",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004821",
           "Reading II",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004822",
           "Reading III",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004823",
           "Reading IV",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004840",
           "Reporter",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004850",
           "Road Safety",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004819",
           "Rocket Fun",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004870",
           "Safe Water",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004860",
           "Safety Specialist",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004862",
           "Sand Art",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004885",
           "Saving Animals",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004886",
           "Seasons",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004887",
           "Seeds",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004890",
           "Sewing Fun",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004895",
           "Sign Language",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004910",
           "Skater",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004920",
           "Skier",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004923",
           "Snowshoeing",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004930",
           "Spotter",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004933",
           "Stamping Fun Art",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004934",
           "Stay Safe",
           "Award",
           "Multi-Level Awards",
-          ""
+          "$1.25"
         ],
         [
           "004935",
           "Steps to Jesus",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004940",
           "Swimmer I",
           "Award",
           "Busy Bee",
-          ""
+          "$1.25"
         ],
         [
           "004950",
           "Swimmer II",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004861",
           "Tabernacle",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004952",
           "Talent",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004585",
           "Technology",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004955",
           "Temperance",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004582",
           "Ten Commandments",
           "Award",
           "",
-          ""
+          "$1.25"
         ],
         [
           "004956",
           "Three Angels",
           "Award",
           "Multi-Level Awards",
-          ""
+          "$1.25"
         ],
         [
           "004957",
           "Tin Can Fun",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004960",
           "Trees",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004970",
           "Troubadour",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004975",
           "Weather",
           "Award",
           "Helping Hand",
-          ""
+          "$1.25"
         ],
         [
           "004985",
           "Whale",
           "Award",
           "Sunbeam",
-          ""
+          "$1.25"
         ],
         [
           "004990",
           "Wise Steward",
           "Award",
           "Builder",
-          ""
+          "$1.25"
         ],
         [
           "004993",
           "Women of the Bible",
           "Award",
+          "",
+          "$1.25"
+        ],
+        [
+          "",
+          "",
+          "",
           "",
           ""
         ],
@@ -8111,47 +7840,54 @@
           "Caring for God's Creation Patch",
           "Round Patch",
           "",
-          ""
+          "$2.25"
         ],
         [
           "002912",
           "Community Service Patch",
           "Round Patch",
           "",
-          ""
+          "$2.25"
         ],
         [
           "002915",
           "Evangelism Patch",
           "Round Patch",
           "",
-          ""
+          "$2.25"
         ],
         [
           "002916",
           "Excellence in Reading Patch",
           "Round Patch",
           "",
-          ""
+          "$2.25"
         ],
         [
           "002913",
           "Health and Safety Patch",
           "Round Patch",
           "",
-          ""
+          "$2.25"
         ],
         [
           "002911",
           "Leadership Patch",
           "Round Patch",
           "",
-          ""
+          "$2.25"
         ],
         [
           "002909",
           "Spiritual Growth Patch",
           "Round Patch",
+          "",
+          "$2.25"
+        ],
+        [
+          "",
+          "",
+          "",
           "",
           ""
         ],
@@ -8911,7 +8647,13 @@
         "PANTS",
         "AVAILABLE"
       ],
-      "rows": []
+      "rows": [
+        [
+          "",
+          "NO PANTS AVAILABLE",
+          ""
+        ]
+      ]
     },
     "[\"adventurer\",\"Uniform-Boy.svg\",\"shirt\"]": {
       "columns": [
@@ -9206,6 +8948,11 @@
           "$47.95"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "002940",
           "Staff Sleeve Strip - Director",
           "$1.95"
@@ -9231,6 +8978,11 @@
           "$3.95"
         ],
         [
+          "",
+          "",
+          ""
+        ],
+        [
           "009842",
           "Mid-America Union Patch 3\"",
           "$3.50"
@@ -9244,6 +8996,11 @@
           "009028",
           "Southern Union Patch",
           "$2.50"
+        ],
+        [
+          "",
+          "",
+          ""
         ],
         [
           "009039",
