@@ -88,6 +88,18 @@
       outline: 3px solid #fff;
       outline-offset: 5px;
     }
+    .master-edit-link {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      z-index: 10;
+    }
+    .master-edit-link:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -2px;
+    }
     @media (max-width: 600px) {
       .menu {
         grid-template-columns: 1fr;
@@ -112,6 +124,7 @@
   </style>
 </head>
 <body>
+  <a class="master-edit-link" href="AS-master-edit.html" aria-label="Open master editor"></a>
   <div class="background background-first" aria-hidden="true"></div>
   <div class="background background-second" aria-hidden="true"></div>
   <main>
