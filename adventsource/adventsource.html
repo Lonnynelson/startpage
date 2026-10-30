@@ -319,6 +319,7 @@
     <input id="backup-file" type="file" accept="application/json,.json" hidden>
     <p>Backup All includes all currently displayed tables, column titles, and rows.
       Use Save Table first to include your current edits.</p>
+    <p>Edit Table supports 3 to 7 columns per table using the Number of columns selector.</p>
     <p>Restore from Backup replaces the displayed tables only until the next page load or refresh.</p>
     <p>Every page load fetches the latest uniform-details-backup.json from https://lonnystartpage.pages.dev/adventsource/.
       Saved browser data is neither read nor overwritten.</p>
@@ -382,6 +383,7 @@
     const tableEditor = document.getElementById('table-editor');
     const shirtTables = document.getElementById('shirt-tables');
     const uniformFiles = new Set(Array.from(uniformButtons, button => button.dataset.svg));
+    const supportedColumnCounts = [3, 4, 5, 6, 7];
     const pathfinderPantsTitles = {
       'Uniform-Woman.svg': ["Women's Pants", "Women's Skirts"],
       'Uniform-Boy.svg': ["Boy's Pants", "Husky Boy's Pants"],
@@ -438,7 +440,7 @@
           throw new Error('A table has an unknown program, uniform, or item.');
         }
         if (!table || !Array.isArray(table.columns) ||
-            ![3, 4, 5, 6].includes(table.columns.length) ||
+            !supportedColumnCounts.includes(table.columns.length) ||
             !table.columns.every(column => typeof column === 'string') ||
             !Array.isArray(table.rows) ||
             !table.rows.every(row => Array.isArray(row) &&
@@ -728,7 +730,7 @@
       countLabel.textContent = 'Number of columns';
       const countSelect = document.createElement('select');
       countSelect.setAttribute('aria-label', 'Number of columns');
-      [3, 4, 5, 6].forEach(count => {
+      supportedColumnCounts.forEach(count => {
         const option = document.createElement('option');
         option.value = String(count);
         option.textContent = String(count);

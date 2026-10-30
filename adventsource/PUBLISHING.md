@@ -21,6 +21,13 @@ The public page's restore control is disabled while published data is loading
 so that a late network response cannot overwrite a temporary restore.
 These changes do not alter the master editor's storage or publishing behavior.
 
+Both `AS-master-edit.html` and `adventsource.html` support 3 through 7 columns
+per uniform table, including stacked tables. In **Edit Table**, choose
+**Number of columns**, edit the headers and cells, then use **Save Table**.
+Seven-column tables are supported in backups, restores, the master editor's
+saved browser data, and the public page's published JSON loading. The public
+page's existing hidden edit controls and temporary-edit behavior are unchanged.
+
 ## Pathfinder T-shirt catalog
 
 [PF-Shirts.html](PF-Shirts.html) loads
