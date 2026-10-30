@@ -45,6 +45,7 @@
       min-height: 100vh;
       min-height: 100svh;
       padding: clamp(1.25rem, 5vw, 4rem);
+      padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
       background: rgba(0, 0, 0, 0.25);
     }
     h1 {
@@ -100,6 +101,28 @@
       outline: 2px solid #fff;
       outline-offset: -2px;
     }
+    .random-fun-link {
+      position: fixed;
+      bottom: max(1rem, env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      padding: 0.65rem 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 999px;
+      background: rgba(12, 29, 38, 0.85);
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .random-fun-link:hover {
+      background: rgba(12, 29, 38, 1);
+    }
+    .random-fun-link:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 3px;
+    }
     @media (max-width: 600px) {
       .menu {
         grid-template-columns: 1fr;
@@ -138,5 +161,24 @@
       <a href="ADV-Shirts.html">Adventurer T-Shirts</a>
     </nav>
   </main>
+  <a class="random-fun-link" href="../Random_Image.html" title="Open a random fun page">Random Fun</a>
+  <script>
+    const randomFunLink = document.querySelector('.random-fun-link');
+    const funPages = [
+      '../Random_Image.html',
+      '../QR_Code_Gennerator.html',
+      '../GuitarTuner.html',
+      '../FreePhotos.html',
+      '../POP/index.html',
+      '../Earthquake.html',
+      '../colorPalette.html'
+    ];
+    function chooseFunPage() {
+      randomFunLink.href = funPages[Math.floor(Math.random() * funPages.length)];
+    }
+    chooseFunPage();
+    randomFunLink.addEventListener('click', chooseFunPage);
+    randomFunLink.addEventListener('auxclick', chooseFunPage);
+  </script>
 </body>
 </html>
