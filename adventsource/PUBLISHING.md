@@ -1,5 +1,30 @@
 # Public Uniform Guide data
 
+## Interactive insignia placement
+
+[Placement.html](Placement.html) is a standalone, client-side NAD Pathfinder
+placement builder, linked from the AdventSource home page. Deploy it with
+`placement.js`, `placement.css`, `page-background.css`, the two AdventSource
+background images, `favicon.png`, and the entire `assets/placement/` directory.
+That directory contains the supplied PNG artwork and the 2025 source PDF.
+No server, remote service, or browser storage is required; selections last until
+the page is reset or closed. The print button prints the preview and placement notes.
+The fixed bottom-left Home button returns to `index.html` and is hidden when printing.
+
+The form shows earned level pins/chevrons and the highest earned name strip.
+Advanced bars are selected independently and packed two per row without gaps.
+The staff/Pathfinder selector prevents staff-only name plates and service stars
+on youth uniforms, and prevents youth Good Conduct bars and TLT level stars on
+staff shirts. Position C permits one TLT/Master TLT pin; position D permits one
+eligible star. Captain/scribe artwork is centered on the wearer's **right**
+pocket (the left side of the front-view diagram).
+
+The sleeve and Master Guide artwork is explicitly schematic; custom club,
+conference, and union text is illustrative. The supplied PBE image shows sample
+hanging bars, and supplied service stars show year/level 1. These are identified
+in the form, not presented as earned-year configuration. The preview is not a
+scale sewing template. Source measurements and a local PDF link accompany it.
+
 The public `adventsource.html` fetches
 `https://lonnystartpage.pages.dev/adventsource/uniform-details-backup.json`
 on every page load and refresh with `cache: 'no-store'`, regardless of where

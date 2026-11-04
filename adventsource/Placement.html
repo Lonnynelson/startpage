@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An interactive North American Division Pathfinder insignia placement guide. Select earned insignia and preview their pocket and sleeve locations.">
+  <title>Placement</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="page-background.css">
+  <link rel="stylesheet" href="placement.css">
+  <script src="placement.js" defer></script>
+</head>
+<body>
+  <div class="page-background page-background-first" aria-hidden="true"></div>
+  <div class="page-background page-background-second" aria-hidden="true"></div>
+  <header>
+    <a href="index.html">AdventSource home</a>
+    <a href="adventsource.html">Uniform Guide</a>
+    <h1>Insignia Placement</h1>
+    <p>North American Division &middot; Pathfinder uniform</p>
+  </header>
+  <main class="placement-layout">
+    <section class="panel controls" aria-labelledby="selection-heading">
+      <h2 id="selection-heading">Build your uniform</h2>
+      <p>Select only insignia you have earned or are authorized to wear.</p>
+      <noscript><p class="error">JavaScript is required for the interactive preview. Use the linked PDF for placement instructions.</p></noscript>
+      <form id="placement-form">
+        <fieldset>
+          <legend>Wearer</legend>
+          <label for="wearer">Uniform worn by</label>
+          <select id="wearer" name="wearer">
+            <option value="pathfinder">Pathfinder / Teen Leadership Training</option>
+            <option value="staff">Adult staff</option>
+          </select>
+          <p class="hint">Name plates are staff-only. Good Conduct bars and TLT level stars are not worn on staff shirts.</p>
+        </fieldset>
+        <fieldset>
+          <legend>Investiture Achievement</legend>
+          <p class="hint">Earned levels show as pins and sleeve chevrons. The highest earned level supplies the name strip.</p>
+          <div id="level-options" class="option-grid"></div>
+          <label class="check"><input type="checkbox" id="master-guide" name="master-guide"> Invested Master Guide</label>
+          <p class="hint">Master Guides wear the star patch alone until all six levels are earned; then they wear the star/chevron combination.</p>
+          <label class="check"><input type="checkbox" id="show-strip" name="show-strip" checked> Show highest earned name strip</label>
+          <label class="check"><input type="checkbox" id="show-pins" name="show-pins" checked> Show earned level pins</label>
+          <label class="check"><input type="checkbox" id="show-chevrons" name="show-chevrons" checked> Show earned sleeve chevrons / Master Guide patch</label>
+        </fieldset>
+        <fieldset>
+          <legend>Advanced level ribbon bars</legend>
+          <p class="hint">Select earned advanced levels independently. Bars pack together without gaps, two per row.</p>
+          <div id="ribbon-options" class="option-grid"></div>
+          <label class="check"><input type="checkbox" id="good-conduct" name="good-conduct"> Good Conduct Award</label>
+        </fieldset>
+        <fieldset>
+          <legend>Left pocket pins</legend>
+          <label class="check"><input type="checkbox" id="baptismal" name="baptismal"> A &mdash; Baptismal pin</label>
+          <label class="check"><input type="checkbox" id="pbe" name="pbe"> B &mdash; Pathfinder Bible Experience pin</label>
+          <p class="hint">The supplied PBE graphic includes sample hanging bars; use only the current year's earned bars on the uniform.</p>
+          <label for="tlt">C &mdash; TLT pin (one only)</label>
+          <select id="tlt" name="tlt">
+            <option value="">None</option>
+            <option value="tlt">TLT</option>
+            <option value="master-tlt">Master TLT</option>
+          </select>
+          <label for="service">D &mdash; Service / level star (one only)</label>
+          <select id="service" name="service">
+            <option value="">None</option>
+            <option value="tlt-star">TLT level star</option>
+            <option value="staff-star" disabled>Staff service star (staff only)</option>
+          </select>
+          <p class="hint">The supplied star artwork illustrates year/level 1.</p>
+        </fieldset>
+        <fieldset>
+          <legend>Right pocket leadership plate</legend>
+          <label for="leadership">Unit leadership plate</label>
+          <select id="leadership" name="leadership">
+            <option value="">None</option>
+            <option value="Captain">Captain</option>
+            <option value="Scribe">Scribe</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <legend>Right chest name plate</legend>
+          <label class="check"><input type="checkbox" id="nameplate" name="nameplate" disabled> Show staff name plate</label>
+          <label for="staff-name">Name on plate</label>
+          <input type="text" id="staff-name" name="staff-name" maxlength="28" placeholder="YOUR NAME" disabled autocomplete="off">
+          <p class="hint">Centered just above the right pocket, or in the equivalent position on the sash if it covers the shirt.</p>
+        </fieldset>
+        <fieldset>
+          <legend>Right sleeve</legend>
+          <label class="check"><input type="checkbox" id="club-crest" name="club-crest" checked> Club name crest</label>
+          <label for="club-name">Club name</label>
+          <input type="text" id="club-name" name="club-name" maxlength="26" placeholder="CLUB NAME" autocomplete="off">
+          <label for="staff-strip">Staff / TLT sleeve strip</label>
+          <select id="staff-strip" name="staff-strip">
+            <option value="">None</option>
+            <option value="TLT">Teen Leadership Training</option>
+            <option value="DIRECTOR" disabled>Director</option>
+            <option value="DEPUTY DIRECTOR" disabled>Deputy Director</option>
+            <option value="INSTRUCTOR" disabled>Instructor</option>
+            <option value="COUNSELOR" disabled>Counselor</option>
+            <option value="PASTOR" disabled>Pastor</option>
+            <option value="ASSOCIATE DIRECTOR" disabled>Associate Director</option>
+            <option value="AREA COORDINATOR" disabled>Area Coordinator</option>
+          </select>
+          <label class="check"><input type="checkbox" id="triangle" name="triangle" checked> Pathfinder triangle patch</label>
+        </fieldset>
+        <fieldset>
+          <legend>Left sleeve</legend>
+          <label class="check"><input type="checkbox" id="conference" name="conference"> Conference patch (optional)</label>
+          <label for="conference-name">Conference</label>
+          <input type="text" id="conference-name" name="conference-name" maxlength="26" placeholder="CONFERENCE" autocomplete="off">
+          <label class="check"><input type="checkbox" id="union" name="union" disabled> Union patch (below conference patch)</label>
+          <label for="union-name">Union</label>
+          <input type="text" id="union-name" name="union-name" maxlength="26" placeholder="UNION" disabled autocomplete="off">
+          <label class="check"><input type="checkbox" id="world" name="world" checked> Pathfinder World patch</label>
+        </fieldset>
+        <div class="actions">
+          <button type="reset">Reset selections</button>
+          <button type="button" id="clear-items">Clear all items</button>
+          <button type="button" id="print-placement">Print placement</button>
+        </div>
+      </form>
+    </section>
+    <section class="panel preview" aria-labelledby="preview-heading">
+      <div class="preview-heading">
+        <h2 id="preview-heading">Your placement preview</h2>
+        <span id="selection-status" role="status" aria-live="polite"></span>
+      </div>
+      <p><strong>Front / inspector's view.</strong> Left and right refer to the person wearing the uniform.</p>
+      <div id="asset-error" class="error" role="alert" hidden></div>
+      <svg id="uniform-preview" viewBox="0 0 1000 1260" role="img" aria-labelledby="uniform-title uniform-description" xmlns="http://www.w3.org/2000/svg">
+        <title id="uniform-title">Selected Pathfinder insignia placement</title>
+        <desc id="uniform-description">Enlarged right and left chest pockets above separate right and left sleeve diagrams. The preview updates as items are selected.</desc>
+        <defs>
+          <linearGradient id="fabric" x2="0.8" y2="1">
+            <stop stop-color="#dfd0b7"/>
+            <stop offset="1" stop-color="#c5b395"/>
+          </linearGradient>
+        </defs>
+        <g class="diagram-label">
+          <text x="255" y="35">RIGHT CHEST</text>
+          <text x="745" y="35">LEFT CHEST</text>
+          <text x="255" y="580">RIGHT SLEEVE</text>
+          <text x="745" y="580">LEFT SLEEVE</text>
+        </g>
+        <g id="chest-base"></g>
+        <g id="chest-items"></g>
+        <g id="sleeve-base"></g>
+        <g id="sleeve-items"></g>
+      </svg>
+      <p class="hint">Placement diagram, not a sewing template. Pockets and sleeves are enlarged separately; artwork sizes are illustrative. Sleeve patches and Master Guide insignia are schematic, not official artwork.</p>
+      <h3>Placement notes</h3>
+      <ul id="placement-notes"></ul>
+      <details>
+        <summary>Source &amp; important rules</summary>
+        <p>Based on <a href="assets/placement/PathfinderUniformGuide_2025.pdf#page=5" target="_blank" rel="noopener">Pathfinder Uniform Guide (2025), NAD Insignia and Placement</a>, PDF pages 5&ndash;8 (printed pages 10&ndash;13), with eligibility notes on subsequent pages.</p>
+        <ul>
+          <li>One pin per pocket-flap location: A Baptismal; B PBE; C TLT or Master TLT; D TLT level star or Staff Service Star.</li>
+          <li>Earned level pins run from lowest to highest left-to-right in this front view; the highest is at the wearer's left. No gaps for skipped levels.</li>
+          <li>Advanced bars sit above the highest earned name strip. Good Conduct sits above the advanced bars.</li>
+          <li>Captain and scribe plates are centered on the wearer's right pocket (left side of this front view).</li>
+          <li>Use your actual conference/union patch and approved club crest. This preview does not authorize insignia or replace conference guidance.</li>
+        </ul>
+      </details>
+    </section>
+  </main>
+  <a class="home-button" href="index.html" aria-label="Home" title="AdventSource home">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <path d="M3 10 12 3 21 10M5 9v12h5v-7h4v7h5V9"/>
+    </svg>
+  </a>
+</body>
+</html>
