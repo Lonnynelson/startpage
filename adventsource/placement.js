@@ -117,9 +117,6 @@
     service.querySelector('[value="tlt-star"]').disabled = staff;
     service.querySelector('[value="staff-star"]').disabled = !staff;
     if (service.selectedOptions[0].disabled) service.value = '';
-    const strip = document.getElementById('staff-strip');
-    for (const option of strip.options) option.disabled = !staff && option.value !== '' && option.value !== 'TLT';
-    if (strip.selectedOptions[0].disabled) strip.value = '';
     setCheckboxAvailability('union', checked('conference'));
   }
 
@@ -190,10 +187,10 @@
       image(sleeves, 'Right_Sleeve_Club_Crest.png', 167, 653, 176, 77, 'Club name crest');
       addNote('Right sleeve crest: centered 3/4 in below the shoulder seam; crest is 4 in wide.');
     }
-    if (value('staff-strip')) {
-      image(sleeves, 'Right_Sleeve_Role.png', 180, rightY, 150, 48, `${value('staff-strip')} sleeve strip`);
+    if (checked('staff-strip')) {
+      image(sleeves, 'Right_Sleeve_Role.png', 180, rightY, 150, 48, 'Staff / TLT sleeve strip');
       rightY += 59;
-      addNote(`Right sleeve role strip (${value('staff-strip')}): centered 1/4 in below the lowest point of the club crest; one strip only. The supplied artwork shows sample role text.`);
+      addNote('Right sleeve role strip: centered 1/4 in below the lowest point of the club crest; one strip only. The supplied artwork shows sample role text; wear only your authorized role strip.');
     }
     if (checked('triangle')) {
       image(sleeves, 'Right_Sleeve_Uniform_Triangle.png', 195, rightY, 120, 121, 'Pathfinder triangle patch');
