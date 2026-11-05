@@ -56,23 +56,6 @@
     });
   }
 
-  function badge(parent, x, y, width, height, label, fill = '#be2428', color = '#ffdc00') {
-    element('rect', { x, y, width, height, rx: 1, fill, stroke: '#ffcf00', 'stroke-width': 3 }, parent);
-    text(parent, x + width / 2, y + height / 2 + 5, label, {
-      fill: color, 'font-size': Math.min(17, width / Math.max(label.length, 1) * 1.5),
-      'font-weight': 700
-    });
-  }
-
-  function star(parent, x, y, radius, fill) {
-    const points = Array.from({ length: 10 }, (_, index) => {
-      const angle = -Math.PI / 2 + index * Math.PI / 5;
-      const r = index % 2 === 0 ? radius : radius * 0.42;
-      return `${x + Math.cos(angle) * r},${y + Math.sin(angle) * r}`;
-    }).join(' ');
-    element('polygon', { points, fill, stroke: '#ffcf00', 'stroke-width': 3 }, parent);
-  }
-
   function addNote(content) {
     const li = document.createElement('li');
     li.textContent = content;
@@ -112,7 +95,7 @@
     for (const [letter, x] of [['A', 625], ['B', 680], ['C', 810], ['D', 865]]) {
       text(base, x, 305, letter, { class: 'slot' });
     }
-    text(base, 255, 535, 'Staff name plate above this pocket', { class: 'diagram-note' });
+    text(base, 255, 535, 'Name tag above this pocket', { class: 'diagram-note' });
     text(base, 745, 535, 'Pins A / B / C / D on the flap', { class: 'diagram-note' });
     const sleeveBase = document.getElementById('sleeve-base');
     for (const x of [125, 615]) {
@@ -130,8 +113,6 @@
       if (!available) control.checked = false;
     };
     setCheckboxAvailability('good-conduct', !staff);
-    setCheckboxAvailability('nameplate', staff);
-    document.getElementById('staff-name').disabled = !staff || !checked('nameplate');
     const service = document.getElementById('service');
     service.querySelector('[value="tlt-star"]').disabled = staff;
     service.querySelector('[value="staff-star"]').disabled = !staff;
@@ -140,16 +121,13 @@
     for (const option of strip.options) option.disabled = !staff && option.value !== '' && option.value !== 'TLT';
     if (strip.selectedOptions[0].disabled) strip.value = '';
     setCheckboxAvailability('union', checked('conference'));
-    document.getElementById('union-name').disabled = !checked('union');
-    document.getElementById('conference-name').disabled = !checked('conference');
-    document.getElementById('club-name').disabled = !checked('club-crest');
   }
 
   function drawChest(earned, advanced) {
     const master = checked('master-guide');
     if (checked('show-strip') && (earned.length || master)) {
       if (master) {
-        badge(item(chest, 'Master Guide name strip'), 660, 163, 170, 45, 'MASTER GUIDE', '#ffc34c', '#ed2024');
+        image(chest, 'Left_Pocket_Master_Guide_Name_Strip.png', 660, 152, 170, 56, 'Master Guide name strip');
       } else {
         const level = earned[earned.length - 1];
         image(chest, `Left_Pocket_Name_Strip_${level.name}.png`, 660, 155, 170, 53, `${level.name} name strip`);
@@ -164,8 +142,7 @@
       if (earned.length) addNote('Level pins: centered across the upper flap, highest level at the wearer\'s left; skipped levels leave no gaps.');
     }
     if (master) {
-      const group = item(chest, 'Master Guide pin');
-      star(group, 745, 246, 13, '#146238');
+      image(chest, 'Left_Pocket_Master_Guide_Pin.png', 732, 233, 26, 26, 'Master Guide pin');
       addNote('Master Guide pin: centered on the flap, above the level pins.');
     }
     // Lowest earned bars form the bottom row; an incomplete top row stays centered.
@@ -199,75 +176,60 @@
       addNote('Unit leadership plate: centered on the wearer\'s right pocket (left side of this front view).');
     }
     if (checked('nameplate')) {
-      const group = item(chest, 'Staff name plate');
+      const group = item(chest, 'Name tag');
       element('rect', { x: 145, y: 174, width: 220, height: 34, fill: '#242323', stroke: '#d4c5a9' }, group);
-      text(group, 255, 197, value('staff-name').trim() || 'YOUR NAME', {
-        fill: '#fff', 'font-size': value('staff-name').length > 20 ? 11 : 15
-      });
-      addNote('Staff name plate: centered immediately above the right pocket; move to the equivalent sash position when covered.');
+      text(group, 255, 197, 'YOUR NAME', { fill: '#fff', 'font-size': 15 });
+      addNote('Name tag: centered immediately above the right pocket; move to the equivalent sash position when covered.');
     }
   }
 
   function drawSleeves(earned) {
     // Sleeve placement uses 44 diagram units per inch; chest details are enlarged separately.
-    let rightY = 729;
+    let rightY = 741;
     if (checked('club-crest')) {
-      const group = item(sleeves, 'Club name crest');
-      element('path', { d: 'M167 702 Q255 600 343 702 L328 718 Q255 638 182 718 Z', fill: '#be2428', stroke: '#ffcf00', 'stroke-width': 4 }, group);
-      const clubName = value('club-name').trim() || 'CLUB NAME';
-      text(group, 255, 683, clubName, { fill: '#fff', 'font-size': Math.min(13, 210 / clubName.length), 'font-weight': 700 });
+      image(sleeves, 'Right_Sleeve_Club_Crest.png', 167, 653, 176, 77, 'Club name crest');
       addNote('Right sleeve crest: centered 3/4 in below the shoulder seam; crest is 4 in wide.');
     }
     if (value('staff-strip')) {
-      badge(item(sleeves, 'Staff / TLT sleeve strip'), 180, rightY, 150, 28, value('staff-strip'));
-      rightY += 39;
-      addNote('Right sleeve role strip: centered 1/4 in below the lowest point of the club crest; one strip only.');
+      image(sleeves, 'Right_Sleeve_Role.png', 180, rightY, 150, 48, `${value('staff-strip')} sleeve strip`);
+      rightY += 59;
+      addNote(`Right sleeve role strip (${value('staff-strip')}): centered 1/4 in below the lowest point of the club crest; one strip only. The supplied artwork shows sample role text.`);
     }
     if (checked('triangle')) {
-      const group = item(sleeves, 'Pathfinder triangle patch');
-      element('path', { d: `M195 ${rightY} h120 L255 ${rightY + 110} Z`, fill: '#be2428', stroke: '#ffcf00', 'stroke-width': 4 }, group);
-      text(group, 255, rightY + 23, 'PATHFINDER', { fill: '#ffdc00', 'font-size': 12, 'font-weight': 700 });
-      element('path', { d: `M214 ${rightY + 35} h82 L255 ${rightY + 89} Z`, fill: '#fff', stroke: '#174d88', 'stroke-width': 3 }, group);
-      text(group, 255, rightY + 56, 'CLUB', { fill: '#174d88', 'font-size': 12, 'font-weight': 700 });
+      image(sleeves, 'Right_Sleeve_Uniform_Triangle.png', 195, rightY, 120, 121, 'Pathfinder triangle patch');
       addNote('Right sleeve triangle: centered 1/4 in below the crest, or 1/4 in below the role strip when worn.');
     }
     let leftY = 708;
     if (checked('conference')) {
-      const group = item(sleeves, 'Conference patch');
-      element('rect', { x: 657, y: 631, width: 176, height: 110, rx: 12, fill: '#e5e9d8', stroke: '#174d88', 'stroke-width': 3 }, group);
-      const conferenceName = value('conference-name').trim() || 'CONFERENCE';
-      text(group, 745, 691, conferenceName, { 'font-size': Math.min(12, 240 / conferenceName.length), 'font-weight': 700 });
-      leftY = 741;
+      image(sleeves, 'Left_Sleeve_Conference.png', 657, 631, 176, 73, 'Conference patch');
+      leftY = 704;
       addNote('Left sleeve conference patch: centered 1/4 in below the shoulder seam; standard size 4 x 2 1/2 in.');
       if (checked('union')) {
-        badge(item(sleeves, 'Union patch'), 657, leftY, 176, 44, value('union-name').trim() || 'UNION', '#174d88', '#fff');
-        leftY += 44;
+        image(sleeves, 'Left_Sleeve_Union.png', 657, leftY, 176, 63, 'Union patch');
+        leftY += 63;
         addNote('Union patch: directly below the conference patch with minimal space; standard size 4 x 1 in.');
       }
       leftY += 22;
     }
     if (checked('world')) {
-      const group = item(sleeves, 'Pathfinder World patch');
-      element('ellipse', { cx: 745, cy: leftY + 36, rx: 78, ry: 36, fill: '#ece8c1', stroke: '#174d88', 'stroke-width': 4 }, group);
-      element('ellipse', { cx: 745, cy: leftY + 36, rx: 36, ry: 33, fill: 'none', stroke: '#b3ad82', 'stroke-width': 1.5 }, group);
-      text(group, 745, leftY + 33, 'PATHFINDER', { fill: '#174d88', 'font-size': 13, 'font-weight': 700 });
-      text(group, 745, leftY + 51, 'WORLD', { fill: '#174d88', 'font-size': 11 });
+      image(sleeves, 'Left_Sleeve_World_Patch.png', 667, leftY, 156, 116, 'Pathfinder World patch');
       addNote(checked('conference')
         ? 'Left sleeve World patch: 1/2 in below the conference patch (below the union patch when present), centered on the sleeve crease.'
         : 'Left sleeve World patch: 2 in below the shoulder seam when no conference patch is worn.');
     }
-    leftY += 94;
+    leftY += 138;
     if (checked('show-chevrons')) {
       const master = checked('master-guide');
       if (master) {
-        const group = item(sleeves, earned.length === 6 ? 'Master Guide star/chevron combination patch' : 'Master Guide star patch');
-        star(group, 745, leftY + 30, 30, '#ffcf00');
-        text(group, 745, leftY + 35, 'MG', { 'font-size': 12, 'font-weight': 700 });
-        leftY += 63;
+        if (earned.length === 6) {
+          image(sleeves, 'Left_Sleeve_Master_Guide_Combination_Chevron.png', 677, leftY, 136, 231, 'Master Guide star/chevron combination patch');
+        } else {
+          image(sleeves, 'Left_Sleeve_Master_Guide_Star.png', 711, leftY, 68, 63, 'Master Guide star patch');
+        }
       }
-      if (!master || earned.length === 6) {
+      if (!master) {
         earned.slice().reverse().forEach(level => {
-          const group = master ? sleeves.lastElementChild : item(sleeves, `${level.name} sleeve chevron`);
+          const group = item(sleeves, `${level.name} sleeve chevron`);
           element('path', { d: `M677 ${leftY} l68 21 l68 -21 v17 l-68 21 l-68 -21 Z`, fill: level.color, stroke: '#ffcf00', 'stroke-width': 2 }, group);
           leftY += 17;
         });
@@ -300,11 +262,6 @@
   form.addEventListener('change', render);
   form.addEventListener('submit', event => event.preventDefault());
   form.addEventListener('reset', () => requestAnimationFrame(render));
-  document.getElementById('clear-items').addEventListener('click', () => {
-    for (const input of form.querySelectorAll('input[type="checkbox"]')) input.checked = false;
-    for (const select of form.querySelectorAll('select:not(#wearer)')) select.value = '';
-    render();
-  });
   document.getElementById('print-placement').addEventListener('click', () => window.print());
   render();
 })();

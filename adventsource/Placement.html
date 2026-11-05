@@ -32,7 +32,7 @@
             <option value="pathfinder">Pathfinder / Teen Leadership Training</option>
             <option value="staff">Adult staff</option>
           </select>
-          <p class="hint">Name plates are staff-only. Good Conduct bars and TLT level stars are not worn on staff shirts.</p>
+          <p class="hint">Name tags are available for all wearers. Good Conduct bars and TLT level stars are not worn on staff shirts.</p>
         </fieldset>
         <fieldset>
           <legend>Investiture Achievement</legend>
@@ -79,17 +79,13 @@
           </select>
         </fieldset>
         <fieldset>
-          <legend>Right chest name plate</legend>
-          <label class="check"><input type="checkbox" id="nameplate" name="nameplate" disabled> Show staff name plate</label>
-          <label for="staff-name">Name on plate</label>
-          <input type="text" id="staff-name" name="staff-name" maxlength="28" placeholder="YOUR NAME" disabled autocomplete="off">
+          <legend>Right chest name tag</legend>
+          <label class="check"><input type="checkbox" id="nameplate" name="nameplate"> Name Tag</label>
           <p class="hint">Centered just above the right pocket, or in the equivalent position on the sash if it covers the shirt.</p>
         </fieldset>
         <fieldset>
           <legend>Right sleeve</legend>
           <label class="check"><input type="checkbox" id="club-crest" name="club-crest" checked> Club name crest</label>
-          <label for="club-name">Club name</label>
-          <input type="text" id="club-name" name="club-name" maxlength="26" placeholder="CLUB NAME" autocomplete="off">
           <label for="staff-strip">Staff / TLT sleeve strip</label>
           <select id="staff-strip" name="staff-strip">
             <option value="">None</option>
@@ -102,21 +98,18 @@
             <option value="ASSOCIATE DIRECTOR" disabled>Associate Director</option>
             <option value="AREA COORDINATOR" disabled>Area Coordinator</option>
           </select>
+          <p class="hint">The supplied crest and role artwork show sample text. Your selected role appears in the placement notes.</p>
           <label class="check"><input type="checkbox" id="triangle" name="triangle" checked> Pathfinder triangle patch</label>
         </fieldset>
         <fieldset>
           <legend>Left sleeve</legend>
           <label class="check"><input type="checkbox" id="conference" name="conference"> Conference patch (optional)</label>
-          <label for="conference-name">Conference</label>
-          <input type="text" id="conference-name" name="conference-name" maxlength="26" placeholder="CONFERENCE" autocomplete="off">
           <label class="check"><input type="checkbox" id="union" name="union" disabled> Union patch (below conference patch)</label>
-          <label for="union-name">Union</label>
-          <input type="text" id="union-name" name="union-name" maxlength="26" placeholder="UNION" disabled autocomplete="off">
+          <p class="hint">Conference and union artwork are examples; wear your actual approved patches.</p>
           <label class="check"><input type="checkbox" id="world" name="world" checked> Pathfinder World patch</label>
         </fieldset>
         <div class="actions">
           <button type="reset">Reset selections</button>
-          <button type="button" id="clear-items">Clear all items</button>
           <button type="button" id="print-placement">Print placement</button>
         </div>
       </form>
@@ -148,7 +141,7 @@
         <g id="sleeve-base"></g>
         <g id="sleeve-items"></g>
       </svg>
-      <p class="hint">Placement diagram, not a sewing template. Pockets and sleeves are enlarged separately; artwork sizes are illustrative. Sleeve patches and Master Guide insignia are schematic, not official artwork.</p>
+      <p class="hint">Placement diagram, not a sewing template. Pockets and sleeves are enlarged separately; artwork sizes are illustrative. Sleeve patches and Master Guide insignia use supplied images; individual level chevrons remain schematic. Crest, role, conference, and union artwork show sample text.</p>
       <h3>Placement notes</h3>
       <ul id="placement-notes"></ul>
       <details>
