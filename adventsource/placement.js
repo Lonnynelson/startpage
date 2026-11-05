@@ -221,7 +221,7 @@
         if (earned.length === 6) {
           image(sleeves, 'Left_Sleeve_Master_Guide_Combination_Chevron.png', 677, leftY, 136, 231, 'Master Guide star/chevron combination patch');
         } else {
-          image(sleeves, 'Left_Sleeve_Master_Guide_Star.png', 711, leftY, 68, 63, 'Master Guide star patch');
+          image(sleeves, 'Left_Sleeve_Master_Guide_Star.png', 711, leftY, 136, 126, 'Master Guide star patch');
         }
       }
       if (!master) {
