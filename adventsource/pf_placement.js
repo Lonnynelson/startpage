@@ -169,14 +169,15 @@
       addNote('Service / level star: position D, not C. Only one star is worn; the supplied artwork shows 1.');
     }
     if (value('leadership')) {
-      image(chest, `Right_Pocket_${value('leadership')}.png`, 177, 417, 156, 42, `${value('leadership')} unit leadership plate`);
-      addNote('Unit leadership plate: centered on the wearer\'s right pocket (left side of this front view).');
+      image(chest, `Right_Pocket_${value('leadership')}.png`, 667, 417, 156, 42, `${value('leadership')} unit leadership plate`);
+      addNote('Unit leadership plate: centered on the wearer\'s left pocket (right side of this front view).');
     }
-    if (checked('nameplate')) {
-      const group = item(chest, 'Name tag');
-      element('rect', { x: 145, y: 174, width: 220, height: 34, fill: '#242323', stroke: '#d4c5a9' }, group);
-      text(group, 255, 197, 'YOUR NAME', { fill: '#fff', 'font-size': 15 });
-      addNote('Name tag: centered immediately above the right pocket; move to the equivalent sash position when covered.');
+    if (checked('nameplate') || checked('master-guide-nameplate')) {
+      const masterGuide = checked('master-guide-nameplate');
+      image(chest,
+        masterGuide ? 'Right_Pocket_Master_Guide_Name_Badge_.png' : 'Right_Pocket_Pathfinder_Name_Badge.png',
+        145, 150, 220, 61, masterGuide ? 'Master Guide name tag' : 'Pathfinder name tag');
+      addNote(`${masterGuide ? 'Master Guide' : 'Pathfinder'} name tag: centered immediately above the right pocket; move to the equivalent sash position when covered.`);
     }
   }
 
@@ -256,7 +257,14 @@
   addOptions();
   drawBase();
   form.addEventListener('input', render);
-  form.addEventListener('change', render);
+  form.addEventListener('change', event => {
+    if (event.target.id === 'nameplate' && checked('nameplate')) {
+      document.getElementById('master-guide-nameplate').checked = false;
+    } else if (event.target.id === 'master-guide-nameplate' && checked('master-guide-nameplate')) {
+      document.getElementById('nameplate').checked = false;
+    }
+    render();
+  });
   form.addEventListener('submit', event => event.preventDefault());
   form.addEventListener('reset', () => requestAnimationFrame(render));
   document.getElementById('print-placement').addEventListener('click', () => window.print());
