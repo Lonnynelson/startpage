@@ -2,9 +2,9 @@
 
 ## Interactive insignia placement
 
-[Placement.html](Placement.html) is a standalone, client-side NAD Pathfinder
+[PF_Placement.html](PF_Placement.html) is a standalone, client-side NAD Pathfinder
 placement builder, linked from the AdventSource home page. Deploy it with
-`placement.js`, `placement.css`, `page-background.css`, the two AdventSource
+`pf_placement.js`, `pf_placement.css`, `page-background.css`, the two AdventSource
 background images, `favicon.png`, and the entire `assets/placement/` directory.
 That directory contains the supplied PNG artwork and the 2025 source PDF.
 No server, remote service, or browser storage is required; selections last until
