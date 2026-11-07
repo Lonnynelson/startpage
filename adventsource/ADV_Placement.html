@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An interactive Adventurer insignia placement guide. Select insignia and preview their pocket and sleeve locations.">
+  <title>Adventurer Insignia Placement</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="page-background.css">
+  <link rel="stylesheet" href="pf_placement.css">
+  <style>
+    #uniform-preview[data-wearer="adventurer"] .pocket,
+    #uniform-preview[data-wearer="adventurer"] .sleeve { fill: url(#adventurer-fabric); }
+  </style>
+  <script src="adv_placement.js" defer></script>
+</head>
+<body>
+  <div class="page-background page-background-first" aria-hidden="true"></div>
+  <div class="page-background page-background-second" aria-hidden="true"></div>
+  <header>
+    <a href="index.html">AdventSource home</a>
+    <a href="adventsource.html">Uniform Guide</a>
+    <h1>Insignia Placement</h1>
+    <p>North American Division &middot; Adventurer uniform</p>
+  </header>
+  <main class="placement-layout">
+    <section class="panel controls" aria-labelledby="selection-heading">
+      <h2 id="selection-heading">Build your uniform</h2>
+      <p>Select only insignia you have earned or are authorized to wear.</p>
+      <noscript><p class="error">JavaScript is required for the interactive preview. Use the linked source for placement instructions.</p></noscript>
+      <form id="placement-form">
+        <fieldset>
+          <legend>Wearer</legend>
+          <label for="wearer">Uniform worn by</label>
+          <select id="wearer" name="wearer">
+            <option value="adventurer">Adventurer</option>
+            <option value="staff">Adult staff</option>
+            <option value="parent">Parent</option>
+          </select>
+        </fieldset>
+        <fieldset data-uniform-options>
+          <legend>Left pocket</legend>
+          <p class="hint">Select earned Adventurer class pins. They appear in ascending order, with the lowest toward the center of the shirt.</p>
+          <div id="level-options" class="option-grid"></div>
+          <label class="check"><input type="checkbox" id="master-guide"> Invested Master Guide (staff)</label>
+          <label class="check"><input type="checkbox" id="baptismal"> Baptismal pin (staff)</label>
+          <label class="check"><input type="checkbox" id="service"> Staff service star</label>
+          <p class="hint">The service star is an additional staff option, placed like the Pathfinder guide. The artwork shows year 7.</p>
+        </fieldset>
+        <fieldset id="parent-fieldset" hidden>
+          <legend>Parent pins</legend>
+          <p class="hint">Select earned parent pins. Their position in this preview is illustrative; check local guidance.</p>
+          <div id="parent-options" class="option-grid"></div>
+        </fieldset>
+        <fieldset data-uniform-options>
+          <legend>Right chest name tag</legend>
+          <label for="nameplate">Name tag</label>
+          <select id="nameplate">
+            <option value="">None</option>
+            <option value="adventurer">Adventurer name tag</option>
+            <option value="master-guide">Master Guide name tag</option>
+          </select>
+          <p class="hint">Centered above the right pocket, or in the equivalent position on the sash.</p>
+        </fieldset>
+        <fieldset data-uniform-options>
+          <legend>Right sleeve</legend>
+          <label class="check"><input type="checkbox" id="club-crest" checked> Club name crest</label>
+          <label class="check"><input type="checkbox" id="staff-strip"> Staff role strip</label>
+          <label class="check"><input type="checkbox" id="club-patch" checked> Adventurer club patch</label>
+          <p class="hint">Crest and staff strip artwork show sample text. Wear your approved club name and role.</p>
+        </fieldset>
+        <fieldset data-uniform-options>
+          <legend>Left sleeve</legend>
+          <label class="check"><input type="checkbox" id="conference"> Conference patch (optional)</label>
+          <label class="check"><input type="checkbox" id="union"> Union patch (below conference patch)</label>
+          <label class="check"><input type="checkbox" id="world" checked> Adventurer World patch</label>
+          <p class="hint">The conference and union arrangement follows the Pathfinder preview; use your approved patches and check local guidance.</p>
+        </fieldset>
+        <div class="actions">
+          <button type="reset">Reset selections</button>
+          <button type="button" id="print-placement">Print placement</button>
+        </div>
+      </form>
+    </section>
+    <section class="panel preview" aria-labelledby="preview-heading">
+      <div class="preview-heading">
+        <h2 id="preview-heading">How Your Uniform Should Look</h2>
+        <span id="selection-status" role="status" aria-live="polite"></span>
+      </div>
+      <p><strong>Front / inspector's view.</strong> Left and right refer to the person wearing the uniform.</p>
+      <div id="asset-error" class="error" role="alert" hidden></div>
+      <svg id="uniform-preview" data-wearer="adventurer" viewBox="0 0 1000 1260" role="img" aria-labelledby="uniform-title uniform-description" xmlns="http://www.w3.org/2000/svg">
+        <title id="uniform-title">Selected Adventurer insignia placement</title>
+        <desc id="uniform-description">Right and left chest pockets above separate right and left sleeve diagrams.</desc>
+        <defs>
+          <linearGradient id="fabric" x2="0.8" y2="1">
+            <stop stop-color="#f6f7fa"/>
+            <stop offset="1" stop-color="#d8e1eb"/>
+          </linearGradient>
+          <linearGradient id="adventurer-fabric" x2="0.8" y2="1">
+            <stop stop-color="#cce9f7"/>
+            <stop offset="1" stop-color="#a8d7ed"/>
+          </linearGradient>
+        </defs>
+        <g class="diagram-label">
+          <text x="255" y="35">RIGHT CHEST</text>
+          <text x="745" y="35">LEFT CHEST</text>
+          <text x="255" y="580">RIGHT SLEEVE</text>
+          <text x="745" y="580">LEFT SLEEVE</text>
+        </g>
+        <g id="chest-base"></g>
+        <g id="chest-items"></g>
+        <g id="sleeve-base"></g>
+        <g id="sleeve-items"></g>
+      </svg>
+      <p class="hint">This is an illustrative placement diagram, not a sewing template. Pockets and sleeves are enlarged separately. Check your conference guidance, especially for parent pins, service stars, conference and union patches.</p>
+      <h3>Placement notes</h3>
+      <ul id="placement-notes"></ul>
+      <details>
+        <summary>Source &amp; important rules</summary>
+        <p>Based on the <a href="https://www.clubministries.org/adventurers/adventurer-uniform/" target="_blank" rel="noopener">North American Division Adventurer uniform instructions</a>. The originally supplied guide was unavailable; local rules may differ.</p>
+        <ul>
+          <li>Class pins are placed on the left front pocket in ascending order, lowest toward the center of the shirt.</li>
+          <li>The Master Guide class strip is above the pocket only for an invested Master Guide. Staff Master Guides may wear the Master Guide pin and Adventurer star/chevron.</li>
+          <li>Adventurer awards and other club-related items may be displayed on the sash; Pathfinder honors, patches and pins should not be displayed on the Adventurer sash.</li>
+          <li>The staff service star and conference/union arrangement are additional options modeled on the Pathfinder page, not specified by the linked Adventurer instructions.</li>
+        </ul>
+      </details>
+    </section>
+  </main>
+  <a class="home-button" href="index.html" aria-label="Home" title="AdventSource home">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <path d="M3 10 12 3 21 10M5 9v12h5v-7h4v7h5V9"/>
+    </svg>
+  </a>
+</body>
+</html>

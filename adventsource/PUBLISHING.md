@@ -2,6 +2,19 @@
 
 ## Interactive insignia placement
 
+[ADV_Placement.html](ADV_Placement.html) is the Adventurer placement builder,
+linked from the AdventSource home page. Deploy it with `adv_placement.js`,
+`pf_placement.css`, `page-background.css`, the background images, `favicon.png`,
+and `assets/adventurer-placement/`. It uses the published NAD Adventurer
+uniform instructions, linked on the page; the originally requested PDF was
+unavailable. The Adventurer preview uses baby-blue fabric; staff and parent
+previews retain the light fabric. The Parent wearer option shows only parent
+pins; their placement is illustrative. The staff baptismal pin, staff service star,
+and conference/union arrangement are additional options modeled on the
+Pathfinder page, so check local guidance. The supplied service star shows year
+7. Selections stay in the page until reset or closed, and print includes the
+preview and placement notes.
+
 [PF_Placement.html](PF_Placement.html) is a standalone, client-side NAD Pathfinder
 placement builder, linked from the AdventSource home page. Deploy it with
 `pf_placement.js`, `pf_placement.css`, `page-background.css`, the two AdventSource
