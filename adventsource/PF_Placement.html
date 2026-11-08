@@ -21,57 +21,58 @@
   </header>
   <main class="placement-layout">
     <section class="panel controls" aria-labelledby="selection-heading">
-      <h2 id="selection-heading">Build your uniform</h2>
+      <h2 id="selection-heading">&#x25BC Select your uniform parts below.</h2>
       <p>Select only insignia you have earned or are authorized to wear.</p>
       <noscript><p class="error">JavaScript is required for the interactive preview. Use the linked PDF for placement instructions.</p></noscript>
       <form id="placement-form">
         <fieldset>
           <legend>Wearer</legend>
-          <label for="wearer">Uniform worn by</label>
+          <label for="wearer">Uniform worn by:</label>
           <select id="wearer" name="wearer">
-            <option value="pathfinder">Pathfinder / Teen Leadership Training</option>
-            <option value="staff">Adult staff</option>
+            <option value="pathfinder">Youth - Pathfinder/TLT</option>
+            <option value="staff">Adult - Staff</option>
           </select>
-          <p class="hint">Name tags are available for all wearers. Good Conduct bars and TLT level stars are not worn on staff shirts.</p>
+          <p class="hint">Name tags are available for all wearers.<br>
+            Good Conduct bars and TLT level stars are not worn by staff.</p>
         </fieldset>
         <fieldset>
-          <legend>Investiture Achievement</legend>
-          <p class="hint">Earned levels show as pins and sleeve chevrons. The highest earned level supplies the name strip.</p>
+          <legend>Investiture Achievement Levels</legend>
+          <p class="hint">Earned levels (Pins, Chevrons and the highest name strip).</p>
           <div id="level-options" class="option-grid"></div>
           <label class="check"><input type="checkbox" id="master-guide" name="master-guide"> Invested Master Guide</label>
-          <p class="hint">Master Guides wear the star patch alone until all six levels are earned; then they wear the star/chevron combination.</p>
+          <p class="hint">Master Guides wear the star patch alone until all six levels are earned; then they wear the Combination Chevron.</p>
           <label class="check"><input type="checkbox" id="show-strip" name="show-strip" checked> Show highest earned name strip</label>
           <label class="check"><input type="checkbox" id="show-pins" name="show-pins" checked> Show earned level pins</label>
           <label class="check"><input type="checkbox" id="show-chevrons" name="show-chevrons" checked> Show earned sleeve chevrons / Master Guide patch</label>
         </fieldset>
         <fieldset>
-          <legend>Advanced level ribbon bars</legend>
+          <legend>Advanced Level Ribbon Bars</legend>
           <p class="hint">Select earned advanced levels independently. Bars pack together without gaps, two per row.</p>
           <div id="ribbon-options" class="option-grid"></div>
           <label class="check"><input type="checkbox" id="good-conduct" name="good-conduct"> Good Conduct Award</label>
         </fieldset>
         <fieldset>
-          <legend>Left pocket pins</legend>
+          <legend>Left Pocket Pins</legend>
           <label class="check"><input type="checkbox" id="baptismal" name="baptismal"> A &mdash; Baptismal pin</label>
-          <label class="check"><input type="checkbox" id="pbe" name="pbe"> B &mdash; Pathfinder Bible Experience pin</label>
+          <label class="check"><input type="checkbox" id="pbe" name="pbe"> B &mdash; PBE Pin and Bars</label>
           <p class="hint">The supplied PBE graphic includes sample hanging bars; use only the current year's earned bars on the uniform.</p>
-          <label for="tlt">C &mdash; TLT pin (one only)</label>
+          <label for="tlt">C &mdash; TLT Pin (one only)</label>
           <select id="tlt" name="tlt">
             <option value="">None</option>
             <option value="tlt">TLT</option>
             <option value="master-tlt">Master TLT</option>
           </select>
-          <label for="service">D &mdash; Service / level star (one only)</label>
+          <label for="service">D &mdash; Service / Level Star (one only)</label>
           <select id="service" name="service">
             <option value="">None</option>
-            <option value="tlt-star">TLT level star</option>
-            <option value="staff-star" disabled>Staff service star (staff only)</option>
+            <option value="tlt-star">TLT Level Star</option>
+            <option value="staff-star" disabled>Staff Service Star (staff only)</option>
           </select>
-          <p class="hint">The supplied star artwork illustrates year/level 1.</p>
+          <p class="hint">The supplied star artwork illustrates year/level 7.</p>
         </fieldset>
         <fieldset>
-          <legend>Left pocket leadership plate</legend>
-          <label for="leadership">Unit leadership plate</label>
+          <legend>Left Pocket Leadership Plate</legend>
+          <label for="leadership">Unit Leadership Plate</label>
           <select id="leadership" name="leadership">
             <option value="">None</option>
             <option value="Captain">Captain</option>
@@ -79,24 +80,24 @@
           </select>
         </fieldset>
         <fieldset>
-          <legend>Right chest name tag</legend>
-          <label class="check"><input type="checkbox" id="nameplate" name="nameplate"> Pathfinder Name Tag</label>
-          <label class="check"><input type="checkbox" id="master-guide-nameplate" name="master-guide-nameplate"> Master Guide Name Tag</label>
-          <p class="hint">Centered just above the right pocket, or in the equivalent position on the sash if it covers the shirt.</p>
+          <legend>Right Pocket Name Badge</legend>
+          <label class="check"><input type="checkbox" id="nameplate" name="nameplate"> Pathfinder Name Badge</label>
+          <label class="check"><input type="checkbox" id="master-guide-nameplate" name="master-guide-nameplate"> Master Guide Name Badge</label>
+          <p class="hint">Centered just above the right pocket, or in the equivalent position on the sash should it cover the shirt or blouse.</p>
         </fieldset>
         <fieldset>
           <legend>Right sleeve</legend>
-          <label class="check"><input type="checkbox" id="club-crest" name="club-crest" checked> Club name crest</label>
-          <label class="check"><input type="checkbox" id="staff-strip" name="staff-strip"> Staff / TLT sleeve strip</label>
-          <p class="hint">The supplied crest and role artwork show sample text. Wear only your authorized role strip.</p>
-          <label class="check"><input type="checkbox" id="triangle" name="triangle" checked> Pathfinder triangle patch</label>
+          <label class="check"><input type="checkbox" id="club-crest" name="club-crest" checked> Club Name Crest</label>
+          <label class="check"><input type="checkbox" id="staff-strip" name="staff-strip"> Staff / TLT Sleeve Strip</label>
+          <p class="hint">The supplied crest and role artwork show sample text. Wear only your authorized Staff Strip (role) strip.</p>
+          <label class="check"><input type="checkbox" id="triangle" name="triangle" checked> Pathfinder Triangle Patch</label>
         </fieldset>
         <fieldset>
           <legend>Left sleeve</legend>
-          <label class="check"><input type="checkbox" id="conference" name="conference"> Conference patch (optional)</label>
-          <label class="check"><input type="checkbox" id="union" name="union" disabled> Union patch (below conference patch)</label>
+          <label class="check"><input type="checkbox" id="conference" name="conference"> Conference Patch (optional)</label>
+          <label class="check"><input type="checkbox" id="union" name="union" disabled> Union Patch (below conference patch)</label>
           <p class="hint">Conference and union artwork are examples; wear your actual approved patches.</p>
-          <label class="check"><input type="checkbox" id="world" name="world" checked> Pathfinder World patch</label>
+          <label class="check"><input type="checkbox" id="world" name="world" checked> Pathfinder World Patch</label>
         </fieldset>
         <div class="actions">
           <button type="reset">Reset selections</button>
@@ -106,7 +107,7 @@
     </section>
     <section class="panel preview" aria-labelledby="preview-heading">
       <div class="preview-heading">
-        <h2 id="preview-heading">How Your Uniform Should Look</h2>
+        <h2 id="preview-heading">&#x25BC This is how your uniform should look.</h2>
         <span id="selection-status" role="status" aria-live="polite"></span>
       </div>
       <p><strong>Front / inspector's view.</strong> Left and right refer to the person wearing the uniform.</p>
@@ -132,7 +133,7 @@
         <g id="sleeve-items"></g>
       </svg>
       <p class="hint">Placement diagram, not a sewing template. Pockets and sleeves are enlarged separately; artwork sizes are illustrative. Sleeve patches and Master Guide insignia use supplied images; individual level chevrons remain schematic. Crest, role, conference, and union artwork show sample text.</p>
-      <h3>Placement notes</h3>
+      <h3>Exact Placements, Measurements, and Notes</h3>
       <ul id="placement-notes"></ul>
       <details>
         <summary>Source &amp; important rules</summary>

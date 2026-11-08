@@ -25,36 +25,36 @@
   </header>
   <main class="placement-layout">
     <section class="panel controls" aria-labelledby="selection-heading">
-      <h2 id="selection-heading">Build your uniform</h2>
+      <h2 id="selection-heading">&#x25BC Select your uniform parts below.</h2>
       <p>Select only insignia you have earned or are authorized to wear.</p>
       <noscript><p class="error">JavaScript is required for the interactive preview. Use the linked source for placement instructions.</p></noscript>
       <form id="placement-form">
         <fieldset>
           <legend>Wearer</legend>
-          <label for="wearer">Uniform worn by</label>
+          <label for="wearer">Uniform worn by:</label>
           <select id="wearer" name="wearer">
             <option value="adventurer">Adventurer</option>
-            <option value="staff">Adult staff</option>
+            <option value="staff">Adult Staff</option>
             <option value="parent">Parent</option>
           </select>
         </fieldset>
         <fieldset data-uniform-options>
-          <legend>Left pocket</legend>
+          <legend>Left Pocket</legend>
           <p class="hint">Select earned Adventurer class pins. They appear in ascending order, with the lowest toward the center of the shirt.</p>
           <div id="level-options" class="option-grid"></div>
-          <label class="check"><input type="checkbox" id="master-guide"> Invested Master Guide (staff)</label>
-          <label class="check"><input type="checkbox" id="baptismal"> Baptismal pin (staff)</label>
-          <label class="check"><input type="checkbox" id="service"> Staff service star</label>
+          <label class="check"><input type="checkbox" id="master-guide"> Invested Master Guide (Staff)</label>
+          <label class="check"><input type="checkbox" id="baptismal"> Baptismal Pin (Staff)</label>
+          <label class="check"><input type="checkbox" id="service"> Staff Service Star</label>
           <p class="hint">The service star is an additional staff option, placed like the Pathfinder guide. The artwork shows year 7.</p>
         </fieldset>
         <fieldset id="parent-fieldset" hidden>
-          <legend>Parent pins</legend>
+          <legend>Parent Pins</legend>
           <p class="hint">Select earned parent pins. Their position in this preview is illustrative; check local guidance.</p>
           <div id="parent-options" class="option-grid"></div>
         </fieldset>
         <fieldset data-uniform-options>
-          <legend>Right chest name tag</legend>
-          <label for="nameplate">Name tag</label>
+          <legend>Right Pocket Name Badge</legend>
+          <label for="nameplate">Name Badge</label>
           <select id="nameplate">
             <option value="">None</option>
             <option value="adventurer">Adventurer name tag</option>
@@ -84,10 +84,11 @@
     </section>
     <section class="panel preview" aria-labelledby="preview-heading">
       <div class="preview-heading">
-        <h2 id="preview-heading">How Your Uniform Should Look</h2>
+        <h2 id="preview-heading">&#x25BC This is how your uniform should look.</h2>
         <span id="selection-status" role="status" aria-live="polite"></span>
       </div>
       <p><strong>Front / inspector's view.</strong> Left and right refer to the person wearing the uniform.</p>
+      <p><strong>Discover the exact measurments near the bottom of this page</p>
       <div id="asset-error" class="error" role="alert" hidden></div>
       <svg id="uniform-preview" data-wearer="adventurer" viewBox="0 0 1000 1260" role="img" aria-labelledby="uniform-title uniform-description" xmlns="http://www.w3.org/2000/svg">
         <title id="uniform-title">Selected Adventurer insignia placement</title>
@@ -114,7 +115,7 @@
         <g id="sleeve-items"></g>
       </svg>
       <p class="hint">This is an illustrative placement diagram, not a sewing template. Pockets and sleeves are enlarged separately. Check your conference guidance, especially for parent pins, service stars, conference and union patches.</p>
-      <h3>Placement notes</h3>
+      <h3>Exact Placements, Measurements, and Notes</h3>
       <ul id="placement-notes"></ul>
       <details>
         <summary>Source &amp; important rules</summary>
