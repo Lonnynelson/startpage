@@ -408,6 +408,9 @@ function paintFor(area) {
       opacity: tax ? (active ? 1 : .78) : .3,
     };
   }
+  if (Object.hasOwn(northPacificConferenceColors, state.selected) && ['ID','OR','WA'].includes(area)) {
+    return { fill:'#dce3e1', stroke:'#ffffff', 'stroke-width':.9, opacity:.42 };
+  }
   return {
     fill: active ? selectedUnion().color : '#dce3e1',
     stroke: active ? '#173944' : '#ffffff',
@@ -741,10 +744,10 @@ function render() {
     && (state.selected === 'North Pacific Union' || Object.hasOwn(northPacificConferenceColors, state.selected));
   for (const target of northPacificConferencePaths) {
     const active = state.selected === 'North Pacific Union' || state.selected === target.conference;
-    target.node.style.display = showNorthPacificRegions ? '' : 'none';
+    target.node.style.display = showNorthPacificRegions && active ? '' : 'none';
     target.node.setAttribute('fill', northPacificConferenceColors[target.conference]);
     target.node.setAttribute('stroke', 'none');
-    target.node.setAttribute('opacity', active ? 1 : .24);
+    target.node.setAttribute('opacity', 1);
   }
 
   for (const county of countyPaths) {
