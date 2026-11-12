@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hive · built with Reactive CSS</title>
+  <link rel="stylesheet" href="./style.css">
+  <!-- The only script: the Reactive CSS runtime, pinned. The gameplay is in style.css. -->
+  <script src="https://cdn.jsdelivr.net/npm/@reactivecss/core@0.9.0/dist/reactive-css.min.js" defer></script>
+  <style>
+    @layer base, reactive;
+
+    @layer base {
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; margin: 0; }
+
+    body {
+        min-block-size: 100dvh;
+        background: radial-gradient(120vmax 90vmax at 30% 20%, oklch(97% .05 95), oklch(86% .1 80));
+        color: oklch(28% .06 60);
+        font-family: system-ui, sans-serif;
+    }
+
+    .game {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(300px, 1fr);
+        gap: 3vmin;
+        min-block-size: 100dvh;
+        padding: 3vmin;
+    }
+    /* Stacked on phones and on portrait tablets; side by side otherwise. */
+    @media (width < 900px), (orientation: portrait) and (width < 1100px) { .game { grid-template-columns: 1fr; } }
+
+    /* The world stays in view (sticky, one screen tall) while the longer shop scrolls beside it. */
+    .world { position: sticky; inset-block-start: 3vmin; block-size: calc(100dvh - 6vmin); display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto 1fr auto; justify-items: center; text-align: center; }
+    @media (width < 900px), (orientation: portrait) and (width < 1100px) { .world { position: static; block-size: auto; } }
+
+    .kicker {
+        font: 600 clamp(12px, 1.4vmin, 15px)/1.4 ui-monospace, "SF Mono", Menlo, monospace;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: oklch(45% .08 60 / .8);
+    }
+
+    .honey {
+        margin-block-start: 1vmin;
+        font: 900 clamp(44px, 8vmin, 96px)/1 system-ui, sans-serif;
+        letter-spacing: -.03em;
+        color: oklch(62% .16 65);
+        text-shadow: 0 3px 0 oklch(45% .12 55 / .35);
+        span { font-size: .4em; font-weight: 700; letter-spacing: 0; color: oklch(45% .08 60); }
+    }
+    .rates { font-weight: 600; color: oklch(42% .07 60); }
+
+    .stage {
+        position: relative;
+        display: grid;
+        place-items: center;
+        inline-size: min(100%, 64vmin);
+        aspect-ratio: 1;
+        container-type: inline-size;            /* the hive, the bees and the golden bee scale with the stage, not the viewport */
+    }
+
+    .hive {
+        position: relative;
+        inline-size: 56%;
+        aspect-ratio: 200 / 236;
+        padding: 0;
+        border: 0;
+        background: none;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        filter: drop-shadow(0 1.4vmin 1.6vmin oklch(45% .12 55 / .35));
+        transition: scale 120ms;
+        &:hover { scale: 1.03; }
+        &:active { scale: .96; }
+        &:focus-visible { outline: 4px solid oklch(45% .12 55); outline-offset: 8px; border-radius: 24px; }
+    }
+    .hive-art { display: block; inline-size: 100%; block-size: 100%; }
+
+    .floats { position: absolute; inset: 0; pointer-events: none; }
+    .float {
+        position: absolute;
+        inset-inline-start: 0;
+        inset-block-start: 0;
+        translate: calc(var(--x) - 50%) calc(var(--y) - 50%);
+        font: 900 clamp(18px, 3vmin, 30px)/1 system-ui, sans-serif;
+        color: oklch(99% .04 95);
+        -webkit-text-stroke: .16em oklch(42% .12 50);
+        paint-order: stroke fill;               /* a solid outline that reads on the straw */
+        text-shadow: 0 3px 0 oklch(35% .1 50 / .5);
+        opacity: 0;
+        --x: 50%; --y: 30%;
+    }
+    .fl1 { --x: var(--fx1); --y: var(--fy1); }
+    .fl2 { --x: var(--fx2); --y: var(--fy2); }
+    .fl3 { --x: var(--fx3); --y: var(--fy3); }
+
+    /* Crowns sit on the hive: one on the knob, one tilted on each shoulder. */
+    .crowns { position: absolute; inset: 0; pointer-events: none; }
+    .crown {
+        position: absolute;
+        inline-size: 22%;
+        aspect-ratio: 64 / 44;
+        opacity: 0;
+        translate: 0 30%;
+        transition: opacity 400ms, translate 400ms cubic-bezier(.3, 1.5, .5, 1);
+        svg { display: block; inline-size: 100%; filter: drop-shadow(0 2px 1px oklch(45% .12 55 / .45)); }
+    }
+    .q1 { inset-inline-start: 39%; inset-block-start: 3%; }
+    .q2 { inset-inline-start: 13%; inset-block-start: 21%; rotate: -24deg; }
+    .q3 { inset-inline-start: 65%; inset-block-start: 21%; rotate: 24deg; }
+
+    /* Bees orbit the hive; each one appears when it is bought. */
+    .swarm { position: absolute; inset: 0; z-index: 2; pointer-events: none; }   /* bees fly in front of the hive */
+    .bee {
+        --size: 9cqi;
+        --r: calc(34cqi + sibling-index() * 1.35cqi);
+        position: absolute;
+        inset-inline-start: calc(50% + var(--r));
+        inset-block-start: 50%;
+        inline-size: var(--size);
+        aspect-ratio: 1;
+        margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
+        transform-origin: calc(-1 * var(--r) + var(--size) / 2) 50%;
+        animation: orbit calc(4s + sibling-index() * .55s) linear infinite;
+        animation-delay: calc(sibling-index() * -.83s);
+        opacity: 0;
+        scale: 0;
+        transition: opacity 300ms, scale 400ms cubic-bezier(.3, 1.6, .5, 1);
+
+        /* The art faces up; on a clockwise orbit the way forward is down. */
+        svg { display: block; inline-size: 100%; rotate: 180deg; filter: drop-shadow(0 .5vmin .4vmin oklch(40% .1 55 / .3)); }
+        .wing { transform-box: fill-box; animation: flap 70ms linear infinite alternate; }
+        .wl { transform-origin: 90% 60%; }
+        .wr { transform-origin: 10% 60%; }
+    }
+    /* Every other bee flies the other way round, so it faces the other way. */
+    .bee:nth-child(even) { animation-direction: reverse; svg { rotate: 0deg; } }
+
+    .meadow { display: flex; justify-content: center; gap: 2vmin; min-block-size: 9vmin; align-items: end; }
+    .flower {
+        --h: calc(sibling-index() * 36);
+        inline-size: 4.5vmin;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(circle, oklch(82% .17 90) 26%, transparent 28%),
+        conic-gradient(from 0deg, oklch(78% .15 calc(var(--h) * 1deg)) 0 12.5%, oklch(70% .17 calc(var(--h) * 1deg)) 0 25%, oklch(78% .15 calc(var(--h) * 1deg)) 0 37.5%, oklch(70% .17 calc(var(--h) * 1deg)) 0 50%, oklch(78% .15 calc(var(--h) * 1deg)) 0 62.5%, oklch(70% .17 calc(var(--h) * 1deg)) 0 75%, oklch(78% .15 calc(var(--h) * 1deg)) 0 87.5%, oklch(70% .17 calc(var(--h) * 1deg)) 0);
+        box-shadow: 0 3vmin 0 -1.9vmin oklch(55% .14 140);
+        opacity: .15;
+        scale: .5;
+        filter: grayscale(1);
+        transition: opacity 400ms, scale 500ms cubic-bezier(.3, 1.6, .5, 1), filter 400ms;
+    }
+
+    .shop {
+        align-self: start;
+        display: grid;
+        gap: 14px;
+        padding: 22px;
+        border-radius: 22px;
+        background: oklch(99% .02 95 / .7);
+        box-shadow: 0 0 0 1px oklch(60% .1 70 / .25), 0 2vmin 5vmin -2vmin oklch(45% .1 60 / .35);
+        backdrop-filter: blur(6px);
+        h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: .1em; color: oklch(45% .1 60); }
+    }
+
+    .items { display: grid; gap: 10px; padding: 0; list-style: none; }
+    .item {
+        display: grid;
+        grid-template-columns: 44px 1fr auto;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: 14px;
+        background: oklch(96% .04 90);
+        .text { display: grid; gap: 1px; strong { font-size: 1rem; } span { font-size: .8125rem; color: oklch(45% .06 60); } }
+        .owned { font-weight: 600; }
+    }
+    .icon { inline-size: 44px; aspect-ratio: 1; border-radius: 12px; background: oklch(88% .1 85); display: grid; place-items: center; font-size: 24px; }
+
+    .buy {
+        min-inline-size: 104px;
+        padding: 10px 14px;
+        border: 0;
+        border-radius: 12px;
+        background: oklch(62% .16 65);
+        color: oklch(99% .02 95);
+        font: 800 .9375rem/1 system-ui, sans-serif;
+        cursor: pointer;
+        box-shadow: 0 4px 0 oklch(45% .13 55);
+        &:active:not(:disabled) { translate: 0 2px; box-shadow: 0 2px 0 oklch(45% .13 55); }
+        &:disabled { background: oklch(85% .03 80); color: oklch(55% .03 70); box-shadow: none; cursor: not-allowed; }
+        &:focus-visible { outline: 3px solid oklch(40% .1 55); outline-offset: 2px; }
+    }
+
+    .badges { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 0; list-style: none; }
+    .badge {
+        --got: 0;
+        display: grid;
+        justify-items: center;
+        gap: 2px;
+        padding: 10px 4px;
+        border-radius: 12px;
+        background: color-mix(in oklch, oklch(80% .16 80) calc(var(--got) * 100%), oklch(93% .02 80));
+        opacity: calc(.45 + var(--got) * .55);
+        filter: grayscale(calc(1 - var(--got)));
+        transition: background-color 500ms, opacity 500ms;
+        b { font-size: 1.125rem; }
+        span { font-size: .6875rem; text-align: center; }
+    }
+
+    .save { font-size: .8125rem; color: oklch(45% .05 60); }
+    .reset, .confirm { margin-inline-start: 8px; padding: 4px 10px; border: 1px solid oklch(60% .08 60 / .4); border-radius: 999px; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+    .confirm { display: none; border-color: oklch(55% .2 25); color: oklch(45% .18 25); font-weight: 700; }
+
+    /* The income clock. */
+    .income { position: absolute; inline-size: 1px; block-size: 1px; opacity: 0; animation: tick-a 1s linear; }
+    @keyframes tick-a { to { opacity: .01; } }
+    @keyframes tick-b { to { opacity: .01; } }
+
+    @keyframes orbit { to { rotate: 1turn; } }
+    @keyframes flap { to { scale: 1 .35; } }
+    @keyframes rise {
+        0% { opacity: 1; translate: calc(var(--x) - 50%) calc(var(--y) - 50%); scale: .7; }
+        20% { scale: 1.15; }
+        100% { opacity: 0; translate: calc(var(--x) - 50%) calc(var(--y) - 50% - 9vmin); scale: 1; }
+    }
+    @keyframes squish { 40% { scale: 1.08 .9; } }
+
+    @media (prefers-reduced-motion: reduce) {
+        .bee { animation: none; }
+        .bee .wing { animation: none; }
+    }
+
+    /* CodePen version (pen.html): the corner labels and the "built with" note. Unused by index.html. */
+    .labels {
+        position: fixed;
+        inset-inline-end: 14px;
+        inset-block-end: 14px;
+        z-index: 50;
+        display: flex;
+        gap: 8px;
+        font: 600 12px/1 system-ui, sans-serif;
+    }
+    .labels > * {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        box-shadow: 0 4px 14px oklch(40% .1 55 / .25);
+        text-decoration: none;
+    }
+    .label-made { background: oklch(30% .07 55); color: oklch(96% .12 95); b { color: oklch(85% .17 80); } }
+    .label-link {
+        background: oklch(99% .02 95);
+        color: oklch(32% .08 55);
+        border: 1px solid oklch(70% .1 70 / .5);
+        &:hover { background: oklch(95% .07 90); }
+        &:focus-visible { outline: 3px solid oklch(45% .12 55); outline-offset: 2px; }
+    }
+    .note { font-size: .8125rem; line-height: 1.45; color: oklch(42% .06 60); a { color: oklch(45% .14 50); font-weight: 700; } }
+    /* Stacked layouts: the labels end the page instead of floating over shop buttons. */
+    @media (width < 900px), (orientation: portrait) and (width < 1100px) {
+        .labels { position: static; justify-content: flex-end; flex-wrap: wrap; padding: 0 3vmin 3vmin; }
+    }
+
+    /* SHOP-STYLES */
+    .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 4px; border-radius: 14px; background: oklch(93% .04 85); }
+    .tab {
+        position: relative;
+        padding: 10px 6px;
+        border: 0;
+        border-radius: 10px;
+        background: transparent;
+        color: oklch(40% .07 60);
+        font: 700 .9375rem/1 system-ui, sans-serif;
+        cursor: pointer;
+        &[aria-selected="true"] { background: oklch(99% .02 95); color: oklch(30% .07 55); box-shadow: 0 2px 6px oklch(45% .1 60 / .2); }
+        &:focus-visible { outline: 3px solid oklch(45% .12 55); outline-offset: 2px; }
+        .dot { position: absolute; inset-block-start: 6px; inset-inline-end: 8px; inline-size: 8px; aspect-ratio: 1; border-radius: 50%; background: oklch(62% .2 30); opacity: 0; transition: opacity 200ms; }
+    }
+    /* Hidden panels stay rendered (visibility, not display: none) so a boost's timer bar keeps running,
+        and its animationend still ends the boost, while another tab is open. */
+    .panels { position: relative; }
+    .panel { position: absolute; inset-inline: 0; inset-block-start: 0; visibility: hidden; pointer-events: none; }
+    .req, .timer { font-size: .75rem; }
+    .req { color: oklch(52% .12 40); font-weight: 600; }
+    .lbl-lock, .lbl-own, .lbl-on { display: none; }
+    .hint { padding: 10px 12px; border-radius: 14px; background: oklch(95% .07 95); color: oklch(42% .08 60); font-size: .8125rem; list-style: none; }
+    .timer { display: block; block-size: 6px; margin-block-start: 4px; border-radius: 999px; background: oklch(88% .04 80); overflow: hidden; opacity: 0; }
+    .timer span { display: block; block-size: 100%; background: linear-gradient(90deg, oklch(70% .2 40), oklch(85% .17 90)); transform-origin: left; scale: 0 1; }
+    .stats { font-size: .8125rem; font-weight: 600; color: oklch(45% .06 60); output { color: oklch(30% .07 55); } }
+    .badges { grid-template-columns: repeat(3, 1fr); }
+
+    /* The golden bee crosses the stage while it is out; the banner pops when one is caught. */
+    .golden {
+        position: absolute;
+        z-index: 4;
+        inset-inline-start: 0;
+        inset-block-start: 18%;
+        inline-size: 15cqi;
+        aspect-ratio: 1;
+        padding: 0;
+        border: 0;
+        background: none;
+        cursor: pointer;
+        display: none;
+        filter: drop-shadow(0 0 1.4vmin oklch(88% .17 90)) drop-shadow(0 0 .4vmin oklch(95% .12 95));
+        svg { display: block; inline-size: 100%; rotate: 90deg; }
+        .wing { transform-box: fill-box; animation: flap 60ms linear infinite alternate; }
+        &:focus-visible { outline: 3px solid oklch(45% .12 55); outline-offset: 4px; border-radius: 50%; }
+    }
+    .banner {
+        position: absolute;
+        z-index: 5;
+        inset-block-start: 4%;
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: oklch(30% .07 55);
+        color: oklch(95% .14 95);
+        font: 900 clamp(16px, 2.4vmin, 24px)/1 system-ui, sans-serif;
+        opacity: 0;
+        pointer-events: none;
+    }
+    .jar { inline-size: 5.2vmin; opacity: 0; scale: .4; transition: opacity 400ms, scale 500ms cubic-bezier(.3, 1.6, .5, 1); svg { display: block; } }
+
+    /* Boost marker on the "+N" floats while Honey Rush is on. */
+    .float::after { content: ""; }
+
+    .spawner { position: absolute; inline-size: 1px; block-size: 1px; opacity: 0; animation: spawn-a 6s linear; }
+    @keyframes spawn-a { to { opacity: .01; } }
+    @keyframes spawn-b { to { opacity: .01; } }
+    @keyframes fly-a { from { translate: -20cqi 0; } 50% { translate: 50cqi -8cqi; } to { translate: 120cqi 5cqi; } }
+    @keyframes fly-b { from { translate: -20cqi 0; } 50% { translate: 50cqi -8cqi; } to { translate: 120cqi 5cqi; } }
+    @keyframes drain { from { scale: 1 1; } to { scale: 0 1; } }
+    @keyframes banner { 0% { opacity: 0; translate: 0 10px; } 15%, 75% { opacity: 1; translate: 0 0; } 100% { opacity: 0; translate: 0 -10px; } }
+    /* END-SHOP-STYLES */
+    }
+
+    /* ---- Reactive CSS ---- */
+
+    @layer reactive {
+    .game {
+        --honey: state(0, persist("showcase.hive.honey"));
+        --total: state(0, persist("showcase.hive.total"));
+        --power: state(1, persist("showcase.hive.power"));
+        --mult: state(1, persist("showcase.hive.mult"));
+        --rate: state(0, persist("showcase.hive.rate"));
+        --gmul: state(1, persist("showcase.hive.gmul"));
+        --clicks: state(0, persist("showcase.hive.clicks"));
+        --caught: state(0, persist("showcase.hive.caught"));
+        --tab: state(1, persist("showcase.hive.tab"));
+        --n-bee: state(0, persist("showcase.hive.n-bee"));
+        --c-bee: state(15, persist("showcase.hive.c-bee"));
+        --o-bee: state(1, persist("showcase.hive.o-bee"));
+        --n-flower: state(0, persist("showcase.hive.n-flower"));
+        --c-flower: state(100, persist("showcase.hive.c-flower"));
+        --o-flower: state(6, persist("showcase.hive.o-flower"));
+        --n-queen: state(0, persist("showcase.hive.n-queen"));
+        --c-queen: state(1100, persist("showcase.hive.c-queen"));
+        --o-queen: state(40, persist("showcase.hive.o-queen"));
+        --n-keeper: state(0, persist("showcase.hive.n-keeper"));
+        --c-keeper: state(12000, persist("showcase.hive.c-keeper"));
+        --o-keeper: state(150, persist("showcase.hive.o-keeper"));
+        --n-factory: state(0, persist("showcase.hive.n-factory"));
+        --c-factory: state(130000, persist("showcase.hive.c-factory"));
+        --o-factory: state(600, persist("showcase.hive.o-factory"));
+        --n-wings: state(0, persist("showcase.hive.n-wings"));
+        --c-wings: state(50, persist("showcase.hive.c-wings"));
+        --n-jelly: state(0, persist("showcase.hive.n-jelly"));
+        --c-jelly: state(500, persist("showcase.hive.c-jelly"));
+        --u-pollen: state(false, persist("showcase.hive.u-pollen"));
+        --u-seeds: state(false, persist("showcase.hive.u-seeds"));
+        --u-court: state(false, persist("showcase.hive.u-court"));
+        --u-smoker: state(false, persist("showcase.hive.u-smoker"));
+        --u-comb: state(false, persist("showcase.hive.u-comb"));
+        --c-rush: state(200, persist("showcase.hive.c-rush"));
+        --rush: state(false);
+        --c-dance: state(500, persist("showcase.hive.c-dance"));
+        --dance: state(false);
+        --tick: state(false);
+        --gt: state(false);
+        --g: state(9);
+        --bonus: state(0);
+        --slot: state(1);
+        --k1: state(0); --k2: state(0); --k3: state(0);
+        --fx1: state(0px); --fy1: state(0px); --fx2: state(0px); --fy2: state(0px); --fx3: state(0px); --fy3: state(0px);
+        --armed: state(false);
+    }
+
+    /* A click: honey per click (three times during Honey Rush), and a rising "+N" where it happened. */
+    .game:when(--slot == 1 and not --rush) .hive:on(click) { --honey: set(var(--honey) + var(--power)); --total: set(var(--total) + var(--power)); --clicks: increment(1); --fx1: set(clamp(24px, event(local-x), calc(element(width) - 24px))); --fy1: set(clamp(24px, event(local-y), calc(element(height) - 24px))); --k1: increment(1); --slot: set(2); }
+    .game:when(--slot == 1 and --rush) .hive:on(click) { --honey: set(var(--honey) + var(--power) * 3); --total: set(var(--total) + var(--power) * 3); --clicks: increment(1); --fx1: set(clamp(24px, event(local-x), calc(element(width) - 24px))); --fy1: set(clamp(24px, event(local-y), calc(element(height) - 24px))); --k1: increment(1); --slot: set(2); }
+    .game:when(--slot == 2 and not --rush) .hive:on(click) { --honey: set(var(--honey) + var(--power)); --total: set(var(--total) + var(--power)); --clicks: increment(1); --fx2: set(clamp(24px, event(local-x), calc(element(width) - 24px))); --fy2: set(clamp(24px, event(local-y), calc(element(height) - 24px))); --k2: increment(1); --slot: set(3); }
+    .game:when(--slot == 2 and --rush) .hive:on(click) { --honey: set(var(--honey) + var(--power) * 3); --total: set(var(--total) + var(--power) * 3); --clicks: increment(1); --fx2: set(clamp(24px, event(local-x), calc(element(width) - 24px))); --fy2: set(clamp(24px, event(local-y), calc(element(height) - 24px))); --k2: increment(1); --slot: set(3); }
+    .game:when(--slot == 3 and not --rush) .hive:on(click) { --honey: set(var(--honey) + var(--power)); --total: set(var(--total) + var(--power)); --clicks: increment(1); --fx3: set(clamp(24px, event(local-x), calc(element(width) - 24px))); --fy3: set(clamp(24px, event(local-y), calc(element(height) - 24px))); --k3: increment(1); --slot: set(1); }
+    .game:when(--slot == 3 and --rush) .hive:on(click) { --honey: set(var(--honey) + var(--power) * 3); --total: set(var(--total) + var(--power) * 3); --clicks: increment(1); --fx3: set(clamp(24px, event(local-x), calc(element(width) - 24px))); --fy3: set(clamp(24px, event(local-y), calc(element(height) - 24px))); --k3: increment(1); --slot: set(1); }
+    .game:changed(--k1) .fl1 { animation: rise 900ms ease-out; }
+    .game:changed(--k1) .hive { animation: squish 260ms ease-out; }
+    .game:changed(--k2) .fl2 { animation: rise 900ms ease-out; }
+    .game:changed(--k2) .hive { animation: squish 260ms ease-out; }
+    .game:changed(--k3) .fl3 { animation: rise 900ms ease-out; }
+    .game:changed(--k3) .hive { animation: squish 260ms ease-out; }
+    .pw { content: var(--power); }
+    .game:when(--rush) .float::after { content: " ×3"; }
+
+    /* Income: each end of the clock's animation adds the rate (twice during Bee Dance) and restarts it. */
+    .game:when(--tick) .income { animation-name: tick-b; }
+    .game:when(not --dance) .income:on(animationend) { --tick: toggle(); --honey: set(var(--honey) + var(--rate)); --total: set(var(--total) + var(--rate)); }
+    .game:when(--dance) .income:on(animationend) { --tick: toggle(); --honey: set(var(--honey) + var(--rate) * 2); --total: set(var(--total) + var(--rate) * 2); }
+
+    /* Helpers: pay, raise the price, add their current output to the rate, in one transaction. */
+    .game:when(--honey >= --c-bee) .buy-bee:on(click) { --honey: set(var(--honey) - var(--c-bee)); --c-bee: set(round(var(--c-bee) * 1.15)); --n-bee: increment(1); --rate: set(var(--rate) + var(--o-bee)); }
+    .buy-bee { --attr-disabled: when(--honey < --c-bee); }
+    .game:when(--honey >= --c-flower) .buy-flower:on(click) { --honey: set(var(--honey) - var(--c-flower)); --c-flower: set(round(var(--c-flower) * 1.15)); --n-flower: increment(1); --rate: set(var(--rate) + var(--o-flower)); }
+    .buy-flower { --attr-disabled: when(--honey < --c-flower); }
+    .game:when(--honey >= --c-queen) .buy-queen:on(click) { --honey: set(var(--honey) - var(--c-queen)); --c-queen: set(round(var(--c-queen) * 1.15)); --n-queen: increment(1); --rate: set(var(--rate) + var(--o-queen)); }
+    .buy-queen { --attr-disabled: when(--honey < --c-queen); }
+    .game:when(--honey >= --c-keeper) .buy-keeper:on(click) { --honey: set(var(--honey) - var(--c-keeper)); --c-keeper: set(round(var(--c-keeper) * 1.15)); --n-keeper: increment(1); --rate: set(var(--rate) + var(--o-keeper)); }
+    .buy-keeper { --attr-disabled: when(--honey < --c-keeper); }
+    .game:when(--honey >= --c-factory) .buy-factory:on(click) { --honey: set(var(--honey) - var(--c-factory)); --c-factory: set(round(var(--c-factory) * 1.15)); --n-factory: increment(1); --rate: set(var(--rate) + var(--o-factory)); }
+    .buy-factory { --attr-disabled: when(--honey < --c-factory); }
+    .game:when(--honey >= --c-wings) .buy-wings:on(click) { --honey: set(var(--honey) - var(--c-wings)); --c-wings: set(round(var(--c-wings) * 1.4)); --n-wings: increment(1); --power: set(var(--power) + var(--mult)); }
+    .buy-wings { --attr-disabled: when(--honey < --c-wings); }
+    .game:when(--honey >= --c-jelly) .buy-jelly:on(click) { --honey: set(var(--honey) - var(--c-jelly)); --c-jelly: set(round(var(--c-jelly) * 4)); --n-jelly: increment(1); --power: set(var(--power) * 2); --mult: set(var(--mult) * 2); }
+    .buy-jelly { --attr-disabled: when(--honey < --c-jelly); }
+
+    /* One-time upgrades: unlocked by what you own, bought once. A doubling also adds what the owned
+        helpers already make, so the rate stays exact. */
+    .game:when(--n-bee >= 10 and not --u-pollen and --honey >= 1000) .buy-pollen:on(click) { --honey: set(var(--honey) - 1000); --u-pollen: set(true); --rate: set(var(--rate) + var(--n-bee) * var(--o-bee)); --o-bee: set(var(--o-bee) * 2); }
+    .buy-pollen { --attr-disabled: when(not (--n-bee >= 10) or --u-pollen or --honey < 1000); }
+    .game:when(not (--n-bee >= 10)) .buy-pollen .lbl-buy, .game:when(--u-pollen) .buy-pollen .lbl-buy { display: none; }
+    .game:when(not (--n-bee >= 10) and not --u-pollen) .buy-pollen .lbl-lock { display: inline; }
+    .game:when(--u-pollen) .buy-pollen .lbl-own { display: inline; }
+    .game:when(--n-bee >= 10) .it-pollen .req, .game:when(--u-pollen) .it-pollen .req { visibility: hidden; }
+    .game:when(--n-flower >= 5 and not --u-seeds and --honey >= 5000) .buy-seeds:on(click) { --honey: set(var(--honey) - 5000); --u-seeds: set(true); --rate: set(var(--rate) + var(--n-flower) * var(--o-flower)); --o-flower: set(var(--o-flower) * 2); }
+    .buy-seeds { --attr-disabled: when(not (--n-flower >= 5) or --u-seeds or --honey < 5000); }
+    .game:when(not (--n-flower >= 5)) .buy-seeds .lbl-buy, .game:when(--u-seeds) .buy-seeds .lbl-buy { display: none; }
+    .game:when(not (--n-flower >= 5) and not --u-seeds) .buy-seeds .lbl-lock { display: inline; }
+    .game:when(--u-seeds) .buy-seeds .lbl-own { display: inline; }
+    .game:when(--n-flower >= 5) .it-seeds .req, .game:when(--u-seeds) .it-seeds .req { visibility: hidden; }
+    .game:when(--n-queen >= 3 and not --u-court and --honey >= 50000) .buy-court:on(click) { --honey: set(var(--honey) - 50000); --u-court: set(true); --rate: set(var(--rate) + var(--n-queen) * var(--o-queen)); --o-queen: set(var(--o-queen) * 2); }
+    .buy-court { --attr-disabled: when(not (--n-queen >= 3) or --u-court or --honey < 50000); }
+    .game:when(not (--n-queen >= 3)) .buy-court .lbl-buy, .game:when(--u-court) .buy-court .lbl-buy { display: none; }
+    .game:when(not (--n-queen >= 3) and not --u-court) .buy-court .lbl-lock { display: inline; }
+    .game:when(--u-court) .buy-court .lbl-own { display: inline; }
+    .game:when(--n-queen >= 3) .it-court .req, .game:when(--u-court) .it-court .req { visibility: hidden; }
+    .game:when(--n-keeper >= 3 and not --u-smoker and --honey >= 300000) .buy-smoker:on(click) { --honey: set(var(--honey) - 300000); --u-smoker: set(true); --rate: set(var(--rate) + var(--n-keeper) * var(--o-keeper)); --o-keeper: set(var(--o-keeper) * 2); }
+    .buy-smoker { --attr-disabled: when(not (--n-keeper >= 3) or --u-smoker or --honey < 300000); }
+    .game:when(not (--n-keeper >= 3)) .buy-smoker .lbl-buy, .game:when(--u-smoker) .buy-smoker .lbl-buy { display: none; }
+    .game:when(not (--n-keeper >= 3) and not --u-smoker) .buy-smoker .lbl-lock { display: inline; }
+    .game:when(--u-smoker) .buy-smoker .lbl-own { display: inline; }
+    .game:when(--n-keeper >= 3) .it-smoker .req, .game:when(--u-smoker) .it-smoker .req { visibility: hidden; }
+    .game:when(--caught >= 1 and not --u-comb and --honey >= 10000) .buy-comb:on(click) { --honey: set(var(--honey) - 10000); --u-comb: set(true); --gmul: set(3); }
+    .buy-comb { --attr-disabled: when(not (--caught >= 1) or --u-comb or --honey < 10000); }
+    .game:when(not (--caught >= 1)) .buy-comb .lbl-buy, .game:when(--u-comb) .buy-comb .lbl-buy { display: none; }
+    .game:when(not (--caught >= 1) and not --u-comb) .buy-comb .lbl-lock { display: inline; }
+    .game:when(--u-comb) .buy-comb .lbl-own { display: inline; }
+    .game:when(--caught >= 1) .it-comb .req, .game:when(--u-comb) .it-comb .req { visibility: hidden; }
+
+    /* Boosts: a draining bar is the timer; when its animation ends, the boost is over. */
+    .game:when(--honey >= --c-rush and not --rush) .buy-rush:on(click) { --honey: set(var(--honey) - var(--c-rush)); --c-rush: set(round(var(--c-rush) * 1.5)); --rush: set(true); }
+    .buy-rush { --attr-disabled: when(--honey < --c-rush or --rush); }
+    .game:when(--rush) .t-rush { opacity: 1; }
+    .game:when(--rush) .t-rush span { animation: drain 15s linear; }
+    .t-rush span:on(animationend) { --rush: set(false); }
+    .game:when(--rush) .buy-rush .lbl-buy { display: none; }
+    .game:when(--rush) .buy-rush .lbl-on { display: inline; }
+    .game:when(--honey >= --c-dance and not --dance) .buy-dance:on(click) { --honey: set(var(--honey) - var(--c-dance)); --c-dance: set(round(var(--c-dance) * 1.6)); --dance: set(true); }
+    .buy-dance { --attr-disabled: when(--honey < --c-dance or --dance); }
+    .game:when(--dance) .t-dance { opacity: 1; }
+    .game:when(--dance) .t-dance span { animation: drain 20s linear; }
+    .t-dance span:on(animationend) { --dance: set(false); }
+    .game:when(--dance) .buy-dance .lbl-buy { display: none; }
+    .game:when(--dance) .buy-dance .lbl-on { display: inline; }
+    .game:when(--rush) .hive { filter: drop-shadow(0 0 2.4vmin oklch(80% .2 60)) drop-shadow(0 1.4vmin 1.6vmin oklch(45% .12 55 / .35)); }
+    .game:when(--dance) .bee { animation-duration: calc(2s + sibling-index() * .25s); }
+
+    /* The golden bee: every 6 s a slow clock rolls random(); on a 0 (one in four) a golden bee flies across.
+        Catching it pays 30 s of income (at least 50), three times that with the Golden Comb. */
+    .game:when(--gt) .spawner { animation-name: spawn-b; }
+    .spawner:on(animationend) { --gt: toggle(); --g: set(random(0, 3, 1)); }
+    .game:when(--g == 0) .golden { display: block; animation: fly-a 6s linear; }
+    .game:when(--g == 0 and --gt) .golden { animation-name: fly-b; }
+    .game:when(--g == 0) .golden:on(click) { --honey: set(var(--honey) + max(50, var(--rate) * 30) * var(--gmul)); --total: set(var(--total) + max(50, var(--rate) * 30) * var(--gmul)); --bonus: set(max(50, var(--rate) * 30) * var(--gmul)); --caught: increment(1); --g: set(9); }
+    .game:changed(--caught) .banner { animation: banner 1.8s ease-out; }
+    .bonus { content: var(--bonus); }
+
+    /* Shop tabs: the selected tab and its panel share a position, so :nth-var() matches both. */
+    .tab:on(click) { --tab: set(sibling-index()); }
+    .tab { --attr-aria-selected: false; }
+    .tab:nth-var(--tab) { --attr-aria-selected: true; }
+    .panel:nth-var(--tab) { position: static; visibility: visible; pointer-events: auto; }
+    .game:when(--honey >= --c-bee or --honey >= --c-flower or --honey >= --c-queen or --honey >= --c-keeper or --honey >= --c-factory) .tab-helpers .dot { opacity: 1; }
+    .game:when(--honey >= --c-wings or --honey >= --c-jelly or (--n-bee >= 10 and not --u-pollen and --honey >= 1000) or (--n-flower >= 5 and not --u-seeds and --honey >= 5000) or (--n-queen >= 3 and not --u-court and --honey >= 50000) or (--n-keeper >= 3 and not --u-smoker and --honey >= 300000) or (--caught >= 1 and not --u-comb and --honey >= 10000)) .tab-upgrades .dot { opacity: 1; }
+    .game:when((--honey >= --c-rush and not --rush) or (--honey >= --c-dance and not --dance)) .tab-boosts .dot { opacity: 1; }
+
+    /* The world grows with what you own. */
+    .game:when(--n-bee >= 1) .b1,
+    .game:when(--n-bee >= 2) .b2,
+    .game:when(--n-bee >= 3) .b3,
+    .game:when(--n-bee >= 4) .b4,
+    .game:when(--n-bee >= 5) .b5,
+    .game:when(--n-bee >= 6) .b6,
+    .game:when(--n-bee >= 7) .b7,
+    .game:when(--n-bee >= 8) .b8,
+    .game:when(--n-bee >= 9) .b9,
+    .game:when(--n-bee >= 10) .b10,
+    .game:when(--n-bee >= 11) .b11,
+    .game:when(--n-bee >= 12) .b12 { opacity: 1; scale: 1; }
+    .game:when(--n-flower >= 1) .f1,
+    .game:when(--n-flower >= 2) .f2,
+    .game:when(--n-flower >= 3) .f3,
+    .game:when(--n-flower >= 4) .f4,
+    .game:when(--n-flower >= 5) .f5,
+    .game:when(--n-flower >= 6) .f6,
+    .game:when(--n-flower >= 7) .f7,
+    .game:when(--n-flower >= 8) .f8,
+    .game:when(--n-flower >= 9) .f9,
+    .game:when(--n-flower >= 10) .f10 { opacity: 1; scale: 1; filter: none; }
+    .game:when(--n-queen >= 1) .q1,
+    .game:when(--n-queen >= 2) .q2,
+    .game:when(--n-queen >= 3) .q3 { opacity: 1; translate: 0 0; }
+    .game:when(--n-factory >= 1) .j1,
+    .game:when(--n-factory >= 2) .j2,
+    .game:when(--n-factory >= 3) .j3 { opacity: 1; scale: 1; }
+
+    .game:when(--total >= 100) .m1 { --got: 1; }
+    .game:when(--total >= 1000) .m2 { --got: 1; }
+    .game:when(--total >= 10000) .m3 { --got: 1; }
+    .game:when(--total >= 100000) .m4 { --got: 1; }
+    .game:when(--total >= 1000000) .m5 { --got: 1; }
+    .game:when(--total >= 10000000) .m6 { --got: 1; }
+
+    /* Numbers as real text. */
+    .amount { content: var(--honey); }
+    .rate { content: var(--rate); }
+    .power { content: var(--power); }
+    .clicks { content: var(--clicks); }
+    .caught { content: var(--caught); }
+    .n-bee { content: var(--n-bee); }
+    .c-bee { content: var(--c-bee); }
+    .o-bee { content: var(--o-bee); }
+    .n-flower { content: var(--n-flower); }
+    .c-flower { content: var(--c-flower); }
+    .o-flower { content: var(--o-flower); }
+    .n-queen { content: var(--n-queen); }
+    .c-queen { content: var(--c-queen); }
+    .o-queen { content: var(--o-queen); }
+    .n-keeper { content: var(--n-keeper); }
+    .c-keeper { content: var(--c-keeper); }
+    .o-keeper { content: var(--o-keeper); }
+    .n-factory { content: var(--n-factory); }
+    .c-factory { content: var(--c-factory); }
+    .o-factory { content: var(--o-factory); }
+    .n-wings { content: var(--n-wings); }
+    .c-wings { content: var(--c-wings); }
+    .n-jelly { content: var(--n-jelly); }
+    .c-jelly { content: var(--c-jelly); }
+    .c-rush { content: var(--c-rush); }
+    .c-dance { content: var(--c-dance); }
+
+    /* Two-step reset: arm it, then confirm; a click anywhere else disarms it. */
+    .reset:on(click) { --armed: set(true); }
+    .save:on(outside(click)) { --armed: set(false); }
+    .game:when(--armed) .reset { display: none; }
+    .game:when(--armed) .confirm { display: inline-block; }
+    .confirm:on(click) { --honey: set(0); --total: set(0); --power: set(1); --mult: set(1); --rate: set(0); --gmul: set(1); --clicks: set(0); --caught: set(0); --n-bee: set(0); --c-bee: set(15); --o-bee: set(1); --n-flower: set(0); --c-flower: set(100); --o-flower: set(6); --n-queen: set(0); --c-queen: set(1100); --o-queen: set(40); --n-keeper: set(0); --c-keeper: set(12000); --o-keeper: set(150); --n-factory: set(0); --c-factory: set(130000); --o-factory: set(600); --n-wings: set(0); --c-wings: set(50); --n-jelly: set(0); --c-jelly: set(500); --u-pollen: set(false); --u-seeds: set(false); --u-court: set(false); --u-smoker: set(false); --u-comb: set(false); --c-rush: set(200); --rush: set(false); --c-dance: set(500); --dance: set(false); --armed: set(false); }
+    }
+
+  </style>
+</head>
+<body>
+  <main class="game">
+    <section class="world">
+      <p class="kicker">Hive · an idle game built with Reactive CSS</p>
+      <p class="honey"><output class="amount">0</output> <span>honey</span></p>
+      <p class="rates"><output class="rate">0</output> per second · <output class="power">1</output> per click</p>
+
+      <div class="stage">
+        <div class="swarm" aria-hidden="true"><i class="bee b1"><svg class="bee-art" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">  <g class="wings">    <ellipse class="wing wl" cx="20" cy="24" rx="13" ry="8" transform="rotate(-28 20 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>    <ellipse class="wing wr" cx="44" cy="24" rx="13" ry="8" transform="rotate(28 44 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>  </g>  <path d="M32 58 l-4 -6 h8 z" fill="#2b1a0a"/>  <ellipse cx="32" cy="34" rx="13.5" ry="17" fill="#ffc93c" stroke="#2b1a0a" stroke-width="2.6"/>  <clipPath id="beebody1"><ellipse cx="32" cy="34" rx="12.2" ry="15.7"/></clipPath>  <g clip-path="url(#beebody1)" fill="#2b1a0a">    <rect x="16" y="23" width="32" height="5" rx="1"/>    <rect x="16" y="33" width="32" height="5.5" rx="1"/>    <rect x="16" y="43.5" width="32" height="5" rx="1"/>  </g>  <ellipse cx="27" cy="29" rx="3.2" ry="6" fill="#fff" opacity=".35"/>  <path d="M27 13 q-4 -7 -9 -8 M37 13 q4 -7 9 -8" fill="none" stroke="#2b1a0a" stroke-width="2.2" stroke-linecap="round"/>  <circle cx="18" cy="5" r="2.2" fill="#2b1a0a"/><circle cx="46" cy="5" r="2.2" fill="#2b1a0a"/>  <circle cx="32" cy="16.5" r="9" fill="#5b3a1c" stroke="#2b1a0a" stroke-width="2"/><ellipse cx="29" cy="12.5" rx="3.5" ry="2" fill="#fff" opacity=".2"/>  <circle cx="28.2" cy="16.4" r="3.3" fill="#fff"/><circle cx="35.8" cy="16.4" r="3.3" fill="#fff"/>  <circle cx="28.8" cy="17.1" r="1.9" fill="#1a0f05"/><circle cx="36.4" cy="17.1" r="1.9" fill="#1a0f05"/>  <circle cx="29.4" cy="16.3" r=".7" fill="#fff"/><circle cx="37" cy="16.3" r=".7" fill="#fff"/>  <circle cx="25.6" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/><circle cx="38.4" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/></svg></i><i class="bee b2"><svg class="bee-art" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">  <g class="wings">    <ellipse class="wing wl" cx="20" cy="24" rx="13" ry="8" transform="rotate(-28 20 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>    <ellipse class="wing wr" cx="44" cy="24" rx="13" ry="8" transform="rotate(28 44 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>  </g>  <path d="M32 58 l-4 -6 h8 z" fill="#2b1a0a"/>  <ellipse cx="32" cy="34" rx="13.5" ry="17" fill="#ffc93c" stroke="#2b1a0a" stroke-width="2.6"/>  <clipPath id="beebody2"><ellipse cx="32" cy="34" rx="12.2" ry="15.7"/></clipPath>  <g clip-path="url(#beebody2)" fill="#2b1a0a">    <rect x="16" y="23" width="32" height="5" rx="1"/>    <rect x="16" y="33" width="32" height="5.5" rx="1"/>    <rect x="16" y="43.5" width="32" height="5" rx="1"/>  </g>  <ellipse cx="27" cy="29" rx="3.2" ry="6" fill="#fff" opacity=".35"/>  <path d="M27 13 q-4 -7 -9 -8 M37 13 q4 -7 9 -8" fill="none" stroke="#2b1a0a" stroke-width="2.2" stroke-linecap="round"/>  <circle cx="18" cy="5" r="2.2" fill="#2b1a0a"/><circle cx="46" cy="5" r="2.2" fill="#2b1a0a"/>  <circle cx="32" cy="16.5" r="9" fill="#5b3a1c" stroke="#2b1a0a" stroke-width="2"/><ellipse cx="29" cy="12.5" rx="3.5" ry="2" fill="#fff" opacity=".2"/>  <circle cx="28.2" cy="16.4" r="3.3" fill="#fff"/><circle cx="35.8" cy="16.4" r="3.3" fill="#fff"/>  <circle cx="28.8" cy="17.1" r="1.9" fill="#1a0f05"/><circle cx="36.4" cy="17.1" r="1.9" fill="#1a0f05"/>  <circle cx="29.4" cy="16.3" r=".7" fill="#fff"/><circle cx="37" cy="16.3" r=".7" fill="#fff"/>  <circle cx="25.6" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/><circle cx="38.4" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/></svg></i><i class="bee b3"><svg class="bee-art" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">  <g class="wings">    <ellipse class="wing wl" cx="20" cy="24" rx="13" ry="8" transform="rotate(-28 20 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>    <ellipse class="wing wr" cx="44" cy="24" rx="13" ry="8" transform="rotate(28 44 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>  </g>  <path d="M32 58 l-4 -6 h8 z" fill="#2b1a0a"/>  <ellipse cx="32" cy="34" rx="13.5" ry="17" fill="#ffc93c" stroke="#2b1a0a" stroke-width="2.6"/>  <clipPath id="beebody3"><ellipse cx="32" cy="34" rx="12.2" ry="15.7"/></clipPath>  <g clip-path="url(#beebody3)" fill="#2b1a0a">    <rect x="16" y="23" width="32" height="5" rx="1"/>    <rect x="16" y="33" width="32" height="5.5" rx="1"/>    <rect x="16" y="43.5" width="32" height="5" rx="1"/>  </g>  <ellipse cx="27" cy="29" rx="3.2" ry="6" fill="#fff" opacity=".35"/>  <path d="M27 13 q-4 -7 -9 -8 M37 13 q4 -7 9 -8" fill="none" stroke="#2b1a0a" stroke-width="2.2" stroke-linecap="round"/>  <circle cx="18" cy="5" r="2.2" fill="#2b1a0a"/><circle cx="46" cy="5" r="2.2" fill="#2b1a0a"/>  <circle cx="32" cy="16.5" r="9" fill="#5b3a1c" stroke="#2b1a0a" stroke-width="2"/><ellipse cx="29" cy="12.5" rx="3.5" ry="2" fill="#fff" opacity=".2"/>  <circle cx="28.2" cy="16.4" r="3.3" fill="#fff"/><circle cx="35.8" cy="16.4" r="3.3" fill="#fff"/>  <circle cx="28.8" cy="17.1" r="1.9" fill="#1a0f05"/><circle cx="36.4" cy="17.1" r="1.9" fill="#1a0f05"/>  <circle cx="29.4" cy="16.3" r=".7" fill="#fff"/><circle cx="37" cy="16.3" r=".7" fill="#fff"/>  <circle cx="25.6" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/><circle cx="38.4" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/></svg></i><i class="bee b4"><svg class="bee-art" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">  <g class="wings">    <ellipse class="wing wl" cx="20" cy="24" rx="13" ry="8" transform="rotate(-28 20 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>    <ellipse class="wing wr" cx="44" cy="24" rx="13" ry="8" transform="rotate(28 44 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>  </g>  <path d="M32 58 l-4 -6 h8 z" fill="#2b1a0a"/>  <ellipse cx="32" cy="34" rx="13.5" ry="17" fill="#ffc93c" stroke="#2b1a0a" stroke-width="2.6"/>  <clipPath id="beebody4"><ellipse cx="32" cy="34" rx="12.2" ry="15.7"/></clipPath>  <g clip-path="url(#beebody4)" fill="#2b1a0a">    <rect x="16" y="23" width="32" height="5" rx="1"/>    <rect x="16" y="33" width="32" height="5.5" rx="1"/>    <rect x="16" y="43.5" width="32" height="5" rx="1"/>  </g>  <ellipse cx="27" cy="29" rx="3.2" ry="6" fill="#fff" opacity=".35"/>  <path d="M27 13 q-4 -7 -9 -8 M37 13 q4 -7 9 -8" fill="none" stroke="#2b1a0a" stroke-width="2.2" stroke-linecap="round"/>  <circle cx="18" cy="5" r="2.2" fill="#2b1a0a"/><circle cx="46" cy="5" r="2.2" fill="#2b1a0a"/>  <circle cx="32" cy="16.5" r="9" fill="#5b3a1c" stroke="#2b1a0a" stroke-width="2"/><ellipse cx="29" cy="12.5" rx="3.5" ry="2" fill="#fff" opacity=".2"/>  <circle cx="28.2" cy="16.4" r="3.3" fill="#fff"/><circle cx="35.8" cy="16.4" r="3.3" fill="#fff"/>  <circle cx="28.8" cy="17.1" r="1.9" fill="#1a0f05"/><circle cx="36.4" cy="17.1" r="1.9" fill="#1a0f05"/>  <circle cx="29.4" cy="16.3" r=".7" fill="#fff"/><circle cx="37" cy="16.3" r=".7" fill="#fff"/>  <circle cx="25.6" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/><circle cx="38.4" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/></svg></i><i class="bee b5"><svg class="bee-art" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">  <g class="wings">    <ellipse class="wing wl" cx="20" cy="24" rx="13" ry="8" transform="rotate(-28 20 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>    <ellipse class="wing wr" cx="44" cy="24" rx="13" ry="8" transform="rotate(28 44 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>  </g>  <path d="M32 58 l-4 -6 h8 z" fill="#2b1a0a"/>  <ellipse cx="32" cy="34" rx="13.5" ry="17" fill="#ffc93c" stroke="#2b1a0a" stroke-width="2.6"/>  <clipPath id="beebody5"><ellipse cx="32" cy="34" rx="12.2" ry="15.7"/></clipPath>  <g clip-path="url(#beebody5)" fill="#2b1a0a">    <rect x="16" y="23" width="32" height="5" rx="1"/>    <rect x="16" y="33" width="32" height="5.5" rx="1"/>    <rect x="16" y="43.5" width="32" height="5" rx="1"/>  </g>  <ellipse cx="27" cy="29" rx="3.2" ry="6" fill="#fff" opacity=".35"/>  <path d="M27 13 q-4 -7 -9 -8 M37 13 q4 -7 9 -8" fill="none" stroke="#2b1a0a" stroke-width="2.2" stroke-linecap="round"/>  <circle cx="18" cy="5" r="2.2" fill="#2b1a0a"/><circle cx="46" cy="5" r="2.2" fill="#2b1a0a"/>  <circle cx="32" cy="16.5" r="9" fill="#5b3a1c" stroke="#2b1a0a" stroke-width="2"/><ellipse cx="29" cy="12.5" rx="3.5" ry="2" fill="#fff" opacity=".2"/>  <circle cx="28.2" cy="16.4" r="3.3" fill="#fff"/><circle cx="35.8" cy="16.4" r="3.3" fill="#fff"/>  <circle cx="28.8" cy="17.1" r="1.9" fill="#1a0f05"/><circle cx="36.4" cy="17.1" r="1.9" fill="#1a0f05"/>  <circle cx="29.4" cy="16.3" r=".7" fill="#fff"/><circle cx="37" cy="16.3" r=".7" fill="#fff"/>  <circle cx="25.6" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/><circle cx="38.4" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/></svg></i><i class="bee b6"><svg class="bee-art" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">  <g class="wings">    <ellipse class="wing wl" cx="20" cy="24" rx="13" ry="8" transform="rotate(-28 20 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>    <ellipse class="wing wr" cx="44" cy="24" rx="13" ry="8" transform="rotate(28 44 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>  </g>  <path d="M32 58 l-4 -6 h8 z" fill="#2b1a0a"/>  <ellipse cx="32" cy="34" rx="13.5" ry="17" fill="#ffc93c" stroke="#2b1a0a" stroke-width="2.6"/>  <clipPath id="beebody6"><ellipse cx="32" cy="34" rx="12.2" ry="15.7"/></clipPath>  <g clip-path="url(#beebody6)" fill="#2b1a0a">    <rect x="16" y="23" width="32" height="5" rx="1"/>    <rect x="16" y="33" width="32" height="5.5" rx="1"/>    <rect x="16" y="43.5" width="32" height="5" rx="1"/>  </g>  <ellipse cx="27" cy="29" rx="3.2" ry="6" fill="#fff" opacity=".35"/>  <path d="M27 13 q-4 -7 -9 -8 M37 13 q4 -7 9 -8" fill="none" stroke="#2b1a0a" stroke-width="2.2" stroke-linecap="round"/>  <circle cx="18" cy="5" r="2.2" fill="#2b1a0a"/><circle cx="46" cy="5" r="2.2" fill="#2b1a0a"/>  <circle cx="32" cy="16.5" r="9" fill="#5b3a1c" stroke="#2b1a0a" stroke-width="2"/><ellipse cx="29" cy="12.5" rx="3.5" ry="2" fill="#fff" opacity=".2"/>  <circle cx="28.2" cy="16.4" r="3.3" fill="#fff"/><circle cx="35.8" cy="16.4" r="3.3" fill="#fff"/>  <circle cx="28.8" cy="17.1" r="1.9" fill="#1a0f05"/><circle cx="36.4" cy="17.1" r="1.9" fill="#1a0f05"/>  <circle cx="29.4" cy="16.3" r=".7" fill="#fff"/><circle cx="37" cy="16.3" r=".7" fill="#fff"/>  <circle cx="25.6" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/><circle cx="38.4" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/></svg></i><i class="bee b7"><svg class="bee-art" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">  <g class="wings">    <ellipse class="wing wl" cx="20" cy="24" rx="13" ry="8" transform="rotate(-28 20 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>    <ellipse class="wing wr" cx="44" cy="24" rx="13" ry="8" transform="rotate(28 44 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>  </g>  <path d="M32 58 l-4 -6 h8 z" fill="#2b1a0a"/>  <ellipse cx="32" cy="34" rx="13.5" ry="17" fill="#ffc93c" stroke="#2b1a0a" stroke-width="2.6"/>  <clipPath id="beebody7"><ellipse cx="32" cy="34" rx="12.2" ry="15.7"/></clipPath>  <g clip-path="url(#beebody7)" fill="#2b1a0a">    <rect x="16" y="23" width="32" height="5" rx="1"/>    <rect x="16" y="33" width="32" height="5.5" rx="1"/>    <rect x="16" y="43.5" width="32" height="5" rx="1"/>  </g>  <ellipse cx="27" cy="29" rx="3.2" ry="6" fill="#fff" opacity=".35"/>  <path d="M27 13 q-4 -7 -9 -8 M37 13 q4 -7 9 -8" fill="none" stroke="#2b1a0a" stroke-width="2.2" stroke-linecap="round"/>  <circle cx="18" cy="5" r="2.2" fill="#2b1a0a"/><circle cx="46" cy="5" r="2.2" fill="#2b1a0a"/>  <circle cx="32" cy="16.5" r="9" fill="#5b3a1c" stroke="#2b1a0a" stroke-width="2"/><ellipse cx="29" cy="12.5" rx="3.5" ry="2" fill="#fff" opacity=".2"/>  <circle cx="28.2" cy="16.4" r="3.3" fill="#fff"/><circle cx="35.8" cy="16.4" r="3.3" fill="#fff"/>  <circle cx="28.8" cy="17.1" r="1.9" fill="#1a0f05"/><circle cx="36.4" cy="17.1" r="1.9" fill="#1a0f05"/>  <circle cx="29.4" cy="16.3" r=".7" fill="#fff"/><circle cx="37" cy="16.3" r=".7" fill="#fff"/>  <circle cx="25.6" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/><circle cx="38.4" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/></svg></i><i class="bee b8"><svg class="bee-art" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">  <g class="wings">    <ellipse class="wing wl" cx="20" cy="24" rx="13" ry="8" transform="rotate(-28 20 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>    <ellipse class="wing wr" cx="44" cy="24" rx="13" ry="8" transform="rotate(28 44 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>  </g>  <path d="M32 58 l-4 -6 h8 z" fill="#2b1a0a"/>  <ellipse cx="32" cy="34" rx="13.5" ry="17" fill="#ffc93c" stroke="#2b1a0a" stroke-width="2.6"/>  <clipPath id="beebody8"><ellipse cx="32" cy="34" rx="12.2" ry="15.7"/></clipPath>  <g clip-path="url(#beebody8)" fill="#2b1a0a">    <rect x="16" y="23" width="32" height="5" rx="1"/>    <rect x="16" y="33" width="32" height="5.5" rx="1"/>    <rect x="16" y="43.5" width="32" height="5" rx="1"/>  </g>  <ellipse cx="27" cy="29" rx="3.2" ry="6" fill="#fff" opacity=".35"/>  <path d="M27 13 q-4 -7 -9 -8 M37 13 q4 -7 9 -8" fill="none" stroke="#2b1a0a" stroke-width="2.2" stroke-linecap="round"/>  <circle cx="18" cy="5" r="2.2" fill="#2b1a0a"/><circle cx="46" cy="5" r="2.2" fill="#2b1a0a"/>  <circle cx="32" cy="16.5" r="9" fill="#5b3a1c" stroke="#2b1a0a" stroke-width="2"/><ellipse cx="29" cy="12.5" rx="3.5" ry="2" fill="#fff" opacity=".2"/>  <circle cx="28.2" cy="16.4" r="3.3" fill="#fff"/><circle cx="35.8" cy="16.4" r="3.3" fill="#fff"/>  <circle cx="28.8" cy="17.1" r="1.9" fill="#1a0f05"/><circle cx="36.4" cy="17.1" r="1.9" fill="#1a0f05"/>  <circle cx="29.4" cy="16.3" r=".7" fill="#fff"/><circle cx="37" cy="16.3" r=".7" fill="#fff"/>  <circle cx="25.6" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/><circle cx="38.4" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/></svg></i><i class="bee b9"><svg class="bee-art" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">  <g class="wings">    <ellipse class="wing wl" cx="20" cy="24" rx="13" ry="8" transform="rotate(-28 20 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>    <ellipse class="wing wr" cx="44" cy="24" rx="13" ry="8" transform="rotate(28 44 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>  </g>  <path d="M32 58 l-4 -6 h8 z" fill="#2b1a0a"/>  <ellipse cx="32" cy="34" rx="13.5" ry="17" fill="#ffc93c" stroke="#2b1a0a" stroke-width="2.6"/>  <clipPath id="beebody9"><ellipse cx="32" cy="34" rx="12.2" ry="15.7"/></clipPath>  <g clip-path="url(#beebody9)" fill="#2b1a0a">    <rect x="16" y="23" width="32" height="5" rx="1"/>    <rect x="16" y="33" width="32" height="5.5" rx="1"/>    <rect x="16" y="43.5" width="32" height="5" rx="1"/>  </g>  <ellipse cx="27" cy="29" rx="3.2" ry="6" fill="#fff" opacity=".35"/>  <path d="M27 13 q-4 -7 -9 -8 M37 13 q4 -7 9 -8" fill="none" stroke="#2b1a0a" stroke-width="2.2" stroke-linecap="round"/>  <circle cx="18" cy="5" r="2.2" fill="#2b1a0a"/><circle cx="46" cy="5" r="2.2" fill="#2b1a0a"/>  <circle cx="32" cy="16.5" r="9" fill="#5b3a1c" stroke="#2b1a0a" stroke-width="2"/><ellipse cx="29" cy="12.5" rx="3.5" ry="2" fill="#fff" opacity=".2"/>  <circle cx="28.2" cy="16.4" r="3.3" fill="#fff"/><circle cx="35.8" cy="16.4" r="3.3" fill="#fff"/>  <circle cx="28.8" cy="17.1" r="1.9" fill="#1a0f05"/><circle cx="36.4" cy="17.1" r="1.9" fill="#1a0f05"/>  <circle cx="29.4" cy="16.3" r=".7" fill="#fff"/><circle cx="37" cy="16.3" r=".7" fill="#fff"/>  <circle cx="25.6" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/><circle cx="38.4" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/></svg></i><i class="bee b10"><svg class="bee-art" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">  <g class="wings">    <ellipse class="wing wl" cx="20" cy="24" rx="13" ry="8" transform="rotate(-28 20 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>    <ellipse class="wing wr" cx="44" cy="24" rx="13" ry="8" transform="rotate(28 44 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>  </g>  <path d="M32 58 l-4 -6 h8 z" fill="#2b1a0a"/>  <ellipse cx="32" cy="34" rx="13.5" ry="17" fill="#ffc93c" stroke="#2b1a0a" stroke-width="2.6"/>  <clipPath id="beebody10"><ellipse cx="32" cy="34" rx="12.2" ry="15.7"/></clipPath>  <g clip-path="url(#beebody10)" fill="#2b1a0a">    <rect x="16" y="23" width="32" height="5" rx="1"/>    <rect x="16" y="33" width="32" height="5.5" rx="1"/>    <rect x="16" y="43.5" width="32" height="5" rx="1"/>  </g>  <ellipse cx="27" cy="29" rx="3.2" ry="6" fill="#fff" opacity=".35"/>  <path d="M27 13 q-4 -7 -9 -8 M37 13 q4 -7 9 -8" fill="none" stroke="#2b1a0a" stroke-width="2.2" stroke-linecap="round"/>  <circle cx="18" cy="5" r="2.2" fill="#2b1a0a"/><circle cx="46" cy="5" r="2.2" fill="#2b1a0a"/>  <circle cx="32" cy="16.5" r="9" fill="#5b3a1c" stroke="#2b1a0a" stroke-width="2"/><ellipse cx="29" cy="12.5" rx="3.5" ry="2" fill="#fff" opacity=".2"/>  <circle cx="28.2" cy="16.4" r="3.3" fill="#fff"/><circle cx="35.8" cy="16.4" r="3.3" fill="#fff"/>  <circle cx="28.8" cy="17.1" r="1.9" fill="#1a0f05"/><circle cx="36.4" cy="17.1" r="1.9" fill="#1a0f05"/>  <circle cx="29.4" cy="16.3" r=".7" fill="#fff"/><circle cx="37" cy="16.3" r=".7" fill="#fff"/>  <circle cx="25.6" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/><circle cx="38.4" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/></svg></i><i class="bee b11"><svg class="bee-art" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">  <g class="wings">    <ellipse class="wing wl" cx="20" cy="24" rx="13" ry="8" transform="rotate(-28 20 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>    <ellipse class="wing wr" cx="44" cy="24" rx="13" ry="8" transform="rotate(28 44 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>  </g>  <path d="M32 58 l-4 -6 h8 z" fill="#2b1a0a"/>  <ellipse cx="32" cy="34" rx="13.5" ry="17" fill="#ffc93c" stroke="#2b1a0a" stroke-width="2.6"/>  <clipPath id="beebody11"><ellipse cx="32" cy="34" rx="12.2" ry="15.7"/></clipPath>  <g clip-path="url(#beebody11)" fill="#2b1a0a">    <rect x="16" y="23" width="32" height="5" rx="1"/>    <rect x="16" y="33" width="32" height="5.5" rx="1"/>    <rect x="16" y="43.5" width="32" height="5" rx="1"/>  </g>  <ellipse cx="27" cy="29" rx="3.2" ry="6" fill="#fff" opacity=".35"/>  <path d="M27 13 q-4 -7 -9 -8 M37 13 q4 -7 9 -8" fill="none" stroke="#2b1a0a" stroke-width="2.2" stroke-linecap="round"/>  <circle cx="18" cy="5" r="2.2" fill="#2b1a0a"/><circle cx="46" cy="5" r="2.2" fill="#2b1a0a"/>  <circle cx="32" cy="16.5" r="9" fill="#5b3a1c" stroke="#2b1a0a" stroke-width="2"/><ellipse cx="29" cy="12.5" rx="3.5" ry="2" fill="#fff" opacity=".2"/>  <circle cx="28.2" cy="16.4" r="3.3" fill="#fff"/><circle cx="35.8" cy="16.4" r="3.3" fill="#fff"/>  <circle cx="28.8" cy="17.1" r="1.9" fill="#1a0f05"/><circle cx="36.4" cy="17.1" r="1.9" fill="#1a0f05"/>  <circle cx="29.4" cy="16.3" r=".7" fill="#fff"/><circle cx="37" cy="16.3" r=".7" fill="#fff"/>  <circle cx="25.6" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/><circle cx="38.4" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/></svg></i><i class="bee b12"><svg class="bee-art" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">  <g class="wings">    <ellipse class="wing wl" cx="20" cy="24" rx="13" ry="8" transform="rotate(-28 20 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>    <ellipse class="wing wr" cx="44" cy="24" rx="13" ry="8" transform="rotate(28 44 24)" fill="#e8f6ff" fill-opacity=".85" stroke="#7fa9c4" stroke-width="1.6"/>  </g>  <path d="M32 58 l-4 -6 h8 z" fill="#2b1a0a"/>  <ellipse cx="32" cy="34" rx="13.5" ry="17" fill="#ffc93c" stroke="#2b1a0a" stroke-width="2.6"/>  <clipPath id="beebody12"><ellipse cx="32" cy="34" rx="12.2" ry="15.7"/></clipPath>  <g clip-path="url(#beebody12)" fill="#2b1a0a">    <rect x="16" y="23" width="32" height="5" rx="1"/>    <rect x="16" y="33" width="32" height="5.5" rx="1"/>    <rect x="16" y="43.5" width="32" height="5" rx="1"/>  </g>  <ellipse cx="27" cy="29" rx="3.2" ry="6" fill="#fff" opacity=".35"/>  <path d="M27 13 q-4 -7 -9 -8 M37 13 q4 -7 9 -8" fill="none" stroke="#2b1a0a" stroke-width="2.2" stroke-linecap="round"/>  <circle cx="18" cy="5" r="2.2" fill="#2b1a0a"/><circle cx="46" cy="5" r="2.2" fill="#2b1a0a"/>  <circle cx="32" cy="16.5" r="9" fill="#5b3a1c" stroke="#2b1a0a" stroke-width="2"/><ellipse cx="29" cy="12.5" rx="3.5" ry="2" fill="#fff" opacity=".2"/>  <circle cx="28.2" cy="16.4" r="3.3" fill="#fff"/><circle cx="35.8" cy="16.4" r="3.3" fill="#fff"/>  <circle cx="28.8" cy="17.1" r="1.9" fill="#1a0f05"/><circle cx="36.4" cy="17.1" r="1.9" fill="#1a0f05"/>  <circle cx="29.4" cy="16.3" r=".7" fill="#fff"/><circle cx="37" cy="16.3" r=".7" fill="#fff"/>  <circle cx="25.6" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/><circle cx="38.4" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/></svg></i></div>
+        <button type="button" class="golden" aria-label="A golden bee. Catch it!"><svg class="bee-art" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">  <g class="wings">    <ellipse class="wing wl" cx="20" cy="24" rx="13" ry="8" transform="rotate(-28 20 24)" fill="#fff6c8" fill-opacity=".85" stroke="#e0a800" stroke-width="1.6"/>    <ellipse class="wing wr" cx="44" cy="24" rx="13" ry="8" transform="rotate(28 44 24)" fill="#fff6c8" fill-opacity=".85" stroke="#e0a800" stroke-width="1.6"/>  </g>  <path d="M32 58 l-4 -6 h8 z" fill="#7a4a00"/>  <ellipse cx="32" cy="34" rx="13.5" ry="17" fill="#ffd84a" stroke="#7a4a00" stroke-width="2.6"/>  <clipPath id="beebodygold"><ellipse cx="32" cy="34" rx="12.2" ry="15.7"/></clipPath>  <g clip-path="url(#beebodygold)" fill="#7a4a00">    <rect x="16" y="23" width="32" height="5" rx="1"/>    <rect x="16" y="33" width="32" height="5.5" rx="1"/>    <rect x="16" y="43.5" width="32" height="5" rx="1"/>  </g>  <ellipse cx="27" cy="29" rx="3.2" ry="6" fill="#fff" opacity=".35"/>  <path d="M27 13 q-4 -7 -9 -8 M37 13 q4 -7 9 -8" fill="none" stroke="#7a4a00" stroke-width="2.2" stroke-linecap="round"/>  <circle cx="18" cy="5" r="2.2" fill="#7a4a00"/><circle cx="46" cy="5" r="2.2" fill="#7a4a00"/>  <circle cx="32" cy="16.5" r="9" fill="#b8860b" stroke="#7a4a00" stroke-width="2"/><ellipse cx="29" cy="12.5" rx="3.5" ry="2" fill="#fff" opacity=".2"/>  <circle cx="28.2" cy="16.4" r="3.3" fill="#fff"/><circle cx="35.8" cy="16.4" r="3.3" fill="#fff"/>  <circle cx="28.8" cy="17.1" r="1.9" fill="#1a0f05"/><circle cx="36.4" cy="17.1" r="1.9" fill="#1a0f05"/>  <circle cx="29.4" cy="16.3" r=".7" fill="#fff"/><circle cx="37" cy="16.3" r=".7" fill="#fff"/>  <circle cx="25.6" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/><circle cx="38.4" cy="20.6" r="1.6" fill="#ff8a8a" opacity=".7"/></svg></button>
+        <p class="banner" aria-live="polite">Golden bee! +<output class="bonus">0</output></p>
+        <button type="button" class="hive" aria-label="The hive. Click to collect honey.">
+          <svg class="hive-art" viewBox="0 0 200 236" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="straw" x1="0" x2="1">
+                <stop offset="0" stop-color="#ffd36b"/><stop offset=".45" stop-color="#f1ad3d"/><stop offset="1" stop-color="#c97a1e"/>
+              </linearGradient>
+              <pattern id="weave" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(28)">
+                <rect width="9" height="9" fill="none"/><path d="M0 4.5h9" stroke="#a8620f" stroke-width="1.6" stroke-linecap="round"/>
+              </pattern>
+              <linearGradient id="door" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1203"/><stop offset="1" stop-color="#4a2408"/></linearGradient>
+              <linearGradient id="honey" x1="0" x2="1"><stop offset="0" stop-color="#ffb21e"/><stop offset=".5" stop-color="#ff9a00"/><stop offset="1" stop-color="#d96f00"/></linearGradient>
+              <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b86f3a"/><stop offset="1" stop-color="#7e4320"/></linearGradient>
+            </defs>
+            <ellipse cx="100" cy="226" rx="86" ry="8" fill="#7a4a10" opacity=".22"/>
+            <rect x="18" y="196" width="164" height="16" rx="6" fill="url(#wood)" stroke="#5a3210" stroke-width="3"/>
+            <path d="M40 212v12M160 212v12" stroke="#5a3210" stroke-width="6" stroke-linecap="round"/>
+            <g><rect x="11.0" y="173.0" width="178" height="26" rx="13.0" fill="url(#straw)" stroke="#5a3210" stroke-width="3"/><rect x="11.0" y="173.0" width="178" height="26" rx="13.0" fill="url(#weave)" opacity=".4"/><rect x="19.0" y="177.0" width="162" height="7.3" rx="3.6" fill="#fff3c4" opacity=".55"/><rect x="14.0" y="150.0" width="172" height="26" rx="13.0" fill="url(#straw)" stroke="#5a3210" stroke-width="3"/><rect x="14.0" y="150.0" width="172" height="26" rx="13.0" fill="url(#weave)" opacity=".4"/><rect x="22.0" y="154.0" width="156" height="7.3" rx="3.6" fill="#fff3c4" opacity=".55"/><rect x="20.0" y="127.0" width="160" height="26" rx="13.0" fill="url(#straw)" stroke="#5a3210" stroke-width="3"/><rect x="20.0" y="127.0" width="160" height="26" rx="13.0" fill="url(#weave)" opacity=".4"/><rect x="28.0" y="131.0" width="144" height="7.3" rx="3.6" fill="#fff3c4" opacity=".55"/><rect x="29.0" y="104.0" width="142" height="26" rx="13.0" fill="url(#straw)" stroke="#5a3210" stroke-width="3"/><rect x="29.0" y="104.0" width="142" height="26" rx="13.0" fill="url(#weave)" opacity=".4"/><rect x="37.0" y="108.0" width="126" height="7.3" rx="3.6" fill="#fff3c4" opacity=".55"/><rect x="41.0" y="82.0" width="118" height="25" rx="12.5" fill="url(#straw)" stroke="#5a3210" stroke-width="3"/><rect x="41.0" y="82.0" width="118" height="25" rx="12.5" fill="url(#weave)" opacity=".4"/><rect x="49.0" y="86.0" width="102" height="7.0" rx="3.5" fill="#fff3c4" opacity=".55"/><rect x="55.0" y="61.0" width="90" height="24" rx="12.0" fill="url(#straw)" stroke="#5a3210" stroke-width="3"/><rect x="55.0" y="61.0" width="90" height="24" rx="12.0" fill="url(#weave)" opacity=".4"/><rect x="63.0" y="65.0" width="74" height="6.7" rx="3.4" fill="#fff3c4" opacity=".55"/><rect x="71.0" y="42.0" width="58" height="22" rx="11.0" fill="url(#straw)" stroke="#5a3210" stroke-width="3"/><rect x="71.0" y="42.0" width="58" height="22" rx="11.0" fill="url(#weave)" opacity=".4"/><rect x="79.0" y="46.0" width="42" height="6.2" rx="3.1" fill="#fff3c4" opacity=".55"/></g>
+            <circle cx="100" cy="41" r="9" fill="url(#straw)" stroke="#5a3210" stroke-width="3"/>
+            <path d="M78 196 v-16 a22 22 0 0 1 44 0 v16 z" fill="url(#door)" stroke="#5a3210" stroke-width="3"/>
+            <path d="M84 192 v-11 a16 16 0 0 1 22 -14" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+            <path d="M70 196 h60" stroke="#5a3210" stroke-width="5" stroke-linecap="round"/>
+            <path d="M108 197 c 0 9, 2 16, 7 22 c 3 4, -1 9, -5 7 c -4 -2, -5 -6, -4 -10 c 1 -6, 0 -12, -2 -19 z" fill="url(#honey)" stroke="#a24f00" stroke-width="2"/>
+            <ellipse cx="111.5" cy="214" rx="1.6" ry="3.4" fill="#fff6d0" opacity=".85"/>
+          </svg>
+          <span class="floats" aria-hidden="true"><span class="float fl1">+<output class="pw"></output></span><span class="float fl2">+<output class="pw"></output></span><span class="float fl3">+<output class="pw"></output></span></span>
+          <span class="crowns" aria-hidden="true"><i class="crown q1"><svg class="crown-art" viewBox="0 0 64 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">  <defs><linearGradient id="crowngold1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe680"/><stop offset=".55" stop-color="#ffbf1f"/><stop offset="1" stop-color="#e08a00"/></linearGradient></defs>  <path d="M6 38 L4 12 L18 24 L32 4 L46 24 L60 12 L58 38 Z" fill="url(#crowngold1)" stroke="#8a4b00" stroke-width="3" stroke-linejoin="round"/>  <rect x="5" y="33" width="54" height="8" rx="3" fill="#ffcf3f" stroke="#8a4b00" stroke-width="3"/>  <circle cx="32" cy="27" r="4.5" fill="#e8364f" stroke="#8a4b00" stroke-width="2"/>  <circle cx="17" cy="30" r="3" fill="#3db5ff" stroke="#8a4b00" stroke-width="2"/><circle cx="47" cy="30" r="3" fill="#3db5ff" stroke="#8a4b00" stroke-width="2"/>  <circle cx="4" cy="12" r="3" fill="#fff3b0" stroke="#8a4b00" stroke-width="2"/><circle cx="32" cy="4" r="3" fill="#fff3b0" stroke="#8a4b00" stroke-width="2"/><circle cx="60" cy="12" r="3" fill="#fff3b0" stroke="#8a4b00" stroke-width="2"/></svg></i><i class="crown q2"><svg class="crown-art" viewBox="0 0 64 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">  <defs><linearGradient id="crowngold2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe680"/><stop offset=".55" stop-color="#ffbf1f"/><stop offset="1" stop-color="#e08a00"/></linearGradient></defs>  <path d="M6 38 L4 12 L18 24 L32 4 L46 24 L60 12 L58 38 Z" fill="url(#crowngold2)" stroke="#8a4b00" stroke-width="3" stroke-linejoin="round"/>  <rect x="5" y="33" width="54" height="8" rx="3" fill="#ffcf3f" stroke="#8a4b00" stroke-width="3"/>  <circle cx="32" cy="27" r="4.5" fill="#e8364f" stroke="#8a4b00" stroke-width="2"/>  <circle cx="17" cy="30" r="3" fill="#3db5ff" stroke="#8a4b00" stroke-width="2"/><circle cx="47" cy="30" r="3" fill="#3db5ff" stroke="#8a4b00" stroke-width="2"/>  <circle cx="4" cy="12" r="3" fill="#fff3b0" stroke="#8a4b00" stroke-width="2"/><circle cx="32" cy="4" r="3" fill="#fff3b0" stroke="#8a4b00" stroke-width="2"/><circle cx="60" cy="12" r="3" fill="#fff3b0" stroke="#8a4b00" stroke-width="2"/></svg></i><i class="crown q3"><svg class="crown-art" viewBox="0 0 64 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">  <defs><linearGradient id="crowngold3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe680"/><stop offset=".55" stop-color="#ffbf1f"/><stop offset="1" stop-color="#e08a00"/></linearGradient></defs>  <path d="M6 38 L4 12 L18 24 L32 4 L46 24 L60 12 L58 38 Z" fill="url(#crowngold3)" stroke="#8a4b00" stroke-width="3" stroke-linejoin="round"/>  <rect x="5" y="33" width="54" height="8" rx="3" fill="#ffcf3f" stroke="#8a4b00" stroke-width="3"/>  <circle cx="32" cy="27" r="4.5" fill="#e8364f" stroke="#8a4b00" stroke-width="2"/>  <circle cx="17" cy="30" r="3" fill="#3db5ff" stroke="#8a4b00" stroke-width="2"/><circle cx="47" cy="30" r="3" fill="#3db5ff" stroke="#8a4b00" stroke-width="2"/>  <circle cx="4" cy="12" r="3" fill="#fff3b0" stroke="#8a4b00" stroke-width="2"/><circle cx="32" cy="4" r="3" fill="#fff3b0" stroke="#8a4b00" stroke-width="2"/><circle cx="60" cy="12" r="3" fill="#fff3b0" stroke="#8a4b00" stroke-width="2"/></svg></i></span>
+        </button>
+      </div>
+      <div class="meadow" aria-hidden="true"><i class="jar j1"><svg viewBox="0 0 40 48" aria-hidden="true"><rect x="9" y="3" width="22" height="7" rx="2" fill="#c47a2c" stroke="#5a3210" stroke-width="2.4"/><path d="M7 12 h26 q3 0 3 4 v24 q0 5 -5 5 h-22 q-5 0 -5 -5 v-24 q0 -4 3 -4z" fill="#ffb21e" stroke="#5a3210" stroke-width="2.4"/><rect x="11" y="20" width="18" height="12" rx="2" fill="#fff4cc" stroke="#5a3210" stroke-width="1.6"/><path d="M15 26 h10" stroke="#c47a2c" stroke-width="2" stroke-linecap="round"/><ellipse cx="12" cy="18" rx="1.6" ry="4" fill="#fff" opacity=".6"/></svg></i><i class="jar j2"><svg viewBox="0 0 40 48" aria-hidden="true"><rect x="9" y="3" width="22" height="7" rx="2" fill="#c47a2c" stroke="#5a3210" stroke-width="2.4"/><path d="M7 12 h26 q3 0 3 4 v24 q0 5 -5 5 h-22 q-5 0 -5 -5 v-24 q0 -4 3 -4z" fill="#ffb21e" stroke="#5a3210" stroke-width="2.4"/><rect x="11" y="20" width="18" height="12" rx="2" fill="#fff4cc" stroke="#5a3210" stroke-width="1.6"/><path d="M15 26 h10" stroke="#c47a2c" stroke-width="2" stroke-linecap="round"/><ellipse cx="12" cy="18" rx="1.6" ry="4" fill="#fff" opacity=".6"/></svg></i><i class="jar j3"><svg viewBox="0 0 40 48" aria-hidden="true"><rect x="9" y="3" width="22" height="7" rx="2" fill="#c47a2c" stroke="#5a3210" stroke-width="2.4"/><path d="M7 12 h26 q3 0 3 4 v24 q0 5 -5 5 h-22 q-5 0 -5 -5 v-24 q0 -4 3 -4z" fill="#ffb21e" stroke="#5a3210" stroke-width="2.4"/><rect x="11" y="20" width="18" height="12" rx="2" fill="#fff4cc" stroke="#5a3210" stroke-width="1.6"/><path d="M15 26 h10" stroke="#c47a2c" stroke-width="2" stroke-linecap="round"/><ellipse cx="12" cy="18" rx="1.6" ry="4" fill="#fff" opacity=".6"/></svg></i><i class="flower f1"></i><i class="flower f2"></i><i class="flower f3"></i><i class="flower f4"></i><i class="flower f5"></i><i class="flower f6"></i><i class="flower f7"></i><i class="flower f8"></i><i class="flower f9"></i><i class="flower f10"></i></div>
+    </section>
+
+    <aside class="shop" aria-label="Shop">
+      <div class="tabs" role="tablist" aria-label="Shop sections">
+        <button type="button" class="tab tab-helpers" role="tab" aria-controls="p-helpers">Helpers<i class="dot"></i></button>
+        <button type="button" class="tab tab-upgrades" role="tab" aria-controls="p-upgrades">Upgrades<i class="dot"></i></button>
+        <button type="button" class="tab tab-boosts" role="tab" aria-controls="p-boosts">Boosts<i class="dot"></i></button>
+      </div>
+      <div class="panels">
+        <ul class="items panel" id="p-helpers" role="tabpanel" aria-label="Helpers">
+          <li class="item it-bee">
+            <div class="icon" aria-hidden="true">🐝</div>
+            <div class="text"><strong>Worker Bee</strong><span>+<output class="o-bee">1</output> honey per second</span><span class="owned">Owned: <output class="n-bee">0</output></span></div>
+            <button type="button" class="buy buy-bee">Buy <output class="c-bee">15</output></button>
+          </li>
+          <li class="item it-flower">
+            <div class="icon" aria-hidden="true">🌼</div>
+            <div class="text"><strong>Flower Field</strong><span>+<output class="o-flower">6</output> honey per second</span><span class="owned">Owned: <output class="n-flower">0</output></span></div>
+            <button type="button" class="buy buy-flower">Buy <output class="c-flower">100</output></button>
+          </li>
+          <li class="item it-queen">
+            <div class="icon" aria-hidden="true">👑</div>
+            <div class="text"><strong>Queen</strong><span>+<output class="o-queen">40</output> honey per second</span><span class="owned">Owned: <output class="n-queen">0</output></span></div>
+            <button type="button" class="buy buy-queen">Buy <output class="c-queen">1100</output></button>
+          </li>
+          <li class="item it-keeper">
+            <div class="icon" aria-hidden="true">🧑‍🌾</div>
+            <div class="text"><strong>Beekeeper</strong><span>+<output class="o-keeper">150</output> honey per second</span><span class="owned">Owned: <output class="n-keeper">0</output></span></div>
+            <button type="button" class="buy buy-keeper">Buy <output class="c-keeper">12000</output></button>
+          </li>
+          <li class="item it-factory">
+            <div class="icon" aria-hidden="true">🏭</div>
+            <div class="text"><strong>Honey Factory</strong><span>+<output class="o-factory">600</output> honey per second</span><span class="owned">Owned: <output class="n-factory">0</output></span></div>
+            <button type="button" class="buy buy-factory">Buy <output class="c-factory">130000</output></button>
+          </li>
+        </ul>
+        <ul class="items panel" id="p-upgrades" role="tabpanel" aria-label="Upgrades">
+          <li class="item it-wings">
+            <div class="icon" aria-hidden="true">🪽</div>
+            <div class="text"><strong>Stronger Wings</strong><span>Adds to honey per click</span><span class="owned">Owned: <output class="n-wings">0</output></span></div>
+            <button type="button" class="buy buy-wings">Buy <output class="c-wings">50</output></button>
+          </li>
+          <li class="item it-jelly">
+            <div class="icon" aria-hidden="true">🍯</div>
+            <div class="text"><strong>Royal Jelly</strong><span>Doubles honey per click</span><span class="owned">Owned: <output class="n-jelly">0</output></span></div>
+            <button type="button" class="buy buy-jelly">Buy <output class="c-jelly">500</output></button>
+          </li>
+          <li class="item it-pollen">
+            <div class="icon" aria-hidden="true">🌸</div>
+            <div class="text"><strong>Pollen Boost</strong><span>Worker bees make twice as much</span><span class="req">Needs 10 bees</span></div>
+            <button type="button" class="buy buy-pollen"><span class="lbl-buy">Buy 1,000</span><span class="lbl-lock">Locked</span><span class="lbl-own">Owned ✓</span></button>
+          </li>
+          <li class="item it-seeds">
+            <div class="icon" aria-hidden="true">🌻</div>
+            <div class="text"><strong>Sunflower Seeds</strong><span>Flower fields make twice as much</span><span class="req">Needs 5 fields</span></div>
+            <button type="button" class="buy buy-seeds"><span class="lbl-buy">Buy 5,000</span><span class="lbl-lock">Locked</span><span class="lbl-own">Owned ✓</span></button>
+          </li>
+          <li class="item it-court">
+            <div class="icon" aria-hidden="true">🏰</div>
+            <div class="text"><strong>Royal Court</strong><span>Queens make twice as much</span><span class="req">Needs 3 queens</span></div>
+            <button type="button" class="buy buy-court"><span class="lbl-buy">Buy 50,000</span><span class="lbl-lock">Locked</span><span class="lbl-own">Owned ✓</span></button>
+          </li>
+          <li class="item it-smoker">
+            <div class="icon" aria-hidden="true">💨</div>
+            <div class="text"><strong>Smoker</strong><span>Beekeepers make twice as much</span><span class="req">Needs 3 beekeepers</span></div>
+            <button type="button" class="buy buy-smoker"><span class="lbl-buy">Buy 300,000</span><span class="lbl-lock">Locked</span><span class="lbl-own">Owned ✓</span></button>
+          </li>
+          <li class="item it-comb">
+            <div class="icon" aria-hidden="true">✨</div>
+            <div class="text"><strong>Golden Comb</strong><span>Golden bees pay three times as much</span><span class="req">Catch a golden bee</span></div>
+            <button type="button" class="buy buy-comb"><span class="lbl-buy">Buy 10,000</span><span class="lbl-lock">Locked</span><span class="lbl-own">Owned ✓</span></button>
+          </li>
+        </ul>
+        <ul class="items panel" id="p-boosts" role="tabpanel" aria-label="Boosts">
+          <li class="item it-rush">
+            <div class="icon" aria-hidden="true">⚡</div>
+            <div class="text"><strong>Honey Rush</strong><span>Three times the honey per click for 15 s</span><span class="timer t-rush" aria-hidden="true"><span></span></span></div>
+            <button type="button" class="buy buy-rush"><span class="lbl-buy">Buy <output class="c-rush">200</output></span><span class="lbl-on">Active</span></button>
+          </li>
+          <li class="item it-dance">
+            <div class="icon" aria-hidden="true">💃</div>
+            <div class="text"><strong>Bee Dance</strong><span>Twice the income per second for 20 s</span><span class="timer t-dance" aria-hidden="true"><span></span></span></div>
+            <button type="button" class="buy buy-dance"><span class="lbl-buy">Buy <output class="c-dance">500</output></span><span class="lbl-on">Active</span></button>
+          </li>
+          <li class="hint">Golden bees cross the hive now and then. Catch one for a bonus worth half a minute of income.</li>
+        </ul>
+      </div>
+      <h2>Milestones</h2>
+      <ul class="badges"><li class="badge m1"><b>100</b><span>First jar</span></li><li class="badge m2"><b>1K</b><span>Busy hive</span></li><li class="badge m3"><b>10K</b><span>Honey baron</span></li><li class="badge m4"><b>100K</b><span>Sweet empire</span></li><li class="badge m5"><b>1M</b><span>Honey moon</span></li><li class="badge m6"><b>10M</b><span>Galactic hive</span></li></ul>
+      <p class="stats">Clicks <output class="clicks">0</output> · Golden bees <output class="caught">0</output></p>
+      <p class="note">Built with <a href="https://reactivecss.com" target="_blank" rel="noopener">Reactive CSS</a>: every click, price, boost and the saved game are CSS rules. There is no application JavaScript; one runtime script runs the rules.</p>
+      <p class="save">Saved in this browser. <button type="button" class="reset">Reset</button><button type="button" class="confirm">Really reset?</button></p>
+    </aside>
+
+    <!-- Clocks: invisible animations that restart themselves on animationend (see style.css). -->
+    <span class="clock income" aria-hidden="true"></span>
+    <span class="clock spawner" aria-hidden="true"></span>
+  </main>
+
+  <div class="labels">
+    <span class="label-made">Built with <b>Reactive CSS</b></span>
+    <a class="label-link" href="https://reactivecss.com" target="_blank" rel="noopener">reactivecss.com ↗</a>
+  </div>
+</body>
+</html>
