@@ -1,12 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hive · built with Reactive CSS</title>
+  <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="Fun_RPS.css">
+  <style>
+    .home-button {
+      position: fixed;
+      left: max(1rem, env(safe-area-inset-left));
+      bottom: max(1rem, env(safe-area-inset-bottom));
+      display: grid;
+      place-items: center;
+      width: 3rem;
+      height: 3rem;
+      border: 1px solid #888;
+      border-radius: 50%;
+      background: #f4f4f4;
+      color: #162b35;
+      box-shadow: 0 2px 8px #0003;
+      z-index: 4;
+    }
+    .home-button:hover {
+      background: #e4ebea;
+    }
+    .home-button:focus-visible {
+      outline: 3px solid #0a84ff;
+      outline-offset: 3px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" defer></script>
   <script src="Fun_RPS_script.js" defer></script>
 </head>
 <body ng-app="app" ng-controller="ctrl">
+  <a class="home-button" href="index.html" aria-label="Home" title="AdventSource home">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <path d="M3 10 12 3 21 10M5 9v12h5v-7h4v7h5V9"/>
+    </svg>
+  </a>
   <main class="column" style="background-image: {{b}}">
 
     <article class="column">
