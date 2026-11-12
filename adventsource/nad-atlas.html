@@ -165,7 +165,7 @@ a { color:inherit; }
   </header>
   <div class="help-body">
     <h3>SIDEBAR</h3>
-    <p>Click a <b>Union</b> to highlight everything it covers and to expand its conferences. Click a <b>Conference</b> to narrow the highlight to that conference's territory. Some states belong to more than one conference, so territories overlap.</p>
+    <p>Click a <b>Union</b> to highlight everything it covers and to expand its conferences. Click a <b>Conference</b> to narrow the highlight to that conference's territory. Some states belong to more than one conference, so territories overlap. North Pacific Union territory view also shows the Washington, Oregon, Upper Columbia, and Idaho conference regions in separate colors.</p>
 
     <h3>THE TWO VIEWS</h3>
     <ul>
@@ -180,7 +180,7 @@ a { color:inherit; }
     <p>Click any state, province, territory, or the Bermuda inset to open a detail card showing its conferences, its union, its sales-tax status, and a link to the official state source. Alaska, Hawaii, and Bermuda sit in their own boxes below the main map.</p>
 
     <h3>COUNTY EXCEPTIONS</h3>
-    <p>A few conferences reach across a state line. When you select one, the affected county is outlined on the map &mdash; San Juan County, New Mexico and Cherokee County, North Carolina. Notes about these appear in the bar under the map.</p>
+    <p>Conference borders in the North Pacific Union are shown at county level in territory view. Idaho is divided at the 45th parallel; counties in Washington and Oregon are grouped by conference. Other cross-state county exceptions include San Juan County, New Mexico and Cherokee County, North Carolina.</p>
 
     <h3>KEYBOARD</h3>
     <p>Press <b>Tab</b> to move between areas and <b>Enter</b> or <b>Space</b> to open one. <b>Esc</b> closes this guide.</p>
@@ -204,6 +204,28 @@ const unions = [
   { name:'Southwestern Union', color:'#ad754d', conferences:['Arkansas-Louisiana Conference','Oklahoma Conference','Southwest Region Conference','Texas Conference','Texico Conference'] },
   { name:'SDA Church in Canada', color:'#287d87', conferences:['Alberta Conference','British Columbia Conference','Manitoba-Saskatchewan Conference','Maritime Conference','Newfoundland and Labrador Conference','Ontario Conference','Quebec Conference'] },
 ];
+
+const northPacificConferenceColors = {
+  'Washington Conference':'#398d2c',
+  'Oregon Conference':'#315981',
+  'Upper Columbia Conference':'#81234c',
+  'Idaho Conference':'#e9661b',
+};
+
+// County FIPS that are not assigned by the Washington/Oregon remainder rules.
+const northPacificCountyGroups = {
+  'Oregon Conference': new Set([
+    '53011','53015','53039','53049','53059','53069',
+  ]),
+  'Upper Columbia Conference': new Set([
+    '53001','53003','53005','53007','53013','53017','53019','53021','53023','53025','53037',
+    '53043','53047','53051','53063','53065','53071','53075','53077',
+    '41021','41049','41059','41069',
+  ]),
+  'Idaho Conference': new Set([
+    '41001','41023','41025','41045','41061','41063',
+  ]),
+};
 
 const unionStates = {
   'Atlantic Union':['BM','CT','MA','ME','NH','NY','RI','VT'], 'Columbia Union':['DE','MD','NJ','OH','PA','VA','WV'],
@@ -372,6 +394,7 @@ function buildSidebar() {
 
 let paintTargets = [];
 let countyPaths = [];
+let northPacificConferencePaths = [];
 let bermudaShape = null;
 
 function paintFor(area) {
@@ -395,7 +418,8 @@ function paintFor(area) {
 
 function buildMap(stateTopology, countyTopology, canadaData) {
   const stateFeatures = feature(stateTopology, stateTopology.objects.states).features;
-  const countyFeatures = feature(countyTopology, countyTopology.objects.counties).features.filter((geo) => ['35045','37039'].includes(String(geo.id).padStart(5,'0')));
+  const allCountyFeatures = feature(countyTopology, countyTopology.objects.counties).features;
+  const countyFeatures = allCountyFeatures.filter((geo) => ['35045','37039'].includes(String(geo.id).padStart(5,'0')));
   const canadaFeatures = canadaData.features;
   const contiguousStates = stateFeatures.filter((geo) => !['02','15'].includes(String(geo.id).padStart(2,'0')));
   const alaskaFeature = stateFeatures.find((geo) => String(geo.id).padStart(2,'0') === '02');
@@ -458,6 +482,66 @@ function buildMap(stateTopology, countyTopology, canadaData) {
     addInteractive(path, countyId);
     countyPaths.push({ id: countyId, node: path });
     svg.append(path);
+  }
+
+  const countyConference = (countyId) => {
+    for (const [conference, countyIds] of Object.entries(northPacificCountyGroups)) {
+      if (countyIds.has(countyId)) return conference;
+    }
+    if (countyId.startsWith('53')) return 'Washington Conference';
+    if (countyId.startsWith('41')) return 'Oregon Conference';
+    return null;
+  };
+  const clipCountyAtLatitude = (geo, latitude, north) => {
+    const clipRing = (ring) => {
+      const points = ring.slice(0, -1);
+      if (!points.length) return [];
+      const inside = ([, y]) => north ? y >= latitude : y <= latitude;
+      const intersection = (a, b) => {
+        const ratio = (latitude - a[1]) / (b[1] - a[1]);
+        return [a[0] + ratio * (b[0] - a[0]), latitude];
+      };
+      const clipped = [];
+      let previous = points[points.length - 1];
+      for (const current of points) {
+        if (inside(current)) {
+          if (!inside(previous)) clipped.push(intersection(previous, current));
+          clipped.push(current);
+        } else if (inside(previous)) {
+          clipped.push(intersection(previous, current));
+        }
+        previous = current;
+      }
+      if (clipped.length < 3) return [];
+      clipped.push(clipped[0]);
+      return clipped;
+    };
+    const clipPolygon = (polygon) => polygon.map(clipRing).filter((ring) => ring.length);
+    const geometry = geo.geometry.type === 'Polygon'
+      ? { type:'Polygon', coordinates:clipPolygon(geo.geometry.coordinates) }
+      : { type:'MultiPolygon', coordinates:geo.geometry.coordinates.map(clipPolygon).filter((polygon) => polygon.length) };
+    if (!geometry.coordinates.length) return null;
+    return { type:'Feature', properties:geo.properties, geometry };
+  };
+  const addNorthPacificConferenceShape = (geo, conference) => {
+    const path = svgEl('path', { d:makeConnectedPath(geo) ?? '', 'pointer-events':'none' });
+    northPacificConferencePaths.push({ conference, node:path });
+    svg.append(path);
+  };
+
+  for (const geo of allCountyFeatures) {
+    const countyId = String(geo.id).padStart(5,'0');
+    const stateId = countyId.slice(0, 2);
+    if (!['16','41','53'].includes(stateId)) continue;
+    if (stateId === '16') {
+      // Upper Columbia's Idaho territory is north of 45 degrees; Idaho Conference is south.
+      const northernPart = clipCountyAtLatitude(geo, 45, true);
+      const southernPart = clipCountyAtLatitude(geo, 45, false);
+      if (northernPart) addNorthPacificConferenceShape(northernPart, 'Upper Columbia Conference');
+      if (southernPart) addNorthPacificConferenceShape(southernPart, 'Idaho Conference');
+      continue;
+    }
+    addNorthPacificConferenceShape(geo, countyConference(countyId));
   }
 
   const alaskaGroup = svgEl('g', { class:'map-inset' });
@@ -604,7 +688,18 @@ function renderLegend() {
     return;
   }
 
-  addItem({ background: selectedUnion().color }, 'Selected territory');
+  if (state.selected === 'North Pacific Union') {
+    for (const [conference, color] of Object.entries(northPacificConferenceColors)) {
+      addItem({ background:color }, conference.replace(' Conference',''));
+    }
+    addItem({ background:selectedUnion().color }, 'Montana & Alaska');
+  } else {
+    const selectedConferenceColor = northPacificConferenceColors[state.selected];
+    addItem(
+      { background:selectedConferenceColor ?? selectedUnion().color },
+      selectedConferenceColor ? state.selected.replace(' Conference','') : 'Selected territory',
+    );
+  }
   const overlap = document.createElement('span');
   const overlapSwatch = document.createElement('i');
   overlapSwatch.className = 'legend-overlap';
@@ -640,6 +735,16 @@ function render() {
     const active = target.area && areas.includes(target.area);
     target.node.classList.toggle('focused-area', !!target.area && target.area === state.focusedArea);
     target.node.setAttribute('aria-label', target.label + (active ? ', in ' + state.selected : ''));
+  }
+
+  const showNorthPacificRegions = state.view === 'territory'
+    && (state.selected === 'North Pacific Union' || Object.hasOwn(northPacificConferenceColors, state.selected));
+  for (const target of northPacificConferencePaths) {
+    const active = state.selected === 'North Pacific Union' || state.selected === target.conference;
+    target.node.style.display = showNorthPacificRegions ? '' : 'none';
+    target.node.setAttribute('fill', northPacificConferenceColors[target.conference]);
+    target.node.setAttribute('stroke', 'none');
+    target.node.setAttribute('opacity', active ? 1 : .24);
   }
 
   for (const county of countyPaths) {
