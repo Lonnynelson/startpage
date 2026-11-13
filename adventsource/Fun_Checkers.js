@@ -101,7 +101,7 @@ var GameBoard = React.createClass({ displayName: "GameBoard",
       React.createElement("button", { onClick: this.reset }, "Reset"), /*#__PURE__*/
       React.createElement("button", { onClick: this.aboutPopOpen }, "About"), /*#__PURE__*/
       React.createElement(Statistics, { board: this.state.board }), /*#__PURE__*/
-      React.createElement(Popup, { shown: this.state.popShown, close: this.aboutPopClose, copy: " Hey! Thanks for checking out my checkers game. I know that the title says 'React Checkers', but there isn't a ton of React in use here, it's only handling the display (that's its job, huh?). Essentially React displays our board array, and most of the moving and detection are just accessing that array. The AI is built out using a limited version of the minimax algorithm (see http://neverstopbuilding.com/minimax for a nice explanation of what that means), simply it means that the program forecasts futures, assumes you'll play as if you were doing the same, and picks the route that it thinks will result in the best for itself if you also play 'perfeclty', and I use that word loosely because this AI currently only looks 3 turns in to the future. It uses a point system to determine 'good' and 'bad' stuff that could happen, for example, if it can win in the next 3 turns, thats a 100 point outcome. If it will lose in the next 3 turns, thats worth -100 points, losing a king or killing an enemy king are worth -25 or 25 points respectively, and killing/losing regular pieces are worth +-10 points. Lastly, classifies making a new king of it's own as worth 15 points, so slightly better than killing 1 opponent. The bot looks through something like 1000-1500 possible futures before each move. " })));
+      React.createElement(Popup, { shown: this.state.popShown, close: this.aboutPopClose, copy: " Hey! Thanks for checking out my checkers game. The AI is built out using a limited version of the minimax algorithm, simply it means that the program forecasts futures, assumes you'll play as if you were doing the same, and picks the route that it thinks will result in the best for itself if you also play 'perfeclty', and I use that word loosely because this AI currently only looks 3 turns in to the future. It uses a point system to determine 'good' and 'bad' stuff that could happen, for example, if it can win in the next 3 turns, thats a 100 point outcome. If it will lose in the next 3 turns, thats worth -100 points, losing a king or killing an enemy king are worth -25 or 25 points respectively, and killing/losing regular pieces are worth +-10 points. Lastly, classifies making a new king of it's own as worth 15 points, so slightly better than killing 1 opponent. The bot looks through something like 1000-1500 possible futures before each move. " })));
 
 
 
@@ -141,21 +141,21 @@ var GameBoard = React.createClass({ displayName: "GameBoard",
   },
   executeMove: function (rowIndex, cellIndex, board, activePlayer) {
     var activePiece;
-    for (var i = 0; i < board.length; i++) {if (window.CP.shouldStopExecution(0)) break;
+    for (var i = 0; i < board.length; i++) {
       //for each row
-      for (var j = 0; j < board[i].length; j++) {if (window.CP.shouldStopExecution(1)) break;
+      for (var j = 0; j < board[i].length; j++) {
         if (board[i][j].indexOf('a') > -1) {
           activePiece = board[i][j];
         }
-      }window.CP.exitedLoop(1);
+      }
     }
     //make any jump deletions
-    window.CP.exitedLoop(0);var deletions = board[rowIndex][cellIndex].match(/d\d\d/g);
+    var deletions = board[rowIndex][cellIndex].match(/d\d\d/g);
     if (typeof deletions !== undefined && deletions !== null && deletions.length > 0) {
-      for (var k = 0; k < deletions.length; k++) {if (window.CP.shouldStopExecution(2)) break;
+      for (var k = 0; k < deletions.length; k++) {
         var deleteCoords = deletions[k].replace('d', '').split('');
         board[deleteCoords[0]][deleteCoords[1]] = '-';
-      }window.CP.exitedLoop(2);
+      }
     }
     //remove active piece from it's place
     board = board.map(function (row) {return row.map(function (cell) {return cell.replace(activePiece, '-');});});
@@ -176,13 +176,13 @@ var GameBoard = React.createClass({ displayName: "GameBoard",
 
     //actually highlight the possible moves on the board
     //the 'highlightTag' inserts the information in to a cell that specifies 
-    for (var j = 0; j < possibleMoves.length; j++) {if (window.CP.shouldStopExecution(3)) break;
+    for (var j = 0; j < possibleMoves.length; j++) {
       var buildHighlightTag = 'h ';
-      for (var k = 0; k < possibleMoves[j].wouldDelete.length; k++) {if (window.CP.shouldStopExecution(4)) break;
+      for (var k = 0; k < possibleMoves[j].wouldDelete.length; k++) {
         buildHighlightTag += 'd' + String(possibleMoves[j].wouldDelete[k].targetRow) + String(possibleMoves[j].wouldDelete[k].targetCell) + ' ';
-      }window.CP.exitedLoop(4);
+      }
       this.state.board[possibleMoves[j].targetRow][possibleMoves[j].targetCell] = buildHighlightTag;
-    }window.CP.exitedLoop(3);
+    }
 
     this.setState(this.state);
   },
@@ -208,8 +208,8 @@ var GameBoard = React.createClass({ displayName: "GameBoard",
     //for each direction of motion allowed to the piece it loops (forward for normal pieces, both for kings)
     //inside of that loop, it checks in that direction of motion for both left and right (checkers move diagonally)
     //any moves found are pushed in to the possible moves array
-    for (var j = 0; j < directionOfMotion.length; j++) {if (window.CP.shouldStopExecution(5)) break;
-      for (var i = 0; i < leftOrRight.length; i++) {if (window.CP.shouldStopExecution(6)) break;
+    for (var j = 0; j < directionOfMotion.length; j++) {
+      for (var i = 0; i < leftOrRight.length; i++) {
         if (
         typeof board[rowIndex + directionOfMotion[j]] !== 'undefined' &&
         typeof board[rowIndex + directionOfMotion[j]][cellIndex + leftOrRight[i]] !== 'undefined' &&
@@ -219,16 +219,16 @@ var GameBoard = React.createClass({ displayName: "GameBoard",
             possibleMoves.push({ targetRow: rowIndex + directionOfMotion[j], targetCell: cellIndex + leftOrRight[i], wouldDelete: [] });
           }
         }
-      }window.CP.exitedLoop(6);
+      }
     }
 
     //get jumps
-    window.CP.exitedLoop(5);var jumps = this.findAllJumps(rowIndex, cellIndex, board, directionOfMotion[0], [], [], isKing, activePlayer);
+    var jumps = this.findAllJumps(rowIndex, cellIndex, board, directionOfMotion[0], [], [], isKing, activePlayer);
 
     //loop and push all jumps in to possibleMoves
-    for (var i = 0; i < jumps.length; i++) {if (window.CP.shouldStopExecution(7)) break;
+    for (var i = 0; i < jumps.length; i++) {
       possibleMoves.push(jumps[i]);
-    }window.CP.exitedLoop(7);
+    }
     return possibleMoves;
   },
   findAllJumps: function (sourceRowIndex, sourceCellIndex, board, directionOfMotion, possibleJumps, wouldDelete, isKing, activePlayer) {
@@ -243,8 +243,8 @@ var GameBoard = React.createClass({ displayName: "GameBoard",
     //here we detect any jump possible moves
     //for each direction available to the piece (based on if it's a king or not) 
     //and for each diag (left or right) we look 2 diag spaces away to see if it's open and if we'd jump an enemy to get there.
-    for (var k = 0; k < directions.length; k++) {if (window.CP.shouldStopExecution(8)) break;
-      for (var l = 0; l < leftOrRight.length; l++) {if (window.CP.shouldStopExecution(9)) break;
+    for (var k = 0; k < directions.length; k++) {
+      for (var l = 0; l < leftOrRight.length; l++) {
         leftOrRight[l];
         if (
         typeof board[sourceRowIndex + directions[k]] !== 'undefined' &&
@@ -266,27 +266,27 @@ var GameBoard = React.createClass({ displayName: "GameBoard",
 
 
 
-            for (var i = 0; i < wouldDelete.length; i++) {if (window.CP.shouldStopExecution(10)) break;
+            for (var i = 0; i < wouldDelete.length; i++) {
               tempJumpObject.wouldDelete.push(wouldDelete[i]);
-            }window.CP.exitedLoop(10);
+            }
             possibleJumps.push(tempJumpObject);
             thisIterationDidSomething = true;
           }
         }
-      }window.CP.exitedLoop(9);
+      }
     }
 
     //if a jump was found, thisIterationDidSomething is set to true and this function calls itself again from that source point, this is how we recurse to find multi jumps
-    window.CP.exitedLoop(8);if (thisIterationDidSomething) {
-      for (var i = 0; i < possibleJumps.length; i++) {if (window.CP.shouldStopExecution(11)) break;
+    if (thisIterationDidSomething) {
+      for (var i = 0; i < possibleJumps.length; i++) {
         var coords = [possibleJumps[i].targetRow, possibleJumps[i].targetCell];
         var children = this.findAllJumps(coords[0], coords[1], board, directionOfMotion, possibleJumps, possibleJumps[i].wouldDelete, isKing, activePlayer);
-        for (var j = 0; j < children.length; j++) {if (window.CP.shouldStopExecution(12)) break;
+        for (var j = 0; j < children.length; j++) {
           if (possibleJumps.indexOf(children[j]) < 0) {
             possibleJumps.push(children[j]);
           }
-        }window.CP.exitedLoop(12);
-      }window.CP.exitedLoop(11);
+        }
+      }
     }
     return possibleJumps;
   },
@@ -308,18 +308,18 @@ var GameBoard = React.createClass({ displayName: "GameBoard",
   winDetection: function (board, activePlayer) {
     var enemyPlayer = activePlayer == 'r' ? 'b' : 'r';
     var result = true;
-    for (var i = 0; i < board.length; i++) {if (window.CP.shouldStopExecution(13)) break;
-      for (var j = 0; j < board[i].length; j++) {if (window.CP.shouldStopExecution(14)) break;
+    for (var i = 0; i < board.length; i++) {
+      for (var j = 0; j < board[i].length; j++) {
         if (board[i][j].indexOf(enemyPlayer) > -1) {
           result = false;
         }
-      }window.CP.exitedLoop(14);
-    }window.CP.exitedLoop(13);
+      }
+    }
     return result;
   },
   cloneBoard: function (board) {
     var output = [];
-    for (var i = 0; i < board.length; i++) {if (window.CP.shouldStopExecution(15)) break;output.push(board[i].slice(0));}window.CP.exitedLoop(15);
+    for (var i = 0; i < board.length; i++) {output.push(board[i].slice(0));}
     return output;
   },
   ai: function () {
@@ -369,18 +369,18 @@ var GameBoard = React.createClass({ displayName: "GameBoard",
   aiBranch: function (hypotheticalBoard, activePlayer, depth) {
     this.count++;
     var output = [];
-    for (var i = 0; i < hypotheticalBoard.length; i++) {if (window.CP.shouldStopExecution(16)) break;
-      for (var j = 0; j < hypotheticalBoard[i].length; j++) {if (window.CP.shouldStopExecution(17)) break;
+    for (var i = 0; i < hypotheticalBoard.length; i++) {
+      for (var j = 0; j < hypotheticalBoard[i].length; j++) {
         if (hypotheticalBoard[i][j].indexOf(activePlayer) > -1) {
           var possibleMoves = this.findAllPossibleMoves(i, j, hypotheticalBoard, activePlayer);
-          for (var k = 0; k < possibleMoves.length; k++) {if (window.CP.shouldStopExecution(18)) break;
+          for (var k = 0; k < possibleMoves.length; k++) {
             var tempBoard = this.cloneBoard(hypotheticalBoard);
             tempBoard[i][j] = 'a' + tempBoard[i][j];
 
             var buildHighlightTag = 'h ';
-            for (var m = 0; m < possibleMoves[k].wouldDelete.length; m++) {if (window.CP.shouldStopExecution(19)) break;
+            for (var m = 0; m < possibleMoves[k].wouldDelete.length; m++) {
               buildHighlightTag += 'd' + String(possibleMoves[k].wouldDelete[m].targetRow) + String(possibleMoves[k].wouldDelete[m].targetCell) + ' ';
-            }window.CP.exitedLoop(19);
+            }
             tempBoard[possibleMoves[k].targetRow][possibleMoves[k].targetCell] = buildHighlightTag;
 
             var buildingObject = {
@@ -415,11 +415,11 @@ var GameBoard = React.createClass({ displayName: "GameBoard",
               //if not terminal, we want the best score from this route (or worst depending on who won)							
               var scoreHolder = [];
 
-              for (var l = 0; l < buildingObject.children.length; l++) {if (window.CP.shouldStopExecution(20)) break;
+              for (var l = 0; l < buildingObject.children.length; l++) {
                 if (typeof buildingObject.children[l].score !== 'undefined') {
                   scoreHolder.push(buildingObject.children[l].score);
                 }
-              }window.CP.exitedLoop(20);
+              }
 
               scoreHolder.sort(function (a, b) {if (a > b) return -1;if (a < b) return 1;return 0;});
 
@@ -441,28 +441,28 @@ var GameBoard = React.createClass({ displayName: "GameBoard",
               }
             }
             if (activePlayer == this.state.activePlayer) {
-              for (var n = 0; n < buildingObject.move.wouldDelete.length; n++) {if (window.CP.shouldStopExecution(21)) break;
+              for (var n = 0; n < buildingObject.move.wouldDelete.length; n++) {
                 if (hypotheticalBoard[buildingObject.move.wouldDelete[n].targetRow][buildingObject.move.wouldDelete[n].targetCell].indexOf('k') > -1) {
                   buildingObject.score += 25 - depth;
                 } else
                 {
                   buildingObject.score += 10 - depth;
                 }
-              }window.CP.exitedLoop(21);
+              }
               if ((JSON.stringify(hypotheticalBoard).match(/k/g) || []).length < (JSON.stringify(buildingObject.board).match(/k/g) || []).length) {
                 //new king made after this move
                 buildingObject.score += 15 - depth;
               }
             } else
             {
-              for (var n = 0; n < buildingObject.move.wouldDelete.length; n++) {if (window.CP.shouldStopExecution(22)) break;
+              for (var n = 0; n < buildingObject.move.wouldDelete.length; n++) {
                 if (hypotheticalBoard[buildingObject.move.wouldDelete[n].targetRow][buildingObject.move.wouldDelete[n].targetCell].indexOf('k') > -1) {
                   buildingObject.score -= 25 - depth;
                 } else
                 {
                   buildingObject.score -= 10 - depth;
                 }
-              }window.CP.exitedLoop(22);
+              }
               if ((JSON.stringify(hypotheticalBoard).match(/k/g) || []).length < (JSON.stringify(buildingObject.board).match(/k/g) || []).length) {
                 //new king made after this move
                 buildingObject.score -= 15 - depth;
@@ -470,10 +470,10 @@ var GameBoard = React.createClass({ displayName: "GameBoard",
             }
             buildingObject.score += buildingObject.move.wouldDelete.length;
             output.push(buildingObject);
-          }window.CP.exitedLoop(18);
+          }
         }
-      }window.CP.exitedLoop(17);
-    }window.CP.exitedLoop(16);
+      }
+    }
 
     output = output.sort(function (a, b) {if (a.score > b.score) return -1;if (a.score < b.score) return 1;return 0;});
     return output;
