@@ -27,6 +27,7 @@
   const previousButton = document.getElementById("previous-track");
   const nextButton = document.getElementById("next-track");
   const seekSlider = document.getElementById("seek-slider");
+  const volumeSlider = document.getElementById("volume-slider");
   const currentTime = document.getElementById("current-time");
   const duration = document.getElementById("duration");
   const startButton = document.getElementById("start-listening");
@@ -244,6 +245,11 @@
       audio.currentTime = (Number(seekSlider.value) / 100) * audio.duration;
     }
     isSeeking = false;
+  });
+
+  audio.volume = Number(volumeSlider.value);
+  volumeSlider.addEventListener("input", () => {
+    audio.volume = Number(volumeSlider.value);
   });
 
   renderTabs();
