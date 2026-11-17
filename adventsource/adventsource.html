@@ -183,6 +183,12 @@
       border-collapse: collapse;
       background: rgba(255, 255, 255, 0.4);
     }
+    #content-table.pathfinder-investiture {
+      table-layout: fixed;
+    }
+    #content-table.pathfinder-investiture th {
+      width: 33.333%;
+    }
     #content-table th,
     #content-table td,
     .shirt-content-table th,
@@ -613,11 +619,28 @@
         detailsTitle.textContent = (division === 'pathfinder' ? 'PF ' : 'ADV ') +
           (beltMaterial === 'leather' ? 'Leather Belts' : 'Cloth Belts');
       }
-      renderTableContents(contentTable, table);
+      const isPathfinderInvestiture = selectedId === 'pathfinder-investiture';
+      contentTable.classList.toggle('pathfinder-investiture', isPathfinderInvestiture);
+      renderTableContents(
+        contentTable,
+        isPathfinderInvestiture
+          ? withoutTableColumns(table, ['Category', 'Skill Level'])
+          : table
+      );
       emptyTableMessage.hidden = table.rows.length > 0;
       tableDisplay.hidden = false;
       detailsBody.hidden = true;
       editTableButton.disabled = false;
+    }
+
+    function withoutTableColumns(table, excludedColumns) {
+      const includedIndexes = table.columns
+        .map((column, index) => excludedColumns.includes(column) ? -1 : index)
+        .filter(index => index !== -1);
+      return {
+        columns: includedIndexes.map(index => table.columns[index]),
+        rows: table.rows.map(row => includedIndexes.map(index => row[index] ?? ''))
+      };
     }
 
     function renderTableContents(target, table) {
