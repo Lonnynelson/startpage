@@ -176,21 +176,32 @@
       overflow-x: auto;
       margin: 1rem 0;
     }
+    .investiture-table-columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+    .investiture-table-columns[hidden] {
+      display: none;
+    }
     #content-table,
+    .investiture-table,
     .shirt-content-table,
     #editor-table {
       width: 100%;
       border-collapse: collapse;
       background: rgba(255, 255, 255, 0.4);
     }
-    #content-table.pathfinder-investiture {
+    .investiture-table {
       table-layout: fixed;
     }
-    #content-table.pathfinder-investiture th {
+    .investiture-table th {
       width: 33.333%;
     }
     #content-table th,
     #content-table td,
+    .investiture-table th,
+    .investiture-table td,
     .shirt-content-table th,
     .shirt-content-table td,
     #editor-table th,
@@ -203,10 +214,14 @@
     #content-table td {
       white-space: pre-wrap;
     }
+    .investiture-table td {
+      white-space: pre-wrap;
+    }
     .shirt-content-table td {
       white-space: pre-wrap;
     }
-    #content-table th {
+    #content-table th,
+    .investiture-table th {
       background: #1d4e89;
       color: #FFFFFF;
     }
@@ -306,6 +321,7 @@
       <div id="table-display" hidden>
         <div class="table-scroll">
           <table id="content-table"></table>
+          <div class="investiture-table-columns" id="investiture-table-columns" hidden></div>
         </div>
         <p id="empty-table" hidden>No rows have been added to this table.</p>
       </div>
@@ -385,6 +401,7 @@
     const tableStatus = document.getElementById('table-status');
     const tableDisplay = document.getElementById('table-display');
     const contentTable = document.getElementById('content-table');
+    const investitureTableColumns = document.getElementById('investiture-table-columns');
     const emptyTableMessage = document.getElementById('empty-table');
     const tableEditor = document.getElementById('table-editor');
     const shirtTables = document.getElementById('shirt-tables');
@@ -620,17 +637,35 @@
           (beltMaterial === 'leather' ? 'Leather Belts' : 'Cloth Belts');
       }
       const isPathfinderInvestiture = selectedId === 'pathfinder-investiture';
-      contentTable.classList.toggle('pathfinder-investiture', isPathfinderInvestiture);
-      renderTableContents(
-        contentTable,
-        isPathfinderInvestiture
-          ? withoutTableColumns(table, ['Category', 'Skill Level'])
-          : table
-      );
+      if (isPathfinderInvestiture) {
+        contentTable.hidden = true;
+        investitureTableColumns.hidden = false;
+        renderInvestitureColumns(withoutTableColumns(table, ['Category', 'Skill Level']));
+      } else {
+        contentTable.hidden = false;
+        investitureTableColumns.hidden = true;
+        investitureTableColumns.replaceChildren();
+        renderTableContents(contentTable, table);
+      }
       emptyTableMessage.hidden = table.rows.length > 0;
       tableDisplay.hidden = false;
       detailsBody.hidden = true;
       editTableButton.disabled = false;
+    }
+
+    function renderInvestitureColumns(table) {
+      const midpoint = Math.ceil(table.rows.length / 2);
+      const rowGroups = [
+        table.rows.slice(0, midpoint),
+        table.rows.slice(midpoint)
+      ];
+      const tables = rowGroups.map(rows => {
+        const columnTable = document.createElement('table');
+        columnTable.className = 'investiture-table';
+        renderTableContents(columnTable, { columns: table.columns, rows });
+        return columnTable;
+      });
+      investitureTableColumns.replaceChildren(...tables);
     }
 
     function withoutTableColumns(table, excludedColumns) {
