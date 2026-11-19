@@ -132,51 +132,6 @@
       ]
     },
     {
-      "title": "Badge Magic",
-      "columns": [
-        "Description",
-        "Item #",
-        "Price"
-      ],
-      "rows": [
-        [
-          "Pathfinder Uniform Sheet",
-          "009400",
-          "$ 7.95"
-        ],
-        [
-          "Pathfinder Honor Sheet",
-          "009405",
-          "$ 9.95"
-        ],
-        [
-          "Cut-to-fit Half Sheet",
-          "009435",
-          "$ 8.95"
-        ],
-        [
-          "Adventurer Uniform (old)",
-          "009410",
-          "$ 3.00"
-        ],
-        [
-          "Adventurer Awards Kit",
-          "009415",
-          "$ 9.95"
-        ],
-        [
-          "Eager Beaver Chips Kit",
-          "009420",
-          "$ 9.95"
-        ],
-        [
-          "Little Lamb Star Kit",
-          "009430",
-          "$ 9.95"
-        ]
-      ]
-    },
-    {
       "title": "IA Director’s Guide & Instructors Helps",
       "columns": [
         "Description",
@@ -226,60 +181,6 @@
           "009505",
           "009672",
           "$3.95"
-        ]
-      ]
-    },
-    {
-      "title": "Investiture Achievement Record Cards",
-      "columns": [
-        "Description",
-        "English",
-        "Spanish",
-        "French",
-        "Price"
-      ],
-      "rows": [
-        [
-          "IA Record Card Friend",
-          "002976",
-          "003047",
-          "003102",
-          "$0.50"
-        ],
-        [
-          "IA Record Card Companion",
-          "002977",
-          "003048",
-          "003103",
-          "$0.50"
-        ],
-        [
-          "IA Record Card Explorer",
-          "002978",
-          "003049",
-          "003104",
-          "$0.50"
-        ],
-        [
-          "IA Record Card Ranger",
-          "002979",
-          "003050",
-          "003105",
-          "$0.50"
-        ],
-        [
-          "IA Record Card Voyager",
-          "002980",
-          "003051",
-          "003106",
-          "$0.50"
-        ],
-        [
-          "IA Record Card Guide",
-          "002981",
-          "003052",
-          "003107",
-          "$0.50"
         ]
       ]
     },
@@ -338,6 +239,60 @@
       ]
     },
     {
+      "title": "Investiture Achievement Record Cards",
+      "columns": [
+        "Description",
+        "English",
+        "Spanish",
+        "French",
+        "Price"
+      ],
+      "rows": [
+        [
+          "IA Record Card Friend",
+          "002976",
+          "003047",
+          "003102",
+          "$0.50"
+        ],
+        [
+          "IA Record Card Companion",
+          "002977",
+          "003048",
+          "003103",
+          "$0.50"
+        ],
+        [
+          "IA Record Card Explorer",
+          "002978",
+          "003049",
+          "003104",
+          "$0.50"
+        ],
+        [
+          "IA Record Card Ranger",
+          "002979",
+          "003050",
+          "003105",
+          "$0.50"
+        ],
+        [
+          "IA Record Card Voyager",
+          "002980",
+          "003051",
+          "003106",
+          "$0.50"
+        ],
+        [
+          "IA Record Card Guide",
+          "002981",
+          "003052",
+          "003107",
+          "$0.50"
+        ]
+      ]
+    },
+    {
       "title": "Investiture Achievement Record Charts",
       "columns": [
         "Description",
@@ -381,6 +336,81 @@
           "002987",
           "003058",
           "$0.69"
+        ]
+      ]
+    },
+    {
+      "title": "Badge Magic",
+      "columns": [
+        "Description",
+        "Item #",
+        "Price"
+      ],
+      "rows": [
+        [
+          "Pathfinder Uniform Sheet",
+          "009400",
+          "$ 7.95"
+        ],
+        [
+          "Pathfinder Honor Sheet",
+          "009405",
+          "$ 9.95"
+        ],
+        [
+          "Cut-to-fit Half Sheet",
+          "009435",
+          "$ 8.95"
+        ],
+        [
+          "Adventurer Uniform (old)",
+          "009410",
+          "$ 3.00"
+        ],
+        [
+          "Adventurer Awards Kit",
+          "009415",
+          "$ 9.95"
+        ],
+        [
+          "Eager Beaver Chips Kit",
+          "009420",
+          "$ 9.95"
+        ],
+        [
+          "Little Lamb Star Kit",
+          "009430",
+          "$ 9.95"
+        ]
+      ]
+    },
+    {
+      "title": "Pathfinder Reading & Devotionals",
+      "columns": [
+        "Description",
+        "Item #",
+        "Price"
+      ],
+      "rows": [
+        [
+          "Finding the Right Path",
+          "001008",
+          "$9.95"
+        ],
+        [
+          "The Happy Path",
+          "001003",
+          "$10.95"
+        ],
+        [
+          "Devotionals for the Pathfinder Pledge & Law",
+          "009018",
+          "$4.95"
+        ],
+        [
+          "Finding the Right Path",
+          "009019",
+          "$4.95"
         ]
       ]
     },
@@ -475,36 +505,6 @@
           "001222",
           "001159",
           "$2.50"
-        ]
-      ]
-    },
-    {
-      "title": "Pathfinder Reading & Devotionals",
-      "columns": [
-        "Description",
-        "Item #",
-        "Price"
-      ],
-      "rows": [
-        [
-          "Finding the Right Path",
-          "001008",
-          "$9.95"
-        ],
-        [
-          "The Happy Path",
-          "001003",
-          "$10.95"
-        ],
-        [
-          "Devotionals for the Pathfinder Pledge & Law",
-          "009018",
-          "$4.95"
-        ],
-        [
-          "Finding the Right Path",
-          "009019",
-          "$4.95"
         ]
       ]
     },
